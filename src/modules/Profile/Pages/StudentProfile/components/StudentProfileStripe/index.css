@@ -1,0 +1,36 @@
+.student-profile-stripe {
+  @apply bg-LightWood py-4 px-6 rounded-xl;
+}
+.student-profile-stripe .left-part {
+  @apply flex items-center gap-6;
+}
+.student-profile-img {
+  @apply w-32 h-32 rounded-full;
+}
+.student-profile-img img {
+  @apply w-full h-full object-cover rounded-full;
+}
+.student-profile-content {
+}
+.student-profile-content p {
+  @apply text-[34px] leading-12 text-black font-semibold;
+}
+.student-profile-content span {
+  @apply text-lg leading-12 text-black;
+}
+.student-profile-stripe .right-part {
+  @apply flex justify-end ml-auto;
+}
+.student-profile-stripe .right-part .icon {
+  @apply w-14 h-14 bg-white/30 rounded-full text-black flex items-center justify-center mb-2.5;
+}
+.student-profile-stripe .right-part .icon svg {
+  @apply w-6 h-6;
+}
+.student-profile-stripe .right-part p,
+.student-profile-stripe .right-part span {
+  @apply text-lg text-black;
+}
+.student-profile-stripe .right-part span {
+  @apply text-PrimaryWood;
+}

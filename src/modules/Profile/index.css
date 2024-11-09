@@ -1,0 +1,45 @@
+.sidebar-content {
+  @apply flex mt-6;
+}
+.sidebar-wrap {
+  @apply max-w-[225px] w-full;
+}
+.sidebar-wrap ul {
+  @apply border-r border-solid border-LightGray h-full;
+}
+.sidebar-link-item a {
+  @apply relative px-2.5 py-4 flex items-center gap-2.5 text-base text-PrimaryWood leading-none hover:bg-LightGray transition-all duration-300;
+}
+.sidebar-link-item.active a::before {
+  @apply absolute -right-0.5 content-[''] top-0 w-1 h-full bg-black;
+}
+.sidebar-link-item.active a {
+  @apply text-black font-medium;
+}
+.sidebar-link-item svg {
+  @apply w-5 h-5;
+}
+.sidebar-content-wrap {
+  @apply max-w-[calc(100%_-_225px)] w-full pl-4 flex flex-wrap content-start;
+}
+.sidebar-content-title-wrap {
+  @apply mb-9 w-full;
+}
+.sidebar-content-title {
+  @apply pl-4 border-b border-solid border-LightGray pb-3 w-full;
+}
+.sidebar-content-title span {
+  @apply text-[22px] font-semibold;
+}
+.sidebar-content-small-title {
+  @apply pl-4 mt-2.5 flex text-sm leading-12 text-PrimaryWood;
+}
+.sidebar-content-left {
+  @apply max-w-[calc(100%_-_184px)] w-full pr-6;
+}
+.sidebar-content-right .btn a {
+  @apply pt-2 pb-2.5 px-3.5 rounded-md;
+}
+.student-profile-form {
+  @apply flex flex-col gap-5 mb-2.5;
+}

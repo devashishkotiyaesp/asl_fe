@@ -1,0 +1,80 @@
+.dasboard-layout {
+  @apply flex h-100dvh;
+}
+.sidebar {
+  @apply w-[300px] transition-all duration-300 bg-white border-r border-solid border-LightWood/80;
+}
+.sidebar.hide {
+  @apply w-[95px];
+}
+.admin-content {
+  @apply w-[calc(100%_-_300px)] ml-auto transition-all duration-300;
+}
+.admin-content main {
+  @apply px-5 pt-5 bg-LightGray max-h-[calc(100dvh_-_80px)] overflow-auto;
+}
+.admin-content.hide {
+  @apply w-[calc(100%_-_95px)];
+}
+.sidebar-logo {
+  @apply py-5 flex items-center justify-center;
+}
+.sidebar.hide .sidebar-logo {
+  @apply py-3;
+}
+.sidebar-logo a img {
+  @apply max-w-[223px] w-full object-contain h-10;
+}
+.sidebar.hide .sidebar-logo a img {
+  @apply h-14 aspect-square;
+}
+.sidebar-title {
+  @apply px-5 py-1.5 bg-LightGray leading-none uppercase text-sm text-center;
+}
+.sidebar-list {
+  @apply p-5;
+}
+.sidebar-list ul {
+  @apply flex flex-col gap-y-1 max-h-[calc(100dvh_-_145px)] overflow-auto;
+}
+.sidebar-list__item a {
+  @apply py-4 px-3.5 flex items-center gap-2.5 text-PrimaryWood rounded-md hover:bg-LightGray transition-all duration-300;
+}
+.sidebar-list__item a.active {
+  @apply bg-black text-white;
+}
+.sidebar-list__item a > span.text {
+  @apply whitespace-nowrap max-w-40 transition-all duration-300 overflow-hidden;
+}
+.sidebar.hide .sidebar-list__item a > span.text {
+  @apply max-w-0;
+}
+.sidebar-list__item.has-menu a .icon-more {
+  @apply ml-auto;
+}
+
+.admin-header__inner {
+  @apply px-5 py-3 flex items-center justify-between bg-white relative z-2;
+}
+
+.admin-content {
+  @apply bg-LightGray;
+}
+.header-notification {
+  @apply relative h-13 w-13 p-3 rounded-full border border-solid border-LightWood flex items-center justify-center text-black hover:bg-PrimaryWood hover:text-white transition-all duration-300 cursor-pointer;
+}
+.header-notification svg {
+  @apply w-full h-full;
+}
+.header-notification svg path {
+  @apply stroke-1;
+}
+.header-notification .update {
+  @apply w-2 h-2 rounded-full bg-PrimaryWood border-2 border-solid border-LightWood absolute top-0.5 right-1;
+}
+.header-profile {
+  @apply w-13 h-13 ml-3 cursor-pointer bg-LightWood border-2 border-solid border-black rounded-full;
+}
+.header-profile img {
+  @apply w-full h-full object-cover rounded-full;
+}

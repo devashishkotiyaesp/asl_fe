@@ -1,0 +1,23 @@
+.course-list {
+  @apply p-0;
+}
+
+.course-list .course-list-item {
+  @apply py-10 1200:py-12 1300:py-14 1600:py-70px;
+}
+.course-list .course-list-item:nth-child(odd) {
+  @apply bg-LightGray my-10 1200:my-12 1300:my-14 1600:my-70px;
+}
+.course-list .course-list-item:nth-child(odd) .wrapper {
+  @apply flex-row-reverse;
+}
+.course-list .course-list-item:nth-child(odd) .right-part {
+  @apply me-auto ml-unset;
+}
+
+/* section{
+    @apply py-10 1200:py-12 1300:py-14 1600:py-70px;
+  }
+  section.fill{
+    @apply my-10 1200:my-12 1300:my-14 1600:my-70px;
+  } */

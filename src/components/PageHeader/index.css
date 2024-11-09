@@ -1,0 +1,18 @@
+.page-header {
+  @apply relative pb-5 transition-all duration-300 z-1;
+}
+.page-header__inner {
+  @apply flex 1200:items-center justify-between flex-col gap-5 1024:gap-4 1200:gap-0 1200:flex-row;
+}
+.page-header .right {
+  @apply ml-auto;
+}
+.page-header .left {
+  @apply flex items-center;
+}
+.back-icon {
+  @apply bg-white me-2.5 w-8 h-8 rounded-full border border-solid border-LightGray inline-flex justify-center items-center rotate-180 p-1.5 select-none cursor-pointer active:scale-95;
+}
+.page-header h2 {
+  @apply text-black text-[28px] leading-none font-bold me-auto;
+}

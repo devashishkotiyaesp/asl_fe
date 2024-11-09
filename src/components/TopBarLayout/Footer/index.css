@@ -1,0 +1,89 @@
+.footer-upper {
+  @apply relative py-10 1200:py-12 1300:py-14 1600:py-70px;
+}
+.footer-upper::before {
+  @apply absolute bottom-0 left-0 w-full h-1/2 content-[''] bg-LightGray -z-1;
+}
+.footer-upper .wrapper {
+  @apply max-w-[970px] mx-auto bg-PrimaryWood p-12 rounded-xl items-center;
+}
+.footer-upper .wrapper > * {
+  @apply w-1/2;
+}
+.footer-upper h2 {
+  @apply text-2xl leading-normal text-white font-semibold;
+}
+.footer-upper .footer-form {
+  @apply max-w-[400px] relative;
+}
+.footer-upper .footer-form input[value] {
+  @apply absolute right-1 top-1/2 -translate-y-1/2 w-fit px-4 py-2.5 bg-black hover:bg-transparent text-sm text-white hover:text-black rounded-full cursor-pointer border border-solid border-black transition-all duration-300 active:scale-95;
+}
+.footer-upper .footer-form input:not([value]) {
+  @apply placeholder:font-normal block w-full rounded-full min-h-[50px] pr-32 pl-5 font-medium text-base text-black;
+}
+.footer-upper .right-part .error {
+  @apply block text-black font-medium text-sm mt-2 capitalize;
+}
+
+.footer-bottom {
+  @apply bg-LightGray;
+}
+
+.footer-logo a {
+  @apply w-[120px] aspect-square block;
+}
+.footer-logo a img {
+  @apply w-full h-full object-contain;
+}
+
+.footer-logo p {
+  @apply w-[130px] text-sm leading-12 text-black/70 font-medium mt-6;
+}
+.footer-others {
+  @apply max-w-[calc(100%_-_240px)] ml-auto w-full;
+}
+
+.footer-others {
+  @apply flex flex-wrap gap-y-10 justify-between;
+}
+.footer-col {
+  @apply w-fit;
+}
+.footer-link-title {
+  @apply text-sm font-medium text-black mb-2.5;
+}
+.footer-link-list {
+  @apply flex flex-col gap-y-2.5;
+}
+.footer-link-list li {
+  @apply inline-flex;
+}
+.footer-link-list a {
+  @apply text-black/70 text-sm leading-tight inline-flex items-center gap-1.5 hover:underline hover:text-black transition-all duration-300 underline-offset-2;
+}
+.footer-col .btn {
+  @apply mt-4;
+}
+.footer-col .btn a {
+  @apply pt-[9px] px-5 pb-2.5;
+}
+.footer-link-title ~ .footer-link-title {
+  @apply mt-6;
+}
+
+.footer-social ul {
+  @apply flex items-center gap-2;
+}
+.footer-social ul a {
+  @apply w-30px h-30px p-2 flex items-center justify-center rounded-full bg-LightWood text-black hover:bg-PrimaryWood hover:text-white transition-all duration-300;
+}
+.footer-social ul a svg {
+  @apply w-full h-full;
+}
+.footer-copy {
+  @apply py-5 border-t border-solid border-black/20 mt-20;
+}
+.footer-copy p {
+  @apply text-sm text-black/50 text-center;
+}

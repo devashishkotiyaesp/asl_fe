@@ -1,0 +1,115 @@
+.product-details {
+  @apply pt-6;
+}
+
+.product-details .wrapper {
+  @apply mt-11;
+}
+
+.product-details .wrapper > * {
+  @apply w-1/2;
+}
+.product-details .wrapper .left-part {
+  @apply pr-30px;
+}
+.product-details .product-image {
+  @apply bg-LightGray p-12 rounded-2xl mb-12;
+}
+.product-details .product-image img {
+  @apply w-full h-full;
+}
+.product-details .left-part ul {
+  @apply mt-6 flex flex-col gap-y-3;
+}
+.product-details .left-part ul li {
+  @apply text-black/70 text-base pl-30px relative;
+}
+.product-details .left-part ul li::before {
+  @apply absolute content-[''] w-5 h-5 rounded-full bg-PrimaryWood left-0;
+}
+.product-details .left-part ul li::after {
+  @apply absolute content-[''] w-[5px] h-2.5 border-r-2 border-b-2 border-solid border-white left-2 top-1 rotate-45;
+}
+
+.product-info {
+  @apply flex flex-col;
+}
+.product-info .title-price {
+  @apply flex gap-4 mb-5;
+}
+.self-card__details,
+.self-card__details h1 {
+  @apply mb-5;
+}
+.self-card__details h1,
+.product-info .title-price h1 {
+  @apply text-[40px] font-semibold leading-12;
+}
+.product-info .title-price .price {
+  @apply text-black text-xl bg-PrimaryYellowLight font-semibold px-1 rounded-full min-w-[60px] flex items-center justify-center;
+}
+.self-card__details p,
+.product-info p {
+  @apply text-black/70;
+}
+.product-amount {
+  @apply mt-6 mb-9;
+}
+.self-card__denominations > label,
+.product-amount > label {
+  @apply text-black font-semibold mb-2.5 block;
+}
+.product-amount ul {
+  @apply flex gap-2.5 flex-wrap;
+}
+.product-amount ul li {
+  @apply px-5 py-1.5 border border-solid border-black text-black rounded-full cursor-pointer hover:bg-LightGray transition-all duration-300 w-fit;
+}
+.product-amount ul li.active {
+  @apply bg-black text-white;
+}
+
+.product-info .gift-for {
+  @apply mt-9;
+}
+.product-info .gift-for .title {
+  @apply text-base leading-12 text-black mb-2.5 block;
+}
+.product-info .gift-for ul {
+  @apply flex gap-2.5 flex-wrap;
+}
+.product-info .gift-for ul li {
+  @apply px-5 py-4 border border-solid border-black text-black rounded-full cursor-pointer hover:bg-LightGray transition-all duration-300 w-fit;
+}
+
+.product-info .gift-for ul li.active {
+  @apply bg-black text-white;
+}
+
+/* counter */
+.counter {
+  @apply w-[130px] border border-solid border-black/20 rounded-full flex items-center;
+}
+.counter span {
+  @apply h-full px-2 cursor-pointer rounded-l-full last:rounded-r-full last:rounded-l-none hover:bg-black hover:text-white py-1.5 border-r border-solid border-black/20 last:border-l last:border-r-0 transition-all duration-300 active:scale-90;
+}
+.counter input {
+  @apply w-fit block px-0 m-0 border-none flex-1 max-w-[46px] text-center text-base font-semibold;
+}
+/* counter */
+
+.product-info form {
+  @apply flex flex-col gap-30px mt-30px;
+}
+
+.product-info form .form-submit {
+  @apply !rounded-full !py-3.5;
+}
+
+.self-card .price-counter {
+  @apply flex items-center gap-8 1200:gap-14 mb-30px;
+}
+
+.self-card .price-counter .price {
+  @apply bg-PrimaryYellow text-black py-2.5 px-5 rounded-full font-semibold text-base;
+}

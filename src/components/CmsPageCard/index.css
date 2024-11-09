@@ -1,0 +1,26 @@
+.cms-page-card {
+}
+.cms-page-card .inner {
+  @apply p-2.5 bg-LightGray rounded-lg;
+}
+.cms-page__img-wrap {
+  @apply aspect-[1.4_/_1] w-full overflow-hidden relative rounded-lg;
+}
+.cms-page__img-wrap::before {
+  @apply absolute content-[''] w-full h-full bg-black/60 top-0 left-0;
+}
+.cms-page__img-wrap img {
+  @apply w-full h-full object-cover;
+}
+.cms-page__label {
+  @apply mt-2.5 flex items-center;
+}
+.cms-page__label .text {
+  @apply text-lg block text-black leading-12 flex-1 pr-1 max-w-[calc(100%_-_36px)];
+}
+.cms-page__label .edit-icon {
+  @apply w-34px h-34px rounded-full bg-black text-white flex items-center justify-center cursor-pointer transition-all duration-300 active:scale-90 select-none;
+}
+.cms-page__label .edit-icon svg {
+  @apply w-[18px] h-[18px];
+}

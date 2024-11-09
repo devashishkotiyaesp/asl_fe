@@ -1,0 +1,58 @@
+.org-banner {
+  @apply bg-LightGray !pb-0;
+}
+.org-banner .section-title {
+  @apply max-w-[540px];
+}
+.org-banner .section-title .btn {
+  @apply mt-10;
+}
+.org-banner .section-title p {
+  @apply max-w-[442px];
+}
+.org-banner .wrapper > * {
+  @apply w-1/2;
+}
+.org-banner .wrapper .org-form {
+  @apply max-w-[540px] ml-auto p-30px bg-LightWood rounded-xl text-center;
+}
+.org-form__title {
+  @apply text-xl leading-normal text-black font-semibold mb-30px block;
+}
+.org-banner .org-form__wrap {
+  @apply text-left grid grid-cols-2 gap-6;
+}
+.org-form__wrap .input-item {
+  @apply min-h-11 bg-white rounded-5px flex items-center pl-2 text-DarkGray;
+}
+.org-achieve {
+  @apply relative mt-14;
+}
+.org-achieve::before {
+  @apply absolute h-1/2 w-full z-1 bg-white left-0 bottom-0 content-[''];
+}
+.org-achieve .wrapper {
+  @apply relative  z-1 grid grid-cols-3 bg-white shadow-md shadow-black/20 py-30px px-30px rounded-2xl;
+}
+.org-achieve .wrapper > * {
+  @apply w-unset;
+}
+.org-achieve__item {
+  @apply flex items-center gap-3 relative;
+}
+.org-achieve__item::before {
+  @apply absolute content-[''] h-4/5 w-px bg-LightWood/80 right-9 last:hidden;
+}
+.org-achieve__item .icons {
+  @apply text-PrimaryWood w-10 aspect-square;
+}
+.org-achieve__item .icons svg {
+  @apply w-full h-full;
+}
+.org-achieve__item .text {
+}
+.org-achieve__item .text span {
+  @apply first:font-semibold first:text-black text-black/70 inline-block leading-tight;
+}
+.org-achieve__item .text .desc {
+}

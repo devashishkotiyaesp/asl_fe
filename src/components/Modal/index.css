@@ -1,0 +1,42 @@
+.confirmation-wrap {
+  @apply text-center;
+}
+.confirmation-close-btn {
+  @apply flex justify-end;
+}
+.confirmation-close-btn button {
+  @apply w-4 h-4 cursor-pointer active:scale-90 select-none;
+}
+.confirmation-wrap .icon-wrap {
+  @apply mb-5 w-20 h-20 mx-auto rounded-full flex items-center justify-center;
+}
+.confirmation-wrap .icon-wrap.success {
+  @apply bg-PrimaryGreen/10 text-PrimaryGreen;
+}
+.confirmation-wrap .icon-wrap.warning {
+  @apply bg-PrimaryOrange/10 text-PrimaryOrange p-5;
+}
+.confirmation-wrap .icon-wrap.danger {
+  @apply bg-PrimaryRed/20 text-PrimaryRed p-5;
+}
+.confirmation-wrap .icon-wrap.info {
+  @apply bg-PrimaryBlue/10 text-PrimaryBlue p-5;
+}
+.confirmation-title {
+  @apply text-2xl text-black font-bold leading-normal text-center;
+}
+.confirmation-sub-title {
+  @apply text-sm leading-normal text-black/50 font-medium block mt-1;
+}
+.confirmation-btn-wrap {
+  @apply flex items-center justify-center gap-x-4 mt-8;
+}
+.confirmation-btn-wrap button {
+  @apply w-fit;
+}
+a.confirmation-text-extra {
+  @apply underline hover:text-PrimaryWood;
+}
+.confirmation-text-extra {
+  @apply text-sm leading-12 inline-block font-semibold text-primary/80 transition-all duration-300;
+}

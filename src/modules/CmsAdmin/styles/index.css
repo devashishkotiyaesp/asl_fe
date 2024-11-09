@@ -1,0 +1,92 @@
+.page-bar {
+  @apply border border-solid border-LightWood w-[245px];
+}
+.page-bar__title {
+  @apply p-5 border-b border-solid border-LightWood text-center text-base leading-12 uppercase text-PrimaryWood;
+}
+.page-bar__list {
+  @apply pt-3.5 pb-2.5;
+}
+.page-bar__item span {
+  @apply w-full relative py-2.5 pl-5 text-base text-PrimaryWood inline-block cursor-pointer;
+}
+.page-bar__item span::before {
+  @apply absolute content-[''] right-0 top-unset bottom-0 h-0 w-1 bg-PrimaryYellow transition-all duration-300;
+}
+.page-bar__item span.active {
+  @apply relative font-semibold text-black;
+}
+.page-bar__item span.active::before {
+  @apply h-full bottom-unset top-0;
+}
+.cms-page-bar-content-wrap {
+  @apply grid grid-cols-[250px_1fr] gap-5 mt-30px;
+}
+.cms-form-card-wrap {
+  @apply grid grid-cols-[230px_1fr] 1400:grid-cols-[300px_1fr] gap-5;
+}
+.cms-form-card-wrap:has(.left-small-column:empty) {
+  @apply grid-cols-1 1400:grid-cols-1;
+}
+.left-small-column {
+  @apply flex flex-col gap-4 empty:hidden;
+}
+.right-big-column {
+  @apply flex flex-col gap-y-5;
+}
+.cms-button {
+  @apply bg-white p-3.5 rounded-10px grid grid-cols-[40%_1fr] gap-2.5 w-full;
+}
+.cms-button.simple {
+  @apply p-0 rounded-none;
+}
+.cms-button.color {
+  @apply bg-LightGray;
+}
+.csm-form-button {
+  @apply flex justify-end mt-2.5;
+}
+.point-list-item {
+  @apply bg-white rounded-10px p-5 flex flex-col gap-y-5 relative;
+}
+.point-list-item .icon-delete {
+  @apply absolute bottom-2 right-2;
+}
+.point-list-item__title {
+  @apply flex w-full justify-between items-center pb-2.5 border-b border-solid border-LightWood;
+}
+.point-list-item__title .text {
+  @apply uppercase text-base block text-PrimaryWood font-medium;
+}
+.point-list-item__title .icon {
+  @apply cursor-pointer;
+}
+.point-list-item__title .icon.icon-delete {
+  @apply text-PrimaryRed;
+}
+
+.point-list-item:has(.left-part) {
+  @apply flex-row flex-wrap;
+}
+.point-list-item .left-part {
+  @apply w-[230px];
+}
+.point-list-item .right-part {
+  @apply max-w-[calc(100%_-_230px)] pl-5 w-full;
+}
+.point-list-item:has(:not(.left-part)) .right-part {
+  @apply pl-0 max-w-full;
+}
+.point-list-item .left-part,
+.point-list-item .right-part {
+  @apply flex flex-col gap-y-5;
+}
+.input-file-wrapper.two-clm {
+  @apply grid grid-cols-[290px_1fr] gap-4;
+}
+.table-of-content h2 {
+  @apply text-lg font-semibold;
+}
+.table-of-content {
+  @apply pt-5 mt-5 border-t border-solid border-black/10 flex items-center justify-between mb-5;
+}

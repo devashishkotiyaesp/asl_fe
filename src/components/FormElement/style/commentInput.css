@@ -1,0 +1,130 @@
+.comment-input {
+  @apply flex gap-2.5;
+}
+.comment-input-wrap {
+  @apply w-full max-w-[440px];
+}
+.comment-input-submit {
+  @apply w-9 h-9 bg-black rounded-full text-white inline-flex items-center justify-center cursor-pointer p-1.5 active:scale-95 transition-all duration-300;
+}
+.comment-input-submit svg {
+  @apply w-full h-full;
+}
+.comment-input-wrap .input-wrap {
+  @apply relative bg-white rounded-10px transition-all duration-300 w-full;
+}
+.comment-input-wrap .input-wrap {
+  @apply w-full;
+}
+.comment-input-wrap:has(.text-input:focus) .input-wrap {
+  @apply ring-2 ring-offset-2 ring-LightWood;
+}
+.comment-input-wrap .input-wrap input {
+  @apply pl-5 !ring-0 !ring-transparent !ring-offset-0;
+}
+.comment-input-wrap .drop-box {
+  @apply relative;
+}
+.comment-input-wrap .text-input {
+  @apply w-[calc(100%_-_60px)] h-full p-0 border-none min-h-10 rounded-10px;
+}
+.comment-input-wrap .file-input-label {
+  @apply absolute right-4 top-1/2 -translate-y-1/2 inline-flex cursor-pointer items-center justify-center w-30px h-30px rounded-full bg-LightWood text-PrimaryWood;
+}
+.file-input {
+  @apply hidden;
+}
+.comment-input {
+  @apply relative;
+}
+.comment-input form {
+  @apply flex max-w-[440px] w-full gap-4 items-center;
+}
+.comment-input .comment-input-wrap {
+  @apply flex-1;
+}
+.comment-input .upload-media-icon {
+  @apply block absolute -top-[34px] right-2 p-1.5 w-30px h-30px bg-transparent bg-LightWood cursor-pointer active:scale-95 transition-all duration-300;
+}
+.comment-file-list {
+  @apply flex flex-wrap gap-2 mt-4 max-w-[440px];
+}
+.comment-file-item {
+  @apply w-14 h-14 overflow-hidden rounded relative active:scale-95 transition-all duration-300;
+}
+.comment-file-item img {
+  @apply w-full h-full object-cover;
+}
+.remove-button {
+  @apply group-hover:opacity-100 opacity-0 transition-all duration-300 cursor-pointer absolute top-0 left-0 bg-black/70 text-white w-full h-full flex items-center justify-center;
+}
+
+.reply-input {
+  @apply relative max-w-[440px];
+}
+.reply-input-wrap {
+  @apply px-4 bg-white transition-all duration-300 rounded-10px;
+}
+.reply-input input {
+  @apply w-[calc(100%_-_30px)] h-full p-0 border-none min-h-10 rounded-10px bg-transparent;
+}
+.reply-submit {
+  @apply absolute top-1/2 -translate-y-1/2 right-2.5 w-30px h-30px bg-black rounded-full text-white inline-flex items-center justify-center p-1 cursor-pointer active:scale-90 transition-all duration-300;
+}
+.reply-submit svg {
+  @apply w-full h-full;
+}
+
+.coment-count {
+  @apply ml-auto inline-flex items-center cursor-pointer hover:text-black gap-1 text-PrimaryWood;
+}
+.coment-count span {
+  @apply underline text-base leading-12 underline-offset-2;
+}
+.coment-count svg {
+  @apply rotate-90 w-18px h-18px;
+}
+
+.reply-list {
+  @apply mt-4 flex flex-col gap-y-1.5;
+}
+.reply-count {
+  @apply flex items-center gap-1;
+}
+.reply-count .text {
+  @apply text-sm font-medium;
+}
+.reply-count svg {
+  @apply w-18px h-18px text-PrimaryWood;
+}
+.reply-item {
+  @apply flex flex-wrap gap-3 p-2.5 bg-white rounded-5px;
+}
+.reply-user-profile {
+  @apply w-9 h-9 rounded-full;
+}
+.reply-user-profile img {
+  @apply w-full h-full object-cover rounded-full;
+}
+.reply-box {
+  @apply flex-1;
+}
+.reply-name-time {
+  @apply flex items-center gap-4;
+}
+.reply-user-name {
+  @apply text-black text-base;
+}
+.reply-time {
+  @apply relative inline-block text-xs leading-none text-PrimaryWood;
+}
+.reply-time::before {
+  @apply w-1 h-1 bg-PrimaryWood rounded-full absolute content-[''] -left-2.5 top-1/2 -translate-y-1/2;
+}
+
+.reply-content {
+  @apply flex gap-3 mt-1 text-sm;
+}
+.reply-box .topic-option {
+  @apply ml-0 z-1;
+}

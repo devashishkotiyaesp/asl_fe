@@ -1,0 +1,3 @@
+.checkbox-input {
+  @apply cursor-pointer translate-y-0.5 h-4 w-4 rounded relative bg-white z-0 checked:z-20 ring-1 ring-LightWood appearance-none checked:bg-PrimaryWood checked:ring-PrimaryWood checked:before:block before:hidden before:w-full before:h-full before:bg-checkmark before:absolute before:z-10 before:bg-no-repeat before:bg-center transition-all duration-300;
+}

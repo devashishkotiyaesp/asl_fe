@@ -1,0 +1,18 @@
+.org-box-wrap {
+  @apply grid grid-cols-2 gap-5 mt-5;
+}
+.org-box-item {
+  @apply grid grid-cols-[30px_1fr] gap-2 px-2.5 py-4 bg-LightGray rounded-10px;
+}
+.org-box-item-icon {
+  @apply w-30px h-30px;
+}
+.org-box-item-icon svg {
+  @apply text-PrimaryWood w-full h-full;
+}
+.org-box-item-content span {
+  @apply uppercase text-black text-sm;
+}
+.org-box-item-content p {
+  @apply text-xl text-PrimaryWood mt-1;
+}

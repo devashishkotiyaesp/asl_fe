@@ -1,0 +1,52 @@
+.virtual-course-card {
+  @apply max-w-[350px] shadow-md shadow-black/10 rounded-10px;
+}
+.virtual-course-card__img {
+  @apply aspect-[3/1.7];
+}
+.virtual-course-card__img img {
+  @apply w-full h-full rounded-t-10px object-cover;
+}
+.virtual-course-card__content {
+  @apply p-4 bg-white rounded-b-10px;
+}
+.virtual-course-card__title {
+  @apply flex items-start mb-2.5;
+}
+.virtual-course-card__title h3 {
+  @apply max-w-[calc(100%_-_80px)] leading-12 flex-1 text-lg text-black font-semibold;
+}
+.virtual-course-card__price {
+  @apply flex justify-end w-full max-w-[80px] text-right font-semibold text-lg text-PrimaryYellow leading-12;
+}
+.virtual-course-card__coach {
+  @apply flex items-center gap-2;
+}
+.virtual-course-card__coach .coach-img {
+  @apply w-30px aspect-square flex;
+}
+.virtual-course-card__coach .coach-img img {
+  @apply w-full h-full bg-cover rounded-full;
+}
+.virtual-course-card__coach .coach-name {
+  @apply underline text-sm font-normal text-black/70 hover:no-underline hover:text-black transition-all duration-300;
+}
+
+.virtual-course-card__date {
+  @apply flex justify-between mt-3.5;
+}
+.virtual-course-card__date .course-date {
+  @apply flex items-center text-base leading-12 text-black/70 gap-2.5;
+}
+
+.virtual-course-card__date .course-spot {
+  @apply text-sm text-PrimaryWood bg-PrimaryWood/10 rounded-full p-2 px-3;
+}
+
+.virtual-course-card .btn {
+  @apply mt-30px;
+}
+
+.virtual-course-card .btn a {
+  @apply w-full justify-center pt-[9px] pb-[11px];
+}

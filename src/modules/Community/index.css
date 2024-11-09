@@ -1,0 +1,9 @@
+.add-topic-wrap {
+  @apply gap-x-0;
+}
+.add-topic-wrap .left-part {
+  @apply max-w-[400px] w-full;
+}
+.add-topic-wrap .right-part {
+  @apply max-w-[calc(100%_-_400px)] w-full pl-5 flex flex-col gap-y-5;
+}

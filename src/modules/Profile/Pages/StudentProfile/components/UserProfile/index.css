@@ -1,0 +1,63 @@
+.sidebar-content-wrap {
+  @apply max-w-[calc(100%_-_225px)] w-full pl-4 flex flex-wrap content-start;
+}
+.sidebar-content-title-wrap {
+  @apply mb-9 w-full;
+}
+.sidebar-content-title {
+  @apply pl-4 border-b border-solid border-LightGray pb-3 w-full;
+}
+.sidebar-content-title span {
+  @apply text-[22px] font-semibold;
+}
+.sidebar-content-small-title {
+  @apply pl-4 mt-2.5 flex text-sm leading-12 text-PrimaryWood;
+}
+.sidebar-content-left {
+  @apply max-w-[calc(100%_-_184px)] w-full pr-6;
+}
+.sidebar-content-right .btn a {
+  @apply pt-2 pb-2.5 px-3.5 rounded-md;
+}
+.student-profile-img {
+  @apply w-20 h-20 rounded-full relative;
+}
+.student-profile-img img {
+  @apply rounded-full w-full h-full;
+}
+.student-profile-img .profile-update {
+  @apply absolute bottom-0 right-0 cursor-pointer active:scale-90 flex items-center justify-center w-6 h-6 rounded-full bg-PrimaryGreen text-white transition-all duration-300;
+}
+.student-profile-img .profile-update input {
+  @apply w-full h-full opacity-0 cursor-pointer absolute top-0 left-0;
+}
+.student-profile-form {
+  @apply flex flex-col gap-5 mb-2.5;
+}
+
+.learn-asl-select-item .active {
+  @apply bg-white;
+}
+
+.learn-asl-selected-items {
+  /* @apply bg-LightGray rounded-xl p-2; */
+}
+.selected-interest-wrap {
+  @apply flex flex-wrap gap-3;
+}
+.select-interest-box {
+  @apply p-5 bg-LightGray flex flex-col gap-y-4;
+}
+.selected-interest-tag {
+  @apply bg-white rounded-5px p-1.5 pb-1 flex items-center gap-2.5;
+}
+.selected-interest-tag > span {
+  @apply flex flex-1 text-base leading-tight;
+}
+
+.selected-interest-tag .remove-icon {
+  @apply cursor-pointer w-4 h-4 rounded-full border border-solid border-PrimaryWood hover:bg-PrimaryWood text-PrimaryWood hover:text-white flex items-center justify-center rotate-45;
+}
+.selected-interest-tag .remove-icon svg path {
+  @apply stroke-2;
+}

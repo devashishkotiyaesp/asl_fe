@@ -1,0 +1,87 @@
+/* FEED BACK MODULE STYLE START HERE */
+.view-feedback-modal {
+  @apply flex flex-wrap;
+}
+.view-feedback-profile {
+  @apply max-w-[180px] w-full;
+}
+.view-feedback-profile img {
+  @apply w-32 h-32 rounded-full object-cover border border-solid border-LightGray;
+}
+.view-feedback-info {
+  @apply max-w-[calc(100%_-_180px)] w-full gap-5 flex flex-col;
+}
+.feedback-filed-item span {
+  @apply text-base text-black/60 font-normal mb-1.5 leading-12 inline-block;
+}
+.feedback-filed-item p {
+  @apply text-black font-medium text-base leading-12;
+}
+.feedback-filed-item p:has(em, i) {
+  @apply font-normal;
+}
+
+.reply-feedback-org-wrap {
+  @apply mb-4 py-6 px-5 bg-LightGray flex items-center;
+}
+.reply-feedback-org-img {
+  @apply max-w-[140px] w-full;
+}
+.reply-feedback-org-img img {
+  @apply w-28 h-28 rounded-full object-cover;
+}
+.reply-feedback-org-details {
+  @apply max-w-[calc(100%_-_140px)] w-full;
+}
+.reply-feedback-org-details .tag {
+  @apply bg-LightWood px-1.5 py-0.5 text-base text-PrimaryWood w-fit leading-12 rounded mb-1.5;
+}
+.reply-feedback-org-details p {
+  @apply text-xl font-semibold mb-1.5 text-black;
+}
+.reply-feedback-org-details p span {
+  @apply font-normal opacity-50;
+}
+.reply-feedback-org-details a {
+  @apply font-medium underline inline-block;
+}
+.reply-feedback-msg label {
+  @apply max-w-[80px] w-full text-base font-medium;
+}
+.reply-feedback-msg p {
+  @apply max-w-[calc(100%_-_80px)] w-full;
+}
+.reply-feedback-msg {
+  @apply flex;
+}
+.reply-feedback-input {
+  @apply mt-6;
+}
+/* FEED BACK MODULE STYLE END HERE */
+.responseInfo {
+  @apply flex items-center bg-LightGray p-5 rounded-10px;
+}
+.responseInfo-image {
+  @apply w-28 h-28;
+}
+.responseInfo-image img {
+  @apply w-full h-full rounded-full object-cover border border-solid border-PrimaryWood/20;
+}
+.responseInfo-content {
+  @apply max-w-[calc(100%_-_112px)] pl-5 w-full flex flex-col gap-1.5;
+}
+.responseInfo-name {
+  @apply text-xl font-semibold text-black;
+}
+.responseInfo-email {
+  @apply underline text-black text-base leading-12;
+}
+.response-item {
+  @apply flex gap-5 mt-4 mb-7;
+}
+.response-item label {
+  @apply w-16 font-semibold text-black;
+}
+.response-item .response-item-text {
+  @apply max-w-[calc(100%_-_64px)] flex-1 italic font-light text-black;
+}

@@ -1,0 +1,30 @@
+.course-card {
+  @apply max-w-[350px] mx-auto;
+}
+.course-card__img {
+  @apply h-[200px] w-full relative;
+}
+.course-card__img::before {
+  @apply absolute content-[''] inset-0 w-full h-full bg-black/20 rounded-t-xl;
+}
+.course-card__img img {
+  @apply w-full h-full object-cover rounded-t-xl;
+}
+.course-card__price {
+  @apply w-14 h-14 bg-PrimaryYellow text-black flex items-center justify-center text-sm leading-12 rounded-full absolute -top-7 right-6 font-medium uppercase;
+}
+.course-card__content {
+  @apply relative flex flex-col p-6 border border-solid border-LightWood border-t-0 rounded-b-xl;
+}
+.course-card__content h3 {
+  @apply text-xl font-semibold text-black mb-3 line-clamp-2;
+}
+.course-card__content p {
+  @apply text-base text-black/70 tracking-normal line-clamp-3 mb-5;
+}
+.course-card__content a {
+  @apply mt-auto flex font-normal gap-2 items-center text-PrimaryWood hover:text-black transition-all duration-300;
+}
+.course-card__content a svg {
+  @apply translate-y-px;
+}

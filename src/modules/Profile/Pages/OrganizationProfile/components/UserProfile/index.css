@@ -1,0 +1,17 @@
+.edit-org-wrap {
+}
+.edit-org-wrap .left-part .upload-small-text {
+  @apply text-center w-11/12 text-sm;
+}
+.edit-org-wrap .left-part {
+  @apply w-48 h-48;
+}
+.edit-org-wrap .right-part {
+  @apply max-w-[calc(100%_-_192px)] pl-10 flex flex-col gap-4;
+}
+.reset-pswd-text {
+  @apply inline-block text-black font-medium mt-2 underline hover:opacity-60 cursor-pointer;
+}
+.edit-org-wrap .checkbox-list {
+  @apply flex flex-col gap-2.5;
+}

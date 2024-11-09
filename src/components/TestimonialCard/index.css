@@ -1,0 +1,39 @@
+.testimonial-card {
+  @apply max-w-[350px] mx-3;
+}
+.testimonial-card .quote-icon {
+  @apply absolute right-30px top-30px rotate-180 w-12 h-12;
+}
+.testimonial-card .quote-icon svg {
+  @apply w-full h-full opacity-5;
+}
+.testimonial-card.company-card .inner {
+  @apply bg-LightGray;
+}
+.testimonial-card .inner {
+  @apply bg-white rounded-xl p-30px relative flex flex-col;
+}
+.testimonial-img {
+  @apply w-70px aspect-square rounded-full overflow-hidden mb-6;
+}
+.testimonial-img img {
+  @apply w-full h-full object-cover;
+}
+.testimonial-title {
+  @apply text-xl font-semibold text-PrimaryWood;
+}
+.testimonial-card .description {
+  @apply mb-6 mt-5;
+}
+.testimonial-card .description p {
+  @apply text-base leading-normal text-black;
+}
+.testimonial-card .testimonial-info {
+  @apply mt-auto;
+}
+.testimonial-card .testimonial-info p {
+  @apply text-lg leading-12 text-black font-semibold mb-1;
+}
+.testimonial-card .testimonial-info span {
+  @apply text-sm font-light text-black/70 block;
+}

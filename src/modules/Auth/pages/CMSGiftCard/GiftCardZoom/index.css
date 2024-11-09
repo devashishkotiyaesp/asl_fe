@@ -1,0 +1,24 @@
+.gift-card-zoom {
+  @apply bg-LightWood;
+}
+.gift-card-zoom .title {
+  @apply mb-12;
+}
+.gift-card-zoom h2 {
+  @apply text-[40px] font-semibold;
+}
+.gift-card-zoom .left-part {
+  @apply max-w-[360px];
+}
+.gift-card-zoom .left-part img {
+  @apply w-full h-auto object-contain;
+}
+.gift-card-zoom .right-part {
+  @apply max-w-[calc(100%_-_360px)] pl-14;
+}
+.gift-card-zoom .text {
+  @apply text-black text-2xl font-semibold;
+}
+.gift-card-zoom .btn {
+  @apply mt-9;
+}

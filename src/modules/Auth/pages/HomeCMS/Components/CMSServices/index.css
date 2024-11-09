@@ -1,0 +1,54 @@
+.services .section-title {
+  @apply flex flex-wrap items-end pb-[92px];
+}
+.services .section-title .right-content {
+  @apply flex justify-end;
+}
+.services .section-title > * {
+  @apply w-1/2;
+}
+.services .wrapper > *:not(.section-title) {
+  @apply w-1/2;
+}
+.services .wrapper .right-part {
+  @apply relative w-fit ml-auto;
+}
+.services .wrapper .right-part > img {
+  @apply block object-cover rounded-2xl max-w-[540px];
+}
+.services .service-img-speed {
+  @apply absolute -top-9 left-3.5 block aspect-[1_/_1.7] w-28;
+}
+.services .service-img-speed img {
+  @apply object-contain object-left-top rounded-lg;
+}
+.services .service-img-small {
+  @apply absolute -bottom-11 right-7  block h-44 aspect-square;
+}
+.services .service-img-small img {
+  @apply w-full h-full object-cover rounded-2xl;
+}
+.services .accordion-item {
+  @apply bg-LightGray border border-solid border-black/10 p-30px rounded-2xl mb-4 last:mb-0;
+}
+.services .accordion-item.active {
+  @apply bg-LightWood;
+}
+.services .accordion-title {
+  @apply cursor-pointer;
+}
+.services .accordion-title h3 {
+  @apply text-2xl leading-12 text-black font-semibold;
+}
+.services .accordion-content {
+  @apply transition-all duration-500 overflow-hidden;
+}
+.services .accordion-content .inner {
+  @apply pt-3 pb-1;
+}
+.services .accordion-content .btn {
+  @apply mt-4;
+}
+.services .accordion-content .btn a {
+  @apply !pt-2 !pb-2.5 !px-3;
+}

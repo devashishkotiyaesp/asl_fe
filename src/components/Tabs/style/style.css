@@ -1,0 +1,33 @@
+/* .tab-header {
+  @apply flex justify-between items-end gap-7 border-b border-solid  overflow-x-auto;
+}
+.tab-items {
+  @apply flex items-center  h-fit flex-[1_0_0%] whitespace-nowrap;
+}
+.tab-item.active {
+  @apply font-medium text-primary cursor-pointer border-b-2 border-b-primary ms-6 first:ms-0;
+}
+.tab-item {
+  @apply flex items-center pb-4 text-base font-normal hover:text-primary text-black cursor-pointer border-b-2 border-b-transparent ms-6 first:ms-0;
+} */
+.tab-items {
+  @apply flex items-center relative;
+}
+.tab-items::before {
+  @apply absolute content-[''] bottom-0 right-0 h-px w-full bg-black/5 transition-all duration-300;
+}
+.tab-item {
+  @apply cursor-pointer leading-none px-18px pb-4 text-lg text-black/50 relative;
+}
+.tab-item::before {
+  @apply absolute content-[''] bottom-0 right-0 h-0.5 w-0 bg-black transition-all duration-300;
+}
+.tab-item.active::before {
+  @apply w-full right-unset left-0;
+}
+.tab-item.active {
+  @apply font-medium text-black;
+}
+.tab-content {
+  @apply mt-8;
+}

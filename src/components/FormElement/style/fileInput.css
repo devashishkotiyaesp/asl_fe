@@ -1,0 +1,61 @@
+.file-input-label-style {
+  @apply h-40 w-full bg-white border border-dashed border-black/20 hover:border-black transition-all duration-300 rounded-5px block cursor-pointer;
+}
+.file-input-button-style {
+  @apply w-6 h-6 cursor-pointer active:scale-90 select-none rounded-full block bg-PrimaryRed text-white p-1 border absolute -top-2 -right-2 z-1;
+}
+.file-input-xls-label-style {
+  @apply h-[266px] text-center w-full bg-white hover:border-black transition-all duration-300 rounded-5px block border border-dashed border-black/20 cursor-pointer;
+}
+.file-input-link-label-style {
+  @apply h-[46px] w-full bg-white hover:bg-white transition-all duration-300 rounded-5px block border border-dashed border-black/20 cursor-pointer;
+}
+.media-icon {
+  @apply border border-solid border-LightWood w-[170px] h-24 rounded-5px relative;
+}
+.media-icon *:not(button) {
+  @apply !object-cover;
+}
+.upload-media-icon {
+  @apply inline-block text-black bg-LightGray rounded-full w-11 h-11 p-2.5;
+}
+.upload-small-text {
+  @apply mt-2.5 px-5 rounded block text-base py-2 bg-LightWood leading-5 text-primary;
+}
+.uploaded-media-wrap {
+  @apply w-full h-full relative flex items-center mt-3.5;
+}
+.uploaded-video-wrap {
+  @apply h-full w-fit;
+}
+.multi-upload-wrap {
+  @apply flex flex-wrap gap-3 p-2 border bg-white border-solid border-gray-200 rounded-5px mt-3;
+}
+.multi-upload-wrap .media-icon {
+  @apply w-14 h-14;
+}
+.multi-upload-wrap .uploaded-media-wrap {
+  @apply w-fit mt-0;
+}
+.xls-icon-wrap {
+  @apply w-16 h-16 rounded-full mx-auto block;
+}
+.xls-icon-wrap .icon {
+  @apply bg-LightGray w-16 h-16 rounded-full mx-auto flex justify-center items-center text-primary/80;
+}
+.xls-inner {
+  @apply flex flex-col h-full justify-center;
+}
+.xls-file-remove-btn {
+  @apply mt-2 text-red-500 underline hover:text-red-700 transition-all duration-300;
+}
+.xls-uploaded-file {
+  @apply mt-4 text-sm text-PrimaryWood leading-4;
+}
+
+.link-file-input-icon {
+  @apply w-8 h-8 inline-block rounded-full bg-LightWood text-PrimaryWood p-1.5;
+}
+.link-file-input-wrap {
+  @apply flex items-center h-full gap-x-1 px-3;
+}

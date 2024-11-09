@@ -1,0 +1,30 @@
+.topic-card {
+  @apply flex flex-col rounded-5px bg-white;
+}
+.topic-card-img {
+  @apply h-[160px] overflow-hidden rounded-t-5px;
+}
+.topic-card-img img {
+  @apply w-full h-full object-cover;
+}
+.topic-card-content {
+  @apply p-2.5 pb-0 flex flex-col mb-auto max-h-[206px] overflow-hidden;
+}
+.topic-card-content h3 {
+  @apply text-black text-lg font-semibold;
+}
+.topic-card-content p {
+  @apply text-PrimaryWood;
+}
+.topic-card-content .topic-card-time {
+  @apply text-xs text-PrimaryWood;
+}
+.topic-card-conversation {
+  @apply px-2.5 pt-3.5 mt-3.5 border-t border-solid border-PrimaryWood/50 pb-5 flex items-center;
+}
+.topic-card-conversation .icon {
+  @apply w-6 h-6;
+}
+.topic-card-conversation .text {
+  @apply flex-1 pl-1 text-base;
+}

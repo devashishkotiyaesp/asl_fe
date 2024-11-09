@@ -1,0 +1,40 @@
+.crew-sec .section-title {
+  @apply text-center;
+}
+.crew-list {
+  @apply grid grid-cols-4 gap-30px mt-70px;
+}
+.crew-item {
+  @apply relative;
+}
+.crew-img {
+  @apply aspect-[1.59_/_2] relative;
+}
+.crew-img img {
+  @apply w-full h-full object-cover rounded-2xl;
+}
+.crew-img .more-info {
+  @apply absolute top-5 right-5 w-12 aspect-square bg-black text-white flex items-center justify-center rounded-full transition-all duration-300 active:scale-95;
+}
+.crew-item h3 {
+  @apply text-black mt-4 text-2xl leading-12;
+}
+.crew-item p {
+  @apply text-black font-normal text-base;
+}
+
+.crew-modal-wrap .left-part {
+  max-width: 255px;
+}
+
+.crew-modal-wrap .right-part {
+  max-width: calc(100% - 255px);
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.home-cta {
+  @apply !pb-0 pt-11;
+}

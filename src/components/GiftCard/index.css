@@ -1,0 +1,24 @@
+.gift-card {
+  @apply p-5 border border-solid border-LightGray rounded-xl;
+}
+.gift-card__img {
+  @apply max-w-[100px] h-[53px] mb-7;
+}
+.gift-card__img img {
+  @apply w-full h-full rounded;
+}
+.gift-card__content {
+  @apply flex items-center gap-4;
+}
+.gift-card__content .text {
+  @apply flex-1 text-xl font-semibold text-black;
+}
+.gift-card__content .price {
+  @apply aspect-square bg-PrimaryYellow text-black flex items-center justify-center rounded-full text-sm py-1 px-1.5 font-semibold;
+}
+.gift-card .btn {
+  @apply mt-30px;
+}
+.gift-card .btn a {
+  @apply w-full justify-center;
+}

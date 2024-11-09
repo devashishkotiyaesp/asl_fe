@@ -1,0 +1,42 @@
+.event-card .image-banner {
+  @apply aspect-video relative;
+}
+.event-card .image-banner img {
+  @apply w-full h-full object-cover rounded-t-xl;
+}
+
+.event-card .image-banner .date {
+  @apply absolute top-4 left-4 flex flex-col aspect-square bg-white rounded-lg w-[60px] justify-center items-center;
+}
+
+.event-card .image-banner .date span:first-child {
+  @apply text-2xl font-semibold leading-none;
+}
+.event-card .image-banner .date span:last-child {
+  @apply text-black uppercase;
+}
+
+.event-card .event-card-content {
+  @apply p-5 bg-LightGray rounded-b-xl;
+}
+
+.event-card .event-card-content h3 {
+  @apply text-xl font-semibold leading-12 mb-4;
+}
+.event-card .event-card-content .event-time {
+  @apply flex items-center gap-2;
+}
+.event-card .event-card-content svg {
+  @apply w-5 h-5 text-black/30;
+}
+.event-card .event-card-content .time-stamp {
+  @apply text-sm leading-12 text-black inline-block;
+}
+
+.event-card .event-card-content .link {
+  @apply flex items-center text-black gap-2 mt-6 cursor-pointer hover:opacity-70 hover:underline underline-offset-2 transition-all duration-300;
+}
+
+.event-card .event-card-content .link svg {
+  @apply w-4 h-4 text-black translate-y-0.5;
+}

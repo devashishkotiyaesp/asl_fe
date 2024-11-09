@@ -1,0 +1,24 @@
+.org-work .section-title {
+  @apply text-center;
+}
+.org-work .section-title p {
+  @apply max-w-[805px] mx-auto;
+}
+.org-work-list {
+  @apply grid grid-cols-3 gap-30px mt-14;
+}
+.org-work-item .inner {
+  @apply border border-solid border-PrimaryWood/20 rounded-xl p-30px;
+}
+.org-work-item .icon {
+  @apply w-10 h-10 mb-3.5 text-PrimaryWood;
+}
+.org-work-item .icon svg {
+  @apply w-full h-full;
+}
+.org-work-item h3 {
+  @apply text-xl font-semibold text-black mb-1;
+}
+.org-work-item p {
+  @apply text-black/70;
+}

@@ -1,0 +1,28 @@
+.organization-profile-stripe {
+  @apply bg-LightGray p-5 rounded-10px;
+}
+
+.organization-profile-stripe .top-part {
+  @apply flex justify-between mb-5;
+}
+.org-image {
+  @apply w-28 h-28 rounded-full p-1 bg-white shadow-lg shadow-black/20;
+}
+.org-image img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.org-details {
+}
+.org-details span {
+  @apply flex items-center gap-1 text-PrimaryWood;
+}
+.org-details p {
+  @apply text-3xl font-semibold text-black mb-1 leading-12;
+}
+
+.organization-profile-stripe .bottom-part {
+  @apply flex justify-between items-end;
+}
+.org-change-paswd span {
+  @apply text-PrimaryBlue font-medium hover:text-black transition-all duration-300 underline cursor-pointer;
+}

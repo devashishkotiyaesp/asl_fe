@@ -1,0 +1,6 @@
+.profile-view {
+  @apply bg-LightGray pt-5;
+}
+.layout-card {
+  @apply p-8 bg-white rounded-lg border border-solid border-LightWood;
+}

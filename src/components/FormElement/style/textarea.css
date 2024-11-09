@@ -1,0 +1,4 @@
+.text-area {
+  /* @apply text-sm text-black placeholder:text-grayText focus:outline-none border rounded-lg p-3 w-full focus:border-secondary/30 */
+  /* @apply block w-full text-sm leading-normal p-3 placeholder:text-grayText text-gray-200 font-normal border border-gray-200 border-solid rounded-10px  focus:ring-2 focus:ring-gray-200/20 focus:ring-offset-2 transition-all duration-300; */
+}

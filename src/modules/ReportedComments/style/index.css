@@ -1,0 +1,12 @@
+.user-profile-data {
+  @apply flex gap-2 items-center;
+}
+.user-profile-image {
+  @apply w-8 h-8 rounded-full;
+}
+.user-profile-image img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.user-profile-name {
+  @apply max-w-[calc(100%_-_32px)] w-full flex-1 text-lg font-light text-black h-fit;
+}

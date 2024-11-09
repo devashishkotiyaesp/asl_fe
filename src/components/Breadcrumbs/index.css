@@ -1,0 +1,18 @@
+/* Breadcrumbs */
+.breadcrumbs {
+  @apply mb-3;
+}
+.breadcrumbs ul {
+  @apply flex items-center;
+}
+.breadcrumbs ul li,
+.breadcrumbs ul li a {
+  @apply text-sm text-black hover:underline;
+}
+.breadcrumbs ul li {
+  @apply after:mx-1 after:content-['/'] last:after:hidden text-black/50 hover:no-underline;
+}
+.breadcrumbs.arrow ul li {
+  @apply after:content-[''] after:bg-rightArrow after:bg-no-repeat after:w-[18px] after:h-[18px] after:justify-center after:items-center after:inline-flex flex items-center last:after:hidden after:opacity-20;
+}
+/* Breadcrumbs */

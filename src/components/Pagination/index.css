@@ -1,0 +1,29 @@
+.pagination-inner {
+  @apply flex gap-12 justify-end items-center;
+}
+.pagination-list {
+  @apply flex gap-2 items-start;
+}
+.pagination-item {
+  @apply p-0 w-9 h-9 inline-flex items-center cursor-pointer justify-center bg-LightGray rounded-lg text-black text-xs;
+}
+.pagination-item.active {
+  @apply text-white bg-PrimaryWood;
+  /* text-white hover:bg-PrimaryWood hover:text-white */
+}
+.pagination-item.arrow {
+  @apply text-black hover:bg-PrimaryWood hover:text-white;
+}
+
+.pagination-item.disabled {
+  @apply cursor-not-allowed opacity-50 hover:bg-LightGray hover:text-black;
+}
+.pagination-item .icon {
+  @apply w-full h-full p-2.5 flex items-center align-middle;
+}
+.pagination-select .text {
+  @apply text-sm font-medium px-3.5 py-2.5 border rounded-md text-primary/80 ml-2;
+}
+.pagination-select {
+  @apply flex items-center gap-2.5;
+}

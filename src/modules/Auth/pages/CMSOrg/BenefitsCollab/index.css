@@ -1,0 +1,28 @@
+.benefites-collab .section-title {
+  @apply text-center max-w-[805px] mx-auto;
+}
+.benefites-collab .swiper-slide {
+  @apply px-2;
+}
+.benefites-collab .wrapper {
+  @apply bg-LightGray py-12 px-10 rounded-2xl items-center mt-10;
+}
+.benefites-collab .left-part {
+  @apply flex-1 pr-10;
+}
+.benefites-collab .left-part h3 {
+  @apply mb-5 font-semibold text-2xl leading-12;
+}
+
+.benefites-collab .left-part p {
+  @apply text-black/70 leading-normal text-base;
+}
+.benefites-collab .left-part .btn {
+  @apply mt-10;
+}
+.benefites-collab .right-part {
+  @apply max-w-[450px] h-fit;
+}
+.benefites-collab .right-part img {
+  @apply w-full h-full object-contain;
+}

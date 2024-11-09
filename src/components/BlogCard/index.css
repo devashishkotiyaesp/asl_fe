@@ -1,0 +1,21 @@
+.blog-card:hover h3 {
+  @apply underline;
+}
+.blog-card .img-wrap {
+  @apply h-[240px] aspect-[2_/_1.37];
+}
+.blog-card .img-wrap img {
+  @apply w-full h-full object-cover rounded-lg;
+}
+.blog-card .content {
+  @apply mt-4;
+}
+.blog-card .content h3 {
+  @apply text-2xl font-semibold text-black leading-12;
+}
+.blog-card .content .date {
+  @apply flex items-center text-black/50 gap-2 mt-4 !no-underline;
+}
+.blog-card .content svg {
+  @apply w-6 h-6;
+}

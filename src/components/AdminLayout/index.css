@@ -1,0 +1,168 @@
+.dasboard-layout {
+  @apply flex h-100dvh;
+}
+.sidebar {
+  @apply w-[300px] transition-all duration-300 bg-white border-r border-solid border-LightWood/80;
+}
+.sidebar.hide {
+  @apply w-[95px];
+}
+.admin-content {
+  @apply w-[calc(100%_-_300px)] ml-auto transition-all duration-300;
+}
+.admin-content main {
+  @apply px-5 pt-5 bg-LightGray max-h-[calc(100dvh_-_80px)] overflow-auto;
+}
+.admin-content.hide {
+  @apply w-[calc(100%_-_95px)];
+}
+.sidebar-trigger {
+  @apply cursor-pointer;
+}
+.admin-content.hide .sidebar-trigger {
+  @apply rotate-180;
+}
+.sidebar-logo {
+  @apply py-5 flex items-center justify-center;
+}
+.sidebar.hide .sidebar-logo {
+  @apply py-3;
+}
+.sidebar-logo a img {
+  @apply max-w-[223px] w-full object-contain h-10;
+}
+.sidebar.hide .sidebar-logo a img {
+  @apply h-14 aspect-square;
+}
+.sidebar-title {
+  @apply px-5 py-1.5 bg-LightGray leading-none uppercase text-sm text-center;
+}
+.sidebar-divider {
+  @apply px-5 py-1.5 bg-LightGray leading-none uppercase text-sm text-left;
+}
+.sidebar-list {
+  @apply p-5;
+}
+.sidebar-list ul {
+  @apply flex flex-col gap-y-1 max-h-[calc(100dvh_-_145px)] overflow-auto;
+}
+.notification-items {
+  @apply max-h-[calc(100dvh_-_450px)]  overflow-auto min-h-[70px] transition-all duration-300;
+}
+.sidebar-list_item a {
+  @apply py-4 px-3.5 flex items-center gap-2.5 text-PrimaryWood rounded-md hover:bg-LightGray transition-all duration-300;
+}
+.sidebar-list_item a.active {
+  @apply bg-black text-white;
+}
+.sidebar-list_item a > span.text {
+  @apply whitespace-nowrap max-w-44 overflow-hidden;
+}
+.sidebar.hide .sidebar-list_item a > span.text {
+  @apply max-w-0;
+}
+.sidebar-list_item.has-menu a .icon-more {
+  @apply ml-auto;
+}
+
+.admin-header__inner {
+  @apply px-5 py-3 flex items-center justify-between bg-white relative z-2;
+}
+
+.admin-content {
+  @apply bg-LightGray;
+}
+.header-notification {
+  @apply relative h-13 w-13 p-3 rounded-full border border-solid border-LightWood flex items-center justify-center text-black hover:bg-PrimaryWood hover:text-white transition-all duration-300 cursor-pointer;
+}
+.header-notification svg {
+  @apply w-full h-full;
+}
+.header-notification svg path {
+  @apply stroke-1;
+}
+.header-notification .update {
+  @apply w-2 h-2 rounded-full bg-PrimaryWood border-2 border-solid border-LightWood absolute top-0.5 right-1;
+}
+.header-profile {
+  @apply w-13 h-13 ml-3 cursor-pointer bg-LightWood border-2 border-solid border-black rounded-full;
+}
+.header-profile img {
+  @apply w-full h-full object-cover rounded-full;
+}
+
+.header-profile-menu {
+  @apply absolute rounded-xl top-[calc(100%_+_20px)] right-0 bg-white py-4 px-5 z-1 w-[260px] drop-shadow-[0_-5px_20px_rgba(0,0,0,0.15)];
+}
+.header-profile-menu::before {
+  @apply content-[''] absolute right-4 -top-2.5 border-x-[12px] border-x-transparent border-b-[12px] border-b-white;
+}
+.header-user-profile {
+  @apply relative;
+}
+.header-profile-menu__title {
+  @apply text-xl font-semibold leading-normal pb-2.5 border-b border-solid border-LightGray;
+}
+.header-profile-wrap {
+  @apply flex gap-3 py-4 hover:opacity-70 transition-all duration-300;
+}
+.header-profile-menu__img {
+  @apply w-9 h-9 rounded-full;
+}
+.header-profile-menu__img img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.header-profile-name {
+  @apply flex-1 relative pr-30px flex flex-col max-w-[calc(100%_-_48px)];
+}
+.header-profile-name .name {
+  @apply text-black truncate leading-12 text-base block;
+}
+.header-profile-name .email {
+  @apply text-black truncate font-light leading-12 text-sm mt-0.5 block;
+}
+.header-notification-wrap {
+  @apply relative;
+}
+.header-profile-name .more-icon {
+  @apply absolute right-0 top-1/2 -translate-y-1/2;
+}
+.header-notification-list-wrap {
+  @apply absolute rounded-xl top-[calc(100%_+_20px)] right-0 bg-white py-4 px-5 z-1 w-[500px] drop-shadow-[0_-5px_20px_rgba(0,0,0,0.15)];
+}
+.header-notification-list-wrap::before {
+  @apply content-[''] absolute right-4 -top-2.5 border-x-[12px] border-x-transparent border-b-[12px] border-b-white;
+}
+.header-notification-list-header {
+  @apply flex justify-between pb-3 mb-4 border-b border-solid border-LightGray;
+}
+.header-notification-title {
+  @apply text-xl font-semibold text-black;
+}
+.header-notification-mark {
+  @apply flex items-center gap-1.5 text-PrimaryWood text-sm font-normal cursor-pointer hover:text-black transition-all duration-300 select-none hover:underline;
+}
+.notification-item {
+  @apply flex relative border-b border-solid border-LightGray pb-3.5 mb-3.5 last:pb-0 last:mb-0 last:border-none;
+}
+.notification-item__img {
+  @apply w-9 h-9 rounded-full;
+}
+.notification-item__img img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.notification-item__content {
+  @apply max-w-[calc(100%_-_36px)] pl-3 flex-1;
+}
+.notification-item__content .title {
+  @apply text-base text-black leading-12 mb-0.5;
+}
+.notification-item__content .desc {
+  @apply text-sm font-light leading-12 block text-black/70;
+}
+.notification-item__content .duration {
+  @apply mt-1 text-xs font-normal text-PrimaryWood block leading-none;
+}
+.notification-clear a {
+  @apply block text-PrimaryWood bg-LightGray text-center pt-1 pb-1.5 rounded hover:bg-PrimaryWood hover:text-white transition-all duration-300 active:scale-95;
+}

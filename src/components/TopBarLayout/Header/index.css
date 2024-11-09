@@ -1,0 +1,31 @@
+.site-header {
+  @apply absolute top-0 left-0 w-full bg-white flex justify-between py-27px border-b border-solid border-LightWood z-2;
+}
+.site-header .wrapper {
+  @apply items-center;
+}
+.site-header .menu {
+  @apply flex items-center gap-x-1;
+}
+
+.site-header .menu-item a {
+  @apply inline-block leading-none py-2 px-3 rounded-5px hover:bg-LightGray transition-all duration-300;
+}
+.site-header .menu-item a.active {
+  @apply bg-LightWood;
+}
+.site-header .lang-wrap {
+  @apply flex flex-wrap;
+}
+.site-header .lang-wrap__inner {
+  @apply flex items-center w-[90px] rounded-full bg-LightGray relative z-1 mr-4;
+}
+.site-header .active-circle {
+  @apply block w-[45px] left-0 aspect-square rounded-full absolute top-0 bg-LightWood -z-1 transition-all duration-300;
+}
+.site-header .active-circle.active {
+  @apply left-1/2;
+}
+.site-header .btn a {
+  @apply pt-[11px] pb-[13px];
+}

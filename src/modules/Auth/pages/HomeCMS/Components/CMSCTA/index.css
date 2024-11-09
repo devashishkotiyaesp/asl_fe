@@ -1,0 +1,61 @@
+.home-cta {
+  @apply bg-LightWood pb-0;
+}
+
+.home-cta .container {
+  @apply relative;
+}
+.home-cta .wrapper > * {
+  @apply w-1/2;
+}
+.home-cta .right-part .inner {
+  @apply max-w-[500px];
+}
+.hand-sign-img {
+  @apply absolute bottom-0 right-9;
+}
+.home-cta h2 {
+  @apply text-36px leading-12 font-bold mb-6;
+}
+.home-cta .img-wrap {
+  @apply -mb-11 flex justify-center;
+}
+.home-cta .img-wrap img {
+  @apply max-w-[377px];
+}
+.home-cta .big-title {
+  @apply text-2xl font-semibold text-black;
+}
+.home-cta .spanish-wrapper .left-part {
+  @apply relative;
+}
+.home-cta .spanish-wrapper .img-wrap {
+  @apply !absolute bottom-0 left-1/2 -translate-x-1/2;
+}
+
+.home-cta .spanish-wrapper h2 {
+  @apply mb-11;
+}
+
+.home-cta .spanish-wrapper .btn-black-border {
+  @apply mb-3;
+}
+
+/* V2 */
+.home-cta.v2 {
+}
+.home-cta.v2 .left-part {
+  @apply w-4/12;
+}
+.home-cta.v2 .right-part {
+  @apply w-8/12 pl-14;
+}
+.home-cta.v2 .left-part .img-wrap {
+  @apply mb-0;
+}
+.home-cta.v2 .right-part .inner {
+  @apply max-w-full;
+}
+.home-cta.v2 .btn {
+  @apply mt-8;
+}

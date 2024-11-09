@@ -1,0 +1,171 @@
+.sidebar-content {
+  @apply flex mt-6;
+}
+.sidebar-wrap {
+  @apply max-w-[225px] w-full;
+}
+.sidebar-wrap ul {
+  @apply border-r border-solid border-LightGray h-full;
+}
+.sidebar-link-item a {
+  @apply relative px-2.5 py-4 flex items-center gap-2.5 text-base text-PrimaryWood leading-none hover:bg-LightGray transition-all duration-300;
+}
+.sidebar-link-item.active a::before {
+  @apply absolute -right-0.5 content-[''] top-0 w-1 h-full bg-black;
+}
+.sidebar-link-item.active a {
+  @apply text-black font-medium;
+}
+.sidebar-link-item svg {
+  @apply w-5 h-5;
+}
+.sidebar-content-wrap {
+  @apply max-w-[calc(100%_-_225px)] w-full pl-4 flex flex-wrap content-start;
+}
+.sidebar-content-title-wrap {
+  @apply mb-9 w-full;
+}
+.sidebar-content-title {
+  @apply pl-4 border-b border-solid border-LightGray pb-3 w-full;
+}
+.sidebar-content-title span {
+  @apply text-[22px] font-semibold;
+}
+.sidebar-content-small-title {
+  @apply pl-4 mt-2.5 flex text-sm leading-12 text-PrimaryWood;
+}
+.sidebar-content-left {
+  @apply max-w-[calc(100%_-_184px)] w-full pr-6;
+}
+.sidebar-content-right .btn a {
+  @apply pt-2 pb-2.5 px-3.5 rounded-md;
+}
+.teacher-profile-img {
+  @apply w-20 h-20 rounded-full relative;
+}
+.teacher-profile-img img {
+  @apply rounded-full w-full h-full;
+}
+.teacher-profile-img .profile-update {
+  @apply absolute bottom-0 right-0 cursor-pointer active:scale-90 flex items-center justify-center w-6 h-6 rounded-full bg-PrimaryGreen text-white transition-all duration-300;
+}
+.teacher-profile-img .profile-update input {
+  @apply w-full h-full opacity-0 cursor-pointer absolute top-0 left-0;
+}
+.teacher-profile-form {
+  @apply flex flex-col gap-5 mb-2.5;
+}
+.reset-text {
+  @apply font-medium underline underline-offset-2 w-fit;
+}
+.learn-asl-text {
+  @apply mb-5;
+}
+.learn-asl-text p {
+  @apply text-black;
+}
+.learn-asl-select-wrap {
+  @apply flex flex-col gap-3;
+}
+.learn-asl-select-item {
+  @apply cursor-pointer select-none hover:bg-LightWood flex items-center py-3.5 px-4 rounded-md bg-LightGray border border-solid border-LightWood transition-all duration-300;
+}
+.learn-asl-select-item .check-name {
+  @apply flex-1 pr-6;
+}
+.learn-asl-select-item .flag-icon {
+  @apply w-8 h-8 block mr-2;
+}
+.learn-asl-select-item .flag-icon svg {
+  @apply w-full h-full;
+}
+.learn-asl-select-item .check-icon {
+  @apply w-4 h-4 rounded-full opacity-0 ml-auto transition-all duration-300 bg-white p-px !text-PrimaryWood;
+}
+.learn-asl-select-item.active {
+  @apply bg-PrimaryWood text-white;
+}
+.learn-asl-select-item.active .check-icon {
+  @apply opacity-100;
+}
+.sidebar-content-ntfc-title {
+  @apply mb-2;
+}
+.sidebar-content-ntfc {
+  @apply w-full mb-7 last:mb-0;
+}
+.sidebar-content-ntfc-title span {
+  @apply font-medium mb-2;
+}
+
+.sidebar-content-ntfc-item span {
+  @apply text-base text-black;
+}
+.sidebar-content-ntfc-item {
+  @apply bg-LightGray mb-1 last:mb-0 px-5 py-4 w-full flex justify-between items-center rounded-md;
+}
+.learn-asl-select-wrap.languages-wrap {
+  @apply w-full;
+}
+.learn-asl-select-wrap.languages-wrap .learn-asl-select-item {
+  @apply max-w-[355px];
+}
+.reset-pswd-wrap {
+  @apply w-full;
+}
+
+.reset-pswd-wrap form {
+  @apply max-w-[430px];
+}
+
+.emoji-rating {
+  @apply mb-5 last:mb-0;
+}
+.emoji-rating-title {
+  @apply block mb-2.5 font-medium;
+}
+
+.emoji-rating ul {
+  @apply flex items-center gap-2 text-3xl;
+}
+.emoji-rating ul li {
+  @apply grayscale hover:filter-none transition-all duration-300 cursor-pointer;
+}
+.emoji-rating ul li.active {
+  @apply filter-none;
+}
+.feedback-form-wrap,
+.feedback-form-wrap form,
+.support-accordion,
+.support-form form {
+  @apply w-full;
+}
+.support-form,
+.feedback-form-wrap form {
+  @apply flex flex-col gap-y-5;
+}
+.support-accordion .accordion-wrapper {
+  @apply flex flex-col gap-y-1;
+}
+.support-accordion .accordion-title {
+  @apply flex justify-between cursor-pointer;
+}
+.support-accordion .accordion-title p {
+  @apply text-black font-normal;
+}
+.support-accordion .accordion-item {
+  @apply bg-LightGray px-5 pt-2.5 pb-3 rounded-lg;
+}
+.support-accordion .accordion-content__inner {
+  @apply pt-2 mt-3 border-t border-solid border-LightWood hidden;
+}
+
+.support-divider {
+  @apply my-6 text-center relative;
+}
+.support-divider::before {
+  @apply h-px w-full absolute bg-LightGray content-[''] left-0 top-1/2 -translate-y-1/2;
+}
+.support-divider .text {
+  @apply relative h-10 w-10 flex mx-auto items-center justify-center rounded-full bg-LightGray uppercase px-2.5;
+}

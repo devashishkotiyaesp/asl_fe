@@ -1,0 +1,9 @@
+.simple-cta {
+  @apply text-center bg-LightWood;
+}
+.simple-cta .section-title {
+  @apply flex flex-col justify-center items-center gap-6 max-w-[790px] mx-auto;
+}
+.simple-cta .section-title h2 {
+  @apply text-4xl;
+}

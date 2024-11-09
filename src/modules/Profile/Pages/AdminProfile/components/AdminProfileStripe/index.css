@@ -1,0 +1,36 @@
+.admin-profile-stripe {
+  @apply bg-LightWood py-4 px-6 rounded-xl;
+}
+.admin-profile-stripe .left-part {
+  @apply flex items-center gap-6;
+}
+.admin-profile-img {
+  @apply w-32 h-32 rounded-full;
+}
+.admin-profile-img img {
+  @apply w-full h-full object-cover rounded-full;
+}
+.admin-profile-content {
+}
+.admin-profile-content p {
+  @apply text-[34px] leading-12 text-black font-semibold;
+}
+.admin-profile-content span {
+  @apply text-lg leading-12 text-black;
+}
+.admin-profile-stripe .right-part {
+  @apply flex justify-end ml-auto;
+}
+.admin-profile-stripe .right-part .icon {
+  @apply w-14 h-14 bg-white/30 rounded-full text-black flex items-center justify-center mb-2.5;
+}
+.admin-profile-stripe .right-part .icon svg {
+  @apply w-6 h-6;
+}
+.admin-profile-stripe .right-part p,
+.admin-profile-stripe .right-part span {
+  @apply text-lg text-black;
+}
+.admin-profile-stripe .right-part span {
+  @apply text-PrimaryWood;
+}

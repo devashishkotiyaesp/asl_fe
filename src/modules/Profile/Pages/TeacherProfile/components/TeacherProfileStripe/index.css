@@ -1,0 +1,36 @@
+.teacher-profile-stripe {
+  @apply bg-LightWood py-4 px-6 rounded-xl;
+}
+.teacher-profile-stripe .left-part {
+  @apply flex items-center gap-6;
+}
+.teacher-profile-img {
+  @apply w-32 h-32 rounded-full;
+}
+.teacher-profile-img img {
+  @apply w-full h-full object-cover rounded-full;
+}
+.teacher-profile-content {
+}
+.teacher-profile-content p {
+  @apply text-[34px] leading-12 text-black font-semibold;
+}
+.teacher-profile-content span {
+  @apply text-lg leading-12 text-black;
+}
+.teacher-profile-stripe .right-part {
+  @apply flex justify-end ml-auto;
+}
+.teacher-profile-stripe .right-part .icon {
+  @apply w-14 h-14 bg-white/30 rounded-full text-black flex items-center justify-center mb-2.5;
+}
+.teacher-profile-stripe .right-part .icon svg {
+  @apply w-6 h-6;
+}
+.teacher-profile-stripe .right-part p,
+.teacher-profile-stripe .right-part span {
+  @apply text-lg text-black;
+}
+.teacher-profile-stripe .right-part span {
+  @apply text-PrimaryWood;
+}

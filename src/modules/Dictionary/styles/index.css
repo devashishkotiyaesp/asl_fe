@@ -1,0 +1,7 @@
+.current-form {
+  @apply w-12 h-12 p-2.5 rounded-full flex items-center justify-center group-last:before:hidden before:-z-1 before:absolute before:content-[""] before:w-24 before:border-t-2 before:border-solid before:border-primary before:left-[calc(100%_+_7px)];
+}
+
+.member-imgCount-span {
+  @apply inline-flex justify-center items-center text-primary font-medium text-sm w-full h-full rounded-full;
+}

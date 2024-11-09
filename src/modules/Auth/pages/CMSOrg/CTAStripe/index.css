@@ -1,0 +1,18 @@
+.cta-stripe .wrapper {
+  @apply bg-LightWood rounded-2xl p-30px items-center;
+}
+.cta-stripe .left-part {
+  @apply max-w-[600px];
+}
+.cta-stripe .right-part {
+  @apply w-fit 1200:ml-auto 1200:mr-30px;
+}
+.cta-stripe .section-title h2 {
+  @apply text-2xl leading-12 mb-3;
+}
+.cta-stripe .btn a {
+  @apply min-w-[148px] justify-center;
+}
+.cta-stripe .section-title p {
+  @apply mt-0 leading-12;
+}

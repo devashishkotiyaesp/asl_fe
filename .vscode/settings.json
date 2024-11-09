@@ -1,0 +1,41 @@
+{
+  "editor.codeActionsOnSave": {
+    // "source.organizeImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.sortImports": "explicit",
+    "source.addMissingImports.ts": "explicit"
+  },
+  "prettier.configPath": ".prettierrc",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false, // required
+  "editor.formatOnType": false, // required
+  "editor.formatOnSave": true, // optional
+  "editor.formatOnSaveMode": "file", // required to format on save
+  "vs-code-prettier-eslint.prettierLast": true,
+  "cSpell.words": ["formik"],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "sonarlint.connectedMode.project": {
+    "connectionId": "asl-ebiz",
+    "projectKey": "ebiz_asl-FE"
+  },
+  "sonarlint.output.showAnalyzerLogs": true,
+  "workbench.tree.enableStickyScroll": false,
+  "editor.stickyScroll.scrollWithEditor": false,
+  "liveServer.settings.port": 5501,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "[xml]": {
+    "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
+  }
+}
