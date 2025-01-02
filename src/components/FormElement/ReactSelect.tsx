@@ -203,6 +203,7 @@ const ReactSelect = (props: IReactSelect) => {
     }
     return null;
   };
+
   return (
     <div className={` ${parentClass ?? ''} `}>
       {loaderType === DropdownLoaderTypes.Skeleton && isLoading ? (
@@ -259,7 +260,7 @@ const ReactSelect = (props: IReactSelect) => {
                 getValue() &&
                 Array.isArray(getValue()) &&
                 (getValue() as IOptions[]).length > 0
-                  ? 'pt-5'
+                  ? 'pt-3'
                   : ''
               }`}
             >

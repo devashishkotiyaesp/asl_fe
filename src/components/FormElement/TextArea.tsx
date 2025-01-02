@@ -1,7 +1,7 @@
 import { useField } from 'formik';
 import React from 'react';
 import ErrorMessage from './ErrorMessage';
-import './style/textarea.css';
+import './style/inputField.css';
 import { ITextAreaProps } from './types';
 
 const TextArea: React.FC<ITextAreaProps> = ({
@@ -18,8 +18,13 @@ const TextArea: React.FC<ITextAreaProps> = ({
   maxLength,
   labelClass,
   className,
+  onChange,
 }) => {
   const [field] = useField(name);
+  // const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   field.onChange(e);
+  //   if (onChange) onChange(e);
+  // };
   return (
     <div className={`w-full ${parentClass ?? ''}`}>
       {label && (
@@ -39,6 +44,7 @@ const TextArea: React.FC<ITextAreaProps> = ({
         disabled={disabled ?? false}
         value={field.value ?? ''}
         placeholder={placeholder}
+        onChange={onChange ?? field.onChange}
       />
       <ErrorMessage name={name} />
       {icon}

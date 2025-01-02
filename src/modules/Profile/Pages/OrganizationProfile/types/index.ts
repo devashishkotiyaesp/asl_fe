@@ -1,4 +1,4 @@
-export interface IEditOrganizationProfie {
+export interface IEditOrganizationProfile {
   name: string;
   email: string;
   profile_image: string | File | null;

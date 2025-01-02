@@ -1,0 +1,86 @@
+.dict-modal-title {
+  @apply mb-2.5 text-4xl font-semibold;
+}
+.dict-modal-wrap .video-wrap {
+  @apply w-full h-[650px];
+}
+.dict-modal-wrap .video-wrap video,
+.dict-modal-wrap .video-wrap iframe {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.dict-modal-wrap .right-part {
+  @apply flex flex-col gap-y-7;
+}
+.dict-modal-wrap .right-part p {
+  @apply text-base text-PrimaryWood;
+}
+.dict-part-title {
+  @apply text-xl text-black font-medium mb-2.5 block;
+}
+.dict-part-profile {
+  @apply flex;
+}
+.dict-part-profile .img {
+  @apply w-11 h-11 rounded-full overflow-hidden;
+}
+.dict-part-profile .img img {
+  @apply object-cover w-full h-full;
+}
+.dict-part-profile .content {
+  @apply max-w-[calc(100%_-_44px)] pl-2 flex-1 flex flex-col;
+}
+.dict-part-profile .content .name {
+  @apply text-black text-lg mb-[3px] leading-12;
+}
+.dict-part-profile .content .role {
+  @apply text-PrimaryWood text-xs inline-block;
+}
+.dict-hand-sign-wrap {
+  @apply flex flex-wrap gap-2;
+}
+.dict-hand-sign-wrap .dict-hand-sign {
+  @apply bg-black inline-block text-white py-2 px-3 rounded-full pr-4;
+}
+.dict-part.slider-part {
+  @apply pt-4 border-t border-solid border-t-LightWood;
+}
+.dict-slider {
+  @apply pt-12 -mt-10;
+}
+.dict-slide .video-wrap video {
+  @apply relative aspect-square rounded-lg;
+}
+.dict-slider .swiper-button-prev,
+.dict-slider .swiper-button-next {
+  @apply absolute flex items-center justify-center top-30px hover:bg-LightWood bottom-unset w-7 h-7 rounded-full transition-all duration-300;
+}
+.dict-slider .swiper-button-prev::before,
+.dict-slider .swiper-button-next::before {
+  @apply content-[''] w-2.5 h-2.5 rotate-45 border-l-2 border-b-2 border-solid border-l-black border-b-black bottom-0;
+}
+.dict-slider .swiper-button-prev::after,
+.dict-slider .swiper-button-next::after {
+  @apply w-4 h-0.5 absolute content-[''] bg-black right-1;
+}
+.dict-slider .swiper-button-prev {
+  @apply left-unset right-10;
+}
+.dict-slider .swiper-button-next {
+  @apply rotate-180 right-0;
+}
+.dict-vocab-list {
+  @apply flex flex-wrap gap-2;
+}
+.dict-vocab-item {
+  @apply border border-solid border-black inline-block text-black py-2 px-3 rounded-full hover:bg-black hover:text-white transition-all duration-300;
+}
+.dict-modal-action {
+  @apply flex justify-end gap-2 mt-5;
+}
+.dictionary-media-wrap {
+  @apply w-10 h-10 block;
+}
+.dictionary-media-wrap img,
+.dictionary-media-wrap video {
+  @apply w-full h-full object-cover rounded cursor-default;
+}

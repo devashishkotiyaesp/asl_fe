@@ -16,6 +16,7 @@ export interface ITableHeaderProps {
   filterComponent?: ReactElement;
   subString?: boolean;
   date?: Date | string;
+  isCheckBox?: boolean;
 }
 
 export type CellProps = { [key: string]: string };
@@ -25,6 +26,7 @@ export interface ITableProps<DataType> {
   headerData?: ITableHeaderProps[];
   loader?: boolean;
   dataPerPage?: number;
+  tableRowClick?: (props: DataType) => void;
   totalPage?: number;
   dataCount?: number;
   pagination?: boolean;
@@ -32,6 +34,7 @@ export interface ITableProps<DataType> {
   setSort?: (string: string) => void;
   sort?: string;
   columnWidth?: string;
+  handleDragRow?: (draggedRow: CellProps) => void;
   width?: string;
   tableHeightClassName?: string;
   parentClassName?: string;
@@ -42,4 +45,6 @@ export interface ITableProps<DataType> {
   headerTitle?: string;
   headerExtra?: React.ReactNode;
   islastRowOnRight?: boolean;
+  isAllSelected?: boolean;
+  handleSelectAll?: () => void;
 }

@@ -1,0 +1,25 @@
+.access-device .wrapper {
+  @apply items-center;
+}
+.access-device .wrapper > * {
+  @apply w-1/2;
+}
+.access-device .section-title {
+  @apply max-w-[500px] mb-10;
+}
+.access-device .store-item {
+  @apply max-w-[130px] w-full;
+}
+.access-device .store-item img {
+  @apply w-full h-auto object-contain;
+}
+.access-device .store-wrap {
+  @apply flex gap-3;
+}
+
+.access-device .right-part {
+  @apply flex items-center justify-center;
+}
+.access-device .right-part img {
+  @apply max-w-[430px] object-contain;
+}

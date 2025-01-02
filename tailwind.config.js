@@ -48,6 +48,7 @@ module.exports = {
       },
       boxShadow: {
         PrimaryRing: '0 0 0 2px rgb(255 255 255 ), 0 0 0 3px rgb(144 136 128 )',
+        searchBoxFilter: ' 0px 4px 84px 0px #00000029',
       },
       backgroundImage: {
         checkmark: 'url(assets/checkmark.svg)',
@@ -98,9 +99,14 @@ module.exports = {
           '0%': { backgroundPosition: '0' },
           '100%': { backgroundPosition: '-200%' },
         },
+        ripple: {
+          '0%': { opacity: '0.50' },
+          '100%': { opacity: '0', transform: 'scale(3)' },
+        },
       },
       animation: {
         lazy: 'lazy 1.7s linear infinite',
+        ripple: 'ripple 2s ease-out infinite',
       },
       backgroundSize: {
         200: '200%',

@@ -7,3 +7,295 @@
 .add-topic-wrap .right-part {
   @apply max-w-[calc(100%_-_400px)] w-full pl-5 flex flex-col gap-y-5;
 }
+
+/* TOPIC STYLE */
+.topic-banner {
+  @apply bg-LightWood p-30px rounded-5px min-h-[270px] flex flex-col;
+}
+.topic-banner__title {
+  @apply text-4xl font-semibold mb-2.5 leading-12;
+}
+.topic-banner__desc {
+  @apply text-base text-black;
+}
+.comment-count {
+  @apply mt-auto flex items-center gap-2 text-base text-primary cursor-pointer w-fit select-none;
+}
+.comment-count .icon {
+  @apply w-6 h-6 text-PrimaryWood;
+}
+.comment-count .icon svg {
+  @apply w-full h-full;
+}
+.course-preview-banner {
+  @apply relative aspect-[12_/_4] max-h-[400px] overflow-hidden w-full;
+}
+.course-preview-banner img {
+  @apply w-full h-full object-cover rounded-10px;
+}
+.course-preview-banner-other {
+  @apply flex flex-col justify-end text-white rounded-b-10px absolute left-0 bottom-0 px-4 pb-4 z-0 bg-gradient-to-t from-black w-full min-h-44;
+}
+.topic-discuss {
+  @apply flex flex-col gap-y-5;
+}
+.topic-discuss__title {
+  @apply flex justify-between items-center mt-5 mb-4;
+}
+.topic-discuss__title .text {
+  @apply text-black font-medium text-lg leading-none h-fit;
+}
+.topic-discuss__title button,
+.topic-discuss__title span:not(.text) {
+  @apply ml-auto;
+}
+.topic-item {
+  /* @apply flex flex-wrap flex-col gap-3; */
+}
+.topic-item-user-info.is-reported {
+  @apply bg-LightWood p-2.5 rounded-5px mb-2.5;
+}
+.topic-item-user-info.is-reported .topic-user-role span {
+  @apply bg-LightGray;
+}
+.comment-content__text {
+  @apply text-lg leading-normal text-black/70;
+}
+.comment-content__text a {
+  @apply underline underline-offset-2 hover:text-black;
+}
+.topic-item-user-info {
+  @apply flex flex-wrap gap-3;
+}
+.topic-item-user-info-content {
+  @apply max-w-[calc(100%_-_48px)] flex-1 bg-LightGray p-3.5 rounded-5px;
+}
+.topic-item-user-info-content .topic-item-user-info-content {
+  @apply p-0 rounded-none bg-transparent;
+}
+.topic-comment .topic-item-user-info.is-reported + .comment-input {
+  @apply mt-4 pt-4 border-t border-solid border-LightWood;
+}
+.topic-comment .topic-item-user-info.is-reported .topic-action {
+  @apply mb-0 pb-0 border-0;
+}
+.topic-user-profile {
+  @apply w-9 h-9 rounded-full border border-solid border-black/10;
+}
+.topic-user-profile img {
+  @apply w-full h-full object-cover rounded-full;
+}
+.topic-box {
+  /* @apply flex-1 bg-LightGray p-3.5 rounded-5px; */
+}
+.report-comment-wrap {
+  @apply flex ml-auto items-center text-sm font-medium gap-1 hover:text-black/50 cursor-pointer select-none active:scale-95;
+}
+.topic-name-time {
+  @apply flex items-center gap-4;
+}
+.topic-user-name {
+  @apply text-black text-base flex items-center leading-12;
+}
+
+.reply-box .reply-name-time .user-role-in {
+  @apply text-PrimaryRed font-medium inline-block ml-1 text-sm leading-none;
+}
+.topic-user-name .user-role-in {
+  @apply text-PrimaryRed font-medium inline-block ml-1 text-sm leading-none;
+}
+.topic-time {
+  @apply relative inline-block text-xs leading-none text-PrimaryWood;
+}
+.topic-time::before {
+  @apply w-1 h-1 bg-PrimaryWood rounded-full absolute content-[''] -left-2.5 top-1/2 -translate-y-1/2;
+}
+.topic-user-role {
+  @apply my-1.5;
+}
+.topic-user-role span {
+  @apply bg-LightWood text-black text-xs inline-block px-1 py-0.5 pb-1 rounded capitalize;
+}
+.topic-content .swiper {
+  @apply max-w-full z-0 w-full;
+}
+.topic-content {
+  @apply flex flex-col gap-3 mt-3 mb-5 max-w-full;
+}
+.topic-content__image {
+  @apply !h-[200px] aspect-video overflow-hidden rounded;
+}
+.topic-content__image a {
+  @apply relative flex items-center justify-center h-full w-full;
+}
+.topic-content__image .icon {
+  @apply absolute flex items-center justify-center bg-black/50 w-full h-full left-0 top-0;
+}
+.topic-content__image .icon svg {
+  @apply w-10 h-10 text-white;
+}
+
+.topic-content__image img,
+.topic-content__image video {
+  @apply bg-white pointer-events-none w-full h-full object-cover border border-solid border-LightWood rounded;
+}
+
+.topic-content__text {
+  @apply flex-1 text-lg text-black leading-normal h-fit max-w-[calc(100%_-_80px)];
+}
+.topic-action {
+  @apply flex items-center gap-5 mt-4;
+}
+.topic-action-like svg,
+.topic-action-comment svg {
+  @apply text-PrimaryWood;
+}
+.topic-action-like svg.active {
+  @apply text-PrimaryYellow;
+}
+.topic-action-like span,
+.topic-action-comment span {
+  @apply text-black leading-12 inline-block;
+}
+.topic-action-like,
+.topic-action-comment {
+  @apply flex items-center gap-1 cursor-pointer hover:opacity-80;
+}
+.topic-name-time ~ div .topic-name-time .topic-option {
+  @apply ml-0;
+}
+
+.topic-comment {
+  @apply pt-4 pl-14;
+}
+.topic-comment .topic-item:not(:first-child) {
+  @apply border-t border-solid border-t-LightWood pt-5 mt-5;
+}
+.topic-comment .topic-item {
+  @apply border-t border-solid border-t-LightWood pt-5 mt-5;
+}
+.topic-comment .topic-item .topic-box {
+  @apply p-0;
+}
+.topic-item .topic-item > .comment-input,
+.topic-item .topic-item > .reply-list {
+  @apply max-w-[calc(100%_-_45px)] ml-auto;
+}
+/* .topic-comment .topic-item .topic-action:has(+ *) */
+.topic-comment .topic-item .topic-action {
+  @apply mb-4 pb-4 border-b border-solid border-LightWood;
+}
+.topic-comment .topic-item .topic-action.reply-action {
+  @apply mb-0 pb-0 border-0;
+}
+.topic-media-list {
+  @apply flex flex-wrap gap-2 mt-4 max-w-[440px] empty:hidden;
+}
+.topic-media-item {
+  @apply w-14 h-14 overflow-hidden rounded relative active:scale-95 transition-all duration-300;
+}
+.topic-media-item a {
+  @apply block w-full h-full;
+}
+.topic-media-item .icon {
+  @apply absolute flex items-center justify-center  w-full h-full bg-black/50;
+}
+.topic-media-item .icon svg {
+  @apply w-7 h-7 text-white;
+}
+.topic-media-item img,
+.topic-media-item video {
+  @apply w-full h-full object-cover;
+}
+.conversation-modal .btn-wrapper {
+  @apply flex justify-end gap-2.5 mt-5;
+}
+
+.no-rights-comment p {
+  @apply text-PrimaryWood text-xl;
+}
+.no-rights-comment {
+  @apply mb-5 text-center mt-1;
+}
+.reported-error {
+  @apply bg-[#E455551A] p-3 mt-2 rounded-lg;
+}
+.reported-error p {
+  @apply italic text-red-500;
+}
+
+/* STCKY INPUT */
+.sticky-post-input-wrap {
+  @apply max-w-[900px] mx-auto right-0 sticky mt-30px shadow-searchBoxFilter bg-white rounded-10px bottom-4 left-0 w-full transition-all duration-300;
+}
+.sticky-post-input-inner {
+  @apply flex gap-2 w-full bg-white p-4 rounded-10px transition-all duration-300 h-[65px];
+}
+.sticky-post-input-wrap textarea {
+  @apply resize-none p-0 focus:ring-0 focus:ring-transparent !border-none h-6 focus:h-24;
+}
+.sticky-post-input-inner.isDataAvailable textarea {
+  @apply h-24;
+}
+.sticky-post-input-inner.isDataAvailable,
+.sticky-post-input-inner:has(textarea:focus) {
+  @apply h-[130px];
+}
+.sticky-post-input-wrap .error-message {
+  @apply hidden;
+}
+.sticky-post-input-wrap:has(textarea:focus) form {
+  @apply items-start;
+}
+.sticky-post-icons {
+  @apply flex items-center gap-2 h-fit;
+}
+.sticky-post-send,
+.sticky-post-input-attach,
+.sticky-post-capture {
+  @apply select-none w-8 h-8 bg-black/10 text-black relative rounded-full flex items-center justify-center cursor-pointer active:scale-95 transition-all duration-300;
+}
+.sticky-post-input-attach::before {
+  @apply absolute content-[''] w-[calc(100%_+_10px)] h-[calc(100%_+_10px)] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
+}
+.sticky-post-capture svg {
+  @apply w-full h-full;
+}
+.sticky-post-capture {
+  @apply text-white bg-PrimaryWood p-1.5;
+}
+.sticky-post-send {
+  @apply bg-black text-white;
+}
+.sticky-post-input {
+  @apply flex-1;
+}
+.sticky-post-uploaded-media-wrap {
+  @apply border-b border-solid border-LightWood flex flex-wrap gap-4 bg-white p-2 rounded-10px mb-1 absolute bottom-full w-full left-0;
+}
+.sticky-post-uploaded-media {
+  @apply w-24 h-24 rounded-10px overflow-hidden relative;
+}
+.sticky-post-uploaded-media img {
+  @apply w-full h-full object-cover;
+}
+.sticky-post-uploaded-media .sticky-post-uploaded-media__action {
+  @apply top-0 left-0 cursor-pointer select-none opacity-0 absolute w-full h-full bg-black/80 gap-2 flex items-center justify-center text-white transition-all duration-300;
+}
+.sticky-post-uploaded-media__action .icon {
+  @apply w-8 h-8 p-0.5 bg-white text-black rounded-full flex items-center justify-center;
+}
+.sticky-post-uploaded-media:hover .sticky-post-uploaded-media__action {
+  @apply opacity-100;
+}
+
+/* read write card */
+.read-write-card .c-card__header {
+  @apply mb-5;
+}
+.read-write-card .c-card__body {
+  @apply flex flex-col gap-y-4;
+}
+.read-write-card .checkbox-wrapper {
+  @apply flex flex-col gap-y-3;
+}

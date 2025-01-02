@@ -8,12 +8,19 @@ import { useModal } from 'hooks/useModal';
 import { t } from 'i18next';
 import { CommunityType } from 'modules/Community/constants';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import { capitalizeFirstLetter, getFullName } from 'utils';
 import { ICommunityItem, ICommunityResponse, IProps } from '../types';
 
-const CommunityTable = ({ communityType, search }: IProps) => {
+const CommunityTable = ({ communityType, search, searchParams }: IProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { currentPage } = useSelector(currentPageSelector);
+  const communityUrlType =
+    searchParams?.get('community') ??
+    new URLSearchParams(location.search).get('community');
   const deleteCommunity = useModal();
   const [getDiscussion, { isLoading }] = useAxiosGet();
   const [deleteCommunityApi] = useAxiosDelete();
@@ -26,6 +33,7 @@ const CommunityTable = ({ communityType, search }: IProps) => {
     const data = await getDiscussion('/community', {
       params: {
         type: communityType,
+        page: currentPage,
         sort,
         limit,
         search,
@@ -36,7 +44,7 @@ const CommunityTable = ({ communityType, search }: IProps) => {
 
   useEffect(() => {
     handleGetDiscussion();
-  }, [search]);
+  }, [search, currentPage]);
 
   const columnData: ITableHeaderProps[] = [
     {
@@ -78,13 +86,24 @@ const CommunityTable = ({ communityType, search }: IProps) => {
       <div className="flex flex-wrap gap-4">
         <Button
           className="action-button green"
-          onClickHandler={() => navigate(`/community/${props?.id}`)}
+          // onClickHandler={() => navigate(`/community/${props?.id}`)}
         >
           <Image iconName="eyeIcon" />
         </Button>
         <Button
+          className="action-button black"
+          onClickHandler={(e) => {
+            e.stopPropagation();
+            navigate(`/community/edit/${props.id}?community=${communityUrlType}`);
+            setSelectedCommunity(props);
+          }}
+        >
+          <Image iconName="editPen" />
+        </Button>
+        <Button
           className="action-button red"
-          onClickHandler={() => {
+          onClickHandler={(e) => {
+            e.stopPropagation();
             deleteCommunity.openModal();
             setSelectedCommunity(props);
           }}
@@ -134,10 +153,17 @@ const CommunityTable = ({ communityType, search }: IProps) => {
   return (
     <>
       <Table
+        tableRowClick={(props: ICommunityItem) =>
+          navigate(`/community/${props?.id}?community=${communityUrlType}`)
+        }
         headerExtra={
           <Button
             variants="black"
-            onClickHandler={() => navigate(`/community/add/${communityType}`)}
+            onClickHandler={() =>
+              navigate(
+                `/community/add/${communityType}?community=${communityUrlType}`
+              )
+            }
           >
             {t('Community.Table.Add')}{' '}
             {communityType === CommunityType.DISCUSSION
@@ -147,8 +173,8 @@ const CommunityTable = ({ communityType, search }: IProps) => {
         }
         headerTitle={
           communityType === CommunityType.DISCUSSION
-            ? t('Community.Discussion')
-            : t('Community.Topic')
+            ? t('Community.Discussions')
+            : t('Community.Topics')
         }
         headerData={columnData}
         loader={isLoading}
@@ -156,15 +182,17 @@ const CommunityTable = ({ communityType, search }: IProps) => {
         pagination
         dataPerPage={limit}
         setLimit={setLimit}
-        totalPage={communityData?.totalPages}
-        dataCount={communityData?.totalCount}
+        totalPage={communityData?.lastPage}
+        dataCount={communityData?.count}
         setSort={setSort}
         sort={sort}
       />
       <ConfirmationPopup
         showCloseIcon
         modal={deleteCommunity}
-        deleteTitle={t('Community.ConfirmationPopup.DeleteTitle')}
+        deleteTitle={t('Community.ConfirmationPopup.DeleteTitle', {
+          TYPE: capitalizeFirstLetter(communityType ?? ''),
+        })}
         bodyText={t('Community.ConfirmationPopup.DeleteBody')}
         cancelButtonText={t('Community.ConfirmationPopup.Cancel')}
         confirmButtonText={t('Community.ConfirmationPopup.Delete')}

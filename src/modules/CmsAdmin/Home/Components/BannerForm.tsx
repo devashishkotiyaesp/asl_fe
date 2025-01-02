@@ -5,7 +5,12 @@ import ReactEditor from 'components/ReactQuillEditor/ReactQuillEditor';
 import { t } from 'i18next';
 import { SectionProps } from '../types';
 
-const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) => {
+const BannerForm = ({
+  setFieldValue,
+  values,
+  setFieldTouched,
+  isLoading,
+}: SectionProps) => {
   const AttachmentFileType = (
     [EnumFileType.Image, EnumFileType.Video] as any
   ).toString();
@@ -23,6 +28,7 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
           fileType={[EnumFileType.Image, EnumFileType.Video]}
           isCompulsory
           size={40}
+          isLoading={isLoading}
         />
         <DropZone
           className="xl:max-w-[330px]"
@@ -36,6 +42,7 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
           isMulti
           limit={10}
           isCompulsory
+          isLoading={isLoading}
         />
       </div>
       <div className="right-big-column">
@@ -44,12 +51,14 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
           label={t('Cms.homepage.banner.hashTitle')}
           placeholder={t('Cms.homepage.banner.hashTitlePlaceholder')}
           isCompulsory
+          isLoading={isLoading}
         />
         <InputField
           name="banner_title"
           label={t('Cms.homepage.banner.bannerTitle')}
           placeholder={t('Cms.homepage.banner.bannerTitlePlaceholder')}
           isCompulsory
+          isLoading={isLoading}
         />
         <ReactEditor
           label={t('Cms.homepage.banner.description')}
@@ -60,6 +69,7 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
           value={values?.description}
           placeholder={t('Cms.homepage.services.serviceDescriptionPlaceholder')}
           isCompulsory
+          isLoading={isLoading}
         />
         <div className="cms-button">
           <InputField
@@ -67,6 +77,7 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
             label={t('Cms.homepage.banner.linkTitle')}
             placeholder={t('Cms.homepage.banner.linkTitlePlaceholder')}
             isCompulsory
+            isLoading={isLoading}
           />
           <InputField
             name="link_btn_url"
@@ -80,6 +91,7 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
             label={t('Cms.homepage.banner.linkTitle')}
             placeholder={t('Cms.homepage.banner.linkTitlePlaceholder')}
             isCompulsory
+            isLoading={isLoading}
           />
           <InputField
             name="banner_button_url"
@@ -92,6 +104,8 @@ const BannerForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) =>
             name="collaboration_logos_title"
             label={t('Cms.homepage.banner.collaborationLogoTitle')}
             placeholder={t('Cms.homepage.banner.collaborationLogoTitle.Placeholder')}
+            isCompulsory
+            isLoading={isLoading}
           />
         </div>
       </div>

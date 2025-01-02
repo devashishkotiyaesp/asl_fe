@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
 import Button from 'components/Button/Button';
 import { IButtonProps } from 'components/Button/types';
+import Checkbox from 'components/FormElement/CheckBox';
 import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,10 @@ type PopUpProps = {
   showCloseIcon?: boolean;
   isLoading?: boolean;
   isDisabled?: boolean;
-  popUpType?: 'success' | 'danger' | 'warning' | 'info';
+  isCheckBox?: boolean;
+  setProfile?: React.Dispatch<React.SetStateAction<boolean>>;
+
+  popUpType?: 'success' | 'danger' | 'warning' | 'info' | 'logout';
   optionalComponent?: () => JSX.Element;
 };
 
@@ -59,6 +63,13 @@ const PopupBody = ({ popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
         </div>
       );
       break;
+    case 'logout':
+      renderIcon = (
+        <div className="logout-icon">
+          <Image iconName="logoutIcon2" />
+        </div>
+      );
+      break;
     default:
       renderIcon = (
         <div className="icon-wrap danger">
@@ -79,6 +90,9 @@ const PopupBody = ({ popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
     }
     if (popUpType === 'info') {
       return 'Blue';
+    }
+    if (popUpType === 'logout') {
+      return 'Red';
     }
     return 'Green';
   }
@@ -117,6 +131,17 @@ const PopupBody = ({ popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
           </>
         )}
 
+        {rest.isCheckBox ? (
+          <Checkbox
+            parentClass="justify-center"
+            text="I Agree"
+            onChange={(e) => {
+              return rest.setProfile && rest.setProfile(e.target.checked);
+            }}
+          />
+        ) : (
+          ''
+        )}
         {rest?.optionalComponent !== undefined ? rest?.optionalComponent() : ''}
         <div className="confirmation-btn-wrap">
           {rest.cancelButtonText && (

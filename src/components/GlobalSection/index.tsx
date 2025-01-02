@@ -1,14 +1,14 @@
 // ** Components **
 import Image from 'components/Image';
 import Footer from 'components/TopBarLayout/Footer/Index';
-import CMSAccessDevice from 'modules/Auth/pages/HomeCMS/Components/CMSAccessDevice';
+import CMSAccessDevice from 'modules/Cms/pages/HomeCMS/Components/CMSAccessDevice';
 
 // ** Hooks **
 import { useAxiosGet } from 'hooks/useAxios';
 import { useEffect, useState } from 'react';
 
 // ** Types **
-import { CmsSectionDataProps } from 'modules/Auth/pages/HomeCMS/types';
+import { CmsSectionDataProps } from 'modules/Cms/pages/HomeCMS/types';
 
 // ** Slices **
 import { useSelector } from 'react-redux';

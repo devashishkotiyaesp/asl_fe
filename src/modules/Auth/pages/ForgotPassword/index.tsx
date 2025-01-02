@@ -2,7 +2,7 @@ import Button from 'components/Button/Button';
 import InputField from 'components/FormElement/InputField';
 import Image from 'components/Image';
 import { REACT_APP_FRONTEND_URL } from 'config';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { PublicNavigation } from 'constants/navigation.constant';
 import { Form, Formik, FormikValues } from 'formik';
 import { ForgotPasswordValidationSchema } from 'modules/Auth/validationSchema';
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import supabase from 'supabase';
+import '../style/index.css';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -21,13 +22,13 @@ const ForgotPassword = () => {
   const OnSubmit = async (userData: FormikValues) => {
     if (userData) {
       const response = await supabase.auth.resetPasswordForEmail(userData.email, {
-        redirectTo: `${REACT_APP_FRONTEND_URL}${PublicNavigation.mfa}?is_reset=true`,
+        redirectTo: `${REACT_APP_FRONTEND_URL}${PublicNavigation.resetPassword}`,
       });
       if (response.data) {
         const toastId = new Date().getTime();
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
+            variant: ToastVariant.SUCCESS,
             message: t('Auth.ResetPassword.ResetLink.Sent'),
             type: 'success',
             id: toastId,

@@ -1,0 +1,114 @@
+/* AUTH FORM STYLE */
+.auth-layout {
+  @apply min-h-[calc(100dvh_-_100px)];
+}
+.form-wrap {
+  @apply max-w-[450px] mx-auto w-full py-12;
+}
+.form-title-text {
+  @apply text-center mb-5;
+}
+.form-title-text h2 {
+  @apply text-2xl font-semibold mb-1 text-center text-black;
+}
+.form-card form button {
+  @apply mx-auto;
+}
+.form-title-text h2 span {
+  @apply text-PrimaryWood;
+}
+.form-card {
+  @apply bg-white rounded-5px w-full p-30px;
+}
+.form-forgot-text {
+  @apply flex justify-end mt-4 mb-5;
+}
+.form-forgot-text a {
+  @apply text-base text-PrimaryWood hover:underline underline-offset-2 hover:text-black transition-all duration-300;
+}
+.form-switch-type {
+  @apply mt-10 text-base font-light text-PrimaryWood transition-all duration-300 text-center flex items-center justify-center gap-2;
+}
+
+.form-switch-type a {
+  @apply font-medium text-black hover:underline underline-offset-2;
+}
+
+.otp-wrapper {
+  @apply flex flex-col gap-2 mb-5;
+}
+
+.otp-container {
+  @apply flex justify-center gap-2;
+}
+.otp-container input {
+  @apply border-2 border-black/5 bg-LightGray/50 focus:ring-black/50;
+}
+
+.twofa-modal {
+  @apply flex flex-col;
+}
+.twofa-modal__icon {
+  @apply w-[120px] h-[120px] rounded-full text-white bg-PrimaryWood mx-auto mb-8 flex items-center justify-center p-6;
+}
+.twofa-modal__content {
+  @apply text-center mb-5;
+}
+
+.twofa-modal__content h2 {
+  @apply text-2xl font-semibold text-center text-black;
+}
+.twofa-modal__text-sub {
+  @apply text-sm text-PrimaryWood leading-tight max-w-[240px] mx-auto mt-2.5;
+}
+.twofa-modal__text-link {
+  @apply text-lg leading-tight text-black font-medium mt-3;
+}
+.resend-code-text {
+  @apply text-black font-medium mt-5 hover:opacity-50 underline underline-offset-2 leading-12 text-center;
+}
+.twofa-instruction {
+  @apply text-center mb-1 text-sm font-normal text-black;
+}
+.twofa-email {
+  @apply text-lg text-center font-semibold text-PrimaryWood mb-30px;
+}
+.twofa-org-tag-wrap {
+  @apply flex flex-wrap gap-2 mb-6 justify-center;
+}
+.twofa-org-tag {
+  @apply bg-LightWood px-2 text-black leading-none py-1 rounded-sm text-sm;
+}
+.form-qr-wrap img {
+  @apply w-32 h-32 border border-solid border-LightGray rounded-5px p-3 mx-auto;
+}
+.form-qr-step {
+  @apply flex flex-col my-5;
+}
+.form-qr-step__item {
+  @apply flex gap-5 border-b border-solid border-LightGray pb-5 mb-5 last:pb-0 last:mb-0 last:border-0;
+}
+.form-qr-step__item-count {
+  @apply h-30px aspect-square bg-PrimaryWood text-white flex items-center justify-center rounded-full;
+}
+.form-qr-step__item-text {
+  @apply block flex-1 text-sm leading-tight;
+}
+.login-with-app-title {
+  @apply relative flex justify-center items-center text-center my-5;
+}
+.login-with-app-title span {
+  @apply bg-white text-xs relative px-2.5 py-1.5 text-PrimaryWood;
+}
+.login-with-app-title::before {
+  @apply absolute content-[''] w-full h-px bg-PrimaryWood/20 left-0 top-1/2 -translate-y-1/2;
+}
+.login-app-wrap {
+  @apply flex justify-center items-center gap-4;
+}
+.login-app-icon {
+  @apply w-[52px] h-[52px] rounded-10px bg-LightGray flex items-center justify-center active:scale-90 select-none cursor-pointer transition-all duration-300;
+}
+.login-app-icon svg {
+  @apply w-[26px] h-[26px];
+}

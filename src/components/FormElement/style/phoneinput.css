@@ -2,10 +2,10 @@
   @apply relative;
 }
 .phone-input .PhoneInputInput {
-  @apply block w-full text-sm leading-normal p-3 ps-[70px] placeholder:text-grayText text-dark font-normal border border-LightGray border-solid rounded-10px focus:ring-2 focus:ring-dark/20 focus:ring-offset-2 transition-all duration-300;
+  @apply block w-full text-sm leading-normal p-[11px] ps-[70px] placeholder:text-black text-black font-normal border border-LightWood/80 border-solid rounded-5px focus:ring-2 focus:ring-black/20 focus:ring-offset-2 transition-all duration-300;
 }
 .phone-input .PhoneInputCountry {
-  @apply absolute top-0 left-0 w-16 bg-[#E2E6E7] h-full rounded-l-lg ps-0 text-base justify-center;
+  @apply absolute top-0 left-0 w-16 bg-LightWood h-full rounded-l-5px ps-0 text-base justify-center;
 }
 
 .PhoneInputCountryIcon--border {

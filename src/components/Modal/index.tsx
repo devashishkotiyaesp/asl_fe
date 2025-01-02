@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 
-export default function Modal(
-  {
-    modalEl,
-    setIsOpen,
-  }: {
-    readonly modalEl: any;
-    readonly setIsOpen: (isOpen: boolean) => void;
-  }
-) {
+export default function Modal({
+  modalEl,
+  setIsOpen,
+}: {
+  readonly modalEl: any;
+  readonly setIsOpen: (isOpen: boolean) => void;
+}) {
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!modalEl.current) return;

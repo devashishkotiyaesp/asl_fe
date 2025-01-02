@@ -117,6 +117,9 @@ export const Header = ({ ...props }: ModalProps) => {
             onClickHandler={() => {
               props.modal.closeModal();
               props.setDataClear?.(null);
+              if (props.headerCancelClick) {
+                props.headerCancelClick();
+              }
             }}
           >
             <Image iconName="crossIcon" iconClassName="w-full h-full" />

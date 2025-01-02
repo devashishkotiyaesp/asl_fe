@@ -7,6 +7,7 @@ import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import Modal from 'components/Modal';
 import { languageConstant } from 'constants/common.constant';
+import { useAxiosGet } from 'hooks/useAxios';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +24,16 @@ const Header = () => {
   const [isNotification, setIsNotification] = useState<boolean>(false);
   const { user } = useSelector(getAuth);
   const { t } = useTranslation();
+
+  const [getApi] = useAxiosGet();
+
+  const handleLogout = async () => {
+    await getApi('auth/login', {
+      params: {
+        status: 'logout',
+      },
+    });
+  };
 
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -73,11 +84,11 @@ const Header = () => {
                 <div ref={modalRef} className="header-notification-list-wrap">
                   <div className="header-notification-list-header">
                     <div className="header-notification-title">
-                      {t(`Header.Notification.Dailog.Title`)}{' '}
+                      {t(`Header.Notification.Dialog.Title`)}{' '}
                     </div>
                     <div className="header-notification-mark">
                       <Image iconName="doubleCheck" />
-                      {t(`Header.Notification.Dailog.MarkAsRead`)}{' '}
+                      {t(`Header.Notification.Dialog.MarkAsRead`)}{' '}
                     </div>
                   </div>
                   <div className="notification-items scroll-hide">
@@ -130,7 +141,7 @@ const Header = () => {
               {isOpen && (
                 <div className={`header-profile-menu `} ref={modalRef}>
                   <div className="header-profile-menu__title">
-                    <span>{t(`Header.Profile.Dailog.Title`)}</span>
+                    <span>{t(`Header.Profile.Dialog.Title`)}</span>
                   </div>
                   <Link
                     to="/profile"
@@ -158,13 +169,14 @@ const Header = () => {
                   </Link>
 
                   <Button
-                    onClickHandler={() => {
+                    onClickHandler={async () => {
                       setIsOpen(!isOpen);
-                      logout(store);
+                      await handleLogout();
+                      await logout(store);
                     }}
                     className="button RedOpacity w-full"
                   >
-                    {t(`Header.Profile.Dailog.Signout`)}
+                    {t(`Header.Profile.Dialog.Signout`)}
                   </Button>
                 </div>
               )}
@@ -174,53 +186,6 @@ const Header = () => {
       </header>
       <Modal modalEl={modalRef} setIsOpen={setIsOpen} />
       <Modal modalEl={modalRef} setIsOpen={setIsNotification} />
-      {/* <header className="bg-white p-4 py-3 flex justify-between relative border-b border-gray-200">
-        <div className="flex items-center">
-          <button
-            onClick={() => {
-              dispatch(toggleSidebar());
-            }}
-          >
-            <MenuIcon className="fill-primary" />
-          </button>
-        </div>
-        <div className="flex gap-3">
-          <div className="flex rounded-full gap-1 bg-lightGray items-center">
-            <Button
-              className={`rounded-full px-4 cursor-pointer h-full w-full flex items-center ${(language === languageConstant.EN ||
-                (!language && defaultLanguage === languageConstant.EN)) &&
-                'bg-secondaryLight'
-                }`}
-              onClickHandler={() =>
-                dispatch(setLanguage({ language: languageConstant.EN }))
-              }
-            >
-              EN
-            </Button>
-            <Button
-              className={`rounded-full px-4 cursor-pointer h-full w-full flex items-center ${(language === languageConstant.ES ||
-                (!language && defaultLanguage === languageConstant.ES)) &&
-                'bg-secondaryLight'
-                }`}
-              onClickHandler={() =>
-                dispatch(setLanguage({ language: languageConstant.ES }))
-              }
-            >
-              ES
-            </Button>
-          </div>
-          <button className="border border-primaryLight rounded-full p-2">
-            <NotificationIcon />
-          </button>
-          <button
-            className="bg-white rounded-full p-1 text-2xl font-semibold"
-            onClick={() => setIsOpen(true)}
-          >
-            <Profile />
-          </button>
-        </div>
-
-      </header> */}
     </>
   );
 };

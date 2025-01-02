@@ -1,0 +1,26 @@
+.materials-box .inner {
+  @apply relative text-center h-[170px] aspect-square rounded-10px border border-solid border-LightGray gap-2.5 flex items-center justify-center flex-col;
+}
+.materials-box .inner > svg {
+  @apply w-12 h-12 block mx-auto;
+}
+.materials-box .inner p,
+.materials-box .inner span {
+  @apply text-base leading-normal text-black/50 truncate;
+}
+
+.materials-box-more-option {
+  @apply absolute right-1 top-1 w-6 h-6 text-PrimaryWood select-none;
+}
+.materials-box-more-option svg {
+  @apply w-full h-full;
+}
+.materials-box .content {
+  @apply px-2 max-h-full w-full;
+}
+.materials-box-download {
+  @apply text-PrimaryBlue;
+}
+.materials-box-download {
+  @apply flex w-fit mx-auto active:scale-95 select-none active:text-PrimaryWood items-center justify-center gap-2 mt-1 cursor-pointer hover:text-black;
+}

@@ -50,11 +50,11 @@ export const RegisterValidationSchema = () => {
     first_name: Yup.string()
       .trim()
       .matches(/^[A-Za-z]+$/, t('Auth.Validation.FirstName.Error.OnlyCharsAllowed'))
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
       .matches(/^[A-Za-z]+$/, t('Auth.Validation.LastName.Error.OnlyCharsAllowed'))
-      .required(t('Auth.Validation.LastName.Error.Requried')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
     language: Yup.string().required(),
   });
 };
@@ -86,27 +86,11 @@ export const AdminUserValidationSchema = () => {
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
-    profile_image: Yup.mixed()
-      .test(
-        'fileType',
-        t('Auth.Validation.Image.Error.UnsupportedFormat'),
-        (value: any) => {
-          return (
-            !value ||
-            (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
-          );
-        }
-      )
-      .test(
-        'fileSize',
-        t('Auth.Validation.Image.Error.FileSize'),
-        (value: any) => !value || (value && value.size <= 2 * 1024 * 1024) // 2MB limit
-      )
-      .nullable(),
+      .required(t('Auth.Validation.LastName.Error.Required')),
+
     email: emailValidation(),
     profile_image_url: Yup.string().optional(),
   });
@@ -115,10 +99,10 @@ export const TeacherUserValidationSchema = () => {
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
     profile_image: Yup.mixed()
       .test(
         'fileType',
@@ -144,10 +128,10 @@ export const StudentUserValidationSchema = () => {
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
     bio: Yup.string().trim().required(t('Community.Description.Required')),
   });
 };
@@ -155,6 +139,14 @@ export const editValidationSchema = () => {
   return Yup.object().shape({
     id: Yup.string(),
     level: Yup.string().trim().required(t('Auth.Validation.Level.Error.Required')),
+  });
+};
+
+export const typeValidationSchema = () => {
+  return Yup.object().shape({
+    type: Yup.string()
+      .trim()
+      .required(t('OrganizationType.Validation.Level.Error.Required')),
   });
 };
 export const addValidationSchema = () => {
@@ -171,3 +163,8 @@ export const ResetUserPasswordValidationSchema = () => {
     confirmpassword: confirmPasswordValidation(),
   });
 };
+
+export const SetupProfileValidationSchema = Yup.object().shape({
+  password: passwordValidation(),
+  confirm_password: confirmPasswordValidation(),
+});

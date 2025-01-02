@@ -42,6 +42,8 @@ interface DatePickerProps {
   disabled?: boolean;
   timeInterval?: number;
   isClearable?: boolean;
+  excludeTimes?: any;
+  noErrorShow?: boolean;
 }
 
 const DatePicker = ({
@@ -78,6 +80,8 @@ const DatePicker = ({
   maxDate,
   timeInterval,
   isClearable = false,
+  excludeTimes,
+  noErrorShow = true,
 }: DatePickerProps) => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
@@ -112,7 +116,7 @@ const DatePicker = ({
             </label>
           )}
           {range ? (
-            <div className="border border-solid pe-3 border-borderColor bg-white rounded-10px flex items-center [&:has(.inputField:focus)]:ring-2 [&:has(.inputField:focus)]:ring-dark/20 [&:has(.inputField:focus)]:ring-offset-2 transition-all duration-300">
+            <div className="data-picker-wrap">
               <ReactDatePicker
                 autoComplete="off"
                 wrapperClassName="flex-[1_0_0%]"
@@ -142,6 +146,7 @@ const DatePicker = ({
                 maxTime={
                   startDateMinTime && startDateMaxTime ? startDateMaxTime : undefined
                 }
+                excludeTimes={excludeTimes}
                 maxDate={maxDate}
                 isClearable={isClearable}
               />
@@ -177,6 +182,7 @@ const DatePicker = ({
                 maxTime={
                   endDateMinTime && endDateMaxTime ? endDateMaxTime : undefined
                 }
+                excludeTimes={excludeTimes}
                 minDate={minDate}
                 isClearable={isClearable}
               />
@@ -222,8 +228,10 @@ const DatePicker = ({
         </>
       )}
       {formik && name && <ErrorMessage name={name} />}
-      {formik && startDateName && <ErrorMessage name={startDateName} />}
-      {formik && endDateName && <ErrorMessage name={endDateName} />}
+      {formik && noErrorShow && startDateName && (
+        <ErrorMessage name={startDateName} />
+      )}
+      {formik && noErrorShow && endDateName && <ErrorMessage name={endDateName} />}
     </div>
   );
 };

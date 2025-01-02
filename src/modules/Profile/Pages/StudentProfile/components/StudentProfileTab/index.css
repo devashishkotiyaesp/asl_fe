@@ -105,10 +105,10 @@
   @apply bg-LightGray mb-1 last:mb-0 px-5 py-4 w-full flex justify-between items-center rounded-md;
 }
 .learn-asl-select-wrap.languages-wrap {
-  @apply w-full;
+  @apply w-full grid grid-cols-2 gap-4;
 }
 .learn-asl-select-wrap.languages-wrap .learn-asl-select-item {
-  @apply max-w-[355px];
+  @apply max-w-full text-left;
 }
 .reset-pswd-wrap {
   @apply w-full;
@@ -148,16 +148,23 @@
   @apply flex flex-col gap-y-1;
 }
 .support-accordion .accordion-title {
-  @apply flex justify-between cursor-pointer;
+  @apply flex justify-between cursor-pointer items-center;
 }
 .support-accordion .accordion-title p {
   @apply text-black font-normal;
 }
 .support-accordion .accordion-item {
-  @apply bg-LightGray px-5 pt-2.5 pb-3 rounded-lg;
+  @apply bg-LightGray px-5 rounded-lg py-0  pt-2.5 pb-3;
 }
+
 .support-accordion .accordion-content__inner {
   @apply pt-2 mt-3 border-t border-solid border-LightWood hidden;
+}
+.support-accordion .accordion-title .trigger-btn {
+  @apply w-8 h-8 !bg-transparent !text-black;
+}
+.support-accordion .accordion-title .trigger-btn.active {
+  @apply rotate-90;
 }
 
 .support-divider {
@@ -168,4 +175,10 @@
 }
 .support-divider .text {
   @apply relative h-10 w-10 flex mx-auto items-center justify-center rounded-full bg-LightGray uppercase px-2.5;
+}
+.support-accordion .accordion-content {
+  @apply transition-all duration-300;
+}
+.support-accordion .accordion-content p {
+  @apply text-black/50 text-sm leading-normal;
 }

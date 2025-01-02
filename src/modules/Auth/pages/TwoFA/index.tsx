@@ -3,6 +3,7 @@ import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
 import { useModal } from 'hooks/useModal';
 import { Link } from 'react-router-dom';
+import '../style/index.css';
 
 const TwoFA = () => {
   const Two_FA = useModal(true);
@@ -43,12 +44,7 @@ const TwoFA = () => {
           <span className="form-switch-type">
             <Image iconName="arrowRight" iconClassName="rotate-180 w-5 h-5" />
             Back to
-            <Link
-              to="/auth/login"
-              className="font-medium text-black hover:underline underline-offset-2"
-            >
-              Login
-            </Link>
+            <Link to="/auth/login">Login</Link>
           </span>
         </div>
       </div>

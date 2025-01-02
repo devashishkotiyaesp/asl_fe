@@ -152,6 +152,7 @@ const Pagination = ({
               name=""
               id=""
               className="text"
+              value={dataPerPage}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setLimit?.(Number(e.target.value));
                 dispatch(currentPageCount({ currentPage: 1 }));

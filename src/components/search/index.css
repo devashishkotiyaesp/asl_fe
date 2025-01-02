@@ -4,9 +4,30 @@
 .search-bar__icon {
   @apply absolute z-[1] top-[11px] left-2.5 w-5 h-5 text-black/40;
 }
-.search-bar input {
+.search-bar input:not([type='checkbox'], [type='radio']) {
   @apply w-full max-w-full py-[9px] px-10 outline-none bg-white text-base font-normal relative rounded text-gray-800 placeholder-black/50  focus:ring-2 ring-offset-2 focus:ring-black/20 transition-all duration-300;
 }
-.searc-bar__clear {
+.search-bar__clear {
   @apply absolute top-1/2 -translate-y-1/2 right-4 items-center justify-center cursor-pointer ms-2 w-3 h-3 text-black rounded-md active:scale-75 transition-all duration-300;
+}
+.search-filter {
+  @apply relative;
+}
+.search-bar.search-filter input:not([type='checkbox'], [type='radio']) {
+  @apply pr-20;
+}
+.search-filter .search-bar__clear {
+  @apply right-14;
+}
+.search-bar__filter {
+  @apply absolute top-1/2 -translate-y-1/2  right-4;
+}
+.search-bar__filter-button {
+  @apply w-5 h-5 my-auto flex active:scale-95 transition-all duration-300;
+}
+.search-bar__filter-button svg {
+  @apply w-full h-full;
+}
+.searchbar-filter-box {
+  @apply p-2.5 bg-white shadow-searchBoxFilter rounded-5px border border-solid border-LightGray absolute -right-4 top-[calc(100%_+_15px)];
 }

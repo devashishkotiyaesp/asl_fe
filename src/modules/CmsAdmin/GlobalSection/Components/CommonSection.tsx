@@ -3,13 +3,17 @@ import Image from 'components/Image';
 import { REACT_APP_API_URL } from 'config';
 import { Form, Formik, FormikValues } from 'formik';
 import { useAxiosPut } from 'hooks/useAxios';
+import _ from 'lodash';
 import { ActionNameEnum, KeysEnum } from 'modules/CmsAdmin/constants';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import {
   BodyDataAccumulator,
   CommonSectionProps,
   FieldsFuncParams,
   ImageProps,
+  KeyValueProps,
 } from '../types';
 import { GlobalSectionValidationSchema } from '../validationSchema';
 
@@ -31,8 +35,10 @@ const CommonSection = ({
   activeSection,
   isLoading,
 }: CommonSectionProps) => {
-  const [putApi] = useAxiosPut();
+  const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [isLoadingButton, setIsLoadingButton] = useState(false); // Single loading state
   const onSubmit = (values: FormikValues) => {
     if (values) {
       switch (actionName) {
@@ -131,6 +137,7 @@ const CommonSection = ({
   };
 
   const handleSubmit = async (values: FormikValues) => {
+    setIsLoadingButton(true);
     setInitialValues((prevValues) => ({
       ...prevValues,
       [formLanguage]: values, // Update initial values for the next language
@@ -168,7 +175,14 @@ const CommonSection = ({
         formData.append(key, bodyData[key] as string);
       }
     });
-    await putApi(`${REACT_APP_API_URL}/cms-page-section`, formData);
+    const { error } = await putApi(
+      `${REACT_APP_API_URL}/cms-page-section`,
+      formData
+    );
+    if (_.isNil(error)) {
+      setIsLoadingButton(false);
+      navigate('/page-list');
+    }
   };
   return (
     <Formik
@@ -186,11 +200,12 @@ const CommonSection = ({
               <Form className="">
                 <div className="cms-form-card-wrap">
                   <BannerFormWithDynamicProps
-                    values={values}
+                    values={values as unknown as KeyValueProps}
                     setFieldValue={setFieldValue}
+                    formLanguage={formLanguage}
                   />
                 </div>
-                <div>
+                <div className="btn-wrap">
                   {activeLanguage > 0 && (
                     <div className="csm-form-button">
                       <Button
@@ -200,13 +215,24 @@ const CommonSection = ({
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.PREV);
                         }}
+                        disabled={isLoadingButton}
                       >
                         {t('Auth.RegisterCommon.prevButtonText')}
                       </Button>
                     </div>
                   )}
                   {activeLanguage < (allLanguages ?? []).length - 1 ? (
-                    <div className="csm-form-button">
+                    <div className="csm-form-button btn-wrap">
+                      <Button
+                        className="min-w-[90px]"
+                        variants="black"
+                        onClickHandler={() => {
+                          navigate(-1);
+                        }}
+                        disabled={isUpdateLoading}
+                      >
+                        {t('Dictionary.EditForm.CancelButton')}
+                      </Button>
                       <Button
                         variants="black"
                         className="w-fit"
@@ -214,6 +240,7 @@ const CommonSection = ({
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.NEXT);
                         }}
+                        isLoading={isUpdateLoading}
                       >
                         {t('Auth.RegisterCommon.nextButtonText')}
                       </Button>
@@ -230,6 +257,7 @@ const CommonSection = ({
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.SUBMIT);
                         }}
+                        isLoading={isLoadingButton}
                       >
                         {t('Auth.RegisterCommon.submitButtonText')}
                       </Button>

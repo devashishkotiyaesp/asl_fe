@@ -5,9 +5,19 @@
 .status-label.green {
   @apply bg-PrimaryGreen/10 text-PrimaryGreen;
 }
+
+.status-label.red {
+  @apply bg-PrimaryRed/10 text-PrimaryRed;
+}
 .status-label.gray {
   @apply text-black bg-LightGray;
 }
 .status-label.LightWood {
   @apply text-PrimaryWood bg-LightWood;
+}
+.status-label.lightgray {
+  @apply bg-LightGray text-PrimaryWood;
+}
+.status-label.lightwoodBorder {
+  @apply pb-1 border border-solid bg-transparent border-LightWood text-PrimaryWood;
 }

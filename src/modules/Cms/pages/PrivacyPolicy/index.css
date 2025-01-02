@@ -1,0 +1,154 @@
+.privacy-banner {
+  @apply bg-LightGray;
+}
+.privacy-banner .section-title ul {
+  @apply list-disc pl-5 my-5 flex flex-col gap-2;
+}
+.privacy-banner .section-title ul li {
+  @apply text-black/70;
+}
+.privacy-banner .section-title a {
+  @apply underline underline-offset-2 mx-0.5 hover:text-black active:text-PrimaryBlue;
+}
+
+.privacy-policy-content {
+}
+.privacy-policy-content .wrapper {
+}
+.privacy-policy-content .wrapper .left-part {
+  @apply max-w-[calc(100%_-_350px)] w-full pr-30px;
+}
+.privacy-policy-content .wrapper .right-part {
+  @apply max-w-[350px] w-full;
+}
+
+.privacy-policy-content .policy-toc {
+  @apply bg-LightGray rounded-xl border border-solid border-black/50 p-5;
+}
+
+.privacy-policy-content .policy-toc .title {
+  @apply block uppercase font-medium text-black mb-5;
+}
+.privacy-policy-content .policy-toc ul {
+  @apply flex flex-col gap-4 list-decimal pl-6;
+}
+.privacy-policy-content .policy-toc ul li {
+  @apply text-base text-black;
+}
+
+.privacy-policy-content .policy-toc ul li a {
+  @apply underline inline-block leading-normal;
+}
+
+/* CONTET */
+.policy-content-img {
+  @apply w-full aspect-[2_/_1.5] mb-6;
+}
+.policy-content-img img {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.policy-content table {
+  @apply my-10 w-full border-collapse;
+}
+
+.policy-content table th {
+  @apply px-6 py-4 text-left text-base leading-none capitalize text-black whitespace-nowrap font-medium;
+}
+
+.policy-content table td {
+  @apply py-4 px-6 font-normal text-black/50 text-base leading-none align-middle;
+}
+
+.policy-content table thead {
+  @apply bg-LightWood;
+}
+
+.policy-content table tbody tr:nth-child(even) {
+  @apply bg-LightGray;
+}
+
+.policy-content table tbody tr {
+  @apply border-b border-solid border-black/50;
+}
+
+.policy-content > ul {
+  @apply my-10;
+}
+
+.policy-content > ul li,
+.policy-content p:not(blockquote p) {
+  @apply text-base font-normal leading-normal text-black/70;
+}
+.policy-content ul {
+  @apply list-disc pl-5;
+}
+.policy-content > ul li:not(:last-child),
+.policy-content p:not(blockquote p, :last-child) {
+  @apply mb-4;
+}
+.policy-content p strong,
+.policy-content li strong {
+  @apply font-semibold text-black;
+}
+.policy-content p img,
+.policy-content img {
+  @apply block w-full h-auto object-contain mt-30px;
+}
+
+.policy-content p a,
+.policy-content li a {
+  @apply underline underline-offset-4 text-PrimaryWood hover:text-black;
+}
+
+.policy-content > ul li {
+  @apply relative pl-7;
+}
+
+.policy-content > ul > li::before {
+  @apply absolute content-[''] w-1.5 h-1.5 bg-black/50 left-0 top-2.5 opacity-70 rounded-full;
+}
+
+.policy-content :is(h1, h2, h3, h4, h5, h6) {
+  @apply pt-10 mt-0 mb-5 leading-normal text-black font-semibold;
+}
+
+.policy-content img {
+  @apply max-w-full mt-10 mb-5;
+}
+
+.policy-content > img {
+  @apply w-full h-[400px] object-cover rounded-2xl;
+}
+
+.policy-content h1 {
+  font-size: 32px;
+  @apply text-4xl;
+}
+
+.policy-content h2 {
+  @apply text-3xl;
+}
+
+.policy-content h3 {
+  @apply text-2xl;
+}
+
+.policy-content h4 {
+  @apply text-xl;
+}
+
+.policy-content h5 {
+  @apply text-lg;
+}
+
+.policy-content h6 {
+  @apply text-base;
+}
+
+.policy-content blockquote {
+  @apply pl-30px my-8 text-lg italic leading-normal py-4 relative text-PrimaryWood;
+}
+
+.policy-content blockquote::before {
+  @apply absolute content-[''] w-[3px] h-full top-0 left-0 bg-PrimaryWood;
+}

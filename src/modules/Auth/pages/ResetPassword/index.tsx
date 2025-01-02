@@ -1,7 +1,7 @@
 import Button from 'components/Button/Button';
 import InputField from 'components/FormElement/InputField';
 import Icon from 'components/Icon';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { PublicNavigation } from 'constants/navigation.constant';
 import { Form, Formik, FormikValues } from 'formik';
 import { ResetPasswordValidationSchema } from 'modules/Auth/validationSchema';
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import supabase from 'supabase';
+import '../style/index.css';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const ResetPassword = () => {
       if (response.data.user) {
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
+            variant: ToastVariant.SUCCESS,
             message: t('Auth.ResetPassword.Success'),
             type: 'success',
             id: toastId,
@@ -39,9 +40,9 @@ const ResetPassword = () => {
       } else {
         dispatch(
           setToast({
-            variant: ToastVarient.WARNING,
+            variant: ToastVariant.WARNING,
             message:
-              response.error?.message ?? t('Comman.ToastMessage.Success.Error'),
+              response.error?.message ?? t('Common.ToastMessage.Success.Error'),
             type: 'error',
             id: toastId,
           })

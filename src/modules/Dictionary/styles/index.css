@@ -5,3 +5,278 @@
 .member-imgCount-span {
   @apply inline-flex justify-center items-center text-primary font-medium text-sm w-full h-full rounded-full;
 }
+
+/* Dictionary STYLE */
+.dict-modal-title {
+  @apply mb-2.5 text-4xl font-semibold;
+}
+.dict-modal-wrap .video-wrap {
+  @apply w-full h-[340px];
+}
+.dict-modal-wrap .video-wrap video,
+.dict-modal-wrap .video-wrap iframe,
+.dict-modal-wrap .video-wrap img {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.dict-modal-wrap .right-part {
+  @apply flex flex-col gap-y-7;
+}
+.dict-modal-wrap .right-part p {
+  @apply text-base text-PrimaryWood;
+}
+.dict-part-title {
+  @apply text-xl text-black font-medium mb-2.5 block;
+}
+.dict-part-profile {
+  @apply flex;
+}
+.dict-part-profile .img {
+  @apply w-11 h-11 rounded-full overflow-hidden;
+}
+.dict-part-profile .img img {
+  @apply object-cover w-full h-full;
+}
+.dict-part-profile .content {
+  @apply max-w-[calc(100%_-_44px)] pl-2 flex-1 flex flex-col;
+}
+.dict-part-profile .content .name {
+  @apply text-black text-lg mb-[3px] leading-12;
+}
+.dict-part-profile .content .role {
+  @apply text-PrimaryWood text-xs inline-block;
+}
+.dict-hand-sign-wrap {
+  @apply flex flex-wrap gap-2;
+}
+.dict-hand-sign-wrap .dict-hand-sign {
+  @apply bg-black inline-block text-white py-2 px-3 rounded-full pr-4;
+}
+.dict-part.slider-part {
+  @apply pt-4 border-t border-solid border-t-LightWood;
+}
+.dict-slider {
+  @apply pt-12 -mt-10;
+}
+.dict-slide .video-wrap video,
+.dict-slide .video-wrap img {
+  @apply relative aspect-square rounded-lg;
+}
+.dict-slider .swiper-button-prev,
+.dict-slider .swiper-button-next {
+  @apply absolute flex items-center justify-center top-30px hover:bg-LightWood bottom-unset w-7 h-7 rounded-full transition-all duration-300;
+}
+.dict-slider .swiper-button-prev::before,
+.dict-slider .swiper-button-next::before {
+  @apply content-[''] w-2.5 h-2.5 rotate-45 border-l-2 border-b-2 border-solid border-l-black border-b-black bottom-0;
+}
+.dict-slider .swiper-button-prev::after,
+.dict-slider .swiper-button-next::after {
+  @apply w-4 h-0.5 absolute content-[''] bg-black right-1;
+}
+.dict-slider .swiper-button-prev {
+  @apply left-unset right-10;
+}
+.dict-slider .swiper-button-next {
+  @apply rotate-180 right-0;
+}
+.dict-vocab-list {
+  @apply flex flex-wrap gap-2;
+}
+.dict-vocab-item {
+  @apply border border-solid border-black inline-block text-black py-2 px-3 rounded-full hover:bg-black hover:text-white transition-all duration-300;
+}
+.dict-modal-action {
+  @apply flex justify-end gap-2 mt-5;
+}
+.dictionary-media-wrap {
+  @apply w-10 h-10 block;
+}
+.dictionary-media-wrap img,
+.dictionary-media-wrap video {
+  @apply w-full h-full object-cover rounded cursor-default;
+}
+
+/* Student vocabulary listing */
+.dictionary-filter-wrap {
+  @apply flex flex-wrap justify-between;
+}
+.dictionary-filter-title {
+  @apply text-2xl font-semibold text-black leading-12;
+}
+
+.dictionary-search-wrap {
+  @apply flex gap-3 relative;
+}
+.dictionary-search-wrap input[type='search'],
+.dictionary-search-wrap input[type='text'] {
+  @apply px-4 pt-3.5 pb-4 rounded-lg 1200:w-[350px];
+}
+.dictionary-search-wrap .filter-icon {
+  @apply w-[50px] h-[50px] rounded bg-LightGray flex items-center justify-center cursor-pointer transition-all duration-300 select-none active:scale-95 hover:bg-PrimaryWood hover:text-white;
+}
+
+.dictionary-sign-list {
+  @apply mt-16 grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] gap-5;
+}
+.dictionary-sign-item {
+  @apply bg-LightGray rounded-10px w-fit relative flex flex-col;
+}
+.dictionary-sign-item .lock-icon {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 w-12 h-12 flex items-center justify-center text-white rounded-full border border-solid border-white;
+}
+.dictionary-sign-item.isLocked {
+  @apply cursor-not-allowed;
+}
+.dictionary-sign-item.isLocked::before {
+  @apply block absolute content-[''] left-0 top-0 w-full h-full rounded-10px bg-black/20 backdrop-blur-md;
+}
+.dictionary-sign-name {
+  @apply py-2.5 px-1;
+}
+.dictionary-sign-item span {
+  @apply text-sm font-semibold text-black text-center line-clamp-2;
+}
+.dictionary-sign-item img {
+  @apply rounded-b-10px aspect-square max-h-[160px] w-full h-full object-cover mt-auto;
+}
+.dictionary-sign .btn {
+  @apply text-center mt-14;
+}
+
+/* Dictionary FILTER MODAL */
+.dictionary-filter-inner {
+  @apply w-[450px];
+}
+.dictionary-filter-tab {
+  @apply flex flex-wrap mt-4 gap-4 mb-5;
+}
+.dictionary-filter-tab .button,
+.dictionary-filter-tab button {
+  @apply pb-2 text-base text-black/50 leading-12 relative cursor-pointer;
+}
+.dictionary-filter-tab .button.active,
+.dictionary-filter-tab button.active {
+  @apply text-black;
+}
+.dictionary-filter-tab .button::before,
+.dictionary-filter-tab button::before {
+  @apply absolute content-[''] w-0 bg-black h-0.5 right-0 bottom-0 transition-all duration-300;
+}
+.dictionary-filter-tab .button.active::before,
+.dictionary-filter-tab button.active::before {
+  @apply w-full left-0 right-unset;
+}
+.dictionary-categories-list {
+  @apply flex flex-wrap gap-2 max-h-[250px] overflow-auto;
+}
+.dictionary-categories-list > span {
+  @apply inline-block rounded-full bg-white border border-solid border-PrimaryWood text-black px-3 py-2.5 hover:bg-LightGray transition-all duration-300 cursor-pointer;
+}
+.dictionary-categories-list > span.active {
+  @apply bg-black border-black text-white;
+}
+/* Dictionary FILTER MODAL */
+
+/* Dictionary QUIZ MODAL */
+.dictionary-quizz-modal p {
+  @apply text-base leading-normal text-primary;
+}
+.select-quiz-list {
+  @apply mt-5 flex flex-col gap-4;
+}
+.select-quiz-item {
+  @apply p-3 hover:opacity-80 flex items-center border border-solid border-black/5 bg-LightGray rounded-10px text-lg text-black;
+}
+.select-quiz-item.active {
+  @apply bg-PrimaryWood text-white;
+}
+.select-quiz-item svg {
+  @apply w-5 h-5 ml-auto;
+}
+.vocab-list {
+  @apply flex flex-wrap gap-2;
+}
+.vocab-list .vocab-list-item {
+  @apply flex rounded-full uppercase text-sm font-normal text-primary px-3 py-2.5 border border-solid border-LightGray hover:bg-PrimaryWood hover:text-white cursor-pointer transition-all duration-300;
+}
+.vocab-list .vocab-list-item.active {
+  @apply bg-primary text-white hover:bg-black hover:text-white;
+}
+.select-vocab-list-wrap {
+  @apply flex flex-col gap-5;
+}
+.quiz-progress {
+  @apply flex gap-4 items-center mb-5;
+}
+.quiz-progress-wrap {
+  @apply flex gap-2 flex-1 h-fit;
+}
+.quiz-progress-bar {
+  @apply flex-1 h-1.5 rounded-full bg-LightGray;
+}
+.quiz-progress-bar.completed {
+  @apply bg-PrimaryYellow;
+}
+.quiz-progress-bar.active {
+  @apply bg-PrimaryWood/50;
+}
+.quiz-progress-count {
+  @apply text-base leading-normal text-primary;
+}
+.mcq-img-option-wrap.isVertical {
+  @apply grid grid-cols-2 gap-5;
+}
+.mcq-img-option-wrap.isVertical .mcq-quiz-options {
+  @apply grid-cols-1;
+}
+.mcq-img-option-wrap.isVertical .mcq-quiz-image {
+  @apply h-[430px] mb-0;
+}
+.mcq-quiz-title {
+  @apply text-primary text-lg leading-normal mb-4;
+}
+.mcq-quiz-image {
+  @apply w-full h-[231px] mb-4;
+}
+.mcq-quiz-image img {
+  @apply w-full h-full object-cover rounded-10px;
+}
+.mcq-quiz-option-title {
+  @apply text-primary mb-2 text-base leading-normal;
+}
+.mcq-quiz-options {
+  @apply grid grid-cols-2 gap-2;
+}
+.mcq-quiz-options .button {
+  @apply w-full min-h-[48px];
+}
+.mcq-quiz-note {
+  @apply text-PrimaryWood text-sm my-5;
+}
+.mcq-quiz-status {
+  @apply mt-5 flex items-center gap-4 text-base leading-normal text-primary font-medium;
+}
+.mcq-quiz-status span svg {
+  @apply w-full h-full;
+}
+.mcq-quiz-status.red span {
+  @apply bg-PrimaryRed ring-PrimaryRed/50;
+}
+.mcq-quiz-status.green span {
+  @apply bg-PrimaryGreen ring-PrimaryGreen/50;
+}
+.mcq-quiz-status span {
+  @apply w-4 h-4 rounded-full p-0.5 block text-white ring-2 ring-offset-2;
+}
+/* Dictionary QUIZ MODAL */
+
+/* Dictionary QUIZ DONE */
+.congrats-wrap {
+  @apply text-center flex flex-col items-center;
+}
+.congrats-wrap-title {
+  @apply text-[28px] mt-10 font-semibold mb-1 text-primary;
+}
+.congrats-wrap-score {
+  @apply text-xl text-PrimaryWood mb-8;
+}

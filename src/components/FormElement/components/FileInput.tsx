@@ -1,7 +1,7 @@
 import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import { REACT_APP_BACKEND_URL } from 'config';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import {
   FILE_SUPPORTED_FORMATS,
   imageExtension,
@@ -188,7 +188,7 @@ export const FileDisplay = ({
         const fileTypeRandom = customRandomNumberGenerator();
         dispatch(
           setToast({
-            variant: ToastVarient.ERROR,
+            variant: ToastVariant.ERROR,
             message: `${t('ToastMessage.validFileTypeText')} ${fileType}`,
             type: 'error',
             id: fileTypeRandom,
@@ -206,7 +206,7 @@ export const FileDisplay = ({
           )} ${fileSize} MB`,
           type: 'error',
           id: sizeRandom,
-          variant: ToastVarient.ERROR,
+          variant: ToastVariant.ERROR,
         })
       );
       removeFile();

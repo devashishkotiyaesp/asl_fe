@@ -1,0 +1,182 @@
+.teacher-availability {
+  @apply w-full;
+}
+.teacher-availability-btn-card {
+  @apply min-h-[150px] w-full bg-LightGray flex justify-center flex-col items-center;
+}
+
+.manage-time-select-date {
+  @apply grid grid-cols-2 gap-4 mb-2.5;
+}
+.manage-time-select-days-wrap {
+  @apply bg-LightWood w-full p-3 rounded-5px mb-2.5;
+}
+.manage-time-select-days-title {
+  @apply text-black text-base mb-3;
+}
+.manage-time-select-days {
+  @apply flex justify-between;
+}
+
+/* CALENDAR */
+.calendar-main-wrap {
+  @apply p-3 mt-3;
+}
+.calendar-main-title {
+  @apply block mb-2;
+}
+.rbc-calendar {
+  @apply bg-LightGray/50 p-4 rounded-10px;
+}
+.rbc-toolbar button {
+  @apply !p-[3px] rounded hover:!bg-PrimaryWood hover:!text-white transition-all duration-300;
+}
+.rbc-month-row {
+  @apply !basis-unset;
+}
+.rbc-date-cell {
+  @apply h-[100px];
+}
+.rbc-toolbar {
+  @apply flex flex-wrap justify-center text-base items-center gap-y-4 !mb-18px;
+}
+.rbc-toolbar .rbc-toolbar-label {
+  @apply text-base text-black leading-12 font-medium;
+}
+.rbc-month-row + .rbc-month-row,
+.rbc-day-bg + .rbc-day-bg,
+.rbc-month-view,
+.rbc-header {
+  @apply border-none !border-0;
+}
+.rbc-header {
+  @apply bg-LightWood !py-2.5 rounded !font-normal font-matter;
+}
+.rbc-off-range-bg {
+  @apply !bg-transparent;
+}
+.rbc-row-bg {
+  @apply gap-1;
+}
+.rbc-date-cell {
+  @apply flex items-center justify-center !p-0;
+}
+.rbc-day-bg {
+  @apply bg-white rounded;
+}
+.rbc-month-row .highlighted-day {
+  @apply !bg-LightWood;
+}
+.rbc-row {
+  @apply gap-1;
+}
+.rbc-month-view {
+  @apply gap-1;
+}
+.rbc-today,
+.rbc-date-cell.rbc-now {
+  @apply !bg-transparent;
+}
+.rbc-button-link {
+  @apply pointer-events-none;
+}
+.rbc-row:has(.rbc-row-segment) {
+  @apply absolute w-full z-1 top-0  gap-0;
+  /* grid grid-cols-7 */
+}
+.rbc-row:has(.rbc-row-segment) .rbc-row-segment {
+  @apply p-0 relative text-xs bg-transparent !max-w-unset;
+}
+.rbc-row-bg .event-day {
+  @apply relative;
+}
+.rbc-row-bg .event-day::before,
+.rbc-row-bg .event-day::after {
+  @apply absolute content-[''] w-2 h-2 bg-PrimaryWood rounded-full top-2 right-2;
+}
+.rbc-row-bg .event-day::after {
+  @apply animate-ripple;
+}
+.rbc-row:has(.rbc-row-segment) .rbc-row-segment .rbc-event {
+  @apply bg-transparent;
+}
+.select-time-slot-wrap-title {
+  @apply text-base text-black mb-2 block mt-3;
+}
+.select-time-slot-wrap {
+  @apply flex gap-4 items-center;
+}
+.react-datepicker__input-container .inputField {
+  @apply rounded-10px;
+}
+.data-picker-wrap {
+  @apply border border-solid pe-3 border-LightGray bg-white rounded-5px flex items-center [&:has(.inputField:focus)]:ring-2 [&:has(.inputField:focus)]:ring-primary/20 [&:has(.inputField:focus)]:ring-offset-2 transition-all duration-300;
+}
+.react-datepicker-popper {
+  @apply !z-3;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
+  @apply !h-[calc(125px_+_1.7rem_/_2)];
+}
+.react-datepicker__time-list {
+}
+
+.react-datepicker__time-list::-webkit-scrollbar {
+  @apply w-1.5 h-1.5;
+}
+.react-datepicker__time-list::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-black/50;
+}
+.react-datepicker__time-list::-webkit-scrollbar-track {
+  @apply rounded-full bg-LightGray;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  @apply !py-2 font-matter font-normal text-black/70;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  @apply !bg-PrimaryWood !text-white !font-medium;
+}
+.react-datepicker__header {
+  @apply !bg-white !border-LightGray;
+}
+.react-datepicker {
+  @apply !border-0 shadow-searchBoxFilter;
+}
+.react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
+  @apply !stroke-white !fill-white !text-white;
+}
+.has-event.rbc-date-cell {
+  @apply relative;
+}
+
+.error-message {
+  @apply text-sm font-medium block text-red-600 mt-1;
+}
+
+.rbc-show-more {
+  @apply !hidden;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--disabled {
+  @apply !text-black/50;
+}
+
+.spinnerLoad {
+  @apply flex items-center justify-center gap-2;
+}

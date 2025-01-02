@@ -1,4 +1,5 @@
 import { Session, User } from '@supabase/supabase-js';
+
 export interface RegisterFormValues {
   email: string;
   password: string;

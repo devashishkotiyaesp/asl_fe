@@ -26,10 +26,12 @@ export interface ModalProps {
   setDataClear?: React.Dispatch<React.SetStateAction<any>> | null;
   isSubmitLoading?: boolean;
   cancelClick?: () => void;
+  headerCancelClick?: () => void;
   isTitleEditable?: boolean;
   handleUpdate?: () => Promise<void>;
   setValue?: React.Dispatch<React.SetStateAction<string>>;
   value?: string;
   isButtonDisable?: boolean;
   isButtonLoader?: boolean;
+  handleCloseOutsideClick?: () => void;
 }

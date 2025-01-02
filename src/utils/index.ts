@@ -1,13 +1,13 @@
 import { Store } from '@reduxjs/toolkit';
 import { REACT_APP_NODE_ENV } from 'config';
 import { LayoutConstant } from 'constants/common.constant';
-import { PublicNavigation } from 'constants/navigation.constant';
 import { format } from 'date-fns';
 import { useAxiosGet } from 'hooks/useAxios';
 import { decode, encode, isValid } from 'js-base64';
-import _ from 'lodash';
+import _, { isNaN } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { setLogoutData, setUserData } from 'reduxStore/slices/authSlice';
 import { setActiveLayoutType } from 'reduxStore/slices/layoutSlice';
 import { getRolesPermission } from 'reduxStore/slices/rolePermissionSlice';
 import { clearToken } from 'reduxStore/slices/tokenSlice';
@@ -248,18 +248,21 @@ export const refreshAuthToken = async (store: Store) => {
     }
     return session?.access_token;
   } catch (error) {
-    logout(store);
+    await logout(store);
   }
 };
 
 export const logout = async (store: Store) => {
   try {
-    supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: 'local' });
     store.dispatch(clearToken());
+    store.dispatch(setUserData({ user: null }));
     store.dispatch(setActiveLayoutType(LayoutConstant.CMS));
-    setTimeout(() => {
-      window.location.href = PublicNavigation.login;
-    }, 0);
+    store.dispatch(setLogoutData());
+    window.location.href = '/';
+    // setTimeout(() => {
+    //   window.location.href = PublicNavigation.login;
+    // }, 0);
   } catch (error) {
     localStorage.clear();
   }
@@ -349,6 +352,18 @@ export const getObjectKey = (jsonData: any, fieldToConvert?: string[]) => {
   return allStrings;
 };
 
+export const shouldDisableField = (
+  fieldName: string,
+  fieldsArray: string[],
+  activeLanguage: string,
+  defaultLanguage: string
+) => {
+  if (defaultLanguage === activeLanguage) {
+    return false;
+  }
+  return fieldsArray.indexOf(fieldName) === -1;
+};
+
 export const getFullName = (firstName?: string, lastName?: string): string => {
   if (!firstName && !lastName) {
     return 'No name provided';
@@ -367,4 +382,78 @@ export const getFullName = (firstName?: string, lastName?: string): string => {
     return trimmedLastName;
   }
   return 'No name provided';
+};
+
+export function base64ToFile(base64String: string, fileName: string): File {
+  // Split the Base64 string into metadata and data
+  const [meta, data] = base64String.split(',');
+
+  if (!meta || !data) {
+    throw new Error('Invalid Base64 string format');
+  }
+
+  // Extract the MIME type (e.g., "image/png")
+  const mimeTypeMatch = meta.match(/:(.*?);/);
+  if (!mimeTypeMatch || !mimeTypeMatch[1]) {
+    throw new Error('MIME type not found in Base64 string');
+  }
+  const mimeType = mimeTypeMatch[1];
+
+  // Decode the Base64 string
+  const byteCharacters = atob(data);
+
+  // Convert to byte array
+  const byteNumbers = new Array(byteCharacters.length)
+    .fill(0)
+    .map((_, i) => byteCharacters.charCodeAt(i));
+  const byteArray = new Uint8Array(byteNumbers);
+
+  // Create and return a File object
+  return new File([byteArray], fileName, { type: mimeType });
+}
+
+export const TIMEZONE: string =
+  Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+export interface FilterObject {
+  [key: string]: string[];
+}
+
+export const hasValues = <T extends { [key: string]: any }>(obj: T): boolean => {
+  return Object.values(obj).some((value) => {
+    if (value === undefined || value === null) {
+      return false;
+    }
+    if (typeof value === 'string' || value instanceof Date) {
+      return value.toString().trim() !== '';
+    }
+    if (Array.isArray(value)) {
+      return (
+        value.length > 0 &&
+        value.some((v) => {
+          if (typeof v === 'string') {
+            return v.trim() !== '';
+          }
+          if (typeof v === 'number') {
+            return !isNaN(v);
+          }
+          return hasValues(v);
+        })
+      );
+    }
+    if (typeof value === 'object') {
+      return hasValues(value);
+    }
+    return false;
+  });
+};
+
+export const removeDuplicates = (array: any[]) => {
+  const seen = new Set();
+  return array.filter((item) => {
+    if (seen.has(item.id)) {
+      return false;
+    }
+    seen.add(item.id);
+    return true;
+  });
 };

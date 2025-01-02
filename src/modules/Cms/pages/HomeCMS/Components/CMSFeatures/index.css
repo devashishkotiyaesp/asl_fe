@@ -1,0 +1,41 @@
+.features {
+  @apply bg-LightGray;
+}
+.features .section-title {
+  @apply text-center mb-12 w-full;
+}
+.features-wrapper {
+  @apply grid grid-cols-3 gap-30px;
+}
+.features-item {
+  @apply pb-0 p-5 1200:pb-0 1200:p-30px bg-white rounded-xl col-span-1 flex flex-col;
+}
+.features-item:nth-child(4n + 1),
+.features-item:nth-child(4n + 4) {
+  @apply col-span-2 pb-5;
+}
+.features-title {
+  @apply flex flex-wrap gap-3 mb-5;
+}
+.features-title .icon {
+  @apply w-8 aspect-square text-PrimaryWood;
+}
+.features-title .icon svg {
+  @apply w-full h-full;
+}
+.features-title h3 {
+  @apply text-xl font-semibold leading-12 text-black;
+}
+.features-item p {
+  @apply text-base text-black/70 leading-normal mb-30px;
+}
+.features-image {
+  @apply flex items-end justify-center mt-auto;
+}
+.features-item:nth-child(4n + 1) .features-image,
+.features-item:nth-child(4n + 4) .features-image {
+  @apply my-auto;
+}
+.features-image img {
+  @apply max-h-[285px] w-auto object-contain;
+}

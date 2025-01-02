@@ -1,3 +1,20 @@
+/* LOGOUT MODAL STYLE */
+.logout-modal {
+  @apply text-center;
+}
+.logout-modal .logout-icon {
+  @apply w-20 h-20 mb-5 bg-LightGray text-PrimaryWood flex items-center justify-center rounded-full mx-auto;
+}
+.logout-modal .logout-title {
+  @apply text-2xl font-semibold text-black mb-2.5;
+}
+.logout-modal .logout-desc {
+  @apply text-sm text-black/50;
+}
+.logout-modal .btn-wrap {
+  @apply justify-center mt-10;
+}
+
 /* Dictionary STYLE */
 .dict-modal-title {
   @apply mb-2.5 text-4xl font-semibold;
@@ -80,7 +97,7 @@
 }
 
 /* TOPIC STYLE */
-.topic-banner {
+/* .topic-banner {
   @apply bg-LightWood p-30px rounded-5px min-h-[270px] flex flex-col;
 }
 .topic-banner__title {
@@ -90,7 +107,7 @@
   @apply text-base text-black;
 }
 .comment-count {
-  @apply mt-auto flex items-center gap-1 text-base text-primary cursor-pointer w-fit select-none;
+  @apply mt-auto flex items-center gap-2 text-base text-primary cursor-pointer w-fit select-none;
 }
 .comment-count .icon {
   @apply w-6 h-6 text-PrimaryWood;
@@ -151,7 +168,7 @@
   @apply w-full h-full object-cover;
 }
 .topic-content__text {
-  @apply flex-1 text-sm text-black leading-12 h-fit;
+  @apply flex-1 text-sm text-black leading-12 h-fit max-w-[calc(100%_-_80px)];
 }
 .topic-action {
   @apply flex items-center gap-5 mt-5;
@@ -170,8 +187,6 @@
 }
 .topic-option {
   @apply ml-auto relative;
-}
-.topic-option .icon {
 }
 .topic-option ul {
   @apply bg-white rounded-10px drop-shadow-lg absolute right-full top-0 -translate-x-4 opacity-0 invisible pointer-events-none transition-all duration-300;
@@ -224,4 +239,4 @@
 }
 .conversation-modal .btn-wrapper {
   @apply flex justify-end gap-2.5 mt-5;
-}
+} */

@@ -4,9 +4,19 @@ import { EnumFileType } from 'components/FormElement/enum';
 import InputField from 'components/FormElement/InputField';
 import { FieldArray } from 'formik';
 import { t } from 'i18next';
+import { useSelector } from 'react-redux';
+import { useLanguage } from 'reduxStore/slices/languageSlice';
 import { SectionProps } from '../types';
 
-const Footer = ({ values, setFieldValue }: SectionProps) => {
+const Footer = ({ values, setFieldValue, formLanguage }: SectionProps) => {
+  const language = useSelector(useLanguage);
+
+  const defaultLanguage = language.allLanguages?.filter(
+    (item) => item.short_name === language.language
+  )?.[0]?.name;
+
+  const isFooterFieldEnable = formLanguage === defaultLanguage;
+
   return (
     <>
       <div className="left-small-column">
@@ -161,6 +171,7 @@ const Footer = ({ values, setFieldValue }: SectionProps) => {
                       values?.contact_number_title?.length > 0 &&
                       values?.contact_number_title.map((_, index: number) => (
                         <InputField
+                          isDisabled={!isFooterFieldEnable}
                           label={t('footer.phoneDetailsTitle')}
                           name={`contact_number_title[${index}]`}
                           placeholder={t('footer.phoneNumberPlaceholder')}
@@ -179,6 +190,7 @@ const Footer = ({ values, setFieldValue }: SectionProps) => {
                       values?.contact_email_title?.length > 0 &&
                       values?.contact_email_title.map((_, index: number) => (
                         <InputField
+                          isDisabled={!isFooterFieldEnable}
                           label={t('footer.emailDetailsTitle')}
                           name={`contact_email_title[${index}]`}
                           placeholder={t('Auth.Login.emailPlaceholder')}
@@ -202,6 +214,7 @@ const Footer = ({ values, setFieldValue }: SectionProps) => {
                       <div className="" key={`point_list_${index + 1}`}>
                         <div className="right-part">
                           <InputField
+                            isDisabled={!isFooterFieldEnable}
                             name={`contact_social_links[${index}].link_url`}
                             placeholder="http://"
                           />

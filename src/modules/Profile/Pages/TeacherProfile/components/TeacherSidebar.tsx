@@ -1,6 +1,9 @@
 import Image from 'components/Image';
-import { t } from 'i18next';
+import { ConfirmationPopup } from 'components/Modal/ConfirmationPopup';
+import { useAxiosGet } from 'hooks/useAxios';
+import { useModal } from 'hooks/useModal';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import store from 'reduxStore/store';
 import { logout } from 'utils';
@@ -12,6 +15,18 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
+  const { t } = useTranslation();
+  const logOutModal = useModal();
+  const [getApi] = useAxiosGet();
+
+  const handleLogout = async () => {
+    await getApi('auth/login', {
+      params: {
+        status: 'logout',
+      },
+    });
+  };
+
   return (
     <div className="sidebar-wrap">
       <ul>
@@ -22,9 +37,9 @@ const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
           </Link>
         </li>
         <li
-          className={`sidebar-link-item ${isSidebar === 'journey' ? 'active' : ''}`}
+          className={`sidebar-link-item ${isSidebar === 'availability' ? 'active' : ''}`}
         >
-          <Link to="#!" onClick={() => setSidebar('journey')}>
+          <Link to="#!" onClick={() => setSidebar('availability')}>
             <Image iconName="bookMark" />
             {t('Profile.Teacher.Sidebar.Availability')}
           </Link>
@@ -33,7 +48,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
           className={`sidebar-link-item ${isSidebar === 'subscription' ? 'active' : ''}`}
         >
           <Link to="#!" onClick={() => setSidebar('subscription')}>
-            <Image iconName="dollarSquare" />
+            <Image iconName="noteBook" />
             {t('Profile.Teacher.Sidebar.Courses')}
           </Link>
         </li>
@@ -41,7 +56,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
           className={`sidebar-link-item ${isSidebar === 'notifications' ? 'active' : ''}`}
         >
           <Link to="#!" onClick={() => setSidebar('notifications')}>
-            <Image iconName="dollarSquare" />
+            <Image iconName="notification" />
             {t('Profile.Teacher.Sidebar.Notifications')}
           </Link>
         </li>
@@ -84,7 +99,10 @@ const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
           <span
             role="button"
             tabIndex={0}
-            onClick={() => logout(store)}
+            onClick={() => {
+              logOutModal.openModal();
+              // logout(store)
+            }}
             className="sidebar-link"
           >
             <Image iconName="logout" />
@@ -92,6 +110,20 @@ const ProfileSidebar: FC<ProfileSidebarProps> = ({ isSidebar, setSidebar }) => {
           </span>
         </li>
       </ul>
+      <ConfirmationPopup
+        showCloseIcon
+        modal={logOutModal}
+        deleteTitle={t('Profile.Sidebar.Logout')}
+        bodyText={t('Event.ConfirmationPopup.LogOutBody')}
+        cancelButtonText={t('Community.ConfirmationPopup.Cancel')}
+        confirmButtonText={t('Community.ConfirmationPopup.Continue')}
+        cancelButtonFunction={() => logOutModal.closeModal()}
+        confirmButtonFunction={async () => {
+          await handleLogout();
+          await logout(store);
+        }}
+        popUpType="logout"
+      />
     </div>
   );
 };

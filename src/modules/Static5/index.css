@@ -1,0 +1,209 @@
+/* REVIEW QUIZ START */
+.review-quiz-wrap {
+  @apply grid grid-cols-[170px_1fr] border-t border-solid border-PrimaryWood/20;
+}
+.review-quiz-question-list ul {
+  @apply flex flex-col gap-3.5 pt-3 border-r border-solid border-PrimaryWood/20;
+}
+.review-quiz-question-list ul li {
+  @apply flex items-center font-medium cursor-pointer gap-2.5 text-base text-PrimaryWood;
+}
+.review-quiz-question-list ul li.active {
+  @apply text-black;
+}
+.review-quiz-question-list ul li .icon {
+  @apply w-8 h-8 flex items-center justify-center p-1 rounded-full bg-PrimaryGreen text-white;
+}
+.review-quiz-question-list ul li.wrong .icon {
+  @apply bg-PrimaryRed;
+}
+/* REVIEW QUIZ END */
+
+/* QUIZZ PROGRESS */
+
+.quiz-progress {
+  @apply flex gap-4 items-center;
+}
+.quiz-progress-wrap {
+  @apply flex gap-2 flex-1 h-fit;
+}
+.quiz-progress-bar {
+  @apply flex-1 h-1.5 rounded-full bg-LightGray;
+}
+.quiz-progress-count {
+  @apply text-base leading-normal text-primary;
+}
+.quiz-title-bar {
+  @apply py-2 px-2.5 rounded-5px text-xl font-medium text-primary bg-LightGray;
+}
+.ques-ans-wrapper {
+  @apply flex flex-col gap-4;
+}
+.ques-ans-wrapper img,
+.ques-ans-wrapper video,
+.ques-ans-wrapper iframe {
+  @apply w-full h-full rounded-10px;
+}
+.ques-item,
+.ans-item {
+  @apply grid grid-cols-[150px_1fr] gap-6;
+}
+.ques-item-text,
+.ans-item-text {
+  @apply text-base text-PrimaryWood leading-12;
+}
+.ques-item-title {
+  @apply text-primary mb-2.5 text-base font-medium block;
+}
+.sort-ans-box-bar {
+  @apply flex gap-5;
+}
+.sort-ans-box-bar > span {
+  @apply flex-1 h-12 bg-LightGray rounded-5px flex items-center justify-center text-base font-medium text-primary cursor-pointer hover:opacity-50;
+}
+.sort-ans-box-bar > span.selected {
+  @apply bg-PrimaryWood text-white;
+}
+.sort-ans-box-bar > span.correct {
+  @apply bg-PrimaryGreen text-white;
+}
+.sort-ans-box-bar > span.wrong {
+  @apply bg-PrimaryRed text-white;
+}
+.ques-ans-media-wrap {
+  @apply h-[170px] w-[250px];
+}
+/* .
+.
+.
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+..
+. */
+
+.select-subscription {
+  @apply flex flex-wrap gap-4;
+}
+.subscription-item.active {
+  @apply bg-PrimaryWood/20;
+}
+.subscription-item {
+  @apply text-left cursor-pointer max-w-[270px] p-5 rounded-5px border border-solid border-PrimaryWood/50 transition-all duration-300;
+}
+.subscription-item h4 {
+  @apply text-primary text-base font-semibold mt-2 mb-0.5;
+}
+.subscription-item p {
+  @apply text-sm leading-normal text-black/60;
+}
+.subscription-form {
+  @apply max-w-[80%] flex flex-col gap-7 mt-30px;
+}
+.subscription-notes {
+  @apply grid grid-cols-2 gap-7;
+}
+.limited-usage-wrap {
+  @apply flex transition-all duration-300;
+}
+.limited-usage-wrap:has(input:focus) {
+  @apply ring-2 ring-black/10 ring-offset-2 rounded;
+}
+.limited-usage-wrap .input input {
+  @apply rounded-r-none border-r-0 ring-0 ring-transparent ring-offset-0;
+}
+.limited-usage-wrap .select-duration {
+  @apply w-[180px];
+}
+.select-duration .select-wrap > div:nth-child(3) {
+  @apply pt-[5px] pb-[6px] bg-LightWood rounded-l-none;
+}
+.select-duration .select-wrap > div:nth-child(3) > div {
+  @apply p-0 pl-2;
+}
+.select-duration .select-wrap > div svg {
+  @apply stroke-LightWood;
+}
+.checkbox-group {
+  @apply flex flex-col gap-4;
+}
+.checkbox-group .limit-input {
+  @apply hidden pl-6;
+}
+.checkbox-group:has(input[type='checkbox']:checked) .limit-input {
+  @apply block;
+}
+.subscription-form .group-label {
+  @apply text-black w-full mb-0 font-medium;
+}
+.subscription-form .input-label:not(.group-label) {
+  @apply text-sm;
+}
+.subscription-courses-access-items {
+  @apply flex flex-wrap gap-5;
+}
+.subscription-courses-iner-card {
+  @apply bg-LightGray flex flex-col gap-2 p-4 rounded-5px relative;
+}
+.subscription-courses-access-item {
+  @apply bg-white w-[195px] relative p-5 rounded-5px border border-solid border-LightWood;
+}
+.subscription-courses-access-item .icon {
+  @apply w-10 h-10 text-PrimaryWood;
+}
+.subscription-courses-access-item .icon svg {
+  @apply w-full h-full;
+}
+.subscription-courses-access-item .text {
+  @apply text-black mt-2.5 block text-base leading-12;
+}
+.subscription-courses-select-option {
+  @apply p-4 bg-white rounded flex gap-5;
+}
+.subscription-courses-select-wrap {
+  @apply p-5 rounded bg-white;
+}
+
+/* subscription Select Courses */
+.subscription-courses-select-title {
+  @apply flex justify-between;
+}
+.subscription-courses-select-title .input-label {
+  @apply whitespace-nowrap;
+}
+.subscription-courses-select-list {
+  @apply grid grid-cols-4 gap-3 mt-2.5;
+}
+.subscription-select-courses {
+  @apply relative h-[160px] rounded-5px;
+}
+.subscription-select-courses .checkbox {
+  @apply absolute right-4 top-4 z-1;
+}
+.subscription-select-courses .checkbox-input:checked {
+  @apply bg-PrimaryGreen ring-PrimaryGreen;
+}
+.subscription-select-courses img {
+  @apply w-full h-full object-cover rounded-5px;
+}
+.subscription-select-courses .content {
+  @apply absolute flex items-end text-white px-3 py-3 top-0 left-0 w-full h-full rounded-5px bg-gradient-to-t from-black;
+}
+.subscription-select-courses .content p {
+  @apply text-white text-sm font-medium leading-12;
+}

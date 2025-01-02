@@ -1,0 +1,130 @@
+.course-inner-card {
+  @apply mt-11;
+}
+.course-card-title {
+  @apply text-black text-xl font-medium text-center mb-9;
+}
+.course-inner-card .row {
+  @apply gap-0;
+}
+.course-inner-card .left-part {
+  @apply max-w-[400px];
+}
+.course-inner-card .row > * {
+  @apply flex flex-col gap-y-5;
+}
+.course-inner-card .right-part {
+  @apply max-w-[calc(100%_-_400px)] pl-10 !w-full;
+}
+.course-inner-card .bnt-wrap {
+  @apply text-right flex justify-end;
+}
+
+/* STUDENT QUIZ */
+.quiz-progress {
+  @apply flex gap-4 items-center;
+}
+.quiz-progress-wrap {
+  @apply flex gap-2 flex-1 h-fit;
+}
+.quiz-progress-bar {
+  @apply flex-1 h-1.5 rounded-full bg-LightGray;
+}
+.quiz-progress-bar.completed {
+  @apply bg-PrimaryYellow;
+}
+.quiz-progress-bar.active {
+  @apply bg-PrimaryWood/50;
+}
+.quiz-progress-count {
+  @apply text-base leading-normal text-primary;
+}
+.quiz-title-bar {
+  @apply mb-3 py-2 px-2.5 rounded-5px text-xl font-medium text-primary bg-LightGray;
+}
+.quiz-error {
+  @apply block bg-red-50 text-red-600 mt-3 px-2 text-sm font-medium py-1 rounded-md;
+}
+.quiz-correct {
+  @apply block bg-green-50 text-green-600 mt-3 px-2 text-sm font-medium py-1 rounded-md;
+}
+.ques-ans-wrapper {
+  @apply flex flex-col gap-4;
+}
+.ques-ans-wrapper img,
+.ques-ans-wrapper video,
+.ques-ans-wrapper iframe {
+  @apply w-full h-full rounded-10px;
+}
+.ques-item,
+.ans-item {
+  @apply grid grid-cols-[150px_1fr] gap-6;
+}
+.ques-item-text,
+.ans-item-text {
+  @apply text-base text-PrimaryWood leading-12;
+}
+.ques-item-title {
+  @apply text-primary mb-2.5 text-base font-medium block;
+}
+.sort-ans-box-bar {
+  @apply flex gap-2;
+}
+.sort-ans-box-bar > span:not(.with-image) {
+  @apply flex-1 relative h-12 bg-LightGray rounded-5px flex items-center justify-center text-base font-medium text-primary cursor-pointer hover:opacity-50;
+}
+.sort-ans-box-bar > span:not(.with-image) input[type='checkbox'] {
+  @apply absolute top-0 border-none opacity-0 left-0 w-full h-full cursor-pointer;
+}
+.sort-ans-box-bar > span:not(.with-image):has(input[type='checkbox']:checked) {
+  @apply bg-PrimaryWood text-white;
+}
+.sort-ans-box-bar > span:not(.with-image).correct {
+  @apply bg-PrimaryGreen text-white;
+}
+.sort-ans-box-bar > span:not(.with-image).wrong {
+  @apply bg-PrimaryRed text-white;
+}
+.ques-ans-media-wrap {
+  @apply h-[170px] w-[250px];
+}
+.quiz-sorting-wrap {
+  @apply flex items-center gap-2;
+}
+.quiz-sorting-wrap > *:not(.dragable-item) {
+  @apply bg-PrimaryWood flex items-center justify-center rounded-5px;
+}
+.quiz-sorting-wrap > .dragable-item {
+  @apply flex-1 relative h-12 bg-LightGray rounded-5px flex items-center justify-center text-base font-medium text-primary cursor-pointer hover:opacity-50;
+}
+.mcq-items-bar {
+  @apply flex gap-2;
+}
+.mcq-item {
+  @apply flex-1;
+}
+.mcq-item .button {
+  @apply w-full;
+}
+.dnd-note {
+  @apply block mt-4 text-sm leading-12 text-PrimaryWood;
+}
+.sort-ans-box-bar:has(.with-image) {
+  @apply flex-wrap;
+}
+.sort-ans-box-bar > span.with-image {
+  @apply flex flex-col items-center gap-2;
+}
+.sort-ans-box-bar > span.with-image img {
+  @apply w-[118px] h-[118px];
+}
+.congrats-wrap {
+  @apply text-center flex flex-col items-center;
+}
+.congrats-wrap-title {
+  @apply text-[28px] mt-10 font-semibold mb-1 text-primary;
+}
+.congrats-wrap-score {
+  @apply text-xl text-PrimaryWood mb-8;
+}
+/* STUDENT QUIZ */

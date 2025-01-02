@@ -1,0 +1,12 @@
+.teacher-profile-category-card {
+  @apply rounded-5px bg-white p-0.5;
+}
+.teacher-profile-category-card img {
+  @apply h-[150px] rounded-5px w-full object-cover;
+}
+.teacher-profile-category-card .content {
+  @apply pt-3 px-1 pb-2;
+}
+.teacher-profile-category-card p {
+  @apply text-black text-lg font-semibold leading-normal line-clamp-2;
+}

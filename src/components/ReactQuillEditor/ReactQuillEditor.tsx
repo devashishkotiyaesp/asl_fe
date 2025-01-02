@@ -1,12 +1,12 @@
 import ErrorMessage from 'components/FormElement/ErrorMessage';
 import Image from 'components/Image';
-import { useRef } from 'react';
-import ReactQuill from 'react-quill';
+import { useMemo, useRef } from 'react';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './style/style.css';
 
 type Editor = {
-  imageField?: string;
+  imageField?: boolean;
   name: string;
   value: string;
   parentClass?: string;
@@ -22,7 +22,6 @@ type Editor = {
   disabled?: boolean;
   placeholder?: string;
   styles?: Object;
-  // tagDropdown?: MembersProps[];
   onChange?: (content: string) => void;
   isLoading?: boolean;
 };
@@ -41,33 +40,70 @@ const ReactEditor = ({
   placeholder,
   styles,
   onChange,
-  // tagDropdown,
   isLoading = false,
 }: Editor) => {
   const quillObj = useRef<ReactQuill | null>(null);
 
-  const modules = {
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3] }],
-        [{ font: [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'blockquote'],
-        [{ color: [] }, { background: [] }],
-        [
-          { list: 'ordered' },
-          { list: 'bullet' },
-          { indent: '-1' },
-          { indent: '+1' },
-        ],
-        imageField ? ['link', 'image'] : [],
-        ['clean'],
-      ],
-    },
-    clipboard: {
-      matchVisual: false,
-    },
+  const BlockEmbed = Quill.import('blots/block/embed');
+
+  class DividerBlot extends BlockEmbed {
+    static create() {
+      const node = super.create();
+      node.setAttribute('style', 'border-top: 1px solid #000; margin: 10px 0;');
+      return node;
+    }
+  }
+
+  DividerBlot.blotName = 'divider';
+  DividerBlot.tagName = 'hr';
+
+  Quill.register(DividerBlot);
+
+  const insertDivider = () => {
+    const quill = quillObj.current?.getEditor();
+    if (quill) {
+      const range = quill.getSelection();
+      if (range) {
+        quill.insertText(range.index, '\n', 'user');
+        quill.insertEmbed(range.index + 1, 'divider', true);
+        quill.insertText(range.index + 2, '\n', 'user');
+        quill.setSelection(range.index + 3, 0);
+      }
+    } else {
+      console.error('Quill editor instance is not initialized');
+    }
   };
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        handlers: {
+          divider: insertDivider, // Custom handler
+        },
+        container: [
+          [{ header: [1, 2, 3] }],
+          [{ font: [] }],
+          [{ size: [] }],
+          [{ align: ['', 'right', 'center', 'justify'] }],
+          ['bold', 'italic', 'underline', 'blockquote'],
+          [{ color: [] }, { background: [] }],
+          [
+            { list: 'ordered' },
+            { list: 'bullet' },
+            { indent: '-1' },
+            { indent: '+1' },
+          ],
+          imageField ? ['link', 'image'] : [],
+          ['link', 'image', 'video'],
+          ['clean'],
+          [{ divider: 'divider' }],
+        ],
+      },
+      clipboard: {
+        matchVisual: false,
+      },
+    }),
+    []
+  );
 
   const formats = [
     'header',
@@ -84,6 +120,9 @@ const ReactEditor = ({
     'indent',
     'link',
     'image',
+    'align',
+    'video',
+    'divider',
   ];
 
   const handleContentChange = (
@@ -102,10 +141,7 @@ const ReactEditor = ({
       onChange(newContent);
     }
   };
-  // const [tag, setTag] = useState<MembersProps[] | undefined>([]);
-  // useEffect(() => {
-  //   setTag(tagDropdown)
-  // }, [tagDropdown])
+
   return (
     <div className={`w-full ${parentClass ?? ''}`}>
       {label && (

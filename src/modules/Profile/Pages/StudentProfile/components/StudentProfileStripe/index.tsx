@@ -22,10 +22,10 @@ const StudentProfileStripe = () => {
           </div>
         </div>
         <div className="right-part">
+          <div className="icon">
+            <Image iconName="bookMark" />
+          </div>
           <div className="">
-            <div className="icon">
-              <Image iconName="bookMark" />
-            </div>
             <p>Your Subscription Plan expires on</p>
             <span>28 March 2025</span>
           </div>

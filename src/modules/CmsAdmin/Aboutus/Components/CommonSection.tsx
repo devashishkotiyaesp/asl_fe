@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { ActionNameEnum, KeysEnum } from 'modules/CmsAdmin/constants';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import {
   BodyDataAccumulator,
   CommonSectionProps,
@@ -44,6 +45,7 @@ const CommonSection = ({
   handleAddEditJourneyClick,
 }: CommonSectionProps) => {
   const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
+  const navigate = useNavigate();
   const [isLoadingButton, setIsLoadingButton] = useState(false); // Single loading state
   const { t } = useTranslation();
   const onSubmit = async (values: FormikValues) => {
@@ -224,6 +226,7 @@ const CommonSection = ({
     );
     if (_.isNil(error)) {
       setIsLoadingButton(false);
+      navigate('/page-list');
     }
   };
 
@@ -290,7 +293,7 @@ const CommonSection = ({
                     />
                   )}
                 </div>
-                <div>
+                <div className="btn-wrap">
                   {activeLanguage > 0 && (
                     <div className="csm-form-button">
                       <Button
@@ -300,13 +303,24 @@ const CommonSection = ({
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.PREV);
                         }}
+                        disabled={isLoadingButton}
                       >
                         {t('Auth.RegisterCommon.prevButtonText')}
                       </Button>
                     </div>
                   )}
                   {activeLanguage < (allLanguages ?? []).length - 1 ? (
-                    <div className="csm-form-button">
+                    <div className="csm-form-button btn-wrap">
+                      <Button
+                        className="min-w-[90px]"
+                        variants="black"
+                        onClickHandler={() => {
+                          navigate(-1);
+                        }}
+                        disabled={isUpdateLoading}
+                      >
+                        {t('Dictionary.EditForm.CancelButton')}
+                      </Button>
                       <Button
                         variants="black"
                         className="w-fit"
@@ -315,7 +329,6 @@ const CommonSection = ({
                           setActionName(ActionNameEnum.NEXT);
                         }}
                         isLoading={isUpdateLoading}
-                        disabled={isUpdateLoading}
                       >
                         {t('Auth.RegisterCommon.nextButtonText')}
                       </Button>

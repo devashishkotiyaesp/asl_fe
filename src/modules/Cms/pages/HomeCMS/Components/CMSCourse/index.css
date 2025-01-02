@@ -1,0 +1,9 @@
+.course .section-title {
+  @apply text-center mb-12;
+}
+.course .section-title p {
+  @apply max-w-[720px] mx-auto;
+}
+.course .wrapper {
+  @apply select-none;
+}

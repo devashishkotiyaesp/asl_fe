@@ -9,7 +9,7 @@ export enum LanguagesEnum {
   ENGLISH = 'english',
 }
 
-export const ToastVarient = {
+export const ToastVariant = {
   SUCCESS: 'Success',
   ERROR: 'Error',
   WARNING: 'Warning',
@@ -48,6 +48,9 @@ export enum FeatureEnum {
   Posts = 'Posts',
   Likes = 'Likes',
   Cms = 'Cms',
+  Blog = 'Blog',
+  Tags = 'Tags',
+  LiveAssessment = 'LiveAssessment',
 }
 
 export const PermissionEnum = {
@@ -69,7 +72,7 @@ export enum ProvidersEnum {
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
   APPLE = 'apple',
-  MICROSOFT = 'microsoft',
+  MICROSOFT = 'azure',
 }
 
 export const LayoutConstant = {
@@ -116,3 +119,38 @@ export const OrganizationTypeOption = [
     value: 'Other',
   },
 ];
+
+export enum CourseTypeEnum {
+  SELF_PACED_COURSES = 'Self Paced Courses',
+  IN_PERSON_CLASS = 'In-Person Class',
+  ZOOM_CLASS = 'Zoom Class',
+  APPOINTMENTS = 'Appointments',
+  MINI_LESSONS = 'Mini Lessons',
+  FULL_COURSE = 'Full Course',
+}
+
+export enum CourseSubTypeEnum {
+  MINI_COURSE = 'Mini Course',
+}
+
+export enum CourseMaterialTypeEnum {
+  PRACTICE = 'practice',
+  TEACHING = 'teaching',
+}
+export const TABLE_DATA_LIMIT = 10;
+
+export enum StatusTypeEnum {
+  REQUEST = 'Request',
+  RESPONDED = 'Responded',
+  CLOSED = 'Closed',
+}
+
+export enum ReplyTypeEnum {
+  USER = 'User',
+  ADMIN = 'Admin',
+}
+export enum CourseProgressEnum {
+  Pending = 'pending',
+  Completed = 'completed',
+  In_Progress = 'in-progress',
+}

@@ -25,6 +25,12 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
       isFree: '',
     });
   };
+  function stringToBoolean(str?: string) {
+    if (typeof str === 'string') {
+      return str.toLowerCase() === 'true';
+    }
+    return false;
+  }
   return (
     <>
       <div className="left-small-column" />
@@ -44,7 +50,7 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
               <>
                 {Array.isArray(values?.point_data_array) &&
                   values?.point_data_array.length > 0 &&
-                  values.point_data_array.map((serviceData, index) => {
+                  values.point_data_array.map((courseData, index) => {
                     return (
                       <div
                         className="point-list-item mb-3"
@@ -52,26 +58,24 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
                       >
                         <div className="cms-form-card-wrap">
                           <div className="left-small-column">
-                            {serviceData?.banner_video && (
-                              <DropZone
-                                className="xl:max-w-[330px]"
-                                label={t('Cms.aboutUs.crew.uploadVideoTitle')}
-                                name="banner_video"
-                                SubTitle={t('Cms.courses.fileUploadSubText')}
-                                setValue={setFieldValue}
-                                value={serviceData?.banner_video ?? ''}
-                                acceptTypes={'videos/*'}
-                                fileType={[EnumFileType.Video]}
-                                size={40}
-                              />
-                            )}
+                            <DropZone
+                              className="xl:max-w-[330px]"
+                              label={t('Cms.aboutUs.crew.uploadVideoTitle')}
+                              name={`point_data_array[${index}].banner_video`}
+                              SubTitle={t('Cms.courses.fileUploadSubText')}
+                              setValue={setFieldValue}
+                              value={courseData?.banner_video ?? ''}
+                              acceptTypes={'videos/*'}
+                              fileType={[EnumFileType.Video]}
+                              size={40}
+                            />
                             <DropZone
                               className="xl:max-w-[330px]"
                               label={t('Community.UploadImage.Label')}
-                              name="banner_image"
+                              name={`point_data_array[${index}].banner_image`}
                               SubTitle={t('Cms.courses.fileUploadSubText')}
                               setValue={setFieldValue}
-                              value={serviceData?.banner_image ?? ''}
+                              value={courseData?.banner_image ?? ''}
                               acceptTypes={FileAcceptType[
                                 EnumFileType.Image
                               ].toString()}
@@ -95,10 +99,10 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
                               name={`point_data_array[${index}].description`}
                               setFieldValue={setFieldValue}
                               setFieldTouched={setFieldTouched}
-                              value={serviceData.description}
+                              value={courseData.description}
                               isCompulsory
                             />
-                            {serviceData?.fun_tidbits && (
+                            {courseData?.fun_tidbits && (
                               <ReactEditor
                                 label={t('Cms.aboutUs.aboutUsers.funTidbitsTitle')}
                                 parentClass="h-unset"
@@ -108,7 +112,7 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
                                 )}
                                 setFieldValue={setFieldValue}
                                 setFieldTouched={setFieldTouched}
-                                value={serviceData.fun_tidbits}
+                                value={courseData.fun_tidbits}
                               />
                             )}
                             <div className="cms-button color">
@@ -128,6 +132,25 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
                                 )}
                               />
                             </div>
+                            {courseData.link_button && (
+                              <div className="cms-button color">
+                                <InputField
+                                  name={`point_data_array[${index}].link_button`}
+                                  label={t('Cms.homepage.story.buttonTitle')}
+                                  placeholder={t(
+                                    'Cms.homepage.story.buttonTitlePlaceholder'
+                                  )}
+                                  isCompulsory
+                                />
+                                <InputField
+                                  name={`point_data_array[${index}].link_btn_url`}
+                                  label={t('Cms.homepage.story.buttonUrlTitle')}
+                                  placeholder={t(
+                                    'Cms.homepage.story.buttonUrlPlaceholder'
+                                  )}
+                                />
+                              </div>
+                            )}
                             <Checkbox
                               id="isFree"
                               labelClass="font-semibold"
@@ -136,10 +159,10 @@ const EditCourses = ({ setFieldValue, values, setFieldTouched }: SectionProps) =
                                 const newValue = e.target.checked;
                                 setFieldValue(
                                   `point_data_array[${index}].isFree`,
-                                  newValue
+                                  String(newValue)
                                 );
                               }}
-                              check={serviceData.isFree === 'true'}
+                              check={stringToBoolean(courseData?.isFree)}
                               text={t('Cms.courses.freeCourseTitle')}
                             />
                           </div>

@@ -38,7 +38,6 @@ const CtaForm = ({ setFieldValue, values }: SectionProps) => {
             name="cta_button_url"
             label={t('Cms.homepage.story.buttonUrlTitle')}
             placeholder={t('Cms.homepage.story.buttonUrlPlaceholder')}
-            isCompulsory
           />
         </div>
         <DropZone

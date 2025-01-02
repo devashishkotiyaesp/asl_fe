@@ -34,6 +34,19 @@ export const HomeValidationSchema = (sectionName: string | undefined) => {
       .required(t('Cms.homepage.story.buttonTitleValidation')),
   };
 
+  const crewFields = {
+    eyebrow_title: Yup.string()
+      .trim()
+      .required(t('Cms.homepage.story.eyebrowTitleValidation')),
+    title: Yup.string().trim().required(t('Cms.homepage.story.titleValidation')),
+  };
+
+  const journeyFields = {
+    eyebrow_title: Yup.string()
+      .trim()
+      .required(t('Cms.homepage.story.eyebrowTitleValidation')),
+  };
+
   const visionFields = {
     collaboration_logos: Yup.array()
       .of(Yup.string().trim())
@@ -120,6 +133,8 @@ export const HomeValidationSchema = (sectionName: string | undefined) => {
     ...(sectionName === KeysEnum.AboutUsers ? aboutUsersFields : {}),
     ...(sectionName === KeysEnum.LocalStories ? localStoriesFields : {}),
     ...(sectionName === KeysEnum.aboutCta ? ctaFields : {}),
+    ...(sectionName === KeysEnum.Crew ? crewFields : {}),
+    ...(sectionName === KeysEnum.Journey ? journeyFields : {}),
   };
 
   return Yup.object().shape(schema);

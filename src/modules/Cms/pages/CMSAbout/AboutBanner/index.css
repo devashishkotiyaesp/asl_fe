@@ -1,0 +1,28 @@
+.about-banner.fill {
+  @apply bg-LightGray !mt-0;
+}
+.about-banner .wrapper > * {
+  @apply w-1/2;
+}
+.about-banner .section-title {
+  @apply max-w-[540px] ml-auto;
+}
+.about-banner .about-banner-img {
+  @apply max-w-[495px] aspect-[1_/_1.1];
+}
+.about-banner .about-banner-img img {
+  @apply w-full h-full object-cover rounded-2xl;
+}
+.about-banner .btn {
+  @apply mt-10;
+}
+.owner-sec .section-title h2,
+.owner-sec .section-title .h2 {
+  @apply font-medium text-2xl mb-9;
+}
+.owner-sec .wrapper .about-banner-img {
+  @apply ml-auto;
+}
+.owner-sec .wrapper {
+  @apply flex-row-reverse;
+}

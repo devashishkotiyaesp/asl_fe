@@ -10,7 +10,7 @@ import { useModal } from 'hooks/useModal';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './index.css';
 
@@ -18,8 +18,35 @@ const Static = () => {
   const NewConversation = useModal();
   const DeleteComment = useModal();
   const ASLDictionary = useModal();
+  const LogOut = useModal();
   return (
     <>
+      <Button onClickHandler={() => LogOut.openModal()} variants="black">
+        Log Out
+      </Button>
+      <Modal modalBodyClassName="logout-modal" width="max-w-[450px]" modal={LogOut}>
+        <>
+          <div className="logout-icon">
+            <Image iconName="logoutIcon2" />
+          </div>
+          <div className="logout-title">Ready to sign out?</div>
+          <p className="logout-desc">
+            Your progress is saved. You can return anytime!
+          </p>
+          <div className="btn-wrap">
+            <Button
+              onClickHandler={() => LogOut.closeModal()}
+              variants="blackBorder"
+            >
+              Cancel
+            </Button>
+            <Button onClickHandler={() => LogOut.closeModal()} variants="Red">
+              Logout
+            </Button>
+          </div>
+        </>
+      </Modal>
+
       {/* Community - Topic View */}
       <h1 className="text-5xl font-semibold text-black leading-normal mb-5">
         Dictionary
@@ -69,10 +96,10 @@ const Static = () => {
                 <span className="dict-part-title">Dominant hand</span>
                 <ul className="dict-hand-sign-wrap">
                   <li>
-                    <span className="dict-hand-sign">✋Left</span>
+                    <span className="dict-hand-sign">&#9997;Left</span>
                   </li>
                   <li>
-                    <span className="dict-hand-sign">✋Left</span>
+                    <span className="dict-hand-sign">&#9997;Left</span>
                   </li>
                 </ul>
               </div>
@@ -83,8 +110,12 @@ const Static = () => {
                   slidesPerView={3}
                   navigation
                   speed={800}
-                  modules={[Navigation]}
                   className="dict-slider"
+                  modules={[Autoplay]}
+                  autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                  }}
                 >
                   <SwiperSlide className="dict-slide">
                     <div className="video-wrap">

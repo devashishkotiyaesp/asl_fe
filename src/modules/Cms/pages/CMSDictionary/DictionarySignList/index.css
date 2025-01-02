@@ -1,0 +1,45 @@
+.dictionary-filter-wrap {
+  @apply flex flex-wrap justify-between;
+}
+.dictionary-filter-title {
+  @apply text-2xl font-semibold text-black leading-12;
+}
+
+.dictionary-search-wrap {
+  @apply flex gap-3 relative;
+}
+.dictionary-search-wrap input[type='search'],
+.dictionary-search-wrap input[type='text'] {
+  @apply px-4 pt-3.5 pb-4 rounded-lg 1200:w-[350px];
+}
+.dictionary-search-wrap .filter-icon {
+  @apply w-[50px] h-[50px] rounded bg-LightGray flex items-center justify-center cursor-pointer transition-all duration-300 select-none active:scale-95 hover:bg-PrimaryWood hover:text-white;
+}
+
+.dictionary-sign-list {
+  @apply mt-16 grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] gap-5;
+}
+.dictionary-sign-item {
+  @apply bg-LightGray rounded-10px w-fit relative flex flex-col;
+}
+.dictionary-sign-item .lock-icon {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 w-12 h-12 flex items-center justify-center text-white rounded-full border border-solid border-white;
+}
+.dictionary-sign-item.isLocked {
+  @apply cursor-not-allowed;
+}
+.dictionary-sign-item.isLocked::before {
+  @apply block absolute content-[''] left-0 top-0 w-full h-full rounded-10px bg-black/20 backdrop-blur-md;
+}
+.dictionary-sign-name {
+  @apply py-2.5 px-1;
+}
+.dictionary-sign-item span {
+  @apply text-sm font-semibold text-black text-center line-clamp-2;
+}
+.dictionary-sign-item img {
+  @apply rounded-b-10px aspect-square max-h-[160px] w-full h-full object-cover mt-auto;
+}
+.dictionary-sign .btn {
+  @apply text-center mt-14;
+}

@@ -1,46 +1,57 @@
 import Button from 'components/Button/Button';
-import TextArea from 'components/FormElement/TextArea';
 import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
 import StatusLabel from 'components/StatusLabel';
 import Table from 'components/Table/Table';
 import { ITableHeaderProps } from 'components/Table/types';
-import { REACT_APP_API_BASE_URL } from 'config';
-import { Formik, FormikValues } from 'formik';
-import { useAxiosGet, useAxiosPost } from 'hooks/useAxios';
+import { StatusTypeEnum } from 'constants/common.constant';
+import { useAxiosGet } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SupportRequestItem, SupportRequestList } from '../types';
+import { useSelector } from 'react-redux';
+import { useLanguage } from 'reduxStore/slices/languageSlice';
+import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
+import { socketSelector } from 'reduxStore/slices/socketSlice';
+import { getDateFormate } from 'utils/date';
+import { FilterApplyProps, SupportRequestItem, SupportRequestList } from '../types';
 
 interface SupportRequestProps {
   search?: string;
+  filterApply?: FilterApplyProps;
 }
 
-const SupportRequest = ({ search }: SupportRequestProps) => {
+const SupportRequest = ({ search, filterApply }: SupportRequestProps) => {
   const { t } = useTranslation();
 
+  const socket = useSelector(socketSelector);
+
   const sendResponse = useModal();
+  // const dispatch = useDispatch();
+  const { currentPage } = useSelector(currentPageSelector);
+  const { language } = useSelector(useLanguage);
 
   // STORE API DATA FOR SUPPORT REQUEST
-  const [getSupportRequest, { isLoading }] = useAxiosGet();
+  const [getSupportRequest] = useAxiosGet();
 
-  const [sendSupportResponse, { isLoading: responseLoading }] = useAxiosPost();
+  // const [sendSupportResponse] = useAxiosPost();
 
   // STORE API DATA FOR SUPPORT REQUEST ID
   const [getSupportRequestItem] = useAxiosGet();
 
-  const [limit, setlimit] = useState<number>(10);
+  const [limit, setLimit] = useState<number>(10);
 
   const [supportRequestData, setSupportRequestData] = useState<SupportRequestList>();
   const [responseItem, setResponseItem] = useState<SupportRequestItem | null>();
-  // const [responseView, setResponseView] = useState<SupportRequestItem>();
 
   const handleSupportRequest = async () => {
     const data = await getSupportRequest('support-request', {
       params: {
+        page: currentPage,
         limit,
         search,
+        ...filterApply,
+        status: filterApply?.status?.join(','),
       },
     });
     setSupportRequestData(data.data);
@@ -55,23 +66,31 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
     setResponseItem(data.data);
   };
 
-  // FOR REPLY
-  const OnSubmit = async (values: FormikValues) => {
-    const payLoad = {
-      message: values.responseReply,
-      support_request_id: responseItem?.id,
-      user_id: responseItem?.user_id,
-      email: responseItem?.user?.email,
-    };
+  // comment FOR REPLY
+  // const OnSubmit = async (values: FormikValues) => {
+  //   const payLoad = {
+  //     message: values.responseReply,
+  //     support_request_id: responseItem?.id,
+  //     user_id: responseItem?.user_id,
+  //     email: responseItem?.user?.email,
+  //   };
 
-    // sendSupportResponse
-    const { error } = await sendSupportResponse('support-request/reply', payLoad);
+  //   // sendSupportResponse
+  //   const { error } = await sendSupportResponse('support-request/reply', payLoad);
 
-    if (!error) {
-      sendResponse.closeModal();
-      handleSupportRequest();
-    }
-  };
+  //   if (!error) {
+  //     dispatch(
+  //       setToast({
+  //         variant: ToastVariant.SUCCESS,
+  //         message: t('Common.ToastMessage.Success.Create'),
+  //         type: 'success',
+  //         id: Date.now(),
+  //       })
+  //     );
+  //     sendResponse.closeModal();
+  //     handleSupportRequest();
+  //   }
+  // };
 
   const columnData: ITableHeaderProps[] = [
     {
@@ -118,12 +137,20 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
     },
     {
       header: t('Status'),
-      name: 'is_resolved',
       option: {
         sort: true,
         hasFilter: false,
       },
       cell: (props) => RequestStatus(props as unknown as SupportRequestItem),
+    },
+    {
+      header: t('Events.CreateOrEditForm.Date'),
+      name: 'created_at',
+      option: {
+        sort: true,
+        hasFilter: false,
+      },
+      cell: (props) => RequestDate(props as unknown as SupportRequestItem),
     },
     {
       header: t('Settings.table.action'),
@@ -136,13 +163,7 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
     return (
       <div className="user-profile-data">
         <div className="user-profile-image">
-          <Image
-            src={
-              SupportReq?.user?.profile_image
-                ? `${REACT_APP_API_BASE_URL}/${SupportReq?.user?.profile_image}`
-                : '/images/no-image.png'
-            }
-          />
+          <Image src={SupportReq?.user?.profile_image ?? '/images/no-image.png'} />
         </div>
         <div className="user-profile-name">
           <span>
@@ -152,53 +173,110 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
       </div>
     );
   };
+  const getStatus = (status: StatusTypeEnum) => {
+    switch (status) {
+      case StatusTypeEnum.RESPONDED:
+        return { color: 'green', message: t('Responded') };
+      case StatusTypeEnum.REQUEST:
+        return { color: 'gray', message: t('NoResponded') };
+      case StatusTypeEnum.CLOSED:
+        return { color: 'red', message: t('StatusClosed') };
+      default:
+        return { color: 'gray', message: t('NoResponded') };
+    }
+  };
   const RequestStatus = (SupportReq: SupportRequestItem) => {
+    const status = getStatus(SupportReq?.status);
     return (
       <StatusLabel
-        variants={SupportReq?.is_resolved ? 'green' : 'gray'}
-        text={SupportReq?.is_resolved ? t('Responded') : t('NoResponded')}
+        variants={
+          status?.color as 'green' | 'gray' | 'LightWood' | 'red' | undefined
+        }
+        text={status?.message}
       />
     );
   };
 
+  const RequestDate = (SupportReq: SupportRequestItem) => {
+    return <div>{getDateFormate(SupportReq?.created_at)}</div>;
+  };
+
   const actionRender = (e: SupportRequestItem) => {
     return (
-      <>
-        <Button
-          onClickHandler={() => {
-            sendResponse.openModal();
-            handleSupportRequestID(e);
-          }}
-          className="flex items-center gap-1 underline text-PrimaryWood hover:text-black cursor-pointer"
-        >
-          {e.is_resolved ? (
-            <>
-              <Image iconName="message2" iconClassName="w-5 h-5" /> {t('View')}
-            </>
-          ) : (
-            <>
-              <Image iconName="send" iconClassName="w-5 h-5" /> {t('Text.Reply')}
-            </>
-          )}
-        </Button>
-      </>
+      <Button
+        onClickHandler={() => {
+          sendResponse.openModal();
+          handleSupportRequestID(e);
+        }}
+        className="flex items-center gap-1 underline text-PrimaryWood hover:text-black cursor-pointer"
+      >
+        {/* {e.status === StatusTypeEnum.RESPONDED ||
+        e.status === StatusTypeEnum.CLOSED ? (
+          <> */}
+        <Image iconName="message2" iconClassName="w-5 h-5" /> {t('View')}
+        {/* </>
+        ) : (
+          <>
+            <Image iconName="send" iconClassName="w-5 h-5" /> {t('Text.Reply')}
+          </>
+        )} */}
+      </Button>
     );
   };
 
   useEffect(() => {
     handleSupportRequest();
-  }, [search]);
+  }, [search, limit, filterApply, currentPage, language]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on(
+      'supportRequestChange',
+      (supportData: SupportRequestList['data'][0]) => {
+        if (supportData?.id) {
+          setSupportRequestData((prev) => {
+            if (!prev) return prev;
+
+            const updatedList =
+              prev.data?.map((item) =>
+                item.id === supportData?.id
+                  ? {
+                      ...item,
+                      ...(supportData?.status
+                        ? { status: supportData?.status }
+                        : {}),
+                    }
+                  : item
+              ) ?? [];
+
+            return {
+              ...prev,
+              data: updatedList,
+            };
+          });
+        }
+      }
+    );
+
+    // Cleanup on unmount
+    return () => {
+      socket.off('supportRequestChange');
+    };
+  }, [socket]);
 
   return (
     <>
       <Table
-        headerData={columnData}
-        parentClassName=""
         islastRowOnRight={false}
-        loader={isLoading}
-        setLimit={setlimit}
         bodyData={supportRequestData?.data}
         pagination
+        totalPage={supportRequestData?.lastPage}
+        dataCount={supportRequestData?.count}
+        dataPerPage={limit}
+        setLimit={setLimit}
+        headerData={columnData}
+        parentClassName=""
       />
 
       <Modal
@@ -209,13 +287,11 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
         <>
           <div className="responseInfo">
             <div className="responseInfo-image">
-              <Image
-                src={
-                  responseItem?.user?.profile_image
-                    ? `${REACT_APP_API_BASE_URL}/${responseItem?.user?.profile_image}`
-                    : '/images/no-image.png'
-                }
-              />
+              {responseItem && (
+                <Image
+                  src={responseItem?.user?.profile_image ?? '/images/no-image.png'}
+                />
+              )}
             </div>
             <div className="responseInfo-content">
               <span className="responseInfo-type">
@@ -235,64 +311,90 @@ const SupportRequest = ({ search }: SupportRequestProps) => {
             <label htmlFor="">{t('InquiryLabel')} :</label>
             <div className="response-item-text">{responseItem?.query}</div>
           </div>
-          <div className="response-reply">
-            <Formik
-              initialValues={{
-                responseReply: responseItem?.supportRequestReplies
-                  ? responseItem?.supportRequestReplies?.message
-                  : '',
-              }}
-              onSubmit={(values) => {
-                OnSubmit(values);
-              }}
-              enableReinitialize
-            >
-              {({ values }) => {
-                return (
-                  <>
-                    <TextArea
-                      isCompulsory
-                      rows={5}
-                      name="responseReply"
-                      label={t('Text.Reply')}
-                      disabled={responseItem?.is_resolved}
-                      value={values.responseReply}
-                    />
-
-                    <div className="btn-wrap">
-                      {responseItem?.is_resolved ? (
-                        <Button
-                          type="button"
-                          onClickHandler={() => sendResponse.closeModal()}
-                          variants="black"
-                        >
-                          {t('Close')}
-                        </Button>
-                      ) : (
-                        <>
+          {/* {responseItem?.status !== StatusTypeEnum.RESPONDED &&
+          responseItem?.status !== StatusTypeEnum.CLOSED ? (
+            <div className="response-reply w-full">
+              <Formik
+                initialValues={{
+                  responseReply: responseItem?.supportRequestReplies
+                    ? responseItem?.supportRequestReplies?.message
+                    : '',
+                }}
+                onSubmit={OnSubmit}
+                enableReinitialize
+              >
+                {({ values }) => {
+                  return (
+                    <Form>
+                      <TextArea
+                        isCompulsory
+                        rows={5}
+                        name="responseReply"
+                        label={t('Text.Reply')}
+                        value={values.responseReply}
+                        // className="w-full border"
+                      />
+                      <div className="btn-wrap">
+                        {responseItem?.status === StatusTypeEnum.RESPONDED ||
+                        responseItem?.status === StatusTypeEnum.CLOSED ? (
                           <Button
                             type="button"
-                            variants="PrimaryWoodBorder"
                             onClickHandler={() => sendResponse.closeModal()}
-                          >
-                            {t('Settings.cancel')}
-                          </Button>
-                          <Button
-                            type="submit"
                             variants="black"
-                            isLoading={responseLoading}
-                            disabled={responseLoading}
                           >
-                            {t('Settings.submit')}
+                            {t('Close')}
                           </Button>
-                        </>
-                      )}
-                    </div>
-                  </>
-                );
-              }}
-            </Formik>
+                        ) : (
+                          <>
+                            <Button
+                              type="button"
+                              variants="PrimaryWoodBorder"
+                              onClickHandler={() => sendResponse.closeModal()}
+                            >
+                              {t('Settings.cancel')}
+                            </Button>
+                            <Button
+                              type="submit"
+                              variants="black"
+                              isLoading={responseLoading}
+                              disabled={responseLoading}
+                            >
+                              {t('Settings.submit')}
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </div>
+          ) : ( */}
+          <div>
+            <div className="response-item">
+              <label htmlFor="" className="flex">
+                {t('Status')} :
+              </label>
+              <div className="response-item-text">
+                {responseItem && RequestStatus(responseItem)}
+              </div>
+            </div>
+            {/* <div className="response-item">
+                <label htmlFor="" className="flex">
+                  {t('ReplyLabel')} :
+                </label>
+                <div className="response-item-text">
+                  {responseItem?.supportRequestReplies?.message && (
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: responseItem?.supportRequestReplies?.message,
+                      }}
+                    />
+                  )}
+                </div>
+              </div> */}
           </div>
+          {/* )} */}
         </>
       </Modal>
     </>

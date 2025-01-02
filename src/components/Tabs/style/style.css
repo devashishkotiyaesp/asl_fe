@@ -1,17 +1,8 @@
-/* .tab-header {
-  @apply flex justify-between items-end gap-7 border-b border-solid  overflow-x-auto;
-}
 .tab-items {
-  @apply flex items-center  h-fit flex-[1_0_0%] whitespace-nowrap;
+  @apply flex items-center relative w-full;
 }
-.tab-item.active {
-  @apply font-medium text-primary cursor-pointer border-b-2 border-b-primary ms-6 first:ms-0;
-}
-.tab-item {
-  @apply flex items-center pb-4 text-base font-normal hover:text-primary text-black cursor-pointer border-b-2 border-b-transparent ms-6 first:ms-0;
-} */
-.tab-items {
-  @apply flex items-center relative;
+.tab-header {
+  @apply flex flex-wrap justify-between;
 }
 .tab-items::before {
   @apply absolute content-[''] bottom-0 right-0 h-px w-full bg-black/5 transition-all duration-300;
@@ -28,6 +19,19 @@
 .tab-item.active {
   @apply font-medium text-black;
 }
+
+.tab-items:has(.tab-item.fill)::before {
+  @apply opacity-0;
+}
+.tab-items:has(.tab-item.fill) {
+  @apply w-auto;
+}
+.tab-item.fill {
+  @apply bg-white text-black py-4 px-6 rounded-full border border-solid border-LightWood before:opacity-0 transition-all duration-300 ml-2 first:ml-0;
+}
+.tab-item.fill.active {
+  @apply bg-black text-white border-black;
+}
 .tab-content {
-  @apply mt-8;
+  @apply mt-4;
 }

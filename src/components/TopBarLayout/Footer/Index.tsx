@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import {
   CmsSectionProps,
   pointDataArrayProps,
-} from 'modules/Auth/pages/HomeCMS/types';
+} from 'modules/Cms/pages/HomeCMS/types';
 
 // ** Constants **
 import { PublicNavigation } from 'constants/navigation.constant';
@@ -14,7 +14,7 @@ import { PublicNavigation } from 'constants/navigation.constant';
 // ** Utils **
 import { IconTypes } from 'components/Icon/types';
 import _ from 'lodash';
-import { formatCMSObjectData } from 'modules/Auth/pages/HomeCMS/helper';
+import { formatCMSObjectData } from 'modules/Cms/pages/HomeCMS/helper';
 import { useTranslation } from 'react-i18next';
 import './index.css';
 
@@ -61,14 +61,14 @@ const Footer = ({
           <div className="wrapper">
             <div className="footer-logo">
               <Link to="./">
-                <Image src={String(footerData.image)} />
+                <Image src={String(footerData?.image)} />
               </Link>
               <p>{String(footerData?.short_description)}</p>
             </div>
             <div className="footer-others">
               <div className="footer-col">
                 <div className="footer-link-title">
-                  <span>{String(footerData.quick_link_title)}</span>
+                  <span>{String(footerData?.quick_link_title)}</span>
                 </div>
                 <ul className="footer-link-list">
                   {(footerData?.quick_titles as pointDataArrayProps[])?.map(
@@ -110,7 +110,7 @@ const Footer = ({
                 <div className="footer-link-title">
                   <span>{String(footerData.resources_link_title)}</span>
                 </div>
-                {footerData.resources_titles ? (
+                {footerData?.resources_titles ? (
                   <ul className="footer-link-list">
                     {(footerData?.resources_titles as pointDataArrayProps[])?.map(
                       (item, index) => (
@@ -141,9 +141,9 @@ const Footer = ({
               </div>
               <div className="footer-col">
                 <div className="footer-link-title">
-                  <span>{String(footerData.members_title)}</span>
+                  <span>{String(footerData?.members_title)}</span>
                 </div>
-                {footerData.members_titles ? (
+                {footerData?.members_titles ? (
                   <ul className="footer-link-list">
                     {(footerData?.members_titles as pointDataArrayProps[])?.map(
                       (item, index) => (
@@ -174,7 +174,7 @@ const Footer = ({
               </div>
               <div className="footer-col">
                 <div className="footer-link-title">
-                  <span>{String(footerData.contact_title)}</span>
+                  <span>{String(footerData?.contact_title)}</span>
                 </div>
                 <ul className="footer-link-list">
                   <li>
@@ -195,21 +195,22 @@ const Footer = ({
                 </div>
                 <div className="footer-social">
                   <ul>
-                    {(
-                      footerData?.contact_social_links as ContactSocialLinkProps[]
-                    ).map(({ link_name, link_url }, index) => {
-                      return (
-                        <li key={`contact_links_${index + 1}`}>
-                          {link_name && link_url ? (
-                            <Link to={link_url ?? ''}>
-                              <Image iconName={link_name} />
-                            </Link>
-                          ) : (
-                            ''
-                          )}
-                        </li>
-                      );
-                    })}
+                    {footerData?.contact_social_links &&
+                      (
+                        footerData?.contact_social_links as ContactSocialLinkProps[]
+                      ).map(({ link_name, link_url }, index) => {
+                        return (
+                          <li key={`contact_links_${index + 1}`}>
+                            {link_name && link_url ? (
+                              <Link to={link_url ?? ''}>
+                                <Image iconName={link_name} />
+                              </Link>
+                            ) : (
+                              ''
+                            )}
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
               </div>

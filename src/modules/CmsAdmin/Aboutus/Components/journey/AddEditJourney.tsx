@@ -25,8 +25,10 @@ const AddEditJourney = (props: JourneyTableProps) => {
     editId,
   } = props;
   const [initialValues, setInitialValues] = useState<LangueKeyValueProps>();
-  const [getApi] = useAxiosGet();
-  const [putApi] = useAxiosPut();
+  const [getApi, { isLoading: isFetchLoading }] = useAxiosGet();
+  const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const [isUpdateButton, setIsUpdateButton] = useState(false);
   const [actionName, setActionName] = useState<string | null>(ActionNameEnum.NEXT);
   const currentYear = new Date().getFullYear(); // Get current year
   const yearsList = Array.from({ length: 11 }, (_, index) => {
@@ -98,12 +100,18 @@ const AddEditJourney = (props: JourneyTableProps) => {
           handleSubmit(values);
           break;
         case ActionNameEnum.UPDATE:
-          UpdateCrew(values);
+          onUpdate(values);
           break;
         default:
           break;
       }
     }
+  };
+
+  const onUpdate = async (values: FormikValues) => {
+    setIsUpdateButton(true);
+    await UpdateCrew(values);
+    setIsUpdateButton(false);
   };
 
   const UpdateCrew = async (values: FormikValues) => {
@@ -127,41 +135,53 @@ const AddEditJourney = (props: JourneyTableProps) => {
     formData.append('id', values.id ?? editId);
     await putApi(`/cms-page-section/${KeysEnum.Journey}/`, formData);
   };
-
   const OnNext = async (values: FormikValues) => {
-    if (editId) {
-      UpdateCrew(values);
-    } else {
-      const formData = new FormData();
-      const fieldValue = {} as KeyValueProps;
-      Object.keys(values).forEach((key) => {
-        const value = values[key];
-        const fieldType = value instanceof File ? 'media' : 'text';
-        if (fieldType === 'media' && value.size > 0) {
-          formData.append(key, value);
-          fieldValue[key] = value;
-        } else {
-          fieldValue[key] = value;
-        }
-      });
-      formData.append('field_value', JSON.stringify(fieldValue));
-      formData.append('field_name', 'journey_years');
-      formData.append('language', formLanguage);
-      formData.append('cms_page_id', cmsId as string);
-      formData.append('section_name', KeysEnum.Journey);
-      formData.append('field_type', 'text');
-      const response = await createApi(`/cms-page-section`, formData);
-      setInitialValues((prevValues) => ({
-        ...prevValues,
-        [formLanguage]: {
-          ...values,
-          id: response.data[activeLanguage + 1].id,
-          slug: response.data[activeLanguage + 1].slug,
-        },
-      }));
+    // Set loading state to true
+    setIsLoadingButton(true);
+    try {
+      // Handle editing if editId exists
+      if (editId) {
+        await UpdateCrew(values); // Wait for the async function to complete
+      } else {
+        // Handle creating a new benefit
+        const formData = new FormData();
+        const fieldValue = {} as KeyValueProps;
+        Object.keys(values).forEach((key) => {
+          const value = values[key];
+          const fieldType = value instanceof File ? 'media' : 'text';
+          if (fieldType === 'media' && value.size > 0) {
+            formData.append(key, value);
+            fieldValue[key] = value;
+          } else {
+            fieldValue[key] = value;
+          }
+        });
+        formData.append('field_value', JSON.stringify(fieldValue));
+        formData.append('field_name', 'journey_years');
+        formData.append('language', formLanguage);
+        formData.append('cms_page_id', cmsId as string);
+        formData.append('section_name', KeysEnum.Journey);
+        formData.append('field_type', 'text');
+        const response = await createApi(`/cms-page-section`, formData);
+        // Update initialValues with the new data
+        setInitialValues((prevValues) => ({
+          ...prevValues,
+          [formLanguage]: {
+            ...values,
+            id: response.data[activeLanguage + 1].id,
+            slug: response.data[activeLanguage + 1].slug,
+          },
+        }));
+      }
+      // Move to the next language form
+      setFormLanguage(nextFormLanguage);
+      setActiveLanguage(activeLanguage + 1);
+    } catch {
+      // You can show a generic error message to the user, if needed
+    } finally {
+      // Set loading state to false when done
+      setIsLoadingButton(false);
     }
-    setFormLanguage(nextFormLanguage);
-    setActiveLanguage(activeLanguage + 1);
   };
 
   const OnPrev = (values: FormikValues) => {
@@ -217,12 +237,14 @@ const AddEditJourney = (props: JourneyTableProps) => {
                   acceptTypes={'image/*'}
                   fileType={[EnumFileType.Image]}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <InputField
                   name="banner_title"
                   label={t('Cms.homepage.story.whyChooseTitle')}
                   placeholder={t('Cms.homepage.story.whyChoosePlaceholder')}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <ReactEditor
                   label={t('Cms.homepage.banner.description')}
@@ -232,6 +254,7 @@ const AddEditJourney = (props: JourneyTableProps) => {
                   setFieldTouched={setFieldTouched}
                   value={values?.description as string}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <ReactSelect
                   parentClass="w-full"
@@ -241,6 +264,7 @@ const AddEditJourney = (props: JourneyTableProps) => {
                   label={t('Cms.aboutUs.journey.yearLabel')}
                   placeholder={t('Cms.aboutUs.journey.yearPlaceholder')}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <div className="btn-wrap">
                   {activeLanguage > 0 && (
@@ -252,6 +276,7 @@ const AddEditJourney = (props: JourneyTableProps) => {
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.PREV);
                         }}
+                        disabled={isUpdateLoading}
                       >
                         {t('Auth.RegisterCommon.prevButtonText')}
                       </Button>
@@ -266,6 +291,8 @@ const AddEditJourney = (props: JourneyTableProps) => {
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.NEXT);
                         }}
+                        isLoading={isLoadingButton}
+                        disabled={isUpdateButton}
                       >
                         {t('Auth.RegisterCommon.nextButtonText')}
                       </Button>
@@ -282,6 +309,8 @@ const AddEditJourney = (props: JourneyTableProps) => {
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.UPDATE);
                         }}
+                        isLoading={isUpdateButton}
+                        disabled={isLoadingButton}
                       >
                         {t('Settings.update')}
                       </Button>
@@ -298,6 +327,8 @@ const AddEditJourney = (props: JourneyTableProps) => {
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.SUBMIT);
                         }}
+                        isLoading={isUpdateLoading}
+                        disabled={isUpdateLoading}
                       >
                         {t('Auth.RegisterCommon.submitButtonText')}
                       </Button>

@@ -22,20 +22,13 @@ const slice = createSlice({
     ) {
       state.allLanguages = action.payload.allLanguages;
     },
-    setDefaultLanguage(
-      state: LanguageType,
-      action: PayloadAction<{ defaultLanguage: string }>
-    ) {
-      state.defaultLanguage = action.payload.defaultLanguage;
-    },
   },
 });
 
 export const { reducer } = slice;
 export const useLanguage = (state: RootStateType) => state.language;
-export const useDefaultLanguage = (state: RootStateType) =>
-  state.language.defaultLanguage;
+export const getActiveLanguage = (state: RootStateType) => state.language.language;
 
-export const { setLanguage, setAllLanguage, setDefaultLanguage } = slice.actions;
+export const { setLanguage, setAllLanguage } = slice.actions;
 
 export default slice;

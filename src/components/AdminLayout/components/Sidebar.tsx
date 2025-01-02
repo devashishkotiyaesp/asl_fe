@@ -38,7 +38,7 @@ const Sidebar = () => {
   }[] = [
     {
       label: t('Sidebar.Dashboard'),
-      to: PrivateNavigation.dashboard.view.path,
+      to: AdminNavigation.dashboard.view.path,
       icon: <DashboardIcon />,
     },
     {
@@ -83,7 +83,7 @@ const Sidebar = () => {
     },
     {
       label: t('Sidebar.AuditLog'),
-      to: '/users3',
+      to: '/audit-log',
       icon: <NoteLog />,
     },
     {
@@ -119,16 +119,6 @@ const Sidebar = () => {
       label: t('Sidebar.Courses'),
       to: PrivateNavigation.courses.view.path,
       icon: <NoteBook />,
-    },
-    {
-      label: t('Sidebar.Community'),
-      to: '/community',
-      icon: <Users />,
-    },
-    {
-      label: t('Sidebar.Dictionary'),
-      to: '/dictionary',
-      icon: <BookMark />,
     },
     {
       label: t('Sidebar.Settings'),
@@ -194,50 +184,52 @@ const Sidebar = () => {
   return (
     <>
       <aside className={`sidebar ${isSidebarOpen ? 'show' : 'hide'}`}>
-        <div className="sidebar-logo">
-          <Link to="/">
-            <Image
-              isFromDataBase={false}
-              width={isSidebarOpen ? 223 : 56}
-              height={isSidebarOpen ? 40 : 56}
-              src={`/images/${isSidebarOpen ? 'logo.png' : 'logo-round.png'}`}
-              alt="Logo"
-            />
-          </Link>
-        </div>
-        <div className="sidebar-title">
-          {isSidebarOpen && <span>{getTitle()}</span>}
-        </div>
-        <nav className="sidebar-list">
-          <ul className="scroll-hide">
-            {getSidebarElements().map((element, index) => (
-              <>
-                <li
-                  key={`${element.label}_${element.to}_${index}`}
-                  className="sidebar-list_item"
-                >
-                  <NavLink
-                    to={element.to}
-                    className={({ isActive }) => `
+        <div className="inner">
+          <div className="sidebar-logo">
+            <Link to="/">
+              <Image
+                isFromDataBase={false}
+                width={isSidebarOpen ? 223 : 56}
+                height={isSidebarOpen ? 40 : 56}
+                src={`/images/${isSidebarOpen ? 'logo.png' : 'logo-round.png'}`}
+                alt={t('Coursemanagement.CommonText.Logo')}
+              />
+            </Link>
+          </div>
+          <div className="sidebar-title">
+            {isSidebarOpen && <span>{getTitle()}</span>}
+          </div>
+          <nav className="sidebar-list">
+            <ul className="scroll-hide">
+              {getSidebarElements()?.map((element, index) => (
+                <>
+                  <li
+                    key={`${element.label}_${element.to}_${index}`}
+                    className="sidebar-list_item"
+                  >
+                    <NavLink
+                      to={element.to}
+                      className={({ isActive }) => `
                     ${isActive ? 'active' : ''}
                     ${element?.divider && isSidebarOpen ? 'mb-4' : ''}
                   `}
-                  >
-                    <span className="icon">{element.icon}</span>
-                    <span className="text">
-                      {isSidebarOpen ? element.label : ''}
-                    </span>
-                  </NavLink>
-                </li>
-                {element.divider && isSidebarOpen && (
-                  <div className="sidebar-divider">
-                    <span>{element.dividerTitle}</span>
-                  </div>
-                )}
-              </>
-            ))}
-          </ul>
-        </nav>
+                    >
+                      <span className="icon">{element.icon}</span>
+                      <span className="text">
+                        {isSidebarOpen ? element.label : ''}
+                      </span>
+                    </NavLink>
+                  </li>
+                  {element.divider && isSidebarOpen && (
+                    <div className="sidebar-divider">
+                      <span>{element.dividerTitle}</span>
+                    </div>
+                  )}
+                </>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </aside>
       {/* <aside className="max-w-64 bg-white h-full border-r border-gray-200">
         <nav className="flex flex-col">

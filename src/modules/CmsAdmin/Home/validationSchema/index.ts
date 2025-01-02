@@ -12,7 +12,15 @@ export const HomeValidationSchema = (sectionName: string | undefined) => {
       .required(t('Cms.homepage.banner.bannerImageValidation')),
     description: Yup.string()
       .trim()
-      .required(t('Cms.homepage.banner.descriptionValidation')),
+      .required(t('Cms.homepage.banner.descriptionValidation'))
+      .test(
+        'contains-meaningful-text',
+        t('Cms.homepage.banner.descriptionValidation'),
+        (value) => {
+          const textWithoutTags = value?.replace(/<\/?[^>]+(>|$)/g, '');
+          return textWithoutTags?.trim() !== '';
+        }
+      ),
     title_hashing: Yup.string()
       .trim()
       .required(t('Cms.homepage.banner.titleHashingValidation')),
@@ -28,6 +36,9 @@ export const HomeValidationSchema = (sectionName: string | undefined) => {
     banner_button: Yup.string()
       .trim()
       .required(t('Cms.homepage.banner.bannerButtonValidation')),
+    collaboration_logos_title: Yup.string()
+      .trim()
+      .required(t('Cms.homepage.banner.collaborationLogoTitle.validation')),
   };
 
   // Fields for the 'story' section

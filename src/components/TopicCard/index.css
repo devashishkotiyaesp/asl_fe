@@ -1,5 +1,8 @@
 .topic-card {
-  @apply flex flex-col rounded-5px bg-white;
+  @apply relative flex flex-col rounded-5px bg-white cursor-pointer;
+}
+.topic-card > * {
+  @apply w-full text-left;
 }
 .topic-card-img {
   @apply h-[160px] overflow-hidden rounded-t-5px;
@@ -20,11 +23,37 @@
   @apply text-xs text-PrimaryWood;
 }
 .topic-card-conversation {
-  @apply px-2.5 pt-3.5 mt-3.5 border-t border-solid border-PrimaryWood/50 pb-5 flex items-center;
+  @apply px-2.5 py-3.5 mt-3.5 border-t border-solid border-PrimaryWood/50 flex items-center;
 }
 .topic-card-conversation .icon {
   @apply w-6 h-6;
 }
 .topic-card-conversation .text {
-  @apply flex-1 pl-1 text-base;
+  @apply flex-1 pl-2 text-base;
+}
+.topic-card .topic-option {
+  @apply absolute top-2 right-2;
+}
+.topic-option .icon {
+  @apply bg-white w-7 h-7 relative block rounded-full;
+}
+.topic-card .topic-option ul {
+  @apply right-[calc(100%_+_10px)];
+}
+/* 
+.topic-card:hover {
+  @apply pointer-events-none cursor-default;
+}
+.topic-card:has(.topic-option:hover) {
+  @apply pointer-events-none;
+} */
+
+.topic-card .no-image h3 {
+  @apply pr-6;
+}
+.topic-card .topic-option .icon {
+  @apply border border-solid border-LightGray;
+}
+.topic-card .topic-option .icon svg {
+  @apply w-full h-full;
 }

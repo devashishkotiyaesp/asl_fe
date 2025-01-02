@@ -9,7 +9,9 @@ import { useModal } from 'hooks/useModal';
 import { t } from 'i18next';
 import { KeysEnum } from 'modules/CmsAdmin/constants';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import {
   CommonSelectProps,
   ICrewItem,
@@ -24,6 +26,7 @@ const Journey = (props: JourneyProps) => {
   const [deleteCmsSectionApi] = useAxiosDelete();
   const [selectedJourney, setSelectedJourney] = useState<CommonSelectProps>();
   const [journeyData, setJourneyData] = useState<JourneyDataProps>();
+  const { currentPage } = useSelector(currentPageSelector);
   const [limit, setLimit] = useState<number>(10);
   const { id } = useParams();
   const [sort, setSort] = useState<string>('-updated_at');
@@ -35,13 +38,14 @@ const Journey = (props: JourneyProps) => {
         limit,
         language: formLanguage,
         fieldName: 'journey_years',
+        page: currentPage,
       },
     });
     setJourneyData(data.data);
   };
   useEffect(() => {
     handleGetSection();
-  }, [formLanguage]);
+  }, [formLanguage, currentPage, sort, limit]);
 
   const columnData: ITableHeaderProps[] = [
     {
@@ -54,7 +58,7 @@ const Journey = (props: JourneyProps) => {
       },
     },
     {
-      header: 'Year',
+      header: t('Cms.aboutUs.journey.yearLabel'),
       name: 'name',
       cell: (props) => yearRender(props as unknown as ICrewItem),
       option: {
@@ -63,7 +67,7 @@ const Journey = (props: JourneyProps) => {
       },
     },
     {
-      header: 'Title',
+      header: t('Dictionary.EditForm.ButtonTitle'),
       name: 'like',
       cell: (props) => titleRender(props as unknown as ICrewItem),
       option: {
@@ -89,13 +93,13 @@ const Journey = (props: JourneyProps) => {
     return (
       <div className="flex flex-wrap gap-4">
         <Button
-          className="action-button small green"
+          className="action-button black"
           onClickHandler={() => getEditId(slug)}
         >
           <Image iconName="editPen" />
         </Button>
         <Button
-          className="action-button small red"
+          className="action-button red"
           onClickHandler={() => {
             deleteCommunity.openModal();
             setSelectedJourney(props);
@@ -114,28 +118,33 @@ const Journey = (props: JourneyProps) => {
     <>
       <div className="left-small-column" />
       <div className="right-big-column">
-        <InputField
-          name="eyebrow_title"
-          label={t('Cms.homepage.story.eyebrowTitle')}
-          placeholder={t('Cms.homepage.story.eyebrowTitlePlaceholder')}
-        />
-        <Button
-          variants="black"
-          onClickHandler={() => handleAddEditJourneyClick(true)}
-        >
-          {t('Cms.aboutUs.journey.yearTitle')}
-        </Button>
+        <div className="flex gap-3">
+          <InputField
+            name="eyebrow_title"
+            label={t('Cms.homepage.story.eyebrowTitle')}
+            placeholder={t('Cms.homepage.story.eyebrowTitlePlaceholder')}
+            isCompulsory
+          />
+          <Button
+            className="shrink-0 self-end"
+            variants="PrimaryWoodLight"
+            onClickHandler={() => handleAddEditJourneyClick(true)}
+          >
+            <Image iconName="plus" />
+            {t('Cms.aboutUs.journey.yearTitle')}
+          </Button>
+        </div>
       </div>
       <div>
         <Table
           headerData={columnData}
           loader={isLoading}
-          bodyData={journeyData?.ourJourney as any}
+          bodyData={journeyData?.ourJourney}
           pagination
           dataPerPage={limit}
           setLimit={setLimit}
-          totalPage={journeyData?.totalPages}
-          dataCount={journeyData?.totalCount}
+          totalPage={journeyData?.lastPage}
+          dataCount={journeyData?.count}
           setSort={setSort}
           sort={sort}
         />

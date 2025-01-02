@@ -1,0 +1,31 @@
+.home-banner {
+  @apply z-1 relative pb-6;
+}
+.home-banner::before {
+  @apply absolute top-0 left-0 w-full bg-LightGray content-[''] h-[70%] -z-1;
+}
+
+.banner-main-title {
+  @apply text-4xl md:text-5xl 1200:text-6xl leading-12 font-black max-w-[600px] mx-auto;
+}
+
+.banner-small-desc {
+  @apply text-base text-black/70 leading-12 mt-6 max-w-[400px] mx-auto;
+}
+
+.banner-buttons {
+  @apply mt-10 flex justify-center items-center gap-4;
+}
+.banner-video-wrapper {
+  @apply mt-12 relative;
+}
+.banner-video-wrapper img {
+  @apply absolute top-0 left-0 w-full h-full pointer-events-none opacity-100 transition-all duration-300;
+}
+.banner-video-wrapper:hover img {
+  @apply opacity-0;
+}
+.banner-video-wrapper img,
+.banner-video-wrapper video {
+  @apply w-full aspect-video object-cover rounded-xl;
+}

@@ -1,0 +1,195 @@
+.blog-details {
+  @apply pt-30px;
+}
+.blog-details .left-part {
+  @apply flex-1 pr-30px;
+}
+.blog-details .right-part {
+  @apply max-w-[360px] w-full;
+}
+
+.blog-details .section-title {
+  @apply mb-6;
+}
+.blog-date-wrap,
+.blog-date-social {
+  @apply inline-flex items-center gap-30px;
+}
+.blog-date-social {
+  @apply mb-30px;
+}
+.blog-date-item {
+  @apply text-black/50 flex items-center gap-2 text-sm;
+}
+.blog-date-item svg {
+  @apply w-5 h-5;
+}
+.blog-social ul,
+.author-social ul {
+  @apply flex items-center gap-2;
+}
+.blog-social ul a,
+.author-social ul a {
+  @apply bg-LightWood h-30px aspect-square rounded-full text-black flex items-center justify-center hover:bg-PrimaryWood hover:text-white transition-all duration-300;
+}
+
+/* BLOG CONTENT */
+.blog-content-img {
+  @apply w-full aspect-[2_/_1.4] mb-6;
+}
+.blog-content-img img {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.blog-content table {
+  @apply my-10 w-full border-collapse;
+}
+
+.blog-content table th {
+  @apply px-6 py-4 text-left text-base leading-none capitalize text-black whitespace-nowrap font-medium;
+}
+
+.blog-content table td {
+  @apply py-4 px-6 font-normal text-black/50 text-base leading-none align-middle;
+}
+
+.blog-content table thead {
+  @apply bg-LightWood;
+}
+
+.blog-content table tbody tr:nth-child(even) {
+  @apply bg-LightGray;
+}
+
+.blog-content table tbody tr {
+  @apply border-b border-solid border-black/50;
+}
+
+.blog-content > ul li,
+.blog-content p:not(blockquote p) {
+  @apply text-base font-normal leading-normal text-black;
+}
+
+.blog-content > ul li:not(:last-child),
+.blog-content p:not(blockquote p, :last-child) {
+  @apply mb-4;
+}
+.blog-content p strong,
+.blog-content li strong {
+  @apply font-semibold text-black;
+}
+.blog-content p img,
+.blog-content img {
+  @apply block w-full h-auto object-contain mt-30px;
+}
+
+.blog-content p a,
+.blog-content li a {
+  @apply underline underline-offset-4 text-PrimaryWood hover:text-black;
+}
+
+.blog-content > ul li {
+  @apply relative pl-5;
+}
+
+.blog-content > ul > li::before {
+  @apply absolute content-[''] w-1.5 h-1.5 bg-black/50 left-0 top-2.5 opacity-70 rounded-full;
+}
+
+.blog-content :is(h1, h2, h3, h4, h5, h6) {
+  @apply mt-10 mb-5 leading-normal text-black font-semibold;
+}
+
+.blog-content img {
+  @apply max-w-full mt-10 mb-5;
+}
+
+.blog-content > img {
+  @apply w-full h-[400px] object-cover rounded-2xl;
+}
+
+.blog-content h1 {
+  font-size: 32px;
+  @apply text-4xl;
+}
+
+.blog-content h2 {
+  @apply text-3xl;
+}
+
+.blog-content h3 {
+  @apply text-2xl;
+}
+
+.blog-content h4 {
+  @apply text-xl;
+}
+
+.blog-content h5 {
+  @apply text-lg;
+}
+
+.blog-content h6 {
+  @apply text-base;
+}
+
+.blog-content blockquote {
+  @apply pl-30px my-8 text-lg italic leading-normal py-4 relative text-PrimaryWood;
+}
+
+.blog-content blockquote::before {
+  @apply absolute content-[''] w-[3px] h-full top-0 left-0 bg-PrimaryWood;
+}
+
+.blog-conclusion {
+  @apply mt-10;
+}
+.blog-conclusion {
+  @apply mt-10;
+}
+.blog-conclusion-title {
+  @apply text-xl leading-12 font-semibold block mb-4;
+}
+.blog-conclusion p {
+  @apply text-base text-black/70 leading-normal;
+}
+.author {
+  @apply mt-10;
+}
+.author-inner {
+  @apply p-30px bg-LightGray rounded-2xl;
+}
+.author-profile {
+  @apply flex gap-4 items-center;
+}
+.author-profile img {
+  @apply w-20 h-20 rounded-full object-cover;
+}
+.author-data {
+  @apply flex flex-col text-sm font-semibold leading-12;
+}
+.author-social {
+  @apply mt-2;
+}
+.author-content {
+  @apply text-sm leading-normal text-black/70 italic mt-5;
+}
+.recent-blog {
+  @apply 1200:mt-[70px];
+}
+.recent-blog-item {
+  @apply flex gap-3 mb-30px last:mb-0;
+}
+.recent-blog-img {
+  @apply max-w-[160px] w-full aspect-[2_/_1.5];
+}
+.recent-blog-img img {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.recent-blog-title {
+  @apply block mb-6 text-2xl font-semibold;
+}
+
+.blog-content img {
+  max-width: 300px; /* Makes sure images are responsive */
+  max-height: 300px; /* Set a max height if necessary */
+}

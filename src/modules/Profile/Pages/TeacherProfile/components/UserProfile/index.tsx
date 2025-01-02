@@ -3,30 +3,27 @@ import ProfilePictureUpload from 'components/FormElement/components/ProfilePictu
 import InputField from 'components/FormElement/InputField';
 import TextArea from 'components/FormElement/TextArea';
 import Icon from 'components/Icon';
-import Image from 'components/Image';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { Formik } from 'formik';
 import { useAxiosPost } from 'hooks/useAxios';
 import { TeacherUserValidationSchema } from 'modules/Profile/validation';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Link } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import {
   getCurrentUser,
   getOrganization,
   setUserData,
 } from 'reduxStore/slices/authSlice';
 import { setToast } from 'reduxStore/slices/toastSlice';
-import {
-  EditInitialValues,
-  TeacherUserProfileProps,
-} from '../../Types/TeacherProfile.types';
+import { EditInitialValues } from '../../Types/TeacherProfile.types';
 import '../TeacherProfileTab/index.css';
 
-const TeacherUserProfile: FC<TeacherUserProfileProps> = ({ isSidebar }) => {
+const UserProfile: FC = () => {
   const dispatch = useDispatch();
   const [callApi, { isLoading }] = useAxiosPost();
+
   const { t } = useTranslation();
 
   const user = useSelector(getCurrentUser);
@@ -38,45 +35,44 @@ const TeacherUserProfile: FC<TeacherUserProfileProps> = ({ isSidebar }) => {
     email: user?.email || '',
     profile_image: user?.profile_image || null,
     bio: user?.bio || '',
+    video_link: user?.video_link,
     organization: organizations?.[0]?.userDetails?.first_name,
   };
 
-  const onSubmit = async (userData: EditInitialValues) => {
-    if (userData && user?.id) {
-      const formData: FormData = new FormData();
-      formData.append('first_name', userData.first_name);
-      formData.append('last_name', userData.last_name);
-      formData.append('bio', userData.bio);
+  const onSubmit = async ({
+    first_name,
+    last_name,
+    bio,
+    video_link,
+    profile_image,
+  }: EditInitialValues) => {
+    if (!user?.id) return;
 
-      if (userData.profile_image) {
-        formData.append('profile_image', userData.profile_image);
-      }
-      const res = await callApi('/users/update-profile', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+    const formData = new FormData();
+    Object.entries({ first_name, last_name, bio, video_link }).forEach(
+      ([key, value]) => formData.append(key, value || '')
+    );
+    if (profile_image) formData.append('profile_image', profile_image);
 
-      if (res.data) {
-        dispatch(
-          setToast({
-            variant: ToastVarient.SUCCESS,
-            message: `${t('Comman.ToastMessage.Success.Update')}`,
-            type: 'success',
-            id: new Date().getTime(),
-          })
-        );
-        dispatch(
-          setUserData({
-            user: res.data,
-          })
-        );
-      }
+    const res = await callApi('/users/update-profile', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    if (res.data) {
+      dispatch(
+        setToast({
+          variant: ToastVariant.SUCCESS,
+          message: t('Common.ToastMessage.Success.Update'),
+          type: 'success',
+          id: Date.now(),
+        })
+      );
+      dispatch(setUserData({ user: res.data }));
     }
   };
+
   return (
-    <div
-      className="sidebar-content-wrap"
-      style={isSidebar === 'edit' ? { display: '' } : { display: 'none' }}
-    >
+    <div className="sidebar-content-wrap">
       <div className="sidebar-content-title-wrap">
         <div className="sidebar-content-title">
           <span>{t('Profile.Edit.Title')}</span>
@@ -92,16 +88,12 @@ const TeacherUserProfile: FC<TeacherUserProfileProps> = ({ isSidebar }) => {
           {({ values, setFieldValue, handleSubmit }) => {
             return (
               <Form className="teacher-profile-form" onSubmit={handleSubmit}>
-                <div className="teacher-profile-img">
-                  <label htmlFor="image" className="profile-update">
-                    <ProfilePictureUpload
-                      setValue={setFieldValue}
-                      name="profile_image"
-                      value={values?.profile_image}
-                      acceptTypes="image/*"
-                    />
-                  </label>
-                </div>
+                <ProfilePictureUpload
+                  setValue={setFieldValue}
+                  name="profile_image"
+                  value={values?.profile_image}
+                  acceptTypes="image/*"
+                />
                 <div className="flex gap-5">
                   <InputField
                     label={t('Auth.Register.Label.FirstName')}
@@ -144,8 +136,7 @@ const TeacherUserProfile: FC<TeacherUserProfileProps> = ({ isSidebar }) => {
                 <InputField
                   type="text"
                   label="YouTube Link"
-                  name="yt_link"
-                  isDisabled
+                  name="video_link"
                   icon={<Icon className="w-full h-full" name="linkIcon2" />}
                 />
 
@@ -154,23 +145,24 @@ const TeacherUserProfile: FC<TeacherUserProfileProps> = ({ isSidebar }) => {
                   variants="black"
                   type="submit"
                   className="w-fit"
-                  value={t('Comman.Button.Update')}
+                  value={t('Common.Button.Update')}
                 />
               </Form>
             );
           }}
         </Formik>
       </div>
-      <div className="sidebar-content-right">
+
+      {/* <div className="sidebar-content-right">
         <div className="btn btn-red">
           <Link to="#!">
             <Image iconName="trashIcon" />
-            {t('Comman.Button.DeleteAccount')}
+            {t('Common.Button.DeleteAccount')}
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default TeacherUserProfile;
+export default UserProfile;

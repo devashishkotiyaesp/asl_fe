@@ -52,3 +52,19 @@ export const getFormattedDate = (date: string | undefined) => {
 export const getMillisecondsToDate = (milliseconds: number) => {
   return addMilliseconds(new Date(), milliseconds);
 };
+
+export const getDateInDateMonthYear = (date: string) => {
+  if (date) {
+    const formattedDate = format(new Date(date), 'dd MMM, yyyy');
+    return formattedDate;
+  }
+};
+
+export const getTimeInHoursMinutes = (date: string) => {
+  const formattedTime = format(new Date(date), 'hh:mm a');
+  return formattedTime;
+};
+
+export const getDateFormate = (date: string) => {
+  return format(new Date(date), 'MMM d, yyyy');
+};

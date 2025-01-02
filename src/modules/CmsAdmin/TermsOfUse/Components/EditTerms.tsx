@@ -51,13 +51,13 @@ const EditTerms = ({ setFieldValue, values, setFieldTouched }: SectionProps) => 
                 <div className="table-of-content">
                   <h2>{t('Cms.privacyPolicy.content.title')}</h2>
                   <Button
-                    variants="black"
-                    // variants="primary"
+                    variants="PrimaryWoodLight"
                     onClickHandler={() => {
                       handleAddTerms(productArrayHelpers);
                     }}
                     className="gap-1 h-10"
                   >
+                    <Image iconName="plus" />
                     {t('Community.Table.Add')}
                   </Button>
                 </div>

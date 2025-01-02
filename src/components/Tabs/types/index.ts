@@ -2,11 +2,11 @@ import { IconTypes } from 'components/Icon/types';
 import { ReactNode } from 'react';
 
 export interface TabComponentProps {
-  current: number;
+  current: string;
   children: ReactNode;
   searchable?: boolean;
   onSearch?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onTabChange?: (tabIndex: number) => void;
+  onTabChange?: (tabIndex: string) => void;
   sideComponent?: JSX.Element | null;
 }
 export interface TabProps {
@@ -15,6 +15,8 @@ export interface TabProps {
   isActive?: boolean;
   onClick?: () => void;
   children?: ReactNode;
+  variant?: 'fill' | null;
+  uniqueKey: string;
 }
 
 export type TabColumnProps = {

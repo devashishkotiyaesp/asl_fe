@@ -1,0 +1,315 @@
+.arrow-up {
+  @apply relative z-2 -mt-13 pt-14 pointer-events-none;
+}
+.arrow-up .swiper-button:first-child,
+.arrow-up .swiper-button:last-child {
+  @apply pointer-events-auto absolute flex items-center justify-center z-1 top-0 cursor-pointer hover:opacity-80 right-0 left-unset w-11 h-11 bg-LightWood rounded-full;
+}
+.arrow-up .swiper {
+  @apply pointer-events-auto;
+}
+.arrow-up .swiper-button svg {
+  @apply w-6 h-6 text-PrimaryWood;
+}
+.arrow-up .swiper-button svg path {
+  @apply stroke-1;
+}
+.arrow-up .swiper-button:first-child::after,
+.arrow-up .swiper-button:last-child::after {
+  @apply text-base stroke-2 stroke-PrimaryWood text-PrimaryWood;
+}
+.arrow-up .swiper-button.swiper-button-disabled {
+  @apply opacity-100 bg-transparent cursor-not-allowed;
+}
+.arrow-up .swiper-button:first-child {
+  @apply right-16 rotate-180;
+}
+
+/* STEP 2 START */
+.filter-tab-wrap {
+  @apply flex flex-wrap;
+}
+.student-filter-inner {
+  @apply max-w-[650px] min-w-[650px];
+}
+.student-filter-title {
+  @apply pb-2.5 border-b border-solid border-LightGray;
+}
+.student-filter-title p {
+  @apply text-xl leading-12 font-medium text-black;
+}
+
+.filter-tab-list {
+  @apply pr-5 pt-5 border-r border-solid border-LightGray w-[200px];
+}
+.filter-tab-list ul {
+  @apply flex flex-col gap-1;
+}
+.filter-tab-list .filter-tab-list-item.active {
+  @apply bg-LightGray text-left;
+}
+.filter-tab-list .filter-tab-list-item {
+  @apply w-full px-2 py-2.5 text-base select-none text-black block cursor-pointer rounded-5px hover:bg-black/5 transition-all duration-300;
+}
+.filter-tab-list ul li {
+  @apply block;
+}
+.filter-tab-content {
+  @apply max-w-[calc(100%_-_200px)] pt-5 pl-5 flex-1;
+}
+.filter-checkbox-list {
+  @apply grid grid-cols-2 gap-4 mb-10;
+}
+.filter-tab-question .question-item {
+  @apply font-medium text-black;
+}
+.filter-tab-question .btn-wrap {
+  /* @apply justify-start; */
+}
+.course-slider {
+  @apply relative;
+}
+/* STEP 2 END */
+
+/* STUDENT COURSE VIEW START */
+.student-course .page-header {
+  @apply z-[120] relative;
+}
+.student-course-banner {
+  @apply relative h-[350px] z-1 overflow-hidden rounded-10px;
+}
+.student-course-banner::before {
+  @apply w-full h-full z-1 absolute content-[''] top-0 left-0 bg-gradient-to-t from-black to-black/10;
+}
+.student-course-banner > img {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}
+.student-course-content {
+  @apply z-1 px-5 absolute w-full bottom-5;
+}
+.student-course-tag {
+  @apply flex flex-wrap gap-2.5;
+}
+.student-course-tag > span {
+  @apply text-sm leading-12 px-1.5 py-1 rounded-5px bg-PrimaryYellow text-black border border-solid border-PrimaryYellow;
+}
+.student-course-tag > span:nth-child(even) {
+  @apply bg-white/10 text-white border-white/20;
+}
+.student-course-category {
+  @apply mt-4 flex gap-4;
+}
+.student-course-category > span {
+  @apply text-white text-base leading-none relative;
+}
+.student-course-category > span:not(:first-child)::before {
+  @apply absolute content-[''] w-1 h-1 bg-PrimaryYellow rounded-full top-1/2 -translate-y-1/2 -left-2.5;
+}
+.student-course-tab-wrap {
+  @apply bg-white rounded-5px;
+}
+.student-course-overview {
+  @apply flex flex-wrap;
+}
+.student-course-details {
+  @apply max-w-[calc(100%_-_380px)] w-full pr-10;
+}
+.student-course-sort-video {
+  @apply max-w-[380px] w-full relative;
+}
+.student-course-sort-video video {
+  @apply aspect-video;
+}
+.student-course-sort-video .video-overlay {
+  @apply absolute top-0 left-0 w-full h-full bg-black/50 z-1 text-white flex items-center justify-center rounded-xl;
+}
+.student-course-sort-video .video-overlay svg {
+  @apply w-12 h-12 cursor-pointer;
+}
+.student-course-overview-video {
+  @apply h-[270px] relative mb-5;
+}
+.student-course-sort-video video {
+  @apply h-full w-full object-cover rounded-xl relative;
+}
+.student-course-view h4 {
+  @apply text-xl font-semibold text-black mb-3;
+}
+.student-course-details h4 {
+  @apply block text-base uppercase font-normal text-black/50 leading-12;
+}
+.student-course-details p {
+  @apply text-base leading-normal text-black;
+}
+.student-course-details ul {
+  @apply mt-6 flex flex-wrap gap-2;
+}
+.student-course-details ul li {
+  @apply py-2.5 px-3 border border-solid border-LightWood bg-LightGray text-PrimaryWood inline-block rounded-full;
+}
+.sign-connect-title {
+  @apply text-black mb-2.5 text-2xl font-medium;
+}
+.sign-connect-wrap {
+  @apply flex gap-6;
+}
+.sign-connect-wrap .sign-connect-left {
+  @apply flex-1;
+}
+.sign-connect-wrap .sign-connect-left .img-wrap {
+  @apply h-[230px] w-full;
+}
+.sign-connect-wrap .sign-connect-left img {
+  @apply w-full h-full block object-cover object-left-top border border-LightGray border-solid rounded-5px;
+}
+.sign-connect-wrap .sign-connect-right {
+  @apply w-[230px];
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap {
+  @apply aspect-square relative flex items-center justify-center overflow-hidden rounded-5px;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap::before {
+  @apply absolute content-[''] w-full h-full left-0 top-0 bg-PrimaryWood/80;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted {
+  @apply before:opacity-50;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted .content {
+  @apply absolute flex flex-col gap-4 text-center items-center px-4;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted .content strong {
+  @apply block;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted .content .button,
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted .content span {
+  @apply static;
+}
+.sign-connect-wrap .sign-connect-right .quiz-wrap.attempted img {
+  @apply object-fill;
+}
+.sign-connect-wrap .sign-connect-right img {
+  @apply w-full h-full object-cover rounded-5px;
+}
+.sign-connect-wrap .sign-connect-right .button {
+  @apply absolute;
+}
+.student-course-list {
+  @apply border-t border-solid border-LightGray relative grid grid-cols-[320px_1fr] pr-6;
+}
+.student-course-module-card-wrap {
+  @apply pb-6;
+}
+.student-course-module-list {
+  @apply relative;
+}
+.student-course-module-list::before {
+  @apply absolute content-[''] right-6 top-0 h-full w-px bg-LightGray;
+}
+.student-course-list ul {
+  @apply flex flex-col gap-4 pt-5 pl-8 pr-6;
+}
+.student-course-list ul li {
+  @apply leading-none relative pl-6 hover:text-black flex items-center gap-1;
+}
+.student-course-list ul li .status-icon {
+  @apply rounded-full rotate-90 w-5 h-5 text-white bg-PrimaryYellow block absolute left-0 top-0;
+}
+.student-course-list ul li .status-icon.complete {
+  @apply bg-PrimaryGreen text-white p-0.5 rotate-0;
+}
+.student-course-list ul li .status-icon svg {
+  @apply w-full h-full;
+}
+.student-course-list ul li button,
+.student-course-list ul li span:not(.status-icon) {
+  @apply inline-block leading-normal text-sm text-PrimaryWood hover:text-black transition-all duration-300 cursor-pointer;
+}
+.student-course-list ul li .text {
+  @apply relative;
+}
+.student-course-list ul li .text svg {
+  @apply absolute -right-5 top-0.5 bg-white -rotate-45 rounded-full;
+}
+.student-course-lessons-title {
+  @apply text-base font-medium leading-12;
+}
+.student-course-lessons-inner {
+  @apply grid grid-cols-3 gap-2;
+}
+/* STUDENT COURSE VIEW END */
+
+/*  LESSON DETAILS START */
+.lesson-detail-banner {
+  @apply relative h-[230px] rounded-t-10px;
+}
+.lesson-detail-banner::before {
+  @apply absolute content-[''] top-0 left-0 w-full h-full bg-gradient-to-t from-black/80 rounded-t-10px;
+}
+.lesson-detail-banner img {
+  @apply w-full h-full object-cover block rounded-t-10px;
+}
+.lesson-detail-content {
+  @apply absolute left-0 bottom-0 px-4 pb-3;
+}
+.lesson-detail-content h2 {
+  @apply text-white text-2xl font-medium;
+}
+
+.lesson-detail-wrap {
+  @apply grid grid-cols-[350px_1fr] gap-5 p-5 pt-8 bg-white rounded-b-10px;
+}
+.lesson-detail-video {
+  @apply h-[245px] relative;
+}
+.lesson-detail-video .video-overlay {
+  @apply z-1 absolute bg-black/50 top-0 left-0 w-full h-full flex items-center justify-center rounded-10px;
+}
+.lesson-detail-video video {
+  @apply w-full h-full object-cover rounded-10px;
+}
+.lesson-detail-video .video-overlay svg {
+  @apply text-white w-10 h-10 cursor-pointer relative;
+}
+.lesson-detail-right {
+  @apply flex flex-col gap-y-4;
+}
+.lesson-detail-right p {
+  @apply text-black/50 text-base leading-normal;
+}
+.lesson-detail-right p a,
+.lesson-detail-right a {
+  @apply text-PrimaryBlue text-base leading-normal inline-block hover:text-black transition-all duration-300;
+}
+.lesson-detail-quizbox {
+  @apply h-[120px] flex items-center justify-center mt-4 relative rounded-10px;
+}
+.lesson-detail-quizbox::before {
+  @apply absolute content-[''] w-full h-full left-0 top-0 bg-PrimaryWood/80 rounded-10px;
+}
+.lesson-detail-quizbox img {
+  @apply w-full h-full object-cover rounded-10px;
+}
+.lesson-detail-quizbox button,
+.lesson-detail-quizbox span {
+  @apply absolute;
+}
+.lesson-detail-quizbox.attempted {
+  @apply before:opacity-20 h-[183px] items-center;
+}
+.lesson-detail-quizbox.attempted .content {
+  @apply absolute flex flex-col gap-4 items-center text-center;
+}
+.lesson-detail-quizbox.attempted .content strong {
+  @apply block;
+}
+.lesson-detail-quizbox.attempted .content .button,
+.lesson-detail-quizbox.attempted .content span {
+  @apply static;
+}
+/*  LESSON DETAILS END */
+
+/* TEACHER ALL COURSES */
+.teacher-course-list {
+  @apply grid grid-cols-3 gap-4;
+}
+/* TEACHER ALL COURSES */

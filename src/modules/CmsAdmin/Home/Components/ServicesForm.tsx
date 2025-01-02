@@ -76,8 +76,10 @@ const ServicesForm = ({ setFieldValue, values, setFieldTouched }: SectionProps) 
                       </div>
                       <InputField
                         name={`point_data_array[${index}].title`}
-                        label={t('Cms.homepage.story.whyChooseTitle')}
-                        placeholder={t('Cms.homepage.story.whyChoosePlaceholder')}
+                        label={t('Cms.homepage.services.serviceTitle')}
+                        placeholder={t(
+                          'Cms.homepage.services.serviceTitlePlaceholder'
+                        )}
                         isCompulsory
                       />
                       <ReactEditor

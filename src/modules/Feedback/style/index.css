@@ -80,7 +80,7 @@
   @apply flex gap-5 mt-4 mb-7;
 }
 .response-item label {
-  @apply w-16 font-semibold text-black;
+  @apply font-semibold text-black;
 }
 .response-item .response-item-text {
   @apply max-w-[calc(100%_-_64px)] flex-1 italic font-light text-black;

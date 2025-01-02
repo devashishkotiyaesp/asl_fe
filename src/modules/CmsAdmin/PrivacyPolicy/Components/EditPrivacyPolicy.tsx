@@ -55,13 +55,13 @@ const EditPrivacyPolicy = ({
                 <div className="table-of-content">
                   <h2>{t('Cms.privacyPolicy.content.title')}</h2>
                   <Button
-                    variants="black"
-                    // variants="primary"
+                    variants="PrimaryWoodLight"
                     onClickHandler={() => {
                       handleAddPolicy(productArrayHelpers);
                     }}
                     className="gap-1 h-10"
                   >
+                    <Image iconName="plus" />
                     {t('Community.Table.Add')}
                   </Button>
                 </div>

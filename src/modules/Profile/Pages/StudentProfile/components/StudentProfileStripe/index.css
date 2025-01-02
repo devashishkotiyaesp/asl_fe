@@ -19,17 +19,17 @@
   @apply text-lg leading-12 text-black;
 }
 .student-profile-stripe .right-part {
-  @apply flex justify-end ml-auto;
+  @apply flex justify-end ml-auto gap-4 h-fit items-center;
 }
 .student-profile-stripe .right-part .icon {
-  @apply w-14 h-14 bg-white/30 rounded-full text-black flex items-center justify-center mb-2.5;
+  @apply w-14 h-14 bg-white/30 rounded-full text-black flex items-center justify-center;
 }
 .student-profile-stripe .right-part .icon svg {
   @apply w-6 h-6;
 }
 .student-profile-stripe .right-part p,
 .student-profile-stripe .right-part span {
-  @apply text-lg text-black;
+  @apply text-base text-black;
 }
 .student-profile-stripe .right-part span {
   @apply text-PrimaryWood;

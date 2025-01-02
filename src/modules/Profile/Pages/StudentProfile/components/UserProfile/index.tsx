@@ -4,7 +4,7 @@ import InputField from 'components/FormElement/InputField';
 import TextArea from 'components/FormElement/TextArea';
 import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { Form, Formik } from 'formik';
 import { useAxiosPost } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
@@ -20,7 +20,7 @@ import { FormValues, UserProfileProps } from '../../types';
 
 import './index.css';
 
-const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
+const UserProfile: FC<UserProfileProps> = ({ setSidebar }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectModal = useModal();
@@ -38,6 +38,17 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
     email: user?.email || '',
     bio: user?.bio || '',
   };
+
+  // const displayProfileOption = [
+  //   {
+  //     label: t('Profile.Auth.Label.displayProfile.optionLabel.showProfile'),
+  //     value: 'true',
+  //   },
+  //   {
+  //     label: t('Profile.Auth.Label.displayProfile.optionLabel.hideProfile'),
+  //     value: 'false',
+  //   },
+  // ];
 
   const handleInterestToggle = useCallback((interest: string) => {
     setSelectedInterests((prev) =>
@@ -70,8 +81,8 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
       if (response.data) {
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
-            message: t('Comman.ToastMessage.Success.Update'),
+            variant: ToastVariant.SUCCESS,
+            message: t('Common.ToastMessage.Success.Update'),
             type: 'success',
             id: Date.now(),
           })
@@ -85,8 +96,8 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
     } catch (error) {
       dispatch(
         setToast({
-          variant: ToastVarient.ERROR,
-          message: t('Comman.ToastMessage.Error.Generic'),
+          variant: ToastVariant.ERROR,
+          message: t('Common.ToastMessage.Error.Generic'),
           type: 'error',
           id: Date.now(),
         })
@@ -113,8 +124,6 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
       )),
     [selectedInterests, handleInterestToggle]
   );
-
-  if (isSidebar !== 'edit') return null;
 
   return (
     <div className="sidebar-content-wrap">
@@ -178,6 +187,11 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
                 placeholder={t('Profile.Auth.Placeholder.Bio')}
                 rows={8}
               />
+              {/* <RadioButtonGroup
+                name="displayProfile"
+                options={displayProfileOption}
+                label={t('Profile.Auth.Label.displayProfile')}
+              /> */}
 
               <Link
                 className="reset-text"
@@ -207,7 +221,7 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
                 type="submit"
                 className="w-fit"
               >
-                {t('Comman.Button.Update')}
+                {t('Common.Button.Update')}
               </Button>
             </Form>
           )}
@@ -229,15 +243,15 @@ const UserProfile: FC<UserProfileProps> = ({ isSidebar, setSidebar }) => {
           <div className="learn-asl-select-wrap">
             {StudentLearningInterest.map((interest) => (
               <button
-                key={interest.value}
+                key={t(interest.value)}
                 type="button"
                 className={`learn-asl-select-item ${
-                  selectedInterests.includes(interest.value) ? 'active' : ''
+                  selectedInterests.includes(t(interest.value)) ? 'active' : ''
                 }`}
-                onClick={() => handleInterestToggle(interest.value)}
+                onClick={() => handleInterestToggle(t(interest.value))}
               >
-                <span className="check-name">{interest.value}</span>
-                {selectedInterests.includes(interest.value) && (
+                <span className="check-name">{t(interest.value)}</span>
+                {selectedInterests.includes(t(interest.value)) && (
                   <span className="check-icon">
                     <Image iconName="checkIcon" iconClassName="w-full h-full" />
                   </span>

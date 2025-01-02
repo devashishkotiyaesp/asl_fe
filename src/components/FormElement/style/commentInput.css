@@ -1,6 +1,19 @@
 .comment-input {
   @apply flex gap-2.5;
 }
+.comment-input-wrap.reply-input .input-wrap {
+  @apply border border-solid border-LightGray rounded-10px;
+}
+.comment-input:has(.reply-input) {
+  @apply mt-4;
+}
+.comment-input-wrap.reply-input .text-input {
+  @apply max-w-[calc(100%_-_90px)] pl-2.5;
+}
+.comment-input-wrap.reply-input .upload-media-icon,
+.comment-input-wrap.reply-input .capture-image-icon {
+  @apply -top-[36px];
+}
 .comment-input-wrap {
   @apply w-full max-w-[440px];
 }
@@ -13,6 +26,7 @@
 .comment-input-wrap .input-wrap {
   @apply relative bg-white rounded-10px transition-all duration-300 w-full;
 }
+
 .comment-input-wrap .input-wrap {
   @apply w-full;
 }
@@ -26,7 +40,13 @@
   @apply relative;
 }
 .comment-input-wrap .text-input {
-  @apply w-[calc(100%_-_60px)] h-full p-0 border-none min-h-10 rounded-10px;
+  @apply w-[calc(100%_-_80px)] h-full p-0 border-none min-h-10 rounded-10px;
+}
+.comment-input-wrap .input-wrap:has(.text-input:disabled) {
+  @apply bg-LightWood cursor-not-allowed opacity-50;
+}
+.comment-input-wrap .text-input:is(:disabled) {
+  @apply bg-transparent;
 }
 .comment-input-wrap .file-input-label {
   @apply absolute right-4 top-1/2 -translate-y-1/2 inline-flex cursor-pointer items-center justify-center w-30px h-30px rounded-full bg-LightWood text-PrimaryWood;
@@ -38,13 +58,20 @@
   @apply relative;
 }
 .comment-input form {
-  @apply flex max-w-[440px] w-full gap-4 items-center;
+  @apply flex max-w-[440px] w-full gap-4 items-start;
 }
 .comment-input .comment-input-wrap {
   @apply flex-1;
 }
+.comment-input .capture-image-icon,
 .comment-input .upload-media-icon {
-  @apply block absolute -top-[34px] right-2 p-1.5 w-30px h-30px bg-transparent bg-LightWood cursor-pointer active:scale-95 transition-all duration-300;
+  @apply rounded-full flex text-black/50 items-center justify-center absolute -top-[34px] right-2 p-1.5 w-30px h-30px bg-transparent bg-LightWood cursor-pointer active:scale-95 transition-all duration-300;
+}
+.comment-input .capture-image-icon svg {
+  @apply w-full h-full;
+}
+.comment-input .upload-media-icon {
+  @apply right-11;
 }
 .comment-file-list {
   @apply flex flex-wrap gap-2 mt-4 max-w-[440px];
@@ -100,6 +127,9 @@
 .reply-item {
   @apply flex flex-wrap gap-3 p-2.5 bg-white rounded-5px;
 }
+.reply-item.is-reported {
+  @apply bg-LightWood;
+}
 .reply-user-profile {
   @apply w-9 h-9 rounded-full;
 }
@@ -128,3 +158,9 @@
 .reply-box .topic-option {
   @apply ml-0 z-1;
 }
+/* .reply-box .topic-option:hover::after {
+  @apply pointer-events-auto;
+}
+.reply-box .topic-option::after {
+  @apply absolute content-[''] w-4 h-20 top-full right-2 pointer-events-none;
+} */

@@ -1,5 +1,5 @@
 import Header from 'components/AdminLayout/components/Header';
-import SiteLoader from 'components/Loaders/SiteLoader';
+import Loaders from 'components/Loaders';
 import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -15,7 +15,7 @@ const AdminLayout = () => {
       <div className={`admin-content ${isSidebarOpen ? 'show' : 'hide'}`}>
         <Header />
         <main className="style-scroll">
-          <Suspense fallback={<SiteLoader />}>
+          <Suspense fallback={<Loaders />}>
             <Outlet />
           </Suspense>
         </main>

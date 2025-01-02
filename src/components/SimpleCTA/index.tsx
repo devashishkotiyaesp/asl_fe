@@ -3,12 +3,12 @@ import Image from 'components/Image';
 import { Link } from 'react-router-dom';
 
 // ** Types **
-import { AboutCTAProps } from 'modules/Auth/pages/CMSAbout/types';
-import { CmsSectionProps } from 'modules/Auth/pages/HomeCMS/types';
+import { AboutCTAProps } from 'modules/Cms/pages/CMSAbout/types';
+import { CmsSectionProps } from 'modules/Cms/pages/HomeCMS/types';
 
 // ** Utils **
 import _ from 'lodash';
-import { formatCMSObjectData } from 'modules/Auth/pages/HomeCMS/helper';
+import { formatCMSObjectData } from 'modules/Cms/pages/HomeCMS/helper';
 import './index.css';
 
 const SimpleCTA = ({ aboutCta }: { aboutCta: CmsSectionProps[] }) => {

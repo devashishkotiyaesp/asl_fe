@@ -1,4 +1,5 @@
 import Button from 'components/Button/Button';
+import InputField from 'components/FormElement/InputField';
 import Image from 'components/Image';
 import { ConfirmationPopup } from 'components/Modal/ConfirmationPopup';
 import Table from 'components/Table/Table';
@@ -8,7 +9,9 @@ import { useModal } from 'hooks/useModal';
 import { t } from 'i18next';
 import { KeysEnum } from 'modules/CmsAdmin/constants';
 import { memo, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import {
   CommonSelectProps,
   CrewDataProps,
@@ -24,6 +27,7 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
   const [crewData, setCrewData] = useState<CrewDataProps>();
   const [limit, setLimit] = useState<number>(10);
   const { id } = useParams();
+  const { currentPage } = useSelector(currentPageSelector);
   const [sort, setSort] = useState<string>('-updated_at');
   const handleGetSection = async () => {
     const data = await getDiscussion(`/cms-page-section/${id}`, {
@@ -32,6 +36,8 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
         sort,
         limit,
         language: formLanguage,
+        fieldName: 'crew_members',
+        page: currentPage,
       },
     });
     setCrewData(data.data);
@@ -39,7 +45,7 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
 
   useEffect(() => {
     handleGetSection();
-  }, [formLanguage]);
+  }, [formLanguage, limit, sort, currentPage]);
 
   const columnData: ITableHeaderProps[] = [
     {
@@ -52,7 +58,7 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
       },
     },
     {
-      header: 'Name',
+      header: t('Table.Name'),
       name: 'name',
       cell: (props) => nameRender(props as unknown as ICrewItem),
       option: {
@@ -61,8 +67,7 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
       },
     },
     {
-      header: 'Designation',
-      name: 'like',
+      header: t('Cms.aboutUs.crew.designationTitle'),
       cell: (props) => designationRender(props as unknown as ICrewItem),
       option: {
         sort: true,
@@ -82,7 +87,7 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
 
   const designationRender = ({ field_value }: ICrewItem) => {
     const parsedFieldValue = field_value ? JSON.parse(field_value) : {};
-    return <div>{parsedFieldValue.username}</div>;
+    return <div>{parsedFieldValue.designation}</div>;
   };
   const actionRender = (props: ICrewItem) => {
     return (
@@ -117,16 +122,28 @@ const Crew = ({ setShowAddEditCrew, getEditId, formLanguage }: CrewTableProps) =
     <>
       <div className="left-small-column" />
       <div className="right-big-column">
+        <InputField
+          name="eyebrow_title"
+          label={t('Cms.homepage.story.eyebrowTitle')}
+          placeholder={t('Cms.homepage.story.eyebrowTitlePlaceholder')}
+          isCompulsory
+        />
+        <InputField
+          name="title"
+          label={t('Cms.homepage.story.whyChooseTitle')}
+          placeholder={t('Cms.homepage.story.whyChoosePlaceholder')}
+          isCompulsory
+        />
         <div>
           <Table
             headerData={columnData}
             loader={isLoading}
-            bodyData={crewData?.crew as any}
+            bodyData={crewData?.crew}
             pagination
             dataPerPage={limit}
             setLimit={setLimit}
-            totalPage={crewData?.totalPages}
-            dataCount={crewData?.totalCount}
+            totalPage={crewData?.lastPage}
+            dataCount={crewData?.count}
             setSort={setSort}
             sort={sort}
           />

@@ -1,12 +1,12 @@
 .radioButton {
-  @apply appearance-none w-4 h-4 bg-white rounded-full cursor-pointer transition-all active:scale-90 checked:bg-PrimaryWood checked:border-white checked:border-[4px] checked:border-solid ring-1 ring-LightGray checked:ring-PrimaryWood;
+  @apply appearance-none translate-y-0.5 w-4 h-4 bg-white rounded-full cursor-pointer transition-all active:scale-90 checked:bg-PrimaryWood checked:border-white checked:border-[4px] checked:border-solid ring-1 ring-PrimaryWood/50 checked:ring-PrimaryWood;
 }
 .radio-option {
   @apply flex;
 }
 
 .radio-option span:not(.input-wrap) {
-  @apply text-base flex font-medium left-4 text-primary max-w-[calc(100%_-_16px)] w-full ps-1.5;
+  @apply text-base flex font-medium left-4 text-primary max-w-[calc(100%_-_16px)] w-full ps-2;
 }
 .option-wrapper {
   @apply flex flex-col gap-y-1;

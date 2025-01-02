@@ -45,15 +45,12 @@ const slice = createSlice({
       const { user } = action.payload;
       if (user) {
         state.user = action.payload.user;
-        state.isAuthenticated = true;
       } else {
         state.user = null;
-        state.isAuthenticated = false;
       }
     },
     setLogoutData(state: AuthSliceType) {
       state.user = null;
-      state.isAuthenticated = false;
     },
   },
 });

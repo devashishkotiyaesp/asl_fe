@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from 'components/Button/Button';
+import Checkbox from 'components/FormElement/CheckBox';
 import Image from 'components/Image';
 import NoDataFound from 'components/NoDataFound';
 import Pagination from 'components/Pagination/Pagination';
 import { ITableHeaderProps, ITableProps } from 'components/Table/types';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import { customRandomNumberGenerator } from 'utils';
@@ -32,9 +34,14 @@ function Table<DataType>({
   headerTitle,
   headerExtra,
   islastRowOnRight = true,
+  tableRowClick,
+  handleSelectAll,
+  isAllSelected,
 }: Readonly<ITableProps<DataType>>) {
   const [isSortAsc, setIsSortAsc] = useState<boolean>();
   const { currentPage } = useSelector(currentPageSelector);
+  const tablLazyCount = [...Array(dataPerPage > 0 ? dataPerPage : 10).keys()];
+  const { t } = useTranslation();
 
   const renderTableHeader = (val: ITableHeaderProps, index: number) => {
     if (Object.keys(val).length) {
@@ -56,6 +63,9 @@ function Table<DataType>({
       className={`td-child ${islastRowOnRight ? 'group-last/tbl:justify-end' : ''} `}
     >
       {val?.header}
+      {val.isCheckBox && (
+        <Checkbox check={isAllSelected} onChange={() => handleSelectAll?.()} />
+      )}
       {val?.option?.sort ? (
         <Button
           className="w-4 h-4 ms-1 opacity-0 group-hover/tbl:opacity-100"
@@ -165,10 +175,11 @@ function Table<DataType>({
         ) : (
           ''
         )}
-        <div className={`overflow-auto ${tableHeightClassName ?? ''}`}>
+        <div className={` ${tableHeightClassName ?? ''}`}>
+          {/* overflow-auto */}
           <table className={`datatable-main w-full ${width ?? ''}`}>
             {/* sticky top-0 z-1 */}
-            <thead className={tableHeaderClass ?? 'sticky top-0'}>
+            <thead className={tableHeaderClass ?? 'custom-table-header'}>
               <tr>
                 {headerData.map((val: ITableHeaderProps, index) =>
                   renderTableHeader(val, index)
@@ -178,20 +189,24 @@ function Table<DataType>({
 
             <tbody className="rounded">
               {loader && (
-                <tr className="bg-white h-[calc(60dvh)]">
-                  <td
-                    className="!border-t-0 !border-b-0"
-                    colSpan={headerData?.length ?? 10}
-                  >
-                    <div className="relative w-full flex items-center">
-                      <div className="flex justify-center items-center h-full w-full">
-                        <span
-                          className={`animate-spin h-12 w-12 inline-block border-4 border-solid border-gray-300/50 border-l-gray-300 rounded-full `}
-                        />
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                <>
+                  {tablLazyCount.map((_, i) => {
+                    return (
+                      <tr key={`Key_${i + 1}`}>
+                        {headerData.map((_, j) => {
+                          return (
+                            //  colSpan={headerData?.length}
+                            <td key={`Key_${j + 1}`}>
+                              <div className="relative w-full flex items-center">
+                                <div className="lazy w-full h-10 rounded-lg" />
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </>
               )}
               {!loader && bodyData.length === 0 && (
                 <tr>
@@ -204,7 +219,13 @@ function Table<DataType>({
                 <>
                   {bodyData.map((row: any, index) => {
                     return (
-                      <tr key={`tr_${row?.id ?? customRandomNumberGenerator()}`}>
+                      <tr
+                        role="button"
+                        onClick={() => {
+                          tableRowClick?.(row);
+                        }}
+                        key={`tr_${row?.id ?? customRandomNumberGenerator()}`}
+                      >
                         {headerData?.map((columnCell) => {
                           if (Object.keys(columnCell).length) {
                             return (
@@ -263,8 +284,12 @@ function Table<DataType>({
           <div className="pagination-show-count">
             <p className="">
               {isDataAvailable
-                ? `showing ${startRecord} to ${endRecord} of ${dataCount} records`
-                : ``}
+                ? t('Cms.Pagination.Text', {
+                    START: startRecord,
+                    END: endRecord,
+                    TOTAL: dataCount,
+                  })
+                : ''}
             </p>
           </div>
           {pagination && totalPage ? (

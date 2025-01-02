@@ -1,5 +1,5 @@
 .button {
-  @apply flex items-center justify-center gap-2 cursor-pointer w-fit text-base leading-tight py-2.5 px-5 text-center rounded-5px border border-solid transition-all duration-300 focus:ring-2 focus:ring-offset-2 select-none active:scale-95;
+  @apply flex items-center justify-center gap-1 cursor-pointer w-fit text-base leading-tight py-2.5 px-5 text-center rounded-5px border border-solid transition-all duration-300 focus:ring-2 focus:ring-offset-2 select-none active:scale-95;
 }
 
 .button.black {

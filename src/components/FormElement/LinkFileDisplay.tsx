@@ -1,7 +1,7 @@
 import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import { REACT_APP_API_URL } from 'config';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { otherSize } from 'constants/filesupport.constant';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
@@ -85,7 +85,7 @@ const LinkFileDisplay = ({
       const fileTypeRandom = customRandomNumberGenerator();
       dispatch(
         setToast({
-          variant: ToastVarient.ERROR,
+          variant: ToastVariant.ERROR,
           message: `${t('ToastMessage.validFileTypeText')} ${EnumFileType.Document}`,
           type: 'error',
           id: fileTypeRandom,
@@ -102,7 +102,7 @@ const LinkFileDisplay = ({
           } ${t('ToastMessage.validFileSizeText')} ${fileSize} MB`,
           type: 'error',
           id: sizeRandom,
-          variant: ToastVarient.ERROR,
+          variant: ToastVariant.ERROR,
         })
       );
 

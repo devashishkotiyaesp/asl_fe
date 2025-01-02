@@ -1,0 +1,16 @@
+.support-request-query-input {
+  @apply flex flex-wrap gap-3 pb-5 border-b border-solid border-LightWood mt-4;
+}
+.support-request-query-input .textarea {
+  @apply w-full;
+}
+.support-request-query-input .action-button {
+  @apply mt-0;
+}
+
+.support-request-query-input .action-button.black {
+  @apply bg-black text-white hover:bg-black/10 hover:text-black;
+}
+.support-request-query-input .action-button {
+  @apply mt-7;
+}

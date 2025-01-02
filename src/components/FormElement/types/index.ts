@@ -62,13 +62,14 @@ export interface IReactSelect {
   warnings?: Array<number | string>;
   isPaginated?: boolean; // new prop
   loadOptions?: (page?: number, debounceSearch?: string) => Promise<IOptions[]>;
+  handleCreateOption?: (value: string) => void;
 }
 
 // checkbox
 export type ICheckboxProps = {
   id?: string;
   text?: string;
-  name: string;
+  name?: string;
   parentClass?: string;
   disabled?: boolean;
   value?: string | number;
@@ -86,7 +87,7 @@ export type ICheckboxProps = {
 // radio
 export type IRadioProps = {
   id?: string;
-  name: string;
+  name?: string;
   margin?: string;
   value?: string;
   onClick?: () => void;
@@ -102,14 +103,14 @@ export type IRadioProps = {
   selectedValue?: string | number;
   isLoading?: boolean;
   isDisabled?: boolean;
-  isChekckbox?: boolean;
+  isCheckbox?: boolean;
   setSelectedValue?: React.Dispatch<React.SetStateAction<string>>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 // input
 export interface IInputProps {
-  name: string;
+  name?: string;
   id?: string;
   placeholder?: string;
   className?: string;
@@ -165,9 +166,10 @@ export interface ITextAreaProps {
   loaderType?: 'Skeleton' | 'Spin';
 }
 
-type FieldValueTye = string | number | File | Array<File | string> | null;
+export type FieldValueTye = string | number | File | Array<File | string> | null;
 
 export interface IInputFileField {
+  isCapture?: boolean;
   fileInputIcon?: IconTypes;
   selectedFileIcon?: IconTypes;
   labelClass?: string;
@@ -248,3 +250,23 @@ export type LinkDisplayProps = {
   isBlack?: boolean;
   externalURL?: string;
 };
+
+// Phone Input Field
+export interface IPhoneInputField {
+  label?: string;
+  name: string;
+  disabled?: boolean;
+  placeholder?: string;
+  labelClass?: string;
+  parentClass?: string;
+  isCompulsory?: boolean;
+  setFieldTouched?: (
+    field: string,
+    isTouched?: boolean,
+    shouldValidate?: boolean
+  ) => void;
+  setFieldError?: (field: string, message?: string) => void;
+  isLoading?: boolean;
+  isDisabled?: boolean;
+  isUpdateForm?: boolean;
+}

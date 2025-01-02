@@ -1,5 +1,3 @@
-import { OrganizationTypeEnum } from 'constants/common.constant';
-
 export type RoleType = {
   id: number;
   name: string;
@@ -31,21 +29,31 @@ export type AuthUserType = {
   id?: string;
   first_name?: string;
   last_name?: string;
+  full_name?: string;
+  provider_type?: string;
   email?: string;
   profile_image?: string;
+  video_link?: string;
   date_format?: string;
   fcmToken?: string;
+  is_show_profile?: boolean;
+  is_user_banned?: boolean;
   sub?: string;
   bio?: string;
   address?: string;
   asl_level_id?: string;
   interests?: string[];
+  role_id: string;
+  last_sign_id?: string;
+  role?: {
+    role: string;
+  };
 };
 
 export type OrganizationType = {
   id?: string;
   user_id: string;
-  organization_type: OrganizationTypeEnum;
+  organization_type: string;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date | null;
@@ -56,6 +64,17 @@ export type AuthSliceType = {
   user?: Partial<AuthUserType | null>;
   isAuthenticated?: boolean;
   organization?: OrganizationType[];
+};
+
+export type DropdownType = {
+  label: string;
+  value: string;
+};
+
+export type CourseCommonType = {
+  aslLevel: DropdownType[];
+  courseType: DropdownType[];
+  courseCategory: DropdownType[];
 };
 
 export type PaginationType = {
@@ -81,10 +100,11 @@ export type LanguageType = {
   language: string;
   allLanguages?: AllLanguages[];
   defaultLanguage: string;
+  languageDetail?: AllLanguages;
 };
 
 export type AllLanguages = {
-  id: number;
+  id: string;
   name: string;
   short_name: string;
   slug?: string;
@@ -114,4 +134,24 @@ export type CmsLanguageStateType = {
   prevFormLanguage?: string;
   isNextClicked?: boolean;
   isPrevClicked?: boolean;
+};
+
+export type CoursesLanguagesType = {
+  slug_language_pair: SlugLanguagePair[];
+  course_languages: string[];
+};
+
+export interface SlugLanguagePair {
+  language_id: string;
+  slug: string;
+}
+export interface IVocabulary {
+  id: string;
+  name: string;
+  sign_photo: string;
+}
+
+export type VocabSliceType = {
+  vocabularies: IVocabulary[];
+  currentPage: number;
 };

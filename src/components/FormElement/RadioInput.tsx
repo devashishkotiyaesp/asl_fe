@@ -13,14 +13,15 @@ const RadioButtonGroup = ({
   readOnly,
   selectedValue,
   className,
-  isChekckbox,
+  isCheckbox,
+  onChange,
 }: IRadioProps) => {
-  const [field] = useField(name);
+  const [field] = name ? useField(name) : [];
   const formik = useFormikContext();
 
   const handleRadioChange = (option: string) => {
-    if (!readOnly) {
-      field.onChange({ target: { value: option, name } });
+    if (!readOnly && name) {
+      field?.onChange({ target: { value: option, name } });
       formik.setFieldTouched(name, true, false);
     }
   };
@@ -37,7 +38,7 @@ const RadioButtonGroup = ({
           <label
             htmlFor={`${name}_${index}`}
             key={`radio_${index + 1}`}
-            className={`radio-option ${isChekckbox && 'checkbox'}`}
+            className={`radio-option ${isCheckbox && 'checkbox'}`}
           >
             <span className="input-wrap">
               <input
@@ -51,14 +52,16 @@ const RadioButtonGroup = ({
                     ? field.value === option.value
                     : option.value === selectedValue
                 }
-                onChange={() => handleRadioChange(option.value as string)}
+                onChange={
+                  onChange || (() => handleRadioChange(option.value as string))
+                }
               />
             </span>
             <span className="">{option.label}</span>
           </label>
         ))}
       </div>
-      {formik ? <ErrorMessage name={name} /> : ''}
+      {formik && name ? <ErrorMessage name={name} /> : ''}
     </div>
   );
 };

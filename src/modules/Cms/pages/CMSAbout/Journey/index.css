@@ -1,0 +1,36 @@
+.journey-sec {
+}
+.journey-sec .wrapper > * {
+  @apply w-1/2;
+}
+.journey-sec .section-title {
+  @apply max-w-[485px];
+}
+.journey-sec .right-part .img-part img {
+  @apply w-full h-auto object-cover rounded-2xl;
+}
+.journey-sec .section-title .content-date {
+  @apply text-xl font-semibold text-PrimaryWood mt-6 block;
+}
+
+.journey-path {
+  @apply relative px-14 flex justify-between mt-24;
+}
+.journey-path::before {
+  @apply absolute content-[''] w-full h-0.5 bg-LightGray left-0 top-[9px] z-1;
+}
+.journey-path-item {
+  @apply w-fit text-center relative z-1;
+}
+.journey-path-circle {
+  @apply w-5 h-5 mx-auto mb-6 rounded-full bg-white block shadow-xl shadow-black/50 border-4 border-solid border-PrimaryWood;
+}
+.journey-path-item span {
+  @apply font-semibold text-black text-xl;
+}
+.journey-path-item .logo-rounded {
+  @apply absolute -top-3.5 left-0 right-0 mx-auto w-12 h-12 rounded-full scale-0 transition-all duration-300;
+}
+.journey-path-item.active .logo-rounded {
+  @apply scale-100;
+}

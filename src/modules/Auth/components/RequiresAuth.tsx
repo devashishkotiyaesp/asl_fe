@@ -1,28 +1,37 @@
-import SiteLoader from 'components/Loaders/SiteLoader';
-import { Suspense, useEffect } from 'react';
-import { ErrorBoundary as ErrorBoundaryDependency } from 'react-error-boundary';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { currentPageCount } from 'reduxStore/slices/paginationSlice';
-import ErrorBoundary from '../pages/ErrorBoundary';
+import Loaders from 'components/Loaders';
+import { Roles } from 'constants/common.constant';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getCurrentUser } from 'reduxStore/slices/authSlice';
+import { getAuthToken } from 'reduxStore/slices/tokenSlice';
 
-type Props = {
-  children: JSX.Element;
-};
-
-const RequiresAuth = ({ children }: Props) => {
-  const location = useLocation();
-  const dispatch = useDispatch();
+const RequiresAuth = ({
+  children,
+  // fetchUser,
+}: {
+  children: React.ReactNode;
+  // fetchUser: () => Promise<void>;
+}) => {
+  const authToken = useSelector(getAuthToken);
+  const userData = useSelector(getCurrentUser);
 
   useEffect(() => {
-    dispatch(currentPageCount({ currentPage: 1 }));
-  }, [location, dispatch]);
+    // For Global BG color
+    const element = document.getElementsByTagName('body')[0];
+    if (
+      userData?.role?.role === Roles.Student ||
+      userData?.role?.role === Roles.Teacher
+    ) {
+      element.style.backgroundColor = '#f2f2f2';
+    }
+    // For Global BG color
+  }, [userData]);
 
   return (
-    // Setup error boundary to capture runtime errors
-    <ErrorBoundaryDependency FallbackComponent={ErrorBoundary}>
-      <Suspense fallback={<SiteLoader />}>{children}</Suspense>
-    </ErrorBoundaryDependency>
+    <div>
+      {authToken && !userData ? <Loaders type="SiteLoader" /> : <></>}
+      {children}
+    </div>
   );
 };
 

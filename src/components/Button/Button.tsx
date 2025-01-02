@@ -60,25 +60,29 @@ const Button = ({
           type={type}
           style={customStyle}
           disabled={disabled || isLoading}
-          className={`${tooltipText ? 'relative group' : ''} 
+          className={`${className ?? ''} 
           ${variants ? getButtonClasses(variants) : ''}  
+          ${tooltipText ? 'relative group' : ''} 
           ${small ? ' !py-1.5 !px-2.5 !font-normal ' : ''} 
           ${isIcon ? ' !px-2.5 h-fit !font-normal ' : ''} 
           ${isLoading ? 'flex justify-center items-center gap-0.5' : ''}  
-          ${className ?? ''}`}
+          `}
           onClick={onClickHandler}
           name={name}
         >
           {value}
           {children}
-          {isLoading && <Loaders className="ms-1" />}
+          {isLoading && <Loaders />}
         </button>
       ) : (
         <span
           style={customStyle}
-          className={` ${tooltipText ? 'relative group' : ''} ${
-            variants ? getButtonClasses(variants) : ''
-          } ${isIcon ? ' !px-2.5 h-fit !font-normal ' : ''}  ${className ?? ''}`}
+          className={` ${tooltipText ? 'relative group' : ''} 
+          ${small ? ' !py-1.5 !px-2.5 !font-normal ' : ''} 
+          ${variants ? getButtonClasses(variants) : ''} 
+          ${isIcon ? ' !px-2.5 h-fit !font-normal ' : ''}  
+          ${className ?? ''}
+          `}
         >
           {value}
           {children}

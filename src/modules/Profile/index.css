@@ -7,7 +7,8 @@
 .sidebar-wrap ul {
   @apply border-r border-solid border-LightGray h-full;
 }
-.sidebar-link-item a {
+.sidebar-link-item a,
+.sidebar-link-item > span {
   @apply relative px-2.5 py-4 flex items-center gap-2.5 text-base text-PrimaryWood leading-none hover:bg-LightGray transition-all duration-300;
 }
 .sidebar-link-item.active a::before {
@@ -42,4 +43,37 @@
 }
 .student-profile-form {
   @apply flex flex-col gap-5 mb-2.5;
+}
+
+.feedback-submitted {
+  @apply text-center w-full;
+}
+
+.status-lable-wrap {
+  @apply flex gap-2 mb-1.5 flex-wrap;
+}
+.status-lable-wrap .status-label {
+  @apply rounded-full text-xs;
+}
+.ticket-support-accordion .accordion-item {
+  @apply !bg-[#f9f9f9] border border-solid border-LightWood/50;
+}
+.support-accordion .accordion-content .inner {
+  @apply bg-white rounded-lg p-5 mt-5;
+}
+
+.support-accordion .accordion-content .inner p {
+  @apply text-black;
+}
+
+.request-raise-date {
+  @apply pt-2 mt-1 border-t border-solid border-LightWood/50 flex gap-2;
+}
+
+.support-accordion .accordion-content .inner img {
+  @apply max-w-[400px] my-4 aspect-video;
+}
+
+.support-accordion .accordion-content .inner > img {
+  @apply w-full h-[400px] object-cover rounded-2xl;
 }

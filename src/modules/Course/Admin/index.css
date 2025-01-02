@@ -1,0 +1,281 @@
+.select-course-type-wrap {
+  @apply flex flex-col gap-y-3;
+}
+.select-course-type-item {
+  @apply cursor-pointer hover:opacity-60 px-5 py-3 bg-LightGray flex items-center text-PrimaryWood rounded-5px transition-all duration-300;
+}
+.select-course-type-item.active {
+  @apply bg-LightWood hover:opacity-100;
+}
+.select-course-type-name {
+  @apply text-black ml-18px text-base;
+}
+.checkbox-design {
+  @apply w-4 h-4 border relative border-solid border-PrimaryWood rounded ml-auto flex items-center justify-center;
+}
+.checkbox-design::before {
+  @apply absolute top-[3px] content-[''] w-2.5 h-1.5 border-r-2 border-t-2 border-solid border-white rotate-[135deg] opacity-0;
+}
+.select-course-type-item.active .checkbox-design {
+  @apply bg-PrimaryWood border-PrimaryWood before:opacity-100;
+}
+.module-acc-title {
+  @apply flex flex-wrap relative pl-6;
+}
+.module-acc-title .title {
+  @apply text-black mr-auto text-xl leading-12 block font-semibold h-fit;
+}
+.module-acc-title > .dnd-icon {
+  @apply absolute top-1 left-0 opacity-30 cursor-grab select-none;
+}
+.module-acc-title .btn-wrap {
+  @apply flex gap-2 mr-4 mt-0;
+}
+.module-acc-arrow {
+  @apply cursor-pointer my-auto hover:bg-PrimaryWood hover:text-white rotate-90 pl-0.5 flex items-center justify-center w-30px h-30px text-PrimaryWood rounded-full border-2 border-solid border-PrimaryWood transition-all duration-300;
+}
+.module-acc-arrow svg {
+  @apply stroke-2;
+}
+.module-acc-status {
+  @apply block w-fit relative pl-4 text-lg h-fit mr-4 my-auto text-PrimaryGreen;
+}
+.module-acc-status::before {
+  @apply w-2 h-2 bg-PrimaryGreen rounded-full left-0 top-1/2 -translate-y-1/2 absolute content-[''];
+}
+.module-name-wrap {
+  @apply flex gap-4 items-end;
+}
+.module-name-wrap .btn-wrap {
+  @apply flex items-center gap-4 mt-0;
+}
+.module-name-wrap .btn-wrap button,
+.module-name-wrap .btn-wrap span {
+  @apply whitespace-nowrap;
+}
+.module-acc-item {
+  @apply flex flex-col gap-6 transition-all duration-300;
+}
+.module-acc-content {
+  @apply flex flex-col gap-3 transition-all duration-300 pl-6;
+}
+.module-acc-item:has([data-collpase='collpase']) {
+  @apply gap-0;
+}
+.module-inner-card {
+  @apply mt-5;
+}
+.course-materials-inner-card {
+  @apply relative pl-10;
+}
+.course-materials-inner-card .c-card__body {
+  @apply flex flex-col gap-4;
+}
+.course-materials-inner-card .dnd-icon {
+  @apply absolute top-5 left-4 cursor-grab active:cursor-grabbing select-none;
+}
+.lesson-entry-media {
+  @apply grid grid-cols-3 gap-4 mt-5 bg-LightGray p-4 rounded-lg;
+}
+.lesson-entry-media-caption {
+  @apply flex flex-col gap-y-2 pt-7;
+}
+.lesson-entry-card .c-card__body {
+  @apply relative;
+}
+.lesson-entry-card .c-card__body .dnd-icon {
+  @apply absolute top-5 -left-4 opacity-30 cursor-grab select-none;
+}
+.lesson-entry-card {
+  @apply pl-9;
+}
+.lesson-entry-card-delete {
+  @apply absolute uppercase tracking-wide text-sm top-3 right-5 text-red-600 underline underline-offset-2 hover:opacity-60 transition-all duration-300 active:scale-90 z-1 cursor-pointer select-none font-medium;
+}
+.module-add-head-wrap {
+  @apply flex justify-between mb-5 items-center;
+}
+.module-add-head-title {
+  @apply text-black text-xl font-semibold;
+}
+.select-module-wrap {
+  @apply flex justify-center gap-4 mt-14;
+}
+.select-module-item {
+  @apply w-fit border border-solid border-LightWood p-5 rounded-5px transition-all duration-300;
+}
+.select-module-item label {
+  @apply select-none;
+}
+.select-module-item:has(input:checked) {
+  @apply bg-LightWood;
+}
+.module-card-action {
+  @apply mt-5 flex justify-end gap-3;
+}
+
+.add-lesson-filed-group {
+  @apply grid grid-cols-3 gap-3 bg-LightGray p-5 rounded-5px w-full;
+}
+.add-lesson-filed-group .inner-group {
+  @apply flex flex-col gap-y-3 mt-7;
+}
+.course-week-inner-card .dndIcon {
+  @apply absolute top-5 left-4;
+}
+.course-week-inner-card {
+  @apply relative pl-10;
+}
+.course-week-inner-card .c-card__body {
+  @apply flex flex-col gap-4;
+}
+.course-week-inner-card .filed-wrap {
+  @apply flex gap-4;
+}
+/* add Module modal style */
+.module-add-filed-wrap {
+  @apply flex flex-col gap-y-2 mb-[-60px];
+}
+.module-add-filed-item {
+  @apply p-5 rounded-5px flex bg-LightGray relative;
+}
+.module-add-filed-counter {
+  @apply text-black text-lg mr-auto;
+}
+.module-add-filed-inner {
+  @apply max-w-[calc(100%_-_30px)] w-full;
+}
+
+.module-add-question-wrap {
+  @apply flex gap-2;
+}
+.module-add-question-text {
+  @apply flex-1 mr-auto;
+}
+.module-add-question-file {
+  @apply max-w-[150px] mr-auto;
+}
+.module-add-question-select .select-wrap {
+  @apply w-full block;
+}
+.module-add-question-option-wrap {
+  @apply mt-4 flex gap-2 flex-wrap;
+}
+.module-add-question-option {
+  @apply grid grid-cols-2 gap-2 flex-1;
+}
+.module-add-question-option.column-single {
+  @apply grid-cols-1;
+}
+.module-add-question-option.column-four {
+  @apply grid-cols-4;
+}
+.module-add-question-select {
+  @apply max-w-[200px];
+}
+.module-add-question-correct {
+  @apply flex gap-2;
+}
+.module-add-question-order-wrap {
+  @apply relative pl-28 grid grid-cols-4 gap-2 w-full;
+}
+.module-add-question-order-item.text {
+  @apply absolute top-0 left-0 w-28 text-sm flex flex-col text-center text-black;
+}
+.module-add-question-order-item.text span {
+  @apply opacity-50;
+}
+.module-add-fill-blank {
+  @apply w-full;
+}
+.module-add-fill-blank-question {
+  @apply flex gap-2;
+}
+.module-add-fill-blank-select-wrap {
+  @apply flex gap-3 flex-1;
+}
+.module-add-fill-blank-select {
+  @apply flex gap-3 mt-2;
+}
+.modual-add-answer-list {
+  @apply w-full flex flex-col gap-y-2;
+}
+.modual-add-answer-item {
+  @apply w-full border border-solid border-LightWood p-3 rounded-5px transition-all duration-300;
+}
+.modual-add-answer-item label {
+  @apply select-none;
+}
+.modual-add-answer-item:has(input:checked) {
+  /* @apply bg-LightWood; */
+}
+.week-list-wrap {
+  @apply bg-LightWood p-2.5 rounded-5px col-span-2;
+}
+.week-list-wrap p {
+  @apply text-base leading-12 mb-3;
+}
+.week-list {
+  @apply flex gap-4 flex-wrap justify-between;
+}
+.comment-input-wrap .inputField {
+  @apply pr-12;
+}
+.comment-input-wrap:has(.input-file-wrapper .uploaded-media-wrap) .inputField {
+  @apply pr-4;
+}
+.module-add-question-option .comment-input-wrap {
+  @apply relative flex gap-1.5;
+}
+
+.module-add-question-option .upload-media-icon {
+  @apply absolute bg-LightWood text-PrimaryWood w-8 h-8 top-1.5 right-[63px] p-1.5;
+}
+.module-add-question-option .media-icon {
+  @apply w-[45px] h-[45px];
+}
+.module-add-question-option .media-icon img {
+  @apply object-cover;
+}
+.module-add-question-option .drop-box {
+  @apply w-fit;
+}
+.module-add-question-option .uploaded-media-wrap {
+  @apply mt-0 w-fit;
+}
+.module-add-question-option .button.Red {
+  @apply w-11 h-11;
+}
+.module-add-question-option .file-input-button-style {
+  @apply bg-black/80 w-full h-full rounded left-0 top-0 border-none p-2 opacity-0 hover:opacity-100 transition-all duration-300;
+}
+
+.module-add-question-file--secondary {
+  @apply !w-auto;
+}
+
+.module-add-question-file--secondary .input-file-wrapper {
+  @apply flex items-center;
+}
+
+.module-add-question-file--secondary .media-icon {
+  @apply w-[45px] h-[45px] m-0;
+}
+
+.module-add-question-file--secondary .media-icon img {
+  @apply object-cover;
+}
+
+.module-add-question-file--secondary .uploaded-media-wrap {
+  @apply m-0;
+}
+
+.module-add-question-file--secondary .file-input-button-style {
+  @apply top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-0 duration-300 ease-in-out;
+}
+
+.module-add-question-file--secondary
+  .uploaded-media-wrap:hover
+  .file-input-button-style {
+  @apply opacity-100;
+}

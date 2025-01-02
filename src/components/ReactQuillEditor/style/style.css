@@ -7,12 +7,12 @@
 .ql-toolbar.ql-snow {
   @apply rounded-t-xl !border-borderColor;
 }
-.ql-container {
-  @apply rounded-b-xl !border-borderColor;
-}
 /* sd{
-@apply min-h-[284px];
-} */
+  @apply min-h-[284px];
+  } */
+.ql-container {
+  @apply h-auto;
+}
 .quill {
   @apply !h-unset bg-white rounded-lg !border-0;
 }
@@ -97,4 +97,17 @@
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
   @apply text-PrimaryWood;
+}
+
+.ql-header {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-top: 0.25px;
+  font-weight: 500;
+}
+.ql-snow.ql-toolbar button.ql-divider {
+  @apply flex w-auto leading-normal text-sm text-[#444];
+}
+.ql-divider:after {
+  content: 'Add Divider -';
 }

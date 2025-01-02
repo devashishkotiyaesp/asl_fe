@@ -12,26 +12,25 @@ interface IData {
   expiresIn: number;
 }
 
-const DB_NAME = 'ProlevenDB';
+const DB_NAME = 'aslDb';
 
 export const getDBInstance = (): Promise<IDBDatabase | null> => {
   return new Promise((resolve) => {
-    const request = indexedDB.open(DB_NAME);
+    try {
+      const request = indexedDB?.open(DB_NAME);
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        Object.values(DBStores).forEach((store) => {
+          if (!db.objectStoreNames.contains(store) && DBStoresKEY[store]) {
+            db.createObjectStore(store, { keyPath: DBStoresKEY[store] });
+          }
+        });
+      };
 
-    request.onupgradeneeded = () => {
-      const db = request.result;
-      Object.values(DBStores).forEach((store) => {
-        if (!db.objectStoreNames.contains(store) && DBStoresKEY[store]) {
-          db.createObjectStore(store, { keyPath: DBStoresKEY[store] });
-        }
-      });
-    };
-
-    request.onsuccess = () => resolve(request.result);
-
-    request.onerror = () => {
+      resolve(request.result);
+    } catch (error) {
       resolve(null);
-    };
+    }
   });
 };
 

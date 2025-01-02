@@ -8,6 +8,7 @@ interface CardProps {
   headerExtra?: React.ReactNode;
   className?: string;
   headerClass?: string;
+  bigTitle?: boolean;
   isGray?: boolean;
   minimal?: boolean;
   backArrow?: boolean;
@@ -21,6 +22,7 @@ const Card = ({
   className,
   isGray,
   minimal,
+  bigTitle,
   headerClass,
   backArrow,
   onClickData,
@@ -32,7 +34,9 @@ const Card = ({
       {title || headerExtra ? (
         <div className={`c-card__header  ${headerClass}`}>
           {title ? (
-            <div className="c-card__title flex items-center gap-[14px] leading-none">
+            <div
+              className={`c-card__title flex items-center gap-[14px] leading-none ${bigTitle ? 'big-text' : ''}`}
+            >
               {backArrow && (
                 <Button
                   className="w-6 h-6 rounded-full bg-PrimaryWood flex items-center justify-center"

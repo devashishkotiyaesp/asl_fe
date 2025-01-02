@@ -1,0 +1,12 @@
+.gift-card-list {
+  @apply pt-2.5;
+}
+.gift-card-list__title {
+  @apply mb-6;
+}
+.gift-card-list__title h2 {
+  @apply text-black text-[40px] font-semibold;
+}
+.gift-card-list .list-wrap {
+  @apply grid grid-cols-3 gap-30px;
+}

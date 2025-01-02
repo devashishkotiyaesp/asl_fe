@@ -1,0 +1,344 @@
+/* STEP 1 START */
+.course-progress-list {
+  @apply grid grid-cols-3 gap-5;
+}
+.title-link {
+  @apply inline-block underline text-lg leading-none font-medium text-PrimaryWood hover:text-black;
+}
+.student-dashboard-part-title {
+  @apply mt-10 pb-0;
+}
+.arrow-up {
+  @apply relative z-2 -mt-9 pt-14;
+}
+.arrow-up .swiper-button-prev,
+.arrow-up .swiper-button-next,
+.arrow-up .image-swiper-button-prev,
+.arrow-up .image-swiper-button-next {
+  @apply absolute flex items-center justify-center z-1 top-0 cursor-pointer hover:opacity-80 right-0 left-unset w-11 h-11 bg-LightWood rounded-full;
+}
+.arrow-up .image-swiper-button-prev svg,
+.arrow-up .image-swiper-button-next svg {
+  @apply w-6 h-6 text-PrimaryWood;
+}
+.arrow-up .swiper-button svg path {
+  @apply stroke-1;
+}
+.arrow-up .swiper-button-prev::after,
+.arrow-up .swiper-button-next::after {
+  @apply text-base stroke-2 stroke-PrimaryWood text-PrimaryWood;
+}
+.arrow-up .swiper-button-disabled {
+  @apply opacity-100 bg-transparent cursor-not-allowed;
+}
+.arrow-up .swiper-button-prev,
+.arrow-up .image-swiper-button-prev {
+  @apply right-16 rotate-180;
+}
+.student-dashboard-topic-slider .swiper-slide {
+  @apply h-auto;
+}
+.student-dashboard-topic-slider .topic-card {
+  @apply h-full;
+}
+.student-dictionary-sign-list {
+  @apply grid-cols-4 mt-0 grid gap-30px;
+}
+.student-dictionary-sign-item span {
+  @apply bg-white rounded-t-10px;
+}
+.student-dictionary-sign-item {
+  @apply w-full;
+}
+.student-dictionary-sign-item img {
+  @apply max-h-[238px];
+}
+.student-dictionary-sign-item {
+  @apply bg-LightGray rounded-10px relative;
+}
+.student-dictionary-sign-item .lock-icon {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 w-12 h-12 flex items-center justify-center text-white rounded-full border border-solid border-white;
+}
+.student-dictionary-sign-item.isLocked {
+  @apply cursor-not-allowed;
+}
+.student-dictionary-sign-item.isLocked::before {
+  @apply block absolute content-[''] left-0 top-0 w-full h-full rounded-10px bg-black/20 backdrop-blur-md;
+}
+.student-dictionary-sign-item span {
+  @apply block font-semibold text-black text-center py-2.5;
+}
+.student-dictionary-sign-item img {
+  @apply rounded-b-10px max-h-[240px] w-full h-full object-cover;
+}
+.student-dictionary-sign .btn {
+  @apply text-center mt-14;
+}
+/* STEP END 1 END */
+
+/* STEP 2 START */
+.filter-tab-wrap {
+  @apply flex flex-wrap;
+}
+.student-filter-inner {
+  @apply max-w-[650px] min-w-[650px];
+}
+.student-filter-title {
+  @apply pb-2.5 border-b border-solid border-LightGray;
+}
+.student-filter-title p {
+  @apply text-xl leading-12 font-medium text-black;
+}
+.filter-tab-list {
+  @apply pr-5 pt-5 border-r border-solid border-LightGray w-[200px];
+}
+.filter-tab-list ul {
+  @apply flex flex-col;
+}
+.filter-tab-list .filter-tab-list-item.active {
+  @apply bg-LightGray;
+}
+.filter-tab-list .filter-tab-list-item {
+  @apply px-6 py-2.5 text-lg text-black block cursor-pointer rounded-5px hover:bg-black/5 transition-all duration-300;
+}
+.filter-tab-list ul li {
+  @apply block;
+}
+.filter-tab-content {
+  @apply max-w-[calc(100%_-_200px)] pt-5 pl-5 flex-1;
+}
+.filter-checkbox-list {
+  @apply grid grid-cols-2 gap-4 mb-10;
+}
+.filter-tab-question .question-item {
+  @apply font-medium text-black;
+}
+.filter-tab-question .btn-wrap {
+  @apply justify-start;
+}
+.your-course-slider .arrow-up {
+  @apply -mt-9 pt-14;
+}
+.course-slider {
+  @apply relative;
+}
+/* STEP 2 END */
+
+/* STUDENT COURSE VIEW START */
+.student-course .page-header {
+  @apply z-[120];
+}
+.student-course-view .btn-wrap {
+  @apply mt-0;
+}
+.student-course-banner {
+  @apply h-[380px] w-full relative rounded-10px;
+}
+.student-course-banner::before {
+  @apply absolute content-[''] w-full h-full bg-gradient-to-t from-black rounded-10px;
+}
+.student-course-banner > img {
+  @apply w-full h-full object-cover rounded-10px;
+}
+.student-course-banner .content {
+  @apply absolute bottom-0 left-0 w-full px-8 pb-6 z-1 flex justify-between items-end;
+}
+.student-course-title-user {
+  @apply flex flex-col gap-4;
+}
+.student-course-title-user .user-profile-name {
+  @apply text-xl text-white underline underline-offset-4 font-medium;
+}
+.student-course-title-user .user-profile-image {
+  @apply w-9 h-9;
+}
+.student-course-banner-title {
+  @apply text-white font-semibold text-[28px];
+}
+.student-course-enroll-date {
+  @apply flex items-center gap-2.5 text-white font-medium text-base leading-none;
+}
+.student-course-enroll-date .check-icon {
+  @apply w-5 h-5 rounded-full bg-PrimaryGreen p-0.5;
+}
+.student-course-enroll-date .check-icon svg {
+  @apply w-full h-full text-white;
+}
+.student-course-tab-base {
+  @apply bg-white p-11 rounded-10px;
+}
+
+.student-course-details {
+}
+.student-course-view h4 {
+  @apply text-xl font-semibold text-black mb-3;
+}
+.student-course-details p {
+  @apply text-black/50;
+}
+.student-course-details ul {
+  @apply mt-6 flex flex-wrap gap-2;
+}
+.student-course-details ul li {
+  @apply py-2.5 px-3 bg-LightGray text-PrimaryWood inline-block rounded-full;
+}
+
+.student-course-overview {
+  @apply pt-7 mt-7 border-t border-solid border-LightGray;
+}
+.student-course-overview ul {
+  @apply list-disc pl-5 flex flex-col gap-2;
+}
+.student-course-overview-video .video-overlay {
+  @apply absolute top-0 left-0 w-full h-full bg-black/50 z-1 text-white flex items-center justify-center rounded-xl;
+}
+.student-course-overview-video .video-overlay svg {
+  @apply w-12 h-12 cursor-pointer;
+}
+.student-course-overview-video {
+  @apply h-[270px] relative;
+}
+.student-course-overview-video video {
+  @apply h-full w-full object-cover rounded-xl relative;
+}
+.student-course-module-wrap .swiper-slide {
+  @apply w-fit px-5 py-2 bg-LightGray border-r border-solid border-PrimaryWood/30 last:border-r-0 first:rounded-l-5px last:rounded-r-5px;
+}
+.student-course-module-wrap .swiper-slide.active {
+  @apply bg-primary text-white;
+}
+
+.student-course-module-tab-slider {
+  @apply flex items-center gap-2 mt-5;
+}
+.student-course-module-tab-slider .swiper {
+  @apply flex-1 rounded-5px;
+}
+.student-course-module-tab-slider .swiper-button.image-swiper-button-prev {
+  @apply rotate-180;
+}
+.student-course-module-tab-slider .swiper-button.swiper-button-disabled {
+  @apply hidden;
+}
+.student-course-module-tab-slider .swiper-button {
+  @apply bg-PrimaryYellow cursor-pointer active:scale-90 select-none w-9 h-9 rounded-5px flex items-center justify-center text-white transition-all duration-300;
+}
+.student-course-lesson-wrap {
+  @apply mt-8;
+}
+.student-course-lesson-title {
+  @apply text-xl text-black mb-3 leading-12;
+}
+.student-course-lesson-list {
+  @apply grid grid-cols-3 gap-1.5;
+}
+.vocab-practice-box {
+  @apply h-full bg-LightWood flex items-center justify-center rounded-10px;
+}
+/* STUDENT COURSE VIEW END */
+
+/* STUDENT COURSE BOOKING START */
+.student-course-booking .left-part {
+  @apply w-[calc(67%_-_10px)];
+}
+.student-course-booking .right-part {
+  @apply w-[calc(33%_-_10px)];
+}
+.student-course-booking-form {
+  @apply grid grid-cols-2 gap-4;
+}
+.booking-details-card {
+  @apply bg-white py-6 px-5 rounded-10px;
+}
+.booking-details-card h4 {
+  @apply text-black text-xl font-semibold leading-12 mb-3;
+}
+.booking-details-info {
+  @apply flex flex-wrap mb-4;
+}
+.booking-details-img {
+  @apply w-24 h-24 rounded-5px;
+}
+.booking-details-img img {
+  @apply w-full h-full object-cover rounded-5px;
+}
+.booking-details-content {
+  @apply max-w-[calc(100%_-_96px)] pl-3 flex flex-col gap-1.5;
+}
+.booking-details-type {
+  @apply w-fit bg-primary text-white inline-flex items-center px-2 py-1 rounded-full text-xs leading-12 gap-1;
+}
+.booking-details-type svg {
+  @apply text-PrimaryGreen w-4 h-4;
+}
+.booking-details-title {
+  @apply text-black text-base leading-12 font-medium;
+}
+.booking-details-address {
+  @apply text-sm leading-12 text-black/70 flex flex-col gap-1.5;
+}
+.booking-details-address em {
+  @apply text-black not-italic;
+}
+.booking-details-price {
+  @apply flex justify-between;
+}
+.booking-details-price .price-lable {
+  @apply text-base text-black/70;
+}
+.booking-details-price .price {
+  @apply text-lg font-semibold text-black;
+}
+.booking-policy-text {
+  @apply mt-7;
+}
+.booking-policy-text p {
+  @apply text-base leading-normal text-black/70;
+}
+/* STUDENT COURSE BOOKING END */
+
+/* TEACHER PROFILE FROM STUDENT ACCOUNT START */
+.teacher-profile-wrap {
+  @apply flex items-center;
+}
+.teacher-profile-wrap .image {
+  @apply w-70px h-70px rounded-full;
+}
+.teacher-profile-wrap .image img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.teacher-profile-wrap .teacher-profile-content {
+  @apply max-w-[calc(100%_-_70px)] w-full pl-5;
+}
+.teacher-profile-wrap .teacher-profile-content h1 {
+  @apply text-black text-4xl leading-12 font-semibold;
+}
+.teacher-profile-wrap .teacher-profile-content p {
+  @apply text-base font-medium text-PrimaryWood;
+}
+.teacher-profile-bio {
+  @apply mt-6;
+}
+.teacher-profile-bio p {
+  @apply text-sm leading-normal text-black/60;
+}
+.teacher-profile-bio-video {
+  @apply mt-10;
+}
+.teacher-profile-bio-video {
+  @apply h-[330px] aspect-video;
+}
+.teacher-profile-bio-video iframe,
+.teacher-profile-bio-video video {
+  @apply w-full h-full object-cover;
+}
+.teacher-profile-category {
+  @apply bg-LightGray p-5 rounded-5px mt-30px;
+}
+.teacher-profile-category-list {
+  @apply grid grid-cols-4 gap-3;
+}
+.teacher-profile-category-title {
+  @apply text-black mb-2.5 text-xl font-medium;
+}
+/* TEACHER PROFILE FROM STUDENT ACCOUNT END */

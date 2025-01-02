@@ -1,7 +1,7 @@
 import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import { REACT_APP_BACKEND_URL } from 'config';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { IMAGE_SUPPORTED_FORMATS } from 'constants/filesupport.constant';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -64,7 +64,11 @@ const ProfilePictureUpload = ({
           url = await getUrl(value);
         } else {
           setIsFromDatabase(true);
-          url = `${(REACT_APP_BACKEND_URL as string) + value}`;
+          if (value.toString().includes('https://')) {
+            url = value;
+          } else {
+            url = `${(REACT_APP_BACKEND_URL as string) + value}`;
+          }
         }
       } else if (value instanceof File) {
         url = window.URL.createObjectURL(value);
@@ -122,7 +126,7 @@ const ProfilePictureUpload = ({
                 const random = customRandomNumberGenerator();
                 dispatch(
                   setToast({
-                    variant: ToastVarient.ERROR,
+                    variant: ToastVariant.ERROR,
                     message: `Image type is invalid`,
                     type: 'error',
                     id: random,
@@ -137,7 +141,7 @@ const ProfilePictureUpload = ({
 
                   dispatch(
                     setToast({
-                      variant: ToastVarient.ERROR,
+                      variant: ToastVariant.ERROR,
                       message: `Profile image size should be less than 5 mb`,
                       type: 'error',
                       id: random,

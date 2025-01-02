@@ -1,7 +1,3 @@
-export interface TeacherUserProfileProps {
-  isSidebar: string;
-}
-
 export interface EditInitialValues {
   first_name: string;
   last_name: string;
@@ -9,9 +5,14 @@ export interface EditInitialValues {
   email: string;
   organization?: string;
   bio: string;
+  video_link?: string;
 }
 
 export interface AxiosResponse {
   data?: Record<string, any>;
   error?: string;
+}
+
+export interface UserProfileProps {
+  setSidebar: (value: string) => void;
 }

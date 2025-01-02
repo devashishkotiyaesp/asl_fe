@@ -24,7 +24,7 @@ export const CommunityValidation = () => {
         is: (val: string) => val === CommunityType.DISCUSSION,
         then: () => Yup.string().required(t('Community.Course.Required')),
       }),
-    media: Yup.string(),
+    media: Yup.string().nullable(),
   });
 };
 
@@ -33,7 +33,6 @@ export const ConversationValidation = () => {
   return Yup.object().shape({
     description: Yup.string()
       .trim()
-      .required(t('Community.Description.Required'))
       .test(
         'contains-meaningful-text',
         t('Community.Description.Invalid'),
@@ -42,6 +41,5 @@ export const ConversationValidation = () => {
           return textWithoutTags?.trim() !== '';
         }
       ),
-    media: Yup.string(),
   });
 };

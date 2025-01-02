@@ -11,7 +11,7 @@ const TopBarLayout: FC = () => {
   return (
     <div className="">
       <Header />
-      <div className="overflow-auto mt-[100px] style-scroll max-h-[calc(100dvh_-_100px)]">
+      <div className="site-wrapper ">
         {/* {children} */}
         <Outlet />
       </div>

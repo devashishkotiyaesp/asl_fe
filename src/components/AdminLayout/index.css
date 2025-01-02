@@ -1,8 +1,11 @@
 .dasboard-layout {
   @apply flex h-100dvh;
 }
+.admin-header {
+  @apply sticky top-0 z-3;
+}
 .sidebar {
-  @apply w-[300px] transition-all duration-300 bg-white border-r border-solid border-LightWood/80;
+  @apply fixed top-0 left-0 w-[300px] transition-all duration-300 bg-white border-r border-solid border-LightWood/80;
 }
 .sidebar.hide {
   @apply w-[95px];
@@ -11,7 +14,10 @@
   @apply w-[calc(100%_-_300px)] ml-auto transition-all duration-300;
 }
 .admin-content main {
-  @apply px-5 pt-5 bg-LightGray max-h-[calc(100dvh_-_80px)] overflow-auto;
+  @apply pb-5 bg-LightGray pt-20;
+}
+.admin-content main > *:not(.page-header) {
+  @apply px-5;
 }
 .admin-content.hide {
   @apply w-[calc(100%_-_95px)];
@@ -64,9 +70,8 @@
 .sidebar-list_item.has-menu a .icon-more {
   @apply ml-auto;
 }
-
 .admin-header__inner {
-  @apply px-5 py-3 flex items-center justify-between bg-white relative z-2;
+  @apply px-5 py-3 flex items-center justify-between bg-white relative z-2 min-h-20;
 }
 
 .admin-content {
@@ -85,7 +90,7 @@
   @apply w-2 h-2 rounded-full bg-PrimaryWood border-2 border-solid border-LightWood absolute top-0.5 right-1;
 }
 .header-profile {
-  @apply w-13 h-13 ml-3 cursor-pointer bg-LightWood border-2 border-solid border-black rounded-full;
+  @apply w-12 h-12 ml-3 cursor-pointer bg-LightWood border-2 border-solid border-black rounded-full;
 }
 .header-profile img {
   @apply w-full h-full object-cover rounded-full;

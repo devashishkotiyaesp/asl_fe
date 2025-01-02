@@ -14,7 +14,7 @@
   @apply border border-solid border-LightWood w-[170px] h-24 rounded-5px relative;
 }
 .media-icon *:not(button) {
-  @apply !object-cover;
+  /* @apply !object-cover; */
 }
 .upload-media-icon {
   @apply inline-block text-black bg-LightGray rounded-full w-11 h-11 p-2.5;

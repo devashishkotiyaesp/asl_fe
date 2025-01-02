@@ -12,9 +12,9 @@ const WhyChooseUsForm = ({ setFieldValue, values }: SectionProps) => {
       <div className="left-small-column">
         <DropZone
           className="xl:max-w-[330px]"
-          label={t('Cms.homepage.banner.imageLabel')}
+          label={t('Cms.homepage.imageLabel')}
           name="banner_image"
-          SubTitle={t('Cms.homepage.banner.imageInnerText')}
+          SubTitle={t('Cms.homepage.imageLabel')}
           setValue={setFieldValue}
           value={values?.banner_image}
           acceptTypes="image/*"

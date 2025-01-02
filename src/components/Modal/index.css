@@ -40,3 +40,16 @@ a.confirmation-text-extra {
 .confirmation-text-extra {
   @apply text-sm leading-12 inline-block font-semibold text-primary/80 transition-all duration-300;
 }
+/* LOGOUT MODAL STYLE */
+.confirmation-wrap {
+  @apply text-center;
+}
+.confirmation-wrap .logout-icon {
+  @apply w-20 h-20 mb-5 bg-LightGray text-PrimaryWood flex items-center justify-center rounded-full mx-auto;
+}
+.confirmation-wrap .logout-title {
+  @apply text-2xl font-semibold text-black mb-2.5;
+}
+.confirmation-wrap .logout-desc {
+  @apply text-sm text-black/50;
+}

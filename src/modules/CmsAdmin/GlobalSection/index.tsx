@@ -1,22 +1,26 @@
+import Breadcrumbs from 'components/Breadcrumbs';
+import Button from 'components/Button/Button';
 import Card from 'components/Card';
+import Image from 'components/Image';
 import PageHeader from 'components/PageHeader';
 import { REACT_APP_API_URL } from 'config';
 import { LanguagesEnum } from 'constants/common.constant';
 import { AdminNavigation } from 'constants/navigation.constant';
 import { useAxiosGet } from 'hooks/useAxios';
 import { t } from 'i18next';
+import 'modules/CmsAdmin/styles/index.css';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useLanguage } from 'reduxStore/slices/languageSlice';
+import { capitalizeFirstCharacter } from 'utils';
 import { ActionNameEnum, GlobalSection } from '../constants';
 import AppDownloadForm from './Components/AppDownloadForm';
 import CommonSection from './Components/CommonSection';
 import CtaTwoForm from './Components/CtaTwoFrom';
 import DynamicWrapper from './Components/DynamicWrapper';
 import Footer from './Components/Footer';
-import './index.css';
-import { LangueKeyValueProps, ResponseDataProps } from './types';
+import { BannerDynamicProps, LangueKeyValueProps, ResponseDataProps } from './types';
 
 const CMSGlobalAdmin = () => {
   const [activeSection, setActiveSection] = useState(GlobalSection()?.[0].value);
@@ -102,17 +106,39 @@ const CMSGlobalAdmin = () => {
       <PageHeader
         title={t('Cms.globalSection.title')}
         url={AdminNavigation.cms_management.view.path}
-      />
+      >
+        <Breadcrumbs
+          items={[
+            {
+              label: t('Cms.pageHeader.Management.Title'),
+              url: '/page-list',
+            },
+            {
+              label: t('Cms.globalSection.title'),
+              url: '/',
+            },
+          ]}
+          variant="arrow"
+        />
+      </PageHeader>
       <div className="content-base">
-        <div className="step-wrapper flex items-center">
+        <div className="step-wrapper">
           {allLanguages?.map((lang, index) => {
             return (
               <div
                 key={lang.id}
-                className={`step-item ${index === activeLanguage ? 'active' : ''}`}
+                className={`step-item ${index <= activeLanguage ? 'active' : ''}`}
               >
-                <span className="step-item__number">{index + 1}</span>
-                <span className="step-item__languages"> {lang.name}</span>
+                {index >= activeLanguage ? (
+                  <span className="step-item__number">{index + 1}</span>
+                ) : (
+                  <span className="step-item__number">
+                    <Image iconClassName="w-10 h-10" iconName="checkIcon" />
+                  </span>
+                )}
+                <span className="step-item__languages">
+                  {capitalizeFirstCharacter(lang.name)}
+                </span>
               </div>
             );
           })}
@@ -120,19 +146,19 @@ const CMSGlobalAdmin = () => {
         <div className="cms-page-bar-content-wrap">
           <div className="page-bar">
             <div className="page-bar__title">
-              <span>{t('Cms.homepage.sectionsTitle')}</span>
+              <span>{t('Cms.globalSection.title')}</span>
             </div>
             <nav className="page-bar__list">
               {GlobalSection()?.map((data) => {
                 return (
                   <ul key={`section_${data.value}`}>
                     <li className="page-bar__item">
-                      <span
-                        onClick={() => handleTabClick(data.value)}
+                      <Button
+                        onClickHandler={() => handleTabClick(data.value)}
                         className={data.value === activeSection ? 'active' : ''}
                       >
                         {data.label}
-                      </span>
+                      </Button>
                     </li>
                   </ul>
                 );
@@ -160,7 +186,9 @@ const CMSGlobalAdmin = () => {
               allLanguages={allLanguages}
               cmsId={id}
               BannerFormWithDynamicProps={
-                renderFormComponent() as unknown as (props: any) => JSX.Element
+                renderFormComponent() as unknown as (
+                  props: BannerDynamicProps
+                ) => JSX.Element
               }
               activeSection={activeSection}
               isLoading={isLoading}

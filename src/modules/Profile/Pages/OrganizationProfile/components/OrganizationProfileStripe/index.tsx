@@ -18,7 +18,6 @@ const OrganizationProfileStripe: FC<OrganizationProfileStripeProps> = ({
   const user = useSelector(getCurrentUser);
   const ResetPasswordModal = useModal();
 
-  const fullName = `${user?.first_name || ''} ${user?.last_name || ''}`.trim();
   return (
     <div className="organization-profile-stripe">
       <div className="top-part">
@@ -43,7 +42,7 @@ const OrganizationProfileStripe: FC<OrganizationProfileStripeProps> = ({
       </div>
       <div className="bottom-part">
         <div className="org-details">
-          <p>{fullName}</p>
+          <p>{user?.first_name}</p>
           <span>
             <Image iconName="mail" />
             {user?.email}

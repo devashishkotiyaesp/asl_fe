@@ -1,0 +1,46 @@
+.refer-sec {
+}
+.refer-sec .light-text {
+  @apply text-base font-medium mt-4 mb-6 block text-PrimaryWood/70;
+}
+.refer-sec .wrapper > * {
+  @apply w-1/2;
+}
+.refer-sec .section-title ul {
+  @apply list-decimal pl-6 flex flex-col gap-3;
+}
+.refer-sec .section-title ul li {
+  @apply text-base font-medium text-black/70;
+}
+.refer-sec .wrapper .img-wrap {
+  @apply max-w-[420px] ml-auto;
+}
+.refer-sec .wrapper .img-wrap {
+  @apply w-full h-auto object-contain;
+}
+
+.refer-sec .refet-copy {
+  @apply mt-10 pt-10 border-t border-dashed border-black/20;
+}
+.refer-sec .refet-copy .label {
+  @apply text-black mb-2 text-base font-medium block;
+}
+.link-box {
+  @apply p-4 border border-solid border-LightGray rounded-lg flex gap-4 items-center;
+}
+
+.link-box > span {
+  @apply line-clamp-1 flex-1 text-sm font-medium;
+}
+.link-box a {
+  @apply active:scale-90;
+}
+.link-box svg {
+  @apply text-PrimaryWood cursor-pointer;
+}
+.refer-social {
+  @apply grid grid-cols-4 gap-4 mt-4;
+}
+.refer-social-item {
+  @apply flex items-center justify-center bg-LightGray h-70px hover:bg-LightWood transition-all duration-300 rounded-10px;
+}

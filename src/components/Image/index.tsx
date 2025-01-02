@@ -39,6 +39,7 @@ const Image = (props: IImageProps) => {
 
   useEffect(() => {
     setIsLoading(true);
+    setFetchError(false);
     setImageURL(src || '');
     setIsLoading(false);
   }, [src, height, width, serverPath]);
@@ -51,16 +52,19 @@ const Image = (props: IImageProps) => {
             className={`block ${imgClassName}`}
             src="/images/no-image.png"
             alt={`${alt ?? src}`}
+            height={height}
+            width={width}
           />
         );
       }
-
       return (
         <img
           className={`${!isImageLoaded ? 'hidden' : 'block'} ${imgClassName}`}
           src={
             isFromDataBase
-              ? `${(REACT_APP_BACKEND_URL as string) + imageURL}`
+              ? imageURL.toString().includes('https://')
+                ? (imageURL as string)
+                : `${(REACT_APP_BACKEND_URL as string) + imageURL}`
               : (imageURL as string)
           }
           alt={`${alt ?? src}`}

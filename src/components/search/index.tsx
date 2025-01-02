@@ -1,14 +1,15 @@
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/FormElement/ErrorMessage';
 import Image from 'components/Image';
-import { RefObject } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './index.css';
 
 interface SearchInputProps {
   placeholder?: string;
   value?: string | number;
   onSearch?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlurOut?: React.FocusEventHandler<HTMLInputElement> | undefined;
+  onBlurOut?: React.FocusEventHandler<HTMLInputElement>;
   onClear?: () => void;
   parentClass?: string;
   IconparentClass?: string;
@@ -17,6 +18,10 @@ interface SearchInputProps {
   isSearchIcon?: boolean;
   loading?: boolean;
   name?: string;
+  IsFilter?: boolean;
+  SearchBarChildren?:
+    | React.ReactNode
+    | ((setFilterVisible: (filterVisible: boolean) => void) => React.ReactNode);
 }
 
 const SearchComponent = ({
@@ -32,11 +37,34 @@ const SearchComponent = ({
   isSearchIcon = true,
   loading = false,
   name,
+  IsFilter,
+  SearchBarChildren,
 }: SearchInputProps) => {
+  const [filterVisible, setFilterVisible] = useState(false);
+
+  const { t } = useTranslation();
+  const filterRef = useRef<HTMLDivElement>(null);
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+      setFilterVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (filterRef) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [filterRef]);
+
   return (
     <>
       <div
-        className={`search-bar ${parentClass ?? ''}  ${loading ? 'lazy' : ''}`}
+        className={`search-bar ${parentClass ?? ''} ${IsFilter && 'search-filter'} ${loading ? 'lazy' : ''}`}
         ref={ref}
       >
         {isSearchIcon && (
@@ -46,7 +74,7 @@ const SearchComponent = ({
         )}
         <input
           type="search"
-          placeholder={placeholder}
+          placeholder={placeholder || t('InputSearchPlaceholder')}
           name={name ?? 'search'}
           value={value}
           onBlur={onBlurOut}
@@ -56,9 +84,30 @@ const SearchComponent = ({
         />
 
         {value && (
-          <Button onClickHandler={onClear} className="searc-bar__clear">
+          <Button onClickHandler={onClear} className="search-bar__clear">
             <Image iconName="crossIcon" iconClassName="w-full h-full" />
           </Button>
+        )}
+
+        {IsFilter && (
+          <div className="search-bar__filter z-1" ref={filterRef}>
+            <Button
+              onClickHandler={() => {
+                setFilterVisible(!filterVisible);
+              }}
+              className="search-bar__filter-button"
+            >
+              <Image iconName="filter" />
+            </Button>
+            {filterVisible && (
+              // <div className="searchbar-filter-box">{SearchBarChildren}</div>
+              <div className="searchbar-filter-box">
+                {typeof SearchBarChildren === 'function'
+                  ? SearchBarChildren(setFilterVisible)
+                  : SearchBarChildren}
+              </div>
+            )}
+          </div>
         )}
       </div>
       {name && <ErrorMessage name={name} />}

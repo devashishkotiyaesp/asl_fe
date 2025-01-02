@@ -1,5 +1,5 @@
 .no-data-sec {
-  @apply !p-0 flex flex-col justify-center text-center min-h-[calc(100dvh_-_100px)];
+  @apply !px-0 !py-10 flex flex-col justify-center text-center min-h-[calc(100dvh_-_100px)];
 }
 .no-data-sec .inner {
   @apply h-full flex flex-col items-center justify-center;

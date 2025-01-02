@@ -1,0 +1,76 @@
+.select-create-user-wrap {
+  @apply p-30px bg-LightGray text-center min-h-[410px] rounded-5px;
+}
+.select-create-user-title {
+  @apply text-black text-[21px] leading-none font-semibold;
+}
+
+.select-create-user {
+  @apply flex flex-wrap justify-center gap-30px mt-14;
+}
+.user-type-name {
+  @apply my-2.5 text-base text-black;
+}
+.select-create-user-icon-box {
+  @apply w-[148px] transition-all duration-300 aspect-square bg-white rounded-10px flex items-center justify-center text-PrimaryWood;
+}
+.select-create-user-icon-box svg {
+  @apply w-20 h-20;
+}
+.select-create-user-item {
+  @apply select-none cursor-pointer;
+}
+.select-create-user-item:has(input:checked) .select-create-user-icon-box {
+  @apply bg-PrimaryWood text-white;
+}
+.select-create-user-item .checkbox-wrap {
+  @apply justify-center;
+}
+.add-user-type-form {
+  @apply grid grid-cols-2 gap-5 max-w-[900px] mx-auto bg-white rounded-10px p-5;
+}
+.manage-user-filter-box label {
+  @apply whitespace-nowrap;
+}
+.manage-user-filter-box > div {
+  @apply border-b border-solid border-PrimaryWood/30 last:border-0 py-3 px-3 first:pt-0 last:pb-0;
+}
+.manage-user-filter-box {
+  @apply flex flex-col -mx-2.5;
+}
+
+/* STUDENT PROFILE PRE$VIEW  */
+.student-profile-preview {
+  @apply flex justify-between bg-LightGray p-30px rounded-10px;
+}
+.student-profile-preview .right-part {
+  @apply flex flex-col items-end justify-between;
+}
+.student-profile-image {
+  @apply flex items-center gap-5;
+}
+.student-profile-image .image-wrap {
+  @apply w-[125px] h-[125px] border border-solid border-LightWood rounded-full overflow-hidden;
+}
+.student-profile-image .image-wrap img {
+  @apply w-full h-full object-cover;
+}
+.student-profile-name {
+  @apply max-w-[190px] text-[34px] leading-12 font-semibold text-black;
+}
+.student-profile-status {
+  @apply flex gap-2 items-center;
+}
+.student-profile-created {
+  @apply flex flex-col text-right gap-1;
+}
+.student-profile-created p {
+  @apply text-black text-base leading-12;
+}
+.student-profile-created p span:first-child {
+  @apply text-PrimaryWood inline-block mr-1;
+}
+.student-profile-status-icon {
+  @apply w-12 h-12 flex items-center justify-center bg-LightWood rounded-full text-PrimaryWood;
+}
+/* STUDENT PROFILE PRE$VIEW  */

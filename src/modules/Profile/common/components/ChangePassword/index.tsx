@@ -2,9 +2,10 @@ import Button from 'components/Button/Button';
 import InputField from 'components/FormElement/InputField';
 import Icon from 'components/Icon';
 import { Modal } from 'components/Modal/Modal';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { Form, Formik, FormikProps, FormikValues } from 'formik';
-import { ResetUserPasswordValidationSchema } from 'modules/Auth/validationSchema';
+import { ChangePasswordProps } from 'modules/Profile/types';
+import { ResetUserPasswordValidationSchema } from 'modules/Profile/validation';
 import { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,12 +13,6 @@ import { getCurrentUser } from 'reduxStore/slices/authSlice';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import supabase from 'supabase';
 import '../../../index.css';
-
-interface ChangePasswordProps {
-  modal?: any;
-  isSidebar?: string;
-  withModal?: boolean;
-}
 
 const ChangePassword: FC<ChangePasswordProps> = ({
   modal,
@@ -39,7 +34,10 @@ const ChangePassword: FC<ChangePasswordProps> = ({
     confirmpassword: '',
   };
 
-  const onResetSubmit = async (values: FormikValues) => {
+  const onResetSubmit = async (
+    values: FormikValues,
+    { resetForm }: { resetForm: (nextState?: FormikValues) => void }
+  ) => {
     const toastId = new Date().getTime();
     setLoading(true);
     try {
@@ -52,18 +50,19 @@ const ChangePassword: FC<ChangePasswordProps> = ({
       if (response.data === 'success') {
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
+            variant: ToastVariant.SUCCESS,
             message: t('Auth.ResetPassword.Success'),
             type: 'success',
             id: toastId,
           })
         );
-        modal.closeModal();
+        modal?.closeModal();
+        resetForm({ values: resetInitialValues });
         setLoading(false);
       } else if (response.data === 'incorrect') {
         dispatch(
           setToast({
-            variant: ToastVarient.WARNING,
+            variant: ToastVariant.WARNING,
             message:
               response.error?.message ?? t('Auth.ResetPassword.Error.incorrect'),
             type: 'error',
@@ -76,7 +75,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({
       setLoading(false);
       dispatch(
         setToast({
-          variant: ToastVarient.WARNING,
+          variant: ToastVariant.WARNING,
           message: t('Auth.ResetPassword.Error'),
           type: 'error',
           id: toastId,
@@ -93,192 +92,190 @@ const ChangePassword: FC<ChangePasswordProps> = ({
   return (
     <>
       {withModal ? (
-        <>
-          <Modal
-            width="max-w-[450px]"
-            headerTitle="Reset Password"
-            modal={modal}
-            showFooter
-            closeOnOutsideClick
-            closeOnEscape
-            footerSubmit={handleSubmitRef}
-          >
-            <div className="reset-pswd-wrap">
-              <Formik
-                initialValues={resetInitialValues}
-                validationSchema={ResetUserPasswordValidationSchema()}
-                onSubmit={(values) => onResetSubmit(values)}
-                innerRef={formikRef as React.Ref<FormikProps<FormikValues>>}
-              >
-                {({ handleSubmit }) => {
-                  return (
-                    <Form className="student-profile-form" onSubmit={handleSubmit}>
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() =>
-                              setShowCurrentPassword(!showCurrentPassword)
-                            }
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showCurrentPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="currentpassword"
-                        type={showCurrentPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.CurrentPassword')}
-                        placeholder={t(
-                          'Comman.ChangePassword.Placeholder.CurrentPassword'
-                        )}
-                      />
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() => setShowPassword(!showPassword)}
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="password"
-                        type={showPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.NewPassword')}
-                        placeholder={t(
-                          'Comman.ChangePassword.Placeholder.EnterNewPassword'
-                        )}
-                      />
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() =>
-                              setShowConfirmPassword(!showConfirmPassword)
-                            }
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showConfirmPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="confirmpassword"
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.ReTypeNewPassword')}
-                        placeholder={t(
-                          `Comman.ChangePassword.Placeholder.ConfirmNewPassword`
-                        )}
-                      />
-                    </Form>
-                  );
-                }}
-              </Formik>
-            </div>
-          </Modal>
-        </>
+        <Modal
+          width="max-w-[450px]"
+          headerTitle="Reset Password"
+          modal={modal}
+          showFooter
+          closeOnOutsideClick
+          closeOnEscape
+          footerSubmit={handleSubmitRef}
+        >
+          <div className="reset-pswd-wrap">
+            <Formik
+              initialValues={resetInitialValues}
+              validationSchema={ResetUserPasswordValidationSchema()}
+              onSubmit={onResetSubmit}
+              innerRef={formikRef as React.Ref<FormikProps<FormikValues>>}
+              enableReinitialize
+            >
+              {({ handleSubmit }) => {
+                return (
+                  <Form className="student-profile-form" onSubmit={handleSubmit}>
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() =>
+                            setShowCurrentPassword(!showCurrentPassword)
+                          }
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showCurrentPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="currentpassword"
+                      type={showCurrentPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.CurrentPassword')}
+                      placeholder={t(
+                        'Common.ChangePassword.Placeholder.CurrentPassword'
+                      )}
+                    />
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() => setShowPassword(!showPassword)}
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.NewPassword')}
+                      placeholder={t(
+                        'Common.ChangePassword.Placeholder.EnterNewPassword'
+                      )}
+                    />
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showConfirmPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="confirmpassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.ReTypeNewPassword')}
+                      placeholder={t(
+                        `Common.ChangePassword.Placeholder.ConfirmNewPassword`
+                      )}
+                    />
+                  </Form>
+                );
+              }}
+            </Formik>
+          </div>
+        </Modal>
       ) : (
-        <>
-          <div
-            className="sidebar-content-wrap"
-            style={
-              isSidebar === 'password' ? { display: 'block' } : { display: 'none' }
-            }
-          >
-            <div className="sidebar-content-title-wrap">
-              <div className="sidebar-content-title">
-                <span>{t('Comman.ChangePassword.ResetPassword')}</span>
-              </div>
-            </div>
-            <div className="reset-pswd-wrap">
-              <Formik
-                initialValues={resetInitialValues}
-                validationSchema={ResetUserPasswordValidationSchema()}
-                onSubmit={onResetSubmit}
-              >
-                {({ handleSubmit }) => {
-                  return (
-                    <Form className="student-profile-form" onSubmit={handleSubmit}>
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() =>
-                              setShowCurrentPassword(!showCurrentPassword)
-                            }
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showCurrentPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="currentpassword"
-                        type={showCurrentPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.CurrentPassword')}
-                        placeholder={t(
-                          'Comman.ChangePassword.Placeholder.CurrentPassword'
-                        )}
-                      />
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() => setShowPassword(!showPassword)}
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="password"
-                        type={showPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.NewPassword')}
-                        placeholder={t(
-                          'Comman.ChangePassword.Placeholder.EnterNewPassword'
-                        )}
-                      />
-                      <InputField
-                        icon={
-                          <Button
-                            className="cursor-pointer w-5 h-5 text-grayText"
-                            onClickHandler={() =>
-                              setShowConfirmPassword(!showConfirmPassword)
-                            }
-                          >
-                            <Icon
-                              className="w-full h-full"
-                              name={showConfirmPassword ? 'eyeIcon' : 'eyeCrossIcon'}
-                            />
-                          </Button>
-                        }
-                        name="confirmpassword"
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        label={t('Comman.ChangePassword.Label.ReTypeNewPassword')}
-                        placeholder={t(
-                          `Comman.ChangePassword.Placeholder.ConfirmNewPassword`
-                        )}
-                      />
-                      <Button
-                        type="submit"
-                        variants="black"
-                        className="w-fit"
-                        isLoading={loading}
-                      >
-                        {t('Comman.Button.Update')}
-                      </Button>
-                    </Form>
-                  );
-                }}
-              </Formik>
+        <div
+          className="sidebar-content-wrap"
+          style={
+            isSidebar === 'password' ? { display: 'block' } : { display: 'none' }
+          }
+        >
+          <div className="sidebar-content-title-wrap">
+            <div className="sidebar-content-title">
+              <span>{t('Common.ChangePassword.ResetPassword')}</span>
             </div>
           </div>
-        </>
+          <div className="reset-pswd-wrap">
+            <Formik
+              initialValues={resetInitialValues}
+              validationSchema={ResetUserPasswordValidationSchema()}
+              onSubmit={onResetSubmit}
+              enableReinitialize
+            >
+              {({ handleSubmit }) => {
+                return (
+                  <Form className="student-profile-form" onSubmit={handleSubmit}>
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() =>
+                            setShowCurrentPassword(!showCurrentPassword)
+                          }
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showCurrentPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="currentpassword"
+                      type={showCurrentPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.CurrentPassword')}
+                      placeholder={t(
+                        'Common.ChangePassword.Placeholder.CurrentPassword'
+                      )}
+                    />
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() => setShowPassword(!showPassword)}
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.NewPassword')}
+                      placeholder={t(
+                        'Common.ChangePassword.Placeholder.EnterNewPassword'
+                      )}
+                    />
+                    <InputField
+                      icon={
+                        <Button
+                          className="cursor-pointer w-5 h-5 text-grayText"
+                          onClickHandler={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          <Icon
+                            className="w-full h-full"
+                            name={showConfirmPassword ? 'eyeIcon' : 'eyeCrossIcon'}
+                          />
+                        </Button>
+                      }
+                      name="confirmpassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      label={t('Common.ChangePassword.Label.ReTypeNewPassword')}
+                      placeholder={t(
+                        `Common.ChangePassword.Placeholder.ConfirmNewPassword`
+                      )}
+                    />
+                    <Button
+                      type="submit"
+                      variants="black"
+                      className="w-fit"
+                      isLoading={loading}
+                    >
+                      {t('Common.Button.Update')}
+                    </Button>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </div>
+        </div>
       )}
     </>
   );

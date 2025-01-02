@@ -1,0 +1,64 @@
+.why-choose .section-title {
+  @apply text-center mb-24;
+}
+
+.why-choose .wrapper > * {
+  @apply w-1/2;
+}
+.why-choose .right-part .inner > img {
+  @apply aspect-[1_/_1.14] w-full object-contain -translate-x-10 grayscale;
+}
+.why-choose .inner .color-round {
+  @apply w-[120px] aspect-square rounded-full bg-PrimaryBlue flex items-end justify-center overflow-hidden -top-30px -left-30px absolute;
+}
+.why-choose .inner .color-round.yellow {
+  @apply bg-PrimaryYellow top-24 -right-4 left-unset;
+}
+.why-choose .right-part .inner {
+  @apply bg-LightGray relative rounded-lg w-full max-w-[470px] ml-auto;
+}
+.why-choose .quote-wrap {
+  @apply max-w-[300px] absolute left-0 right-0 -bottom-5 mx-auto -mb-5 bg-LightWood px-7 py-5 rounded-lg;
+}
+.why-choose .quote-icon {
+  @apply flex items-center gap-4;
+}
+.why-choose .quote-icon .line {
+  @apply inline-block h-0.5 bg-black flex-1;
+}
+.why-choose .quote-icon img {
+  @apply h-6 aspect-square object-contain;
+}
+.why-choose .quote-wrap p {
+  @apply block text-base leading-12 font-semibold text-black text-center;
+}
+.why-choose .accordion-item {
+  @apply border-b-[3px] border-solid border-LightGray py-30px first:pt-0 transition-all duration-300;
+}
+.why-choose .accordion-item.active {
+  @apply pb-0;
+}
+.why-choose .accordion-title {
+  @apply flex items-center;
+}
+.why-choose .accordion-title h3 {
+  @apply text-xl font-semibold leading-12 flex-1;
+}
+.why-choose .accordion-title h3 span {
+  @apply inline-flex mr-2;
+}
+.why-choose .accordion-title .trigger-btn {
+  @apply flex items-center justify-center h-12 aspect-square bg-LightGray rounded-full cursor-pointer transition-all duration-300 hover:bg-black/10 active:scale-95 select-none;
+}
+.why-choose .accordion-title .trigger-btn.active {
+  @apply bg-black text-white;
+}
+.why-choose .accordion-content {
+  @apply max-h-0 overflow-hidden transition-all duration-500;
+}
+.why-choose .accordion-content .inner {
+  @apply pt-6 pb-8 max-w-[calc(100%_-_60px)];
+}
+.why-choose .accordion-content .inner * {
+  @apply text-black/70 leading-relaxed;
+}

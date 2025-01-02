@@ -2,7 +2,6 @@ import Image from 'components/Image';
 import './index.css';
 
 interface TestimonialCardProps {
-  key?: number;
   imagePath?: string;
   title?: string;
   description?: string;
@@ -13,7 +12,6 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard = ({
-  key,
   imagePath,
   title,
   description,
@@ -23,7 +21,7 @@ const TestimonialCard = ({
   isStatic,
 }: TestimonialCardProps) => {
   return (
-    <div key={key} className={`testimonial-card ${className || ''}`}>
+    <div className={`testimonial-card ${className || ''}`}>
       <div className="inner">
         <div className="testimonial-img">
           {isStatic ? (

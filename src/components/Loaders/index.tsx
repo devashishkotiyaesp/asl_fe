@@ -1,4 +1,4 @@
-import './style/Loader.css';
+import LogoAnimate from './LogoAnimate';
 
 interface ILoadersProps {
   type?: 'Spin' | 'SiteLoader';
@@ -10,13 +10,11 @@ const Loaders = ({ type, className }: ILoadersProps) => {
     <>
       {type === 'SiteLoader' ? (
         <div
-          className={`fixed top-0 left-0 w-full h-full z-5 bg-dark/70 flex items-center justify-center ${
+          className={`bg-black/80 fixed top-0 left-0 w-full h-full z-5 bg-dark/70 flex items-center justify-center ${
             className ?? ''
           }`}
         >
-          <div className="w-48 h-48">
-            <div className="w-12 h-12 bg-white rounded-full animate-pulse"> </div>
-          </div>
+          <LogoAnimate />
         </div>
       ) : (
         <span

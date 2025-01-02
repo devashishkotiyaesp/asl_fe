@@ -1,0 +1,33 @@
+.course-progress-status {
+  @apply text-sm text-black mb-1.5 block;
+}
+.course-progress-bar {
+  @apply w-full bg-LightWood/40 rounded-full h-2.5;
+}
+.course-progress-bar .inner {
+  @apply bg-PrimaryYellow rounded-full block h-full transition-all duration-300;
+}
+.course-progress-bar-wrap.simple,
+.course-progress-bar-wrap.boolean {
+  @apply flex gap-3 items-center;
+}
+.course-progress-bar-wrap.simple .course-progress-bar,
+.course-progress-bar-wrap.boolean .course-progress-bar {
+  @apply p-0.5  bg-white;
+}
+.course-progress-number {
+  @apply text-sm font-normal text-black leading-12;
+}
+
+.course-progress-bar-wrap.green .inner {
+  @apply bg-PrimaryGreen;
+}
+.course-progress-bar-wrap.boolean {
+  @apply flex-wrap;
+}
+.course-progress-bar-wrap .progress-status {
+  @apply w-full flex items-center text-xs gap-1 text-PrimaryGreen font-medium;
+}
+.course-progress-bar-wrap .progress-status .icon {
+  @apply w-4 h-4 rounded-full bg-PrimaryGreen text-white p-0.5;
+}

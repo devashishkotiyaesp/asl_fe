@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { AllLanguages } from 'reduxStore/types';
+import { SetFieldValue } from 'types';
 
 export interface ResponseDataProps {
   field_name: string;
@@ -26,12 +27,6 @@ export interface SectionProps {
   isLoading?: boolean;
 }
 
-export type SetFieldValue<ValueType = any> = (
-  field: string,
-  value: ValueType,
-  shouldValidate?: boolean
-) => void;
-
 export type SetFieldTouched = (
   field: string,
   isTouched?: boolean,
@@ -51,12 +46,16 @@ export interface CommonSectionProps {
   responseData: ResponseDataProps[] | undefined;
   setActiveLanguage: Dispatch<SetStateAction<number>>;
   allLanguages: AllLanguages[] | undefined;
-  BannerFormWithDynamicProps: (props: any) => JSX.Element;
+  BannerFormWithDynamicProps: (props: BannerDynamicProps) => JSX.Element;
   cmsId: string | undefined;
   activeSection: string | undefined;
   isLoading: boolean;
 }
-
+export interface BannerDynamicProps {
+  values: KeyValueProps;
+  setFieldValue: SetFieldValue;
+  isLoading: boolean;
+}
 export interface FieldsFuncParams {
   key: string;
   item: {
@@ -74,4 +73,17 @@ export interface FieldsFuncParams {
 
 export interface BodyDataAccumulator {
   [key: string]: string | string[]; // Adjust this type based on your actual data structure
+}
+
+export interface ImageProps {
+  title?: string;
+  description?: string;
+  button_text?: string;
+  button_url?: string;
+  banner_image?: string;
+  link_button?: string;
+  link_btn_url?: string;
+  isFree?: string;
+  banner_video?: string;
+  fun_tidbits?: string;
 }

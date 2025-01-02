@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ** Slices **
-import GlobalSection from 'components/GlobalSection';
 import { setLanguage, useLanguage } from 'reduxStore/slices/languageSlice';
 
 export type Props = {
@@ -71,8 +70,8 @@ const AuthLayout = ({ children }: Props) => {
         </div>
       </header>
 
-      <div className="site-content  bg-LightGray">{children}</div>
-      <GlobalSection />
+      <div className="site-content  bg-LightGray auth-layout">{children}</div>
+      {/* <GlobalSection /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import openSocket from 'socket.io-client';
 
 // ** constants **
-import { REACT_APP_API_BASE_URL } from 'config';
+import { REACT_APP_BACKEND_URL } from 'config';
 import { PublicNavigation } from 'constants/navigation.constant';
 import { setSocket, socketSelector } from 'reduxStore/slices/socketSlice';
 import { getAuthToken } from 'reduxStore/slices/tokenSlice';
@@ -27,7 +27,7 @@ const SocketComponent = () => {
   });
 
   const connectSocket = async () => {
-    const socket = openSocket(REACT_APP_API_BASE_URL as string, {
+    const socket = openSocket(REACT_APP_BACKEND_URL as string, {
       forceNew: true,
       transports: ['websocket'],
       query: {

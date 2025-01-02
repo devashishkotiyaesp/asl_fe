@@ -4,7 +4,7 @@ import InputField from 'components/FormElement/InputField';
 import Icon from 'components/Icon';
 import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
-import { ProvidersEnum, ToastVarient } from 'constants/common.constant';
+import { ProvidersEnum, ToastVariant } from 'constants/common.constant';
 import { PublicNavigation } from 'constants/navigation.constant';
 import { Form, Formik, FormikValues } from 'formik';
 import { useModal } from 'hooks/useModal';
@@ -16,6 +16,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import supabase from 'supabase';
 
+import '../style/index.css';
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,8 +25,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const loginInitialValue = { email: '', password: '' };
   const EmailSent = useModal();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const OnSubmit = async (userData: FormikValues) => {
+    setIsLoading(true);
     if (userData) {
       const response = await supabase.auth.signInWithPassword({
         email: userData.email,
@@ -33,29 +37,45 @@ const Login = () => {
 
       const toastId = new Date().getTime();
       if (response.data.session) {
-        dispatch(
-          setToast({
-            variant: ToastVarient.SUCCESS,
-            message: t('Auth.Login.Success'),
-            type: 'success',
-            id: toastId,
-          })
-        );
-        navigate(PublicNavigation.mfa, {
-          state: { access_token: response.data.session.access_token },
+        const { error } = await supabase.auth.signInWithOtp({
+          email: userData.email,
         });
+
+        if (error) {
+          dispatch(
+            setToast({
+              variant: ToastVariant.ERROR,
+              message: error.message,
+              type: 'error',
+              id: toastId,
+            })
+          );
+        } else {
+          dispatch(
+            setToast({
+              variant: ToastVariant.SUCCESS,
+              message: t('Auth.Login.Success'),
+              type: 'success',
+              id: toastId,
+            })
+          );
+          navigate(PublicNavigation.mfa, {
+            state: { access_token: response.data.session.access_token },
+          });
+        }
       } else {
         dispatch(
           setToast({
-            variant: ToastVarient.WARNING,
+            variant: ToastVariant.WARNING,
             message:
-              response.error?.message ?? t('Comman.ToastMessage.Success.Error'),
+              response.error?.message ?? t('Common.ToastMessage.Success.Error'),
             type: 'error',
             id: toastId,
           })
         );
       }
     }
+    setIsLoading(false);
   };
 
   const signInWithOauth = async (providerType: ProvidersEnum) => {
@@ -63,6 +83,10 @@ const Login = () => {
       provider: providerType as Provider,
       options: {
         redirectTo: window.location.origin + PublicNavigation.mfa,
+        ...(providerType === ProvidersEnum.MICROSOFT
+          ? { scopes: 'openid profile email User.Read' }
+          : {}),
+        ...(providerType === ProvidersEnum.APPLE ? { scopes: 'name email' } : {}),
       },
     });
     if (error) {
@@ -118,6 +142,7 @@ const Login = () => {
             initialValues={loginInitialValue}
             validationSchema={LoginValidationSchema()}
             onSubmit={(values) => OnSubmit(values)}
+            enableReinitialize
           >
             {({ values }) => (
               <Form autoComplete="off">
@@ -132,8 +157,8 @@ const Login = () => {
                 <InputField
                   parentClass="mb-2.5"
                   name="password"
-                  label={t('Auth.Login.Label.Enterassword')}
-                  placeholder={t('Auth.Login.Placeholder.Enterpassword')}
+                  label={t('Auth.Login.Label.EnterPassword')}
+                  placeholder={t('Auth.Login.Placeholder.EnterPassword')}
                   type={showPassword ? 'text' : 'password'}
                   value={values.password}
                   icon={
@@ -156,9 +181,45 @@ const Login = () => {
                 <Button
                   variants="black"
                   type="submit"
+                  isLoading={isLoading}
                   value={t('Auth.Login.Button.Login')}
                   // onClickHandler={EmailSent?.openModal}
                 />
+
+                <div className="login-with-app">
+                  <div className="login-with-app-title">
+                    <span>Or Continue with</span>
+                  </div>
+                  <div className="login-app-wrap">
+                    <div>
+                      <Button
+                        className="login-app-icon"
+                        onClickHandler={() => signInWithOauth(ProvidersEnum.GOOGLE)}
+                      >
+                        <Image iconName="google" />
+                      </Button>
+                    </div>
+                    <div>
+                      <Button
+                        className="login-app-icon"
+                        onClickHandler={() =>
+                          signInWithOauth(ProvidersEnum.MICROSOFT)
+                        }
+                      >
+                        <Image iconName="microsoft" />
+                      </Button>
+                    </div>
+                    <div>
+                      <Button
+                        className="login-app-icon"
+                        onClickHandler={() => signInWithOauth(ProvidersEnum.APPLE)}
+                      >
+                        <Image iconName="apple" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
                 <span className="form-switch-type">
                   {t(`Auth.Login.AskExists`)}
                   <Link to="/auth/register" className="">
@@ -169,7 +230,7 @@ const Login = () => {
             )}
           </Formik>
         </div>
-        <div className="flex my-4 w-full gap-2 justify-center col-span-2">
+        {/* <div className="flex my-4 w-full gap-2 justify-center col-span-2">
           <Button
             variants="White"
             className="w-full min-w-[150px] justify-center"
@@ -178,7 +239,7 @@ const Login = () => {
             <Image iconName="google" />
             {t(`Auth.Login.Provider.Google`)}
           </Button>
-        </div>
+        </div> */}
       </div>
     </>
   );

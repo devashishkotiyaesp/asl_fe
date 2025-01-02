@@ -32,7 +32,7 @@ export const Modal = ({ ...props }: ModalProps) => {
       {props.modal.isOpen && (
         <div
           className="fixed top-0 left-0 w-full h-100dvh pt-4 px-4 flex items-center justify-center z-3"
-          // onClick={handleMaskClick}
+          onClick={props.handleCloseOutsideClick}
         >
           {/* add onClick for close modal while click on outside of the modal */}
           <div className="fixed top-0 left-0 w-full h-100dvh bg-black opacity-50" />

@@ -1,0 +1,51 @@
+.mycourse-card {
+  @apply bg-white border border-solid border-LightWood rounded-5px h-full flex flex-col;
+}
+.mycourse-card-image {
+  @apply h-[215px] w-full relative;
+}
+.mycourse-card-image.black-overlay::before {
+  @apply absolute content-[''] top-0 left-0 w-full h-full bg-gradient-to-t from-black/80;
+}
+.mycourse-card-image .inside-tag {
+  @apply absolute bottom-1.5 left-2.5 bg-PrimaryYellow;
+}
+.mycourse-card-image img {
+  @apply w-full h-full object-cover rounded-t-5px;
+}
+.mycourse-card-edit {
+  @apply absolute top-3 right-3 w-10 h-10 p-2 bg-black/40 rounded-full text-white backdrop-blur active:scale-95;
+}
+.mycourse-card-content {
+  @apply py-4 px-5 h-[calc(100%_-_215px)] w-full flex flex-col;
+}
+.mycourse-card-tag {
+  @apply text-sm leading-12 rounded bg-LightWood text-black px-1 py-0.5 mb-1.5;
+}
+.mycourse-card-content {
+  @apply bg-PrimaryWood/5 rounded-5px;
+}
+.mycourse-card.white .mycourse-card-content {
+  @apply bg-white;
+}
+.mycourse-card-content h3 {
+  @apply text-black text-xl mt-1 font-medium leading-normal mb-2;
+}
+.mycourse-card-content .course-progress-bar-wrap {
+  @apply mt-5;
+}
+.mycourse-author {
+  @apply flex items-center mt-auto;
+}
+.mycourse-author .author-profile {
+  @apply w-6 h-6 rounded-full border border-solid border-LightWood;
+}
+.mycourse-author .author-profile img {
+  @apply w-full h-full rounded-full;
+}
+.mycourse-author .author-name {
+  @apply w-[calc(100%_-_24px)] pl-1;
+}
+.mycourse-card .button {
+  @apply mt-1.5;
+}

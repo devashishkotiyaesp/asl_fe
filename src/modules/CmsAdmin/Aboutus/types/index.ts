@@ -147,15 +147,15 @@ export interface CommonSelectProps {
   slug?: string;
 }
 export interface CrewDataProps {
-  crew: CommonSelectProps;
-  totalPages?: number;
-  totalCount?: number;
+  crew: CommonSelectProps[];
+  lastPage?: number;
+  count?: number;
 }
 
 export interface JourneyDataProps {
-  ourJourney: CommonSelectProps;
-  totalPages?: number;
-  totalCount?: number;
+  ourJourney: CommonSelectProps[];
+  lastPage?: number;
+  count?: number;
 }
 
 export interface JourneyProps {

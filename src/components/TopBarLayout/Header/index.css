@@ -1,5 +1,5 @@
 .site-header {
-  @apply absolute top-0 left-0 w-full bg-white flex justify-between py-27px border-b border-solid border-LightWood z-2;
+  @apply fixed top-0 left-0 w-full bg-white flex justify-between py-[21px] border-b border-solid border-LightWood z-[123];
 }
 .site-header .wrapper {
   @apply items-center;

@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { ActionNameEnum } from 'modules/CmsAdmin/constants';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import {
   BodyDataAccumulator,
   CommonSectionProps,
@@ -33,6 +34,7 @@ const CommonSection = ({
   isLoading,
 }: CommonSectionProps) => {
   const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
+  const navigate = useNavigate();
   const [isLoadingButton, setIsLoadingButton] = useState(false); // Single loading state
   const { t } = useTranslation();
   const onSubmit = async (values: FormikValues) => {
@@ -85,7 +87,10 @@ const CommonSection = ({
           formData.append(`${key}[description][${index}]`, item.description ?? '');
           formData.append(`${key}[button_text][${index}]`, item.button_text ?? '');
           formData.append(`${key}[button_url][${index}]`, item.button_url ?? '');
+          formData.append(`${key}[link_button][${index}]`, item.link_button ?? '');
+          formData.append(`${key}[link_btn_url][${index}]`, item.link_btn_url ?? '');
           formData.append(`${key}[banner_image][${index}]`, item.banner_image ?? '');
+          formData.append(`${key}[banner_video][${index}]`, item.banner_video ?? '');
           formData.append(`${key}[fun_tidbits][${index}]`, item.fun_tidbits ?? '');
           formData.append(`${key}[isFree][${index}]`, item.isFree ?? '');
         });
@@ -142,7 +147,10 @@ const CommonSection = ({
           formData.append(`${key}[description][${index}]`, item.description ?? '');
           formData.append(`${key}[button_text][${index}]`, item.button_text ?? '');
           formData.append(`${key}[button_url][${index}]`, item.button_url ?? '');
+          formData.append(`${key}[link_button][${index}]`, item.link_button ?? '');
+          formData.append(`${key}[link_btn_url][${index}]`, item.link_btn_url ?? '');
           formData.append(`${key}[banner_image][${index}]`, item.banner_image ?? '');
+          formData.append(`${key}[banner_video][${index}]`, item.banner_video ?? '');
           formData.append(`${key}[fun_tidbits][${index}]`, item.fun_tidbits ?? '');
           formData.append(`${key}[isFree][${index}]`, item.isFree ?? '');
         });
@@ -156,6 +164,7 @@ const CommonSection = ({
     );
     if (_.isNil(error)) {
       setIsLoadingButton(false);
+      navigate('/page-list');
     }
   };
   return (
@@ -163,7 +172,7 @@ const CommonSection = ({
       initialValues={
         initialValues?.[formLanguage] ?? {
           title_hashing: '',
-          point_data_array: [],
+          point_data_array: [{ isFree: false }],
         }
       }
       enableReinitialize
@@ -184,7 +193,7 @@ const CommonSection = ({
                     isLoading={isLoading}
                   />
                 </div>
-                <div>
+                <div className="btn-wrap">
                   {activeLanguage > 0 && (
                     <div className="csm-form-button">
                       <Button
@@ -194,13 +203,24 @@ const CommonSection = ({
                         onClickHandler={() => {
                           setActionName(ActionNameEnum.PREV);
                         }}
+                        disabled={isLoadingButton}
                       >
                         {t('Auth.RegisterCommon.prevButtonText')}
                       </Button>
                     </div>
                   )}
                   {activeLanguage < (allLanguages ?? []).length - 1 ? (
-                    <div className="csm-form-button">
+                    <div className="csm-form-button btn-wrap">
+                      <Button
+                        className="min-w-[90px]"
+                        variants="black"
+                        onClickHandler={() => {
+                          navigate(-1);
+                        }}
+                        disabled={isUpdateLoading}
+                      >
+                        {t('Dictionary.EditForm.CancelButton')}
+                      </Button>
                       <Button
                         variants="black"
                         className="w-fit"

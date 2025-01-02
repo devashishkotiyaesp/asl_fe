@@ -1,0 +1,65 @@
+.event-sec .section-title {
+  @apply mb-14;
+}
+.event-sec .event-list {
+  @apply grid grid-cols-3 gap-30px;
+}
+.event-modal {
+}
+.event-modal-img {
+  @apply relative aspect-[2.4_/_1];
+}
+.event-modal-img::before {
+  @apply absolute content-[''] inset-0 w-full h-full bg-gradient-to-t from-black/80 rounded-xl;
+}
+.event-modal-img img {
+  @apply w-full h-full object-cover rounded-xl;
+}
+.event-modal-img .date {
+  @apply absolute top-4 left-4 flex flex-col aspect-square bg-white rounded-lg w-[60px] justify-center items-center;
+}
+
+.event-modal-img .date span:first-child {
+  @apply text-2xl font-semibold leading-none;
+}
+.event-modal-img .date span:last-child {
+  @apply text-black uppercase;
+}
+
+.event-modal-img-content {
+  @apply absolute w-full h-fit bottom-4 left-4 max-w-[calc(100%_-_32px)];
+}
+
+.event-modal-img-content h3 {
+  @apply text-xl font-semibold leading-12 mb-4 text-white;
+}
+
+.event-modal-img-content .event-time {
+  @apply flex items-center gap-2;
+}
+.event-modal-img-content .event-time svg {
+  @apply w-5 h-5 text-white;
+}
+.event-modal-img-content .event-time .time-stamp {
+  @apply text-sm leading-12 text-white inline-block;
+}
+
+.event-modal-content {
+  @apply mt-1.5 pb-4;
+}
+.event-modal-content__title {
+  @apply text-2xl font-semibold leading-12 text-black mt-6 mb-2.5 inline-block w-full;
+}
+.event-modal-content p {
+  @apply leading-normal text-base text-black/70;
+}
+
+.event-location {
+  @apply flex items-center gap-3;
+}
+.event-location .text {
+  @apply text-base text-black/70;
+}
+.event-location .icon {
+  @apply w-8 h-8 rounded-full bg-black text-white hover:bg-PrimaryWood transition-all duration-300 flex items-center justify-center active:scale-95;
+}

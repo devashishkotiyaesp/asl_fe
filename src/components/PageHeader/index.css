@@ -1,5 +1,8 @@
 .page-header {
-  @apply relative pb-5 transition-all duration-300 z-1;
+  @apply p-5 transition-all duration-300;
+}
+.admin-content .page-header {
+  @apply bg-LightGray sticky top-20 z-[11];
 }
 .page-header__inner {
   @apply flex 1200:items-center justify-between flex-col gap-5 1024:gap-4 1200:gap-0 1200:flex-row;
@@ -13,6 +16,6 @@
 .back-icon {
   @apply bg-white me-2.5 w-8 h-8 rounded-full border border-solid border-LightGray inline-flex justify-center items-center rotate-180 p-1.5 select-none cursor-pointer active:scale-95;
 }
-.page-header h2 {
-  @apply text-black text-[28px] leading-none font-bold me-auto;
+.page-header h2:not(.react-datepicker__current-month) {
+  @apply text-black text-[28px] leading-normal font-bold me-auto;
 }

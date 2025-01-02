@@ -2,16 +2,9 @@ import Switch from 'components/FormElement/Switch';
 import { FC } from 'react';
 import '../../../index.css';
 
-interface NotificationProps {
-  isSidebar: string;
-}
-
-const Notification: FC<NotificationProps> = ({ isSidebar }) => {
+const Notification: FC = () => {
   return (
-    <div
-      className="sidebar-content-wrap"
-      style={isSidebar === 'notifications' ? { display: '' } : { display: 'none' }}
-    >
+    <div className="sidebar-content-wrap">
       <div className="sidebar-content-title-wrap">
         <div className="sidebar-content-title">
           <span>Notification Settings</span>
@@ -29,7 +22,7 @@ const Notification: FC<NotificationProps> = ({ isSidebar }) => {
           <Switch small />
         </div>
         <div className="sidebar-content-ntfc-item">
-          <span>New products and updates</span>
+          <span>New courses and updates</span>
           <Switch small />
         </div>
         <div className="sidebar-content-ntfc-item">
@@ -47,7 +40,7 @@ const Notification: FC<NotificationProps> = ({ isSidebar }) => {
           <Switch small />
         </div>
         <div className="sidebar-content-ntfc-item">
-          <span>New products and updates</span>
+          <span>New courses and updates</span>
           <Switch small />
         </div>
         <div className="sidebar-content-ntfc-item">

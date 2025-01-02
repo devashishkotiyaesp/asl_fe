@@ -1,81 +1,48 @@
-import { IMAGE_SUPPORTED_FORMATS } from 'constants/filesupport.constant';
 import { t } from 'i18next';
-import { emailValidation } from 'modules/Auth/validationSchema';
+import {
+  confirmPasswordValidation,
+  emailValidation,
+  passwordValidation,
+} from 'modules/Auth/validationSchema';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
 export const AdminUserValidationSchema = () => {
+  const { t } = useTranslation();
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
 
-    // profile_image: Yup.lazy((value) => {
-    //   if (typeof value === 'string') {
-    //     return Yup.string().trim();
-    //   }
-    //   return Yup.mixed().test(
-    //     'fileFormat',
-    //     t('Auth.Validation.Image.Error.UnsupportedFormat'),
-    //     (file) => {
-    //       if (!file) return true;
-    //       return IMAGE_SUPPORTED_FORMATS.includes((file as File).type);
-    //     }
-    //   );
-    // }),
     email: emailValidation(),
     profile_image_url: Yup.string().optional(),
   });
 };
 export const TeacherUserValidationSchema = () => {
+  const { t } = useTranslation();
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
 
-    profile_image: Yup.lazy((value) => {
-      if (typeof value === 'string') {
-        return Yup.string().trim();
-      }
-      return Yup.mixed().test(
-        'fileFormat',
-        t('Auth.Validation.Image.Error.UnsupportedFormat'),
-        (file) => {
-          if (!file) return true;
-          return IMAGE_SUPPORTED_FORMATS.includes((file as File).type);
-        }
-      );
-    }),
     email: emailValidation(),
-    bio: Yup.string().trim().required(t('Profile.Validation.Bio.Error.Reqired')),
+    bio: Yup.string().trim().required(t('Profile.Validation.Bio.Error.Required')),
   });
 };
 
-export const OrganizationUserValidationSchema = () =>
-  Yup.object().shape({
+export const OrganizationUserValidationSchema = () => {
+  return Yup.object().shape({
     name: Yup.string()
       .trim()
-      .required(t('Organization.EditProfile.Name.Error,Required')),
+      .required(t('Organization.EditProfile.Name.Error.Required')),
 
     email: emailValidation(),
-    profile_image: Yup.lazy((value) => {
-      if (typeof value === 'string') {
-        return Yup.string().trim();
-      }
-      return Yup.mixed().test(
-        'fileFormat',
-        t('Auth.Validation.Image.Error.UnsupportedFormat'),
-        (file) => {
-          if (!file) return true;
-          return IMAGE_SUPPORTED_FORMATS.includes((file as File).type);
-        }
-      );
-    }),
 
     address: Yup.string()
       .trim()
@@ -101,19 +68,47 @@ export const OrganizationUserValidationSchema = () =>
       .trim()
       .required(t('Organization.EditProfile.OrganizationType.Error.Required')),
   });
+};
 
 export const StudentUserValidationSchema = () => {
+  const { t } = useTranslation();
   return Yup.object().shape({
     first_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.FirstName.Error.Requried')),
+      .required(t('Auth.Validation.FirstName.Error.Required')),
     last_name: Yup.string()
       .trim()
-      .required(t('Auth.Validation.LastName.Error.Requried')),
-    bio: Yup.string().trim().required(t('Profile.Validation.Bio.Error.Reqired')),
+      .required(t('Auth.Validation.LastName.Error.Required')),
+    bio: Yup.string().trim().required(t('Profile.Validation.Bio.Error.Required')),
+  });
+};
 
-    // asl_level_id: Yup.string().required(
-    //   t('Auth.Validation.AslLevel.Error.Requried')
-    // ),
+export const ResetUserPasswordValidationSchema = () => {
+  const { t } = useTranslation();
+  return Yup.object().shape({
+    currentpassword: Yup.string().required(
+      t('Auth.Validation.CurrentPassword.Error.Required')
+    ),
+    password: passwordValidation(),
+    confirmpassword: confirmPasswordValidation(),
+  });
+};
+
+export const FeedbackValidation = () => {
+  return Yup.object().shape({
+    addFeedback: Yup.string().required(t('Profile.Feedback.Feedback.Required')),
+    emojiRatings: Yup.object().shape({
+      overallRating: Yup.object().shape({
+        value: Yup.number().required(t('Profile.Feedback.OverallRating.Required')),
+      }),
+      easeUseRating: Yup.object().shape({
+        value: Yup.number().required(t('Profile.Feedback.EaseUseRating.Required')),
+      }),
+      contentQualityRating: Yup.object().shape({
+        value: Yup.number().required(
+          t('Profile.Feedback.ContentQualityRating.Required')
+        ),
+      }),
+    }),
   });
 };

@@ -3,7 +3,6 @@ import DropZone from 'components/FormElement/DropZoneField';
 import InputField from 'components/FormElement/InputField';
 import ReactSelect from 'components/FormElement/ReactSelect';
 import Icon from 'components/Icon';
-import SiteLoader from 'components/Loaders/SiteLoader';
 import { ProvidersEnum } from 'constants/common.constant';
 import { PublicNavigation } from 'constants/navigation.constant';
 import { Form, Formik } from 'formik';
@@ -15,6 +14,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import supabase from 'supabase';
+import '../style/index.css';
+
+import Loaders from 'components/Loaders';
 import {
   RegisterFormField,
   RegisterFormValues,
@@ -100,13 +102,13 @@ const Register: FC = () => {
     <>
       <div className="form-wrap">
         {loading ? (
-          <SiteLoader />
+          <Loaders />
         ) : (
           <div>
             <div className="form-title-text">
               <h2>
                 {t('Auth.Register.Title.1')}
-                <span>{t('Auth.Register.Title.2')}</span>
+                <span> {t('Auth.Register.Title.2')}</span>
               </h2>
               <p>{t('Auth.Register.SubTitle')}</p>
             </div>

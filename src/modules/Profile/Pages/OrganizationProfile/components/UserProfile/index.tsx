@@ -2,20 +2,20 @@ import Button from 'components/Button/Button';
 import ProfilePictureUpload from 'components/FormElement/components/ProfilePictureUpload';
 import InputField from 'components/FormElement/InputField';
 import RadioButtonGroup from 'components/FormElement/RadioInput';
-import { OrganizationTypeOption, ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { Form, Formik } from 'formik';
-import { useAxiosPost } from 'hooks/useAxios';
+import { useAxiosGet, useAxiosPost } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
-import { t } from 'i18next';
 import ChangePassword from 'modules/Profile/common/components/ChangePassword';
 import { combineAddress, parseAddress } from 'modules/Profile/helper';
 import { OrganizationUserValidationSchema } from 'modules/Profile/validation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser, setUserData } from 'reduxStore/slices/authSlice';
 import { setToast } from 'reduxStore/slices/toastSlice';
 import { OrganizationType } from 'reduxStore/types';
-import { IEditOrganizationProfie } from '../../types';
+import { IEditOrganizationProfile } from '../../types';
 import './index.css';
 
 // Interface
@@ -31,9 +31,12 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
   const ResetPasswordModal = useModal();
   const dispatch = useDispatch();
   const [callApi, { isLoading }] = useAxiosPost();
+  const { t } = useTranslation();
+  const [getOrganizationType] = useAxiosGet();
+  const [organizationType, setOrganizationType] = useState();
 
   // constants
-  const InitialRecord: IEditOrganizationProfie = {
+  const InitialRecord: IEditOrganizationProfile = {
     name: user?.first_name ?? '',
     email: user?.email ?? '',
     profile_image: user?.profile_image ?? null,
@@ -46,7 +49,7 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
   const [initialValues] = useState(InitialRecord);
 
   // methods
-  const OnSubmit = async (values: IEditOrganizationProfie) => {
+  const OnSubmit = async (values: IEditOrganizationProfile) => {
     if (values && user?.id) {
       const combinedAddress = combineAddress(
         values.address,
@@ -64,7 +67,7 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
       formData.append('address', payload.address);
       formData.append('organization_type', payload.organizationType);
 
-      if (typeof payload.profile_image !== 'string') {
+      if (payload.profile_image) {
         formData.append('profile_image', payload.profile_image as Blob);
       }
       const res = await callApi('/users/update-profile', formData, {
@@ -73,8 +76,8 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
       if (res.data) {
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
-            message: `${t('Comman.ToastMessage.Success.Update')}`,
+            variant: ToastVariant.SUCCESS,
+            message: `${t('Common.ToastMessage.Success.Update')}`,
             type: 'success',
             id: new Date().getTime(),
           })
@@ -87,6 +90,20 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
       }
     }
   };
+
+  const handleGetType = async () => {
+    const tag = await getOrganizationType('/organization_type', {
+      params: {
+        dropdown: true,
+        label: 'type',
+        value: 'id',
+      },
+    });
+    setOrganizationType(tag?.data);
+  };
+  useEffect(() => {
+    handleGetType();
+  }, []);
   return (
     <>
       <div className="edit-org-wrap">
@@ -95,9 +112,9 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
           onSubmit={(values) => OnSubmit(values)}
           validationSchema={OrganizationUserValidationSchema()}
         >
-          {({ values, setFieldValue }) => {
+          {({ values, setFieldValue, handleSubmit }) => {
             return (
-              <Form className="row">
+              <Form className="row" onSubmit={handleSubmit}>
                 <div className="left-part">
                   <ProfilePictureUpload
                     isBig
@@ -169,9 +186,9 @@ const OrganizationUserProfile: FC<OrganizationUserProfileProps> = ({
 
                   <div className="checkbox-list">
                     <RadioButtonGroup
-                      isChekckbox
+                      isCheckbox
                       name="organizationType"
-                      options={OrganizationTypeOption}
+                      options={organizationType ?? []}
                       isCompulsory
                       label={t('Organization.EditProfile.OrganizationType.Label')}
                       selectedValue={values.organizationType}

@@ -7,19 +7,26 @@
 .page-bar__list {
   @apply pt-3.5 pb-2.5;
 }
-.page-bar__item span {
-  @apply w-full relative py-2.5 pl-5 text-base text-PrimaryWood inline-block cursor-pointer;
+.page-bar__item span,
+.page-bar__item button {
+  @apply w-full relative py-2.5 pl-5 text-base text-PrimaryWood inline-block cursor-pointer text-left;
 }
-.page-bar__item span::before {
+.page-bar__item span::before,
+.page-bar__item button::before {
   @apply absolute content-[''] right-0 top-unset bottom-0 h-0 w-1 bg-PrimaryYellow transition-all duration-300;
 }
-.page-bar__item span.active {
+.page-bar__item span.active,
+.page-bar__item button.active {
   @apply relative font-semibold text-black;
 }
-.page-bar__item span.active::before {
+.page-bar__item span.active::before,
+.page-bar__item button.active::before {
   @apply h-full bottom-unset top-0;
 }
-.cms-page-bar-content-wrap {
+.cms-page-bar-content-wrap:has(:not(.page-bar)) {
+  @apply block;
+}
+.cms-page-bar-content-wrap:has(.page-bar) {
   @apply grid grid-cols-[250px_1fr] gap-5 mt-30px;
 }
 .cms-form-card-wrap {
@@ -36,6 +43,9 @@
 }
 .cms-button {
   @apply bg-white p-3.5 rounded-10px grid grid-cols-[40%_1fr] gap-2.5 w-full;
+}
+.cms-button.half {
+  @apply grid-cols-2;
 }
 .cms-button.simple {
   @apply p-0 rounded-none;

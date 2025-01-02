@@ -2,7 +2,7 @@ import Button from 'components/Button/Button';
 import ProfilePictureUpload from 'components/FormElement/components/ProfilePictureUpload';
 import InputField from 'components/FormElement/InputField';
 import Image from 'components/Image';
-import { ToastVarient } from 'constants/common.constant';
+import { ToastVariant } from 'constants/common.constant';
 import { Formik } from 'formik';
 import { useAxiosPost } from 'hooks/useAxios';
 import { AdminUserValidationSchema } from 'modules/Profile/validation';
@@ -30,8 +30,11 @@ const AdminUserProfile = ({ isSidebar }: { isSidebar: string }) => {
   const onSubmit = async (userData: OnSubmitProps) => {
     if (userData && user?.id) {
       const formData: FormData = new FormData();
-      formData.append('first_name', userData.first_name);
-      formData.append('last_name', userData.last_name);
+      Object.entries(userData).forEach(([key, value]) => {
+        if (value !== null && key !== 'profile_image') {
+          formData.append(key, value);
+        }
+      });
 
       if (userData.profile_image) {
         formData.append('profile_image', userData.profile_image as Blob);
@@ -43,8 +46,8 @@ const AdminUserProfile = ({ isSidebar }: { isSidebar: string }) => {
       if (res.data) {
         dispatch(
           setToast({
-            variant: ToastVarient.SUCCESS,
-            message: `${t('Comman.ToastMessage.Success.Update')}`,
+            variant: ToastVariant.SUCCESS,
+            message: `${t('Common.ToastMessage.Success.Update')}`,
             type: 'success',
             id: new Date().getTime(),
           })

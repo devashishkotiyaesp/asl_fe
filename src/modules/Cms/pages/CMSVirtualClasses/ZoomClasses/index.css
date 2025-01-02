@@ -1,0 +1,30 @@
+.zoom-classes .wrapper {
+  @apply flex-col;
+}
+.zoom-classes .tab-wrapper {
+  @apply mt-10;
+}
+.zoom-classes .tab-content .inner {
+  @apply grid grid-cols-3 gap-30px;
+}
+.lesson-column .inner {
+  @apply flex flex-col;
+}
+.lesson-column-duration {
+  @apply text-xl text-PrimaryWood font-semibold leading-12 mb-6;
+}
+.lesson-list__item {
+  @apply p-4 pb-5 bg-LightGray rounded-10px mb-3 last:mb-0;
+}
+.lesson-list__item .title {
+  @apply text-base leading-normal font-semibold text-black mb-2;
+}
+.lesson-list__item .days {
+  @apply text-base leading-12 text-black/70 flex gap-1.5;
+}
+.lesson-list__item .days span {
+  @apply flex-1;
+}
+.lesson-note {
+  @apply mt-4 leading-12 rounded text-base px-2.5 py-3.5 bg-PrimaryYellowLight/10 text-PrimaryYellow;
+}

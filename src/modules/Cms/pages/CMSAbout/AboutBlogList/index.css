@@ -1,0 +1,21 @@
+.recent-blog-list .section-title {
+  @apply mb-14 text-center;
+}
+.blog-list {
+  @apply pt-0;
+}
+.blog-list-wrapper {
+  @apply gap-30px grid grid-cols-3;
+}
+
+.blog-list {
+}
+.blog-list .load-more {
+  @apply mt-10 text-center;
+}
+.blog-list .load-more a {
+  @apply inline-flex items-center mx-auto gap-2 text-black hover:underline underline-offset-4;
+}
+.blog-list .load-more a svg {
+  @apply text-black/50;
+}

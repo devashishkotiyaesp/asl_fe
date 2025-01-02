@@ -10,21 +10,24 @@
 .c-card__header {
   @apply p-5 pb-3.5 rounded-t-lg relative mb-5;
 }
+.c-card__header:has(.c-card__header-extra) {
+  @apply flex justify-between;
+}
 .c-card__header::before {
   @apply absolute content-[''] w-[calc(100%_-_40px)] mx-auto h-px left-0 right-0 bg-black bottom-0 opacity-10;
 }
 .card-minimal .c-card__header {
   @apply before:opacity-0 p-5 pb-0 mb-2;
 }
-
+.c-card__title.big-text {
+  @apply text-black text-[28px] font-semibold leading-12;
+}
 .c-card__title {
   @apply text-lg font-semibold;
 }
-
 .c-card__body {
   @apply px-5 pb-5;
 }
-
 .c-card__body.no-header {
   @apply py-5;
 }

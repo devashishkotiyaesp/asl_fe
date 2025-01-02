@@ -1,7 +1,7 @@
 import { FeatureEnum, PermissionEnum } from './common.constant';
 
 // Routes which are publically available will be available here.
-export const PublicNavigation = Object.freeze({
+export const PublicNavigation: { [key: string]: string } = Object.freeze({
   login: '/auth/login',
   twoFA: '/auth/2fa',
   mfa: '/mfa',
@@ -9,12 +9,16 @@ export const PublicNavigation = Object.freeze({
   forgotPassword: '/auth/forgot-password',
   resetPassword: '/auth/reset-password',
   somethingWentWrong: '/something-went-wrong',
-  GetAll: '/asl/get-all',
-  AddLevel: 'asl/addLevel',
-  EditLevel: 'asl/editLevel',
-  DeleteLevel: 'asl/deleteLevel',
+  GetAll: '/asl',
+  AddLevel: 'asl',
+  EditLevel: 'asl',
+  DeleteLevel: 'asl',
   Static: '/static',
   Static2: '/static2',
+  Static3: '/static3',
+  Static4: '/static4',
+  Static5: '/static5',
+  acceptInvite: '/accept-invite',
 });
 
 // Routes related to cms will be available here.
@@ -25,7 +29,7 @@ export const CmsNavigation = Object.freeze({
   Dictionary: '/cms-dictionary',
   Org: '/cms-org',
   Blog: '/cms-blog',
-  BlogDetails: '/cms-blog-details',
+  BlogDetails: '/cms-blog-details/:slug',
   About: '/cms-about',
   StudentProfile: '/student-profile',
   Event: '/cms-event',
@@ -64,8 +68,18 @@ export const StudentNavigation = Object.freeze({
       feature: FeatureEnum.User,
       permission: PermissionEnum.View,
     },
+    studentView: {
+      path: '/community',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.View,
+    },
     add: {
       path: '/community/add/:type',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.View,
+    },
+    edit: {
+      path: '/community/edit/:id',
       feature: FeatureEnum.User,
       permission: PermissionEnum.View,
     },
@@ -75,10 +89,66 @@ export const StudentNavigation = Object.freeze({
       permission: PermissionEnum.View,
     },
   },
+  // courses: {
+  //   view: {
+  //     path: '/courses',
+  //     feature: FeatureEnum.LiveAssessment,
+  //     permission: PermissionEnum.View,
+  //   },
+  //   assessmentView: {
+  //     path: '/courses/assessment',
+  //     feature: FeatureEnum.LiveAssessment,
+  //     permission: PermissionEnum.View,
+  //   },
+  // },
   profile: {
     view: {
       path: '/profile',
       feature: FeatureEnum.Profile,
+      permission: PermissionEnum.View,
+    },
+  },
+  courses: {
+    view: {
+      path: '/courses',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    detailView: {
+      path: '/courses/view/:id/:common_id',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    lessonView: {
+      path: '/courses/:slug/lesson/:lesson_slug',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    list: {
+      path: '/courses/all/:type_id',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    bookAppointment: {
+      path: '/courses/book-appointment',
+      feature: FeatureEnum.LiveAssessment,
+      permission: PermissionEnum.View,
+    },
+    assessmentView: {
+      path: '/courses/assessment',
+      feature: FeatureEnum.LiveAssessment,
+      permission: PermissionEnum.View,
+    },
+  },
+  dictionary: {
+    view: {
+      path: '/dictionary',
+      feature: FeatureEnum.Dictionary,
+      permission: PermissionEnum.View,
+    },
+    viewSign: {
+      path: '/dictionary/:vocabularyId',
+      feature: FeatureEnum.Dictionary,
       permission: PermissionEnum.View,
     },
   },
@@ -105,10 +175,57 @@ export const PrivateNavigation = Object.freeze({
       feature: FeatureEnum.User,
       permission: PermissionEnum.View,
     },
+    viewUser: {
+      path: '/manage-users/:userId/:role',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.View,
+    },
+    add: {
+      path: '/manage-users/add-user',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.View,
+    },
+    add_user: {
+      path: '/manage-users/add-users/:role',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.Create,
+    },
+  },
+  deletedUser: {
+    view: {
+      path: '/manage-users/delete_user',
+      feature: FeatureEnum.User,
+      permission: PermissionEnum.View,
+    },
   },
   courses: {
+    add: {
+      path: '/courses/add',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    edit: {
+      path: '/courses/:common_id/:slug',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
     view: {
-      path: '/manage-courses',
+      path: '/courses',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    list: {
+      path: '/courses/all/:type_id',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    detailView: {
+      path: '/courses/view/:id/:common_id',
+      feature: FeatureEnum.Course,
+      permission: PermissionEnum.View,
+    },
+    lessonView: {
+      path: '/courses/:slug/lesson/:lesson_slug',
       feature: FeatureEnum.Course,
       permission: PermissionEnum.View,
     },
@@ -125,7 +242,32 @@ export const PrivateNavigation = Object.freeze({
 export const AdminNavigation = Object.freeze({
   settings: {
     view: {
-      path: '/admin/settings',
+      path: '/settings',
+    },
+    asl_level: {
+      path: '/settings/asl-level',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.View,
+    },
+    course_category: {
+      path: '/settings/course-category',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.View,
+    },
+    organization_types: {
+      path: '/settings/organization-types',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.View,
+    },
+    support_faqs: {
+      path: '/settings/support-faqs',
+      feature: FeatureEnum.SupportRequest,
+      permission: PermissionEnum.View,
+    },
+    tags: {
+      path: '/settings/tags',
+      feature: FeatureEnum.Tags,
+      permission: PermissionEnum.View,
     },
   },
   dashboard: {
@@ -135,22 +277,30 @@ export const AdminNavigation = Object.freeze({
       permission: PermissionEnum.View,
     },
   },
+  calendar: {
+    view: {
+      path: '/calendar',
+      feature: FeatureEnum.Calendar,
+      permission: PermissionEnum.View,
+    },
+  },
   dictionary: {
     view: {
       path: '/dictionary',
     },
   },
+
   cms_management: {
     view: {
-      path: '/admin/page-list',
+      path: '/page-list',
     },
     edit: {
-      path: '/admin/page-list/:id',
+      path: '/page-list/:id',
     },
   },
   cms_homeAdmin: {
     view: {
-      path: '/admin/cms-home',
+      path: '/cms-home',
     },
   },
   profile: {
@@ -162,44 +312,107 @@ export const AdminNavigation = Object.freeze({
   },
   static: {
     view: {
-      path: '/admin/static',
+      path: '/static',
     },
   },
   reported_comments: {
     view: {
-      path: '/admin/reported-comments',
+      path: '/reported-comments',
     },
   },
   feedback: {
     view: {
-      path: '/admin/feedback',
+      path: '/feedback',
+    },
+  },
+  event: {
+    create: {
+      path: '/create-event',
+    },
+    edit: {
+      path: '/edit-event/:slug',
+    },
+  },
+  blog: {
+    view: {
+      path: '/blog',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.View,
+    },
+    add: {
+      path: '/blog/add',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.Create,
+    },
+    edit: {
+      path: '/blog/update/:slug',
+      feature: FeatureEnum.Blog,
+      permission: PermissionEnum.Update,
+    },
+  },
+  audit_log: {
+    view: {
+      path: '/audit-log',
+      feature: FeatureEnum.AuditLog,
+      permission: PermissionEnum.View,
+    },
+  },
+  tag: {
+    add: {
+      path: '/tag/add',
+      feature: FeatureEnum.Tags,
+      permission: PermissionEnum.Create,
+    },
+    edit: {
+      path: '/tag/update/:slug',
+      feature: FeatureEnum.Tags,
+      permission: PermissionEnum.Update,
     },
   },
 });
-// export const OrganizationNavigation = Object.freeze({
-//   settings: {
-//     view: {
-//       path: '/org/settings',
-//     },
-//   },
-//   courses: {
-//     view: {
-//       path: '/org/courses',
-//     },
-//   },
-//   home: {
-//     view: {
-//       path: '/org/home',
-//     },
-//   },
-//   dictionary: {
-//     view: {
-//       path: '/org/dictionary',
-//     },
-//   },
-//   Community: {
-//     view: {
-//       path: '/org/community',
-//     },
-//   },
-// });
+export const OrganizationNavigation = Object.freeze({
+  // settings: {
+  //   view: {
+  //     path: '/org/settings',
+  //   },
+  // },
+  // courses: {
+  //   view: {
+  //     path: '/org/courses',
+  //   },
+  // },
+  // home: {
+  //   view: {
+  //     path: '/org/home',
+  //   },
+  // },
+  // dictionary: {
+  //   view: {
+  //     path: '/org/dictionary',
+  //   },
+  // },
+  manageStudent: {
+    view: {
+      path: '/manage-student',
+    },
+
+    add: {
+      path: '/manage-student/invite-student',
+    },
+  },
+  deletedStudent: {
+    view: {
+      path: '/manage-student/deleted-student',
+    },
+  },
+  manageTeachers: {
+    view: {
+      path: '/teachers',
+    },
+  },
+  // Community: {
+  //   view: {
+  //     path: '/org/community',
+  //   },
+  // },
+});

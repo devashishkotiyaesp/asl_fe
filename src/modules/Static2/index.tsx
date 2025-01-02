@@ -12,7 +12,6 @@ import { Modal } from 'components/Modal/Modal';
 import PageHeader from 'components/PageHeader';
 import ReactEditor from 'components/ReactQuillEditor/ReactQuillEditor';
 import SearchComponent from 'components/search';
-import TopicCard from 'components/TopicCard';
 import { Form, Formik } from 'formik';
 import { useModal } from 'hooks/useModal';
 import { useState } from 'react';
@@ -31,46 +30,6 @@ const Static2 = () => {
 
   return (
     <>
-      {/* 404 START HERE */}
-      <section className="no-data-sec">
-        <div className="inner">
-          <div className="img-wrap">
-            <Image src="images/no-data-image.png" isFromDataBase={false} />
-          </div>
-          <div className="title">Page Not Found</div>
-          <p>We're sorry, the page you requested could not be found</p>
-          <p>please go back to the homepage</p>
-          <Button className="no-data-button" variants="black">
-            Go Home
-          </Button>
-        </div>
-      </section>
-      {/* 404 END HERE */}
-
-      <div className="grid grid-cols-4 gap-5">
-        <TopicCard
-          // imagePath="images/blog-1.png"
-          title="ASL Beyond the Classroom"
-          description="Lorem ipsum odor amet, consectetuer adipiscing elit. Feugiat orci netus lectus nulla turpis. Rhoncus nec tempor natoque; litora ac senectus nulla. Suspendisse quisque "
-          time={10}
-          conversationCount={6}
-        />
-        <TopicCard
-          imagePath="images/blog-1.png"
-          title="ASL Beyond the Classroom"
-          description="Lorem ipsum odor amet, consectetuer adipiscing elit. Feugiat orci netus lectus nulla turpis. Rhoncus nec tempor natoque; litora ac senectus nulla. Suspendisse quisque "
-          time={10}
-          conversationCount={6}
-        />
-        <TopicCard
-          // imagePath="images/blog-1.png"
-          title="ASL Beyond the Classroom"
-          description="Lorem ipsum odor amet, consectetuer adipiscing elit. Feugiat orci netus lectus nulla turpis. Rhoncus nec tempor natoque; litora ac senectus nulla. Suspendisse quisque "
-          time={10}
-          conversationCount={6}
-        />
-      </div>
-      <div className="my-12" />
       <PageHeader title="Self Paced Courses" url="./" />
       <div className="content-base">
         {/* MAKE COMPONENT */}
@@ -326,10 +285,10 @@ const Static2 = () => {
 
         <div className="select-module-wrap">
           <div className="select-module-item">
-            <Checkbox id="check1" reverse name="name" text="Course with Modules" />
+            <Checkbox id="check1" reverse text="Course with Modules" />
           </div>
           <div className="select-module-item">
-            <Checkbox id="check2" reverse name="name" text="Course with Modules" />
+            <Checkbox id="check2" reverse text="Course with Modules" />
           </div>
         </div>
 
@@ -979,13 +938,13 @@ const Static2 = () => {
                           <div className="modual-add-answer-list">
                             <span className="title">Answers</span>
                             <div className="modual-add-answer-item">
-                              <Checkbox id="hello1" name="sd" text="Order 1" />
+                              <Checkbox id="hello1" text="Order 1" />
                             </div>
                             <div className="modual-add-answer-item">
-                              <Checkbox id="hello2" name="sd" text="Order 2" />
+                              <Checkbox id="hello2" text="Order 2" />
                             </div>
                             <div className="modual-add-answer-item">
-                              <Checkbox id="hello3" name="sd" text="Order 3" />
+                              <Checkbox id="hello3" text="Order 3" />
                             </div>
                           </div>
                         </div>
@@ -1045,31 +1004,31 @@ const Static2 = () => {
                   <tr>
                     <td>Public</td>
                     <td>
-                      <Checkbox name="we" />
+                      <Checkbox />
                     </td>
                   </tr>
                   <tr>
                     <td>Course Editor</td>
                     <td>
-                      <Checkbox name="we" />
+                      <Checkbox />
                     </td>
                   </tr>
                   <tr>
                     <td>Teachers only</td>
                     <td>
-                      <Checkbox name="we" />
+                      <Checkbox />
                     </td>
                   </tr>
                   <tr>
                     <td>Only users from specific organization</td>
                     <td>
-                      <Checkbox name="we" />
+                      <Checkbox />
                     </td>
                   </tr>
                   <tr>
                     <td>Students</td>
                     <td>
-                      <Checkbox name="we" />
+                      <Checkbox />
                     </td>
                   </tr>
                 </tbody>

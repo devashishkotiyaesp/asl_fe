@@ -1,0 +1,40 @@
+.our-story .wrapper {
+  @apply 1200:items-center;
+}
+
+.our-story .left-part img {
+  @apply block object-contain;
+}
+.our-story .right-content {
+  @apply mt-6;
+}
+.our-story .right-content p {
+  @apply text-base leading-normal mb-5 last:mb-0 text-black/70;
+}
+.our-story .right-content p strong {
+  @apply font-semibold;
+}
+.our-story .wrapper > div {
+  @apply w-1/2;
+}
+.icon-text-list {
+  @apply mt-10;
+}
+.icon-text-list-item {
+  @apply flex gap-3 mb-8 last:mb-0;
+}
+.icon-text-list-item .icon {
+  @apply h-10 aspect-square text-PrimaryWood;
+}
+.icon-text-list-item .icon svg {
+  @apply w-full h-full;
+}
+.icon-text-list-item .text {
+  @apply flex flex-col gap-1 flex-1;
+}
+.icon-text-list-item .text span {
+  @apply first:font-semibold text-black/70 inline-block leading-tight;
+}
+.our-story .btn {
+  @apply mt-10;
+}

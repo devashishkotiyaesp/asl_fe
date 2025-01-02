@@ -4,43 +4,53 @@ import PageHeader from 'components/PageHeader';
 import SearchComponent from 'components/search';
 import TabComponent from 'components/Tabs';
 import { TabColumnProps } from 'components/Tabs/types';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDebounce } from 'utils';
 import { CommunityType } from './constants';
+import './index.css';
 import CommunityTable from './pages/CommunityTable';
+import ViewCommunityFeed from './pages/ViewCommunityFeed';
 
 const Community = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(0);
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentTab = urlParams.get('community') ?? 'feed';
+  const communityUrlType =
+    new URLSearchParams(location.search).get('community') || currentTab;
+  const [activeTab, setActiveTab] = useState(currentTab ?? 'feed');
   const [search, setSearch] = useState<string>('');
   const searchString = typeof search === 'string' ? search : '';
   const debouncedSearch = useDebounce(searchString, 500);
   const { t } = useTranslation();
   const tabs: TabColumnProps[] = [
     {
-      uniqueKey: 'communityFeed',
+      uniqueKey: 'feed',
       title: 'Community.Feed',
-      component: <h1>{t('Community.Feed')}</h1>,
+      component: <ViewCommunityFeed search={debouncedSearch} />,
     },
     {
-      uniqueKey: 'communityTopic',
-      title: 'Community.Topic',
+      uniqueKey: 'topic',
+      title: 'Community.Topics',
       component: (
         <CommunityTable
           communityType={CommunityType.TOPIC}
           search={debouncedSearch}
+          searchParams={searchParams}
         />
       ),
     },
     {
-      uniqueKey: 'communityDiscussion',
-      title: 'Community.Discussion',
+      uniqueKey: 'discussion',
+      title: 'Community.Discussions',
       component: (
         <CommunityTable
           communityType={CommunityType.DISCUSSION}
           search={debouncedSearch}
+          searchParams={searchParams}
         />
       ),
     },
@@ -63,25 +73,39 @@ const Community = () => {
           <Button
             variants="PrimaryWoodLight"
             className="whitespace-nowrap text-PrimaryWood"
-            onClickHandler={() => navigate('/admin/reported-comments')}
+            onClickHandler={() =>
+              navigate(`/reported-comments?community=${communityUrlType}`)
+            }
           >
             <Image iconName="infoIcon" iconClassName="" />
-            {t('ReportedComments.Title')}
+            {t('ReportedComments.ManageTitle')}
           </Button>
         </div>
       </PageHeader>
       <div className="content-base">
         <TabComponent
           current={activeTab}
-          onTabChange={(status: SetStateAction<number>) => {
+          onTabChange={(status: string) => {
             setActiveTab(status);
+            searchParams.set('community', status);
+            setSearchParams(searchParams);
           }}
         >
-          {tabs?.map(({ title, component, icon }: TabColumnProps, index: number) => (
-            <TabComponent.Tab key={`TAB_${index + 1}`} title={t(title)} icon={icon}>
-              {activeTab === index && component}
-            </TabComponent.Tab>
-          ))}
+          {tabs?.map(
+            (
+              { title, component, icon, uniqueKey }: TabColumnProps,
+              index: number
+            ) => (
+              <TabComponent.Tab
+                key={`TAB_${index + 1}`}
+                title={t(title)}
+                icon={icon}
+                uniqueKey={uniqueKey}
+              >
+                {activeTab === uniqueKey && component}
+              </TabComponent.Tab>
+            )
+          )}
         </TabComponent>
       </div>
     </>

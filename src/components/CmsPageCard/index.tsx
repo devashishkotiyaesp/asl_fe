@@ -11,17 +11,17 @@ const CMSPageCard = ({
 }) => {
   return (
     <div className="cms-page-card">
-      <div className="inner">
+      <Button className="inner" onClickHandler={onClick}>
         <div className="cms-page__img-wrap">
           <Image src="/images/page-preview.png" isFromDataBase={false} />
         </div>
         <div className="cms-page__label">
           <span className="text">{cardName}</span>
-          <Button className="edit-icon" onClickHandler={onClick}>
+          <Button className="edit-icon">
             <Image iconName="editPen" />
           </Button>
         </div>
-      </div>
+      </Button>
     </div>
   );
 };

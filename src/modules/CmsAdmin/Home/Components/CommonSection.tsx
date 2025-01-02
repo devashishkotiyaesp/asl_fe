@@ -3,9 +3,18 @@ import Image from 'components/Image';
 import { REACT_APP_API_URL } from 'config';
 import { Form, Formik, FormikValues } from 'formik';
 import { useAxiosPut } from 'hooks/useAxios';
+import _ from 'lodash';
 import { ActionNameEnum, KeysEnum } from 'modules/CmsAdmin/constants';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BodyDataAccumulator, CommonSectionProps, FieldsFuncParams } from '../types';
+import { useNavigate } from 'react-router-dom';
+import {
+  BodyDataAccumulator,
+  CommonSectionProps,
+  FieldsFuncParams,
+  ImageProps,
+  KeyValueProps,
+} from '../types';
 import { HomeValidationSchema } from '../validationSchema';
 
 const CommonSection = ({
@@ -26,7 +35,10 @@ const CommonSection = ({
   activeSection,
   isLoading,
 }: CommonSectionProps) => {
-  const [putApi] = useAxiosPut();
+  const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
+  const navigate = useNavigate();
+  const [isLoadingButton, setIsLoadingButton] = useState(false); // Single loading state
+
   const { t } = useTranslation();
   const onSubmit = (values: FormikValues) => {
     if (values) {
@@ -89,13 +101,16 @@ const CommonSection = ({
       ...Object.keys(values).reduce((acc: BodyDataAccumulator, key) => {
         if (key === 'collaboration_logos' || key === 'point_data_array') {
           acc[key] = [];
+        } else if (values[key]) {
+          if (Array.isArray(values[key])) {
+            acc[key] = JSON.stringify(values[key]);
+          } else {
+            acc[key] = values[key];
+          }
         } else {
-          acc[key] = values[key]
-            ? Array.isArray(values[key])
-              ? JSON.stringify(values[key])
-              : values[key]
-            : '';
+          acc[key] = '';
         }
+
         acc[`${key}[id]`] =
           responseData?.find(
             (item) => item.field_name === key && item.language === formLanguage
@@ -109,7 +124,7 @@ const CommonSection = ({
     // Append each field directly to formData
     Object.keys(bodyData).forEach((key) => {
       if (key === 'collaboration_logos' || key === 'point_data_array') {
-        values[key]?.forEach((item: any, index: number) => {
+        values[key]?.forEach((item: ImageProps, index: number) => {
           fieldsFunc({ key, item, index, formData }); // Pass key as an argument
         });
       } else {
@@ -132,6 +147,7 @@ const CommonSection = ({
   };
 
   const handleSubmit = async (values: FormikValues) => {
+    setIsLoadingButton(true);
     setInitialValues((prevValues) => ({
       ...prevValues,
       [formLanguage]: values, // Update initial values for the next language
@@ -140,12 +156,14 @@ const CommonSection = ({
       ...Object.keys(values).reduce((acc: BodyDataAccumulator, key) => {
         if (key === 'collaboration_logos' || key === 'point_data_array') {
           acc[key] = [];
+        } else if (values[key]) {
+          if (Array.isArray(values[key])) {
+            acc[key] = JSON.stringify(values[key]);
+          } else {
+            acc[key] = values[key];
+          }
         } else {
-          acc[key] = values[key]
-            ? Array.isArray(values[key])
-              ? JSON.stringify(values[key])
-              : values[key]
-            : '';
+          acc[key] = '';
         }
         acc[`${key}[id]`] =
           responseData?.find(
@@ -160,14 +178,21 @@ const CommonSection = ({
     // Append each field directly to formData
     Object.keys(bodyData).forEach((key) => {
       if (key === 'collaboration_logos' || key === 'point_data_array') {
-        values[key]?.forEach((item: any, index: number) => {
+        values[key]?.forEach((item: ImageProps, index: number) => {
           fieldsFunc({ key, item, index, formData }); // Pass key as an argument
         });
       } else {
         formData.append(key, bodyData[key] as string);
       }
     });
-    await putApi(`${REACT_APP_API_URL}/cms-page-section`, formData);
+    const { error } = await putApi(
+      `${REACT_APP_API_URL}/cms-page-section`,
+      formData
+    );
+    if (_.isNil(error)) {
+      setIsLoadingButton(false);
+      navigate('/page-list');
+    }
   };
   return (
     <Formik
@@ -177,65 +202,85 @@ const CommonSection = ({
       validationSchema={HomeValidationSchema(activeSection)}
     >
       {({ values, setFieldValue }) => {
-        return isLoading ? (
-          <Image loaderType="Spin" />
-        ) : (
-          <Form className="">
-            <div className="cms-form-card-wrap">
-              <BannerFormWithDynamicProps
-                values={values}
-                setFieldValue={setFieldValue}
-              />
-            </div>
-            <div>
-              {activeLanguage > 0 && (
-                <div className="csm-form-button">
-                  <Button
-                    variants="black"
-                    className="w-fit"
-                    type="submit"
-                    onClickHandler={() => {
-                      setActionName(ActionNameEnum.PREV);
-                    }}
-                  >
-                    {t('Auth.RegisterCommon.prevButtonText')}
-                  </Button>
+        return (
+          <>
+            {isLoading ? (
+              <Image loaderType="Spin" />
+            ) : (
+              <Form className="">
+                <div className="cms-form-card-wrap">
+                  <BannerFormWithDynamicProps
+                    values={values as unknown as KeyValueProps}
+                    setFieldValue={setFieldValue}
+                    isLoading={isLoading}
+                  />
                 </div>
-              )}
-              {activeLanguage < (allLanguages ?? []).length - 1 ? (
-                <div className="csm-form-button">
-                  <Button
-                    variants="black"
-                    className="w-fit"
-                    type="submit"
-                    onClickHandler={() => {
-                      setActionName(ActionNameEnum.NEXT);
-                    }}
-                  >
-                    {t('Auth.RegisterCommon.nextButtonText')}
-                  </Button>
+                <div className="btn-wrap">
+                  {activeLanguage > 0 && (
+                    <div className="csm-form-button">
+                      <Button
+                        variants="black"
+                        className="w-fit"
+                        type="submit"
+                        onClickHandler={() => {
+                          setActionName(ActionNameEnum.PREV);
+                        }}
+                        disabled={isLoadingButton}
+                      >
+                        {t('Auth.RegisterCommon.prevButtonText')}
+                      </Button>
+                    </div>
+                  )}
+                  {activeLanguage < (allLanguages ?? []).length - 1 ? (
+                    <div className="csm-form-button btn-wrap">
+                      <Button
+                        className="min-w-[90px]"
+                        variants="black"
+                        onClickHandler={() => {
+                          navigate(-1);
+                        }}
+                        disabled={isUpdateLoading}
+                      >
+                        {t('Dictionary.EditForm.CancelButton')}
+                      </Button>
+                      <Button
+                        variants="black"
+                        className="w-fit"
+                        type="submit"
+                        onClickHandler={() => {
+                          setActionName(ActionNameEnum.NEXT);
+                        }}
+                        isLoading={isUpdateLoading}
+                        disabled={isUpdateLoading}
+                      >
+                        {t('Auth.RegisterCommon.nextButtonText')}
+                      </Button>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  {nextFormLanguage === '' ? (
+                    <div className="csm-form-button">
+                      <Button
+                        variants="black"
+                        className="w-fit"
+                        type="submit"
+                        onClickHandler={() => {
+                          setActionName(ActionNameEnum.SUBMIT);
+                        }}
+                        isLoading={isLoadingButton}
+                        disabled={isLoadingButton}
+                      >
+                        {t('Auth.RegisterCommon.submitButtonText')}
+                      </Button>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
-              ) : (
-                ''
-              )}
-              {nextFormLanguage === '' ? (
-                <div className="csm-form-button">
-                  <Button
-                    variants="black"
-                    className="w-fit"
-                    type="submit"
-                    onClickHandler={() => {
-                      setActionName(ActionNameEnum.SUBMIT);
-                    }}
-                  >
-                    {t('Auth.RegisterCommon.submitButtonText')}
-                  </Button>
-                </div>
-              ) : (
-                ''
-              )}
-            </div>
-          </Form>
+              </Form>
+            )}
+          </>
         );
       }}
     </Formik>

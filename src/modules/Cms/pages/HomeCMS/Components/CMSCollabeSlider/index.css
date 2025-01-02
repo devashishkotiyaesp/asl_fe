@@ -1,0 +1,26 @@
+.collab-sec {
+  @apply py-6;
+}
+.collab-text {
+  @apply max-w-[300px] w-full pr-6 border-r border-solid border-gray-200 py-1 h-fit;
+}
+.collab-text * {
+  @apply text-base leading-relaxed text-black;
+}
+.collab-text strong {
+  @apply font-semibold;
+}
+.collab-slider {
+  @apply max-w-[calc(100%_-_300px)] pl-6;
+}
+.collab-slider .swiper-wrapper {
+  @apply !items-center;
+}
+
+.brand-item {
+  @apply max-w-fit flex items-center justify-center;
+}
+
+.brand-item img {
+  @apply max-h-[50px] max-w-[100px] object-contain;
+}

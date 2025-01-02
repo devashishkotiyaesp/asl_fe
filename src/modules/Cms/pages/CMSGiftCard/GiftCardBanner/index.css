@@ -1,0 +1,18 @@
+.gift-card-banner .left-part {
+  @apply max-w-[calc(100%_-_445px)] pr-30px;
+}
+.gift-card-banner .left-part ul {
+  @apply mt-6 flex flex-col gap-y-3;
+}
+.gift-card-banner .left-part ul li {
+  @apply text-black/70 text-base pl-30px relative;
+}
+.gift-card-banner .left-part ul li::before {
+  @apply absolute content-[''] w-5 h-5 rounded-full bg-PrimaryWood left-0;
+}
+.gift-card-banner .left-part ul li::after {
+  @apply absolute content-[''] w-[5px] h-2.5 border-r-2 border-b-2 border-solid border-white left-2 top-1 rotate-45;
+}
+.gift-card-banner .right-part {
+  @apply max-w-[445px];
+}

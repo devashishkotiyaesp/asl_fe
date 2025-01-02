@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { AllLanguages } from 'reduxStore/types';
+import { SetFieldValue } from 'types';
 
 export interface ResponseDataProps {
   field_name: string;
@@ -24,13 +25,8 @@ export interface SectionProps {
   values: KeyValueProps;
   setFieldTouched?: SetFieldTouched;
   isLoading?: boolean;
+  formLanguage?: string;
 }
-
-export type SetFieldValue<ValueType = any> = (
-  field: string,
-  value: ValueType,
-  shouldValidate?: boolean
-) => void;
 
 export type SetFieldTouched = (
   field: string,
@@ -51,10 +47,16 @@ export interface CommonSectionProps {
   responseData: ResponseDataProps[] | undefined;
   setActiveLanguage: Dispatch<SetStateAction<number>>;
   allLanguages: AllLanguages[] | undefined;
-  BannerFormWithDynamicProps: (props: any) => JSX.Element;
+  BannerFormWithDynamicProps: (props: BannerDynamicProps) => JSX.Element;
   cmsId: string | undefined;
   activeSection: string | undefined;
   isLoading: boolean;
+}
+
+export interface BannerDynamicProps {
+  values: KeyValueProps;
+  setFieldValue: SetFieldValue;
+  formLanguage?: string;
 }
 
 export interface FieldsFuncParams {

@@ -1,5 +1,4 @@
 export interface UserProfileProps {
-  isSidebar: string;
   setSidebar: (value: string) => void;
 }
 

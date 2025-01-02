@@ -1,0 +1,18 @@
+.testimonial {
+  @apply bg-LightGray;
+}
+
+.testimonial .section-title {
+  @apply text-center mb-12;
+}
+.testimonial .section-title p {
+  @apply max-w-[720px] mx-auto;
+}
+
+.testimonial .swiper-slide {
+  @apply h-auto;
+}
+.testimonial .swiper-slide .testimonial-card,
+.testimonial .swiper-slide .testimonial-card .inner {
+  @apply h-full;
+}

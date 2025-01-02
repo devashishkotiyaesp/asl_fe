@@ -10,7 +10,7 @@ export const useAxiosGet = (): [
     url: string,
     config?: AxiosRequestConfig<object>,
     baseUrl?: boolean
-  ) => Promise<{ data?: any; error?: any }>,
+  ) => Promise<{ data?: any; error?: any; message?: string }>,
   { isLoading: boolean; isError: boolean; isSuccess: boolean },
 ] => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +35,7 @@ export const useAxiosGet = (): [
 
       setIsLoading(false);
       setIsSuccess(true);
-      return { data: response.data };
+      return { data: response.data, message: (response as any).message };
     } catch (error: any) {
       const typedError = error as ApiResponseType;
       setIsError(true);

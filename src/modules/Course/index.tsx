@@ -1,72 +1,43 @@
-import Table from 'components/Table/Table';
-import { useEffect, useState } from 'react';
+import { LayoutConstant } from 'constants/common.constant';
+import NotFound from 'modules/Auth/pages/NotFound';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
+import { activeLayoutType } from 'reduxStore/slices/layoutSlice';
+import AdminCourse from './Admin';
+import OrganizationCourse from './Organization';
+import StudentCourse from './Student';
+import TeacherCourse from './Teacher';
 
-import PageHeader from 'components/PageHeader';
-import SearchComponent from 'components/search';
-import { useAxiosGet } from 'hooks/useAxios';
-import { useTranslation } from 'react-i18next';
-import { CourseList } from './types/course.type';
-
-const Course = () => {
-  const [getApi] = useAxiosGet();
-  const { t } = useTranslation();
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const { currentPage } = useSelector(currentPageSelector);
-  const [courses, setCourses] = useState<CourseList[] | null>(null);
-
-  const getCourses = async () => {
-    const response = await getApi('/courses/all', {
-      params: {
-        page: currentPage,
-        limit: 10,
-      },
-    });
-    setTotalPages(response?.data?.totalPages);
-    setCourses(response?.data?.courses);
-  };
+const Course: FC = () => {
+  const activeLayout = useSelector(activeLayoutType);
+  const [CourseComponent, setCourseComponent] = useState<React.ComponentType | null>(
+    null
+  );
 
   useEffect(() => {
-    getCourses();
-  }, [currentPage]);
+    switch (activeLayout) {
+      case LayoutConstant.Admin:
+        setCourseComponent(() => AdminCourse);
+        break;
+      case LayoutConstant.Organization:
+        setCourseComponent(() => OrganizationCourse);
+        break;
+      case LayoutConstant.Teacher:
+        setCourseComponent(() => TeacherCourse);
+        break;
+      case LayoutConstant.Student:
+        setCourseComponent(() => StudentCourse);
+        break;
+      default:
+        setCourseComponent(() => NotFound);
+    }
+  }, [activeLayout]);
 
-  const coloumData = [
-    {
-      header: 'No.',
-      option: { isIndex: true },
-    },
-    { header: t('Course.Table.CourseName'), name: 'name' },
-    { header: t('Course.Table.CourseLevel'), name: 'course_level' },
-    {
-      header: t('Course.Table.CourseType'),
-      name: 'course_type',
-    },
-    { header: t('Course.Table.Students'), name: 'student_count' },
-    {
-      header: t('Course.Table.Publish_Unpublish'),
-      name: 'status',
-    },
-    {
-      header: 'Action',
-    },
-  ];
+  if (!CourseComponent) {
+    return <NotFound />;
+  }
 
-  return (
-    <div className="relative">
-      <PageHeader title={t('Courses.Title')}>
-        <div className="flex gap-4">
-          <SearchComponent parentClass="min-w-[300px]" placeholder="Search.." />
-        </div>
-      </PageHeader>
-      <Table
-        headerData={coloumData}
-        bodyData={courses || []}
-        pagination
-        totalPage={totalPages}
-      />
-    </div>
-  );
+  return <CourseComponent />;
 };
 
 export default Course;

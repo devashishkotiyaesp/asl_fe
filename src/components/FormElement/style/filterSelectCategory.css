@@ -16,8 +16,14 @@
 .select-wrap {
   @apply flex gap-10;
 }
+.select-wrap div:has([type='hidden']) {
+  @apply hidden;
+}
+/* .select-wrap > div:last-child:has(input) {
+  @apply hidden;
+} */
 .multi-select-wrap {
-  @apply flex flex-wrap gap-1;
+  @apply flex flex-wrap gap-1 empty:hidden;
 }
 .multi-select-item {
   @apply flex items-center gap-x-2 py-1 px-1.5 border border-solid border-LightWood rounded;
@@ -27,4 +33,7 @@
 }
 .multi-select-clear {
   @apply w-4 h-4 select-none rounded-full hover:bg-PrimaryWood hover:text-white border border-solid border-PrimaryWood inline-block p-[3px] cursor-pointer active:scale-90 transition-all duration-300;
+}
+.width-full > .select-wrap > *:nth-child(3) {
+  @apply w-full;
 }

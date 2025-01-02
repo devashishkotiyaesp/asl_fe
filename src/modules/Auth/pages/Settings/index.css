@@ -1,4 +1,19 @@
-.dasboard-layout {
+.settings-listing {
+  @apply flex flex-col gap-1.5;
+}
+.settings-list-item {
+  @apply bg-white hover:bg-LightWood/50 flex items-center gap-4 px-6 py-3 cursor-pointer border border-solid border-LightGray rounded-5px transition-all duration-300;
+}
+.settings-list-icon {
+  @apply text-PrimaryWood w-10 h-10 cursor-pointer;
+}
+.settings-list-icon svg {
+  @apply w-full h-full;
+}
+.settings-list-name {
+  @apply text-black text-base font-normal mr-auto block cursor-pointer;
+}
+/* .dasboard-layout {
   @apply flex h-100dvh;
 }
 .sidebar {
@@ -77,4 +92,4 @@
 }
 .header-profile img {
   @apply w-full h-full object-cover rounded-full;
-}
+} */

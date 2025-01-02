@@ -36,7 +36,7 @@ const InputField = (
   }: IInputProps,
   ref: Ref<HTMLInputElement>
 ) => {
-  const [field] = useField(name);
+  const [field] = name ? useField(name) : [];
   const getPrefixClass = () => {
     if (prefix && prefixBig) {
       return ' !ps-16 ';
@@ -64,7 +64,7 @@ const InputField = (
               )}
               {prefix && (
                 <span
-                  className={`absolute bg-offWhite2 rounded-s-lg h-[47px] flex items-center justify-center text-sm leading-5 font-medium text-grayText left-0 text-center border-e border-solid border-LightGray ${
+                  className={`absolute pb-1 bg-offWhite2 rounded-s-lg h-[47px] flex items-center justify-center text-sm leading-5 font-medium text-PrimaryWood left-0 text-center border-e border-solid border-LightGray ${
                     prefix && !label ? ' top-0' : ' top-[29px]'
                   } ${prefix && prefixBig ? ' w-14' : ''} ${prefix ? ' w-10' : ''}`}
                 >
@@ -78,7 +78,7 @@ const InputField = (
                 ref={ref}
                 placeholder={placeholder ?? ''}
                 type={type}
-                {...field}
+                {...(field ?? {})}
                 name={name}
                 min={min}
                 max={max}
@@ -86,14 +86,18 @@ const InputField = (
                 onFocus={onFocus}
                 onKeyUp={onKeyUp}
                 onKeyDown={onKeyDown}
-                onChange={!isDisabled ? (onChange ?? field.onChange) : undefined}
-                value={type === 'file' ? undefined : (value ?? field.value ?? '')}
+                onChange={!isDisabled ? (onChange ?? field?.onChange) : undefined}
+                value={type === 'file' ? undefined : (value ?? field?.value ?? '')}
                 onBlur={onBlur}
                 autoComplete="false"
                 disabled={isDisabled ?? false}
               />
-              {icon && <span className="absolute top-10 right-5">{icon}</span>}
-              {showError && <ErrorMessage name={name} />}
+              {icon && (
+                <span className={`absolute right-5 ${label ? 'top-11' : 'top-4'}`}>
+                  {icon}
+                </span>
+              )}
+              {showError && name ? <ErrorMessage name={name} /> : <></>}
             </>
           )}
         </>
@@ -117,7 +121,7 @@ const InputField = (
                   ref={ref}
                   placeholder={placeholder ?? ''}
                   type={type}
-                  {...field}
+                  {...(field ?? {})}
                   name={name}
                   min={min}
                   max={max}
@@ -125,8 +129,8 @@ const InputField = (
                   onFocus={onFocus}
                   onKeyUp={onKeyUp}
                   onKeyDown={onKeyDown}
-                  onChange={!isDisabled ? (onChange ?? field.onChange) : undefined}
-                  value={type === 'file' ? undefined : (value ?? field.value ?? '')}
+                  onChange={!isDisabled ? (onChange ?? field?.onChange) : undefined}
+                  value={type === 'file' ? undefined : (value ?? field?.value ?? '')}
                   onBlur={onBlur}
                   autoComplete="false"
                   disabled={isDisabled ?? false}
@@ -142,7 +146,7 @@ const InputField = (
                   <Image iconName="trashIcon" />
                 </span>
               </div>
-              {showError && <ErrorMessage name={name} />}
+              {showError && name ? <ErrorMessage name={name} /> : <></>}
             </>
           )}
         </>

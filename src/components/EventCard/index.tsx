@@ -1,16 +1,15 @@
+// ** Components **
 import Image from 'components/Image';
-import { MouseEventHandler } from 'react';
+
+// ** Types **
+import { EventCardProps } from 'modules/Cms/pages/CMSEvent/types';
+
+// ** Localization **
+import { useTranslation } from 'react-i18next';
+
+// ** Styles **
 import './index.css';
 
-interface EventCardProps {
-  imagePath?: string;
-  date?: string;
-  month?: string;
-  title?: string;
-  time?: string;
-  linkText?: string;
-  onClickHandler?: MouseEventHandler<HTMLElement>;
-}
 const EventCard = ({
   imagePath,
   date,
@@ -18,13 +17,13 @@ const EventCard = ({
   title,
   time,
   onClickHandler,
-  linkText,
 }: EventCardProps) => {
+  const { t } = useTranslation();
   return (
-    <div className="event-card" onClick={onClickHandler}>
+    <div className="event-card">
       <div className="inner">
         <div className="image-banner">
-          <Image src={imagePath} isFromDataBase={false} />
+          <Image src={imagePath} />
           <div className="date">
             <span>{date}</span>
             <span>{month}</span>
@@ -36,8 +35,8 @@ const EventCard = ({
             <Image iconName="clock" />
             <span className="time-stamp">{time}</span>
           </div>
-          <div className="link">
-            {linkText}
+          <div className="link" onClick={onClickHandler}>
+            {t('Events.EventBanner.details')}
             <Image iconName="arrowRight" />
           </div>
         </div>

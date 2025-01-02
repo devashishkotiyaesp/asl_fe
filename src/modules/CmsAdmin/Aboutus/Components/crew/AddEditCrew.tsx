@@ -24,8 +24,10 @@ const AddEditCrew = (props: CrewProps) => {
     editId,
   } = props;
   const [initialValues, setInitialValues] = useState<LangueKeyValueProps>();
-  const [getApi] = useAxiosGet();
-  const [putApi] = useAxiosPut();
+  const [getApi, { isLoading: isFetchLoading }] = useAxiosGet();
+  const [putApi, { isLoading: isUpdateLoading }] = useAxiosPut();
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const [isUpdateButton, setIsUpdateButton] = useState(false);
   const [actionName, setActionName] = useState<string | null>(ActionNameEnum.NEXT);
   const editResponseGet = async () => {
     const response = await getApi(`/cms-page-section/crew/${editId}`);
@@ -93,12 +95,17 @@ const AddEditCrew = (props: CrewProps) => {
           handleSubmit(values);
           break;
         case ActionNameEnum.UPDATE:
-          UpdateCrew(values);
+          onUpdate(values);
           break;
         default:
           break;
       }
     }
+  };
+  const onUpdate = async (values: FormikValues) => {
+    setIsUpdateButton(true);
+    await UpdateCrew(values);
+    setIsUpdateButton(false);
   };
 
   const UpdateCrew = async (values: FormikValues) => {
@@ -124,40 +131,54 @@ const AddEditCrew = (props: CrewProps) => {
   };
 
   const OnNext = async (values: FormikValues) => {
-    if (editId) {
-      UpdateCrew(values);
-    } else {
-      const formData = new FormData();
-      const fieldValue = {} as KeyValueProps;
-      Object.keys(values).forEach((key) => {
-        const value = values[key];
-        const fieldType = value instanceof File ? 'media' : 'text';
-        if (fieldType === 'media' && value.size > 0) {
-          formData.append(key, value);
-          fieldValue[key] = value;
-        } else {
-          fieldValue[key] = value;
-        }
-      });
-      formData.append('field_value', JSON.stringify(fieldValue));
-      formData.append('field_name', 'crew_info');
-      formData.append('language', formLanguage);
-      formData.append('cms_page_id', cmsId as string);
-      formData.append('section_name', 'crew');
-      formData.append('field_type', 'text');
-      const response = await createApi(`/cms-page-section`, formData);
-      setInitialValues((prevValues) => ({
-        ...prevValues,
-        [formLanguage]: {
-          ...values,
-          id: response.data[activeLanguage + 1].id,
-          slug: response.data[activeLanguage + 1].slug,
-        },
-      }));
+    // Set loading state to true
+    setIsLoadingButton(true);
+    try {
+      // Handle editing if editId exists
+      if (editId) {
+        await UpdateCrew(values); // Wait for the async function to complete
+      } else {
+        // Handle creating a new benefit
+        const formData = new FormData();
+        const fieldValue = {} as KeyValueProps;
+        Object.keys(values).forEach((key) => {
+          const value = values[key];
+          const fieldType = value instanceof File ? 'media' : 'text';
+          if (fieldType === 'media' && value.size > 0) {
+            formData.append(key, value);
+            fieldValue[key] = value;
+          } else {
+            fieldValue[key] = value;
+          }
+        });
+        formData.append('field_value', JSON.stringify(fieldValue));
+        formData.append('field_name', 'crew_members');
+        formData.append('language', formLanguage);
+        formData.append('cms_page_id', cmsId as string);
+        formData.append('section_name', 'crew');
+        formData.append('field_type', 'text');
+        const response = await createApi(`/cms-page-section`, formData);
+        // Update initialValues with the new data
+        setInitialValues((prevValues) => ({
+          ...prevValues,
+          [formLanguage]: {
+            ...values,
+            id: response.data[activeLanguage + 1].id,
+            slug: response.data[activeLanguage + 1].slug,
+          },
+        }));
+      }
+      // Move to the next language form
+      setFormLanguage(nextFormLanguage);
+      setActiveLanguage(activeLanguage + 1);
+    } catch {
+      // You can show a generic error message to the user, if needed
+    } finally {
+      // Set loading state to false when done
+      setIsLoadingButton(false);
     }
-    setFormLanguage(nextFormLanguage);
-    setActiveLanguage(activeLanguage + 1);
   };
+
   const OnPrev = (values: FormikValues) => {
     setInitialValues((prevValues) => ({
       ...prevValues,
@@ -213,18 +234,21 @@ const AddEditCrew = (props: CrewProps) => {
                   acceptTypes={'image/*'}
                   fileType={[EnumFileType.Image]}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <InputField
                   name="username"
                   label={t('Cms.aboutUs.crew.usernameTitle')}
                   placeholder={t('Cms.aboutUs.crew.usernameTitlePlaceholder')}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <InputField
                   name="designation"
                   label={t('Cms.aboutUs.crew.designationTitle')}
                   placeholder={t('Cms.homepage.story.whyChoosePlaceholder')}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <ReactEditor
                   label={t('Cms.homepage.banner.description')}
@@ -234,12 +258,14 @@ const AddEditCrew = (props: CrewProps) => {
                   setFieldTouched={setFieldTouched}
                   value={values?.description as string}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <InputField
                   name="fun_tidbits"
                   label={t('Cms.aboutUs.aboutUsers.funTidbitsTitle')}
                   placeholder={t('Cms.aboutUs.aboutUsers.funTidbitsPlaceholder')}
                   isCompulsory
+                  isLoading={isFetchLoading}
                 />
                 <DropZone
                   className="xl:max-w-[330px]"
@@ -256,6 +282,7 @@ const AddEditCrew = (props: CrewProps) => {
                   size={20}
                   uploadedMediaClass="!mt-0 w-[280px] h-[158px]"
                   labelClass="w-[278px]"
+                  isLoading={isFetchLoading}
                 />
               </div>
             </div>
@@ -269,6 +296,7 @@ const AddEditCrew = (props: CrewProps) => {
                     onClickHandler={() => {
                       setActionName(ActionNameEnum.PREV);
                     }}
+                    disabled={isUpdateLoading}
                   >
                     {t('Auth.RegisterCommon.prevButtonText')}
                   </Button>
@@ -283,6 +311,8 @@ const AddEditCrew = (props: CrewProps) => {
                     onClickHandler={() => {
                       setActionName(ActionNameEnum.NEXT);
                     }}
+                    isLoading={isLoadingButton}
+                    disabled={isUpdateButton}
                   >
                     {t('Auth.RegisterCommon.nextButtonText')}
                   </Button>
@@ -299,6 +329,8 @@ const AddEditCrew = (props: CrewProps) => {
                     onClickHandler={() => {
                       setActionName(ActionNameEnum.UPDATE);
                     }}
+                    isLoading={isUpdateButton}
+                    disabled={isLoadingButton}
                   >
                     {t('Settings.update')}
                   </Button>
@@ -315,6 +347,8 @@ const AddEditCrew = (props: CrewProps) => {
                     onClickHandler={() => {
                       setActionName(ActionNameEnum.SUBMIT);
                     }}
+                    isLoading={isUpdateLoading}
+                    disabled={isUpdateLoading}
                   >
                     {t('Auth.RegisterCommon.submitButtonText')}
                   </Button>

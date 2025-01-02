@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import '../FormElement/style/inputField.css';
 
 export const OTPInput = ({
   otp,
@@ -12,6 +13,7 @@ export const OTPInput = ({
   readonly otpError?: string;
 }) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const handleChange = (index: number, value: string) => {
     const newOtp = otp.split('');
 
@@ -38,12 +40,19 @@ export const OTPInput = ({
     }
   };
 
+  const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+    const clipboardData = event.clipboardData.getData('Text');
+    if (/^\d{6}$/.test(clipboardData)) {
+      setOtp(clipboardData);
+    }
+  };
+
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
 
   return (
-    <div className="otp-wrapper">
+    <div className="otp-wrapper" onPaste={handlePaste}>
       <div className="otp-container">
         {Array.from({ length: 6 }).map((_, index) => (
           <input

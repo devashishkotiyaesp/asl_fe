@@ -2,6 +2,7 @@ import { StylesConfig } from 'react-select';
 
 export const SelectStyle: StylesConfig = {
   control: (state) => ({
+    width: '100%',
     padding: '0.282rem',
     display: 'flex',
     outline: 'none',

@@ -105,10 +105,10 @@
   @apply bg-LightGray mb-1 last:mb-0 px-5 py-4 w-full flex justify-between items-center rounded-md;
 }
 .learn-asl-select-wrap.languages-wrap {
-  @apply w-full;
+  @apply w-full grid grid-cols-2 gap-4;
 }
 .learn-asl-select-wrap.languages-wrap .learn-asl-select-item {
-  @apply max-w-[355px];
+  @apply max-w-full text-left;
 }
 .reset-pswd-wrap {
   @apply w-full;

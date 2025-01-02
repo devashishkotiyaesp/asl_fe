@@ -1,5 +1,5 @@
 .inputField {
-  @apply bg-white block w-full border border-solid border-LightGray text-base text-black placeholder:text-black/30 px-4 py-3 rounded-5px leading-none ring-2 ring-transparent focus:ring-black/10 focus:ring-offset-2 transition-all duration-300 disabled:bg-black/5 disabled:cursor-not-allowed;
+  @apply bg-white block w-full border border-solid border-LightWood/80 text-base text-black placeholder:text-black/30 px-4 py-3 rounded-5px leading-none ring-2 ring-transparent focus:ring-black/10 focus:ring-offset-2 transition-all duration-300 disabled:bg-black/5 disabled:cursor-not-allowed;
 }
 .inputField.has-file-input {
   @apply pr-11;

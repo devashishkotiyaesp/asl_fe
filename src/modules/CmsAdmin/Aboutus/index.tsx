@@ -1,18 +1,21 @@
+import Breadcrumbs from 'components/Breadcrumbs';
 import Button from 'components/Button/Button';
 import Card from 'components/Card';
+import Image from 'components/Image';
 import PageHeader from 'components/PageHeader';
 import { REACT_APP_API_URL } from 'config';
 import { LanguagesEnum } from 'constants/common.constant';
 import { AdminNavigation } from 'constants/navigation.constant';
 import { useAxiosGet } from 'hooks/useAxios';
+import 'modules/CmsAdmin/styles/index.css';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useLanguage } from 'reduxStore/slices/languageSlice';
+import { capitalizeFirstCharacter } from 'utils';
 import { AboutPageSection, ActionNameEnum, KeysEnum } from '../constants';
 import ConditionalComponent from './Components/ConditionalComponent';
-import './index.css';
 import { LangueKeyValueProps, ResponseDataProps } from './types';
 
 const CMSAboutAdmin = () => {
@@ -41,8 +44,10 @@ const CMSAboutAdmin = () => {
 
   const handleAddEditJourneyClick = (data: boolean) => {
     setShowAddEditJourney(data);
+    setFormLanguage(LanguagesEnum.ENGLISH);
+    setActiveLanguage(0);
+    setEditId('');
   };
-
   const getEditId = (data: string | undefined) => {
     setEditId(data ?? '');
   };
@@ -53,6 +58,7 @@ const CMSAboutAdmin = () => {
     setFormLanguage(LanguagesEnum.ENGLISH);
     setShowAddEditCrew(false);
     setShowAddEditJourney(false);
+    setEditId('');
   };
 
   const [actionName, setActionName] = useState<string | null>(ActionNameEnum.NEXT);
@@ -101,7 +107,7 @@ const CMSAboutAdmin = () => {
   const [initialValues, setInitialValues] = useState<LangueKeyValueProps>();
 
   useEffect(() => {
-    if (id && activeSection !== KeysEnum.Crew) {
+    if (id) {
       dataFEtch(activeSection);
     }
   }, [id, activeSection]);
@@ -140,17 +146,39 @@ const CMSAboutAdmin = () => {
       <PageHeader
         title={t('Cms.about.title')}
         url={AdminNavigation.cms_management.view.path}
-      />
+      >
+        <Breadcrumbs
+          items={[
+            {
+              label: t('Cms.pageHeader.Management.Title'),
+              url: '/page-list',
+            },
+            {
+              label: t('Cms.about.title'),
+              url: '/',
+            },
+          ]}
+          variant="arrow"
+        />
+      </PageHeader>
       <div className="content-base">
-        <div className="step-wrapper flex items-center">
+        <div className="step-wrapper">
           {allLanguages?.map((lang, index) => {
             return (
               <div
                 key={lang.id}
-                className={`step-item ${index === activeLanguage ? 'active' : ''}`}
+                className={`step-item ${index <= activeLanguage ? 'active' : ''}`}
               >
-                <span className="step-item__number">{index + 1}</span>
-                <span className="step-item__languages"> {lang.name}</span>
+                {index >= activeLanguage ? (
+                  <span className="step-item__number">{index + 1}</span>
+                ) : (
+                  <span className="step-item__number">
+                    <Image iconClassName="w-10 h-10" iconName="checkIcon" />
+                  </span>
+                )}
+                <span className="step-item__languages">
+                  {capitalizeFirstCharacter(lang.name)}
+                </span>
               </div>
             );
           })}
@@ -158,19 +186,19 @@ const CMSAboutAdmin = () => {
         <div className="cms-page-bar-content-wrap">
           <div className="page-bar">
             <div className="page-bar__title">
-              <span>{t('Cms.homepage.sectionsTitle')}</span>
+              <span>{t('Cms.about.pageSection')}</span>
             </div>
             <nav className="page-bar__list">
               {AboutPageSection({ t })?.map((data) => {
                 return (
                   <ul key={`section_${data.value}`}>
                     <li className="page-bar__item">
-                      <span
-                        onClick={() => handleTabClick(data.value)}
+                      <Button
+                        onClickHandler={() => handleTabClick(data.value)}
                         className={data.value === activeSection ? 'active' : ''}
                       >
                         {data.label}
-                      </span>
+                      </Button>
                     </li>
                   </ul>
                 );
@@ -191,7 +219,13 @@ const CMSAboutAdmin = () => {
             headerExtra={
               <div>
                 {activeSection === KeysEnum.Crew && !showAddEditCrew ? (
-                  <Button variants="black" onClickHandler={handleAddEditCrewClick}>
+                  <Button
+                    small
+                    className="font-medium"
+                    variants="PrimaryWoodLight"
+                    onClickHandler={handleAddEditCrewClick}
+                  >
+                    <Image iconName="plus" iconClassName="w-4 h-4" />
                     {t('Community.Table.Add')}
                   </Button>
                 ) : (

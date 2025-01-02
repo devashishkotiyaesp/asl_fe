@@ -33,7 +33,7 @@ export const HomePageSection = () => {
       value: 'aslCourses',
     },
     {
-      label: t('Cms.homepage.sectionTestimonialTitle'),
+      label: t('Cms.Organization.testimonialsTitle'),
       value: 'testimonials',
     },
   ];
@@ -67,8 +67,19 @@ export const KeysEnum = {
   AboutStory: 'aboutStory',
   PrivacyPolicy: 'privacyPolicy',
   TermsOfUse: 'termsOfUse',
+  VirtualClass: 'virtualClass',
   Courses: 'courses',
+  OrgCollaborating: 'orgCollaborating',
+  OrgWork: 'orgWork',
+  OrgCta1: 'orgCta1',
+  OrgCta2: 'orgCta2',
+  OrgBenefits: 'orgBenefits',
+  OrgTestimonials: 'orgTestimonials',
   Dictionary: 'dictionary',
+  Event: 'cmsEvent',
+  GiftCard: 'giftCard',
+  ReferYourFriends: 'referYourFriends',
+  Blog: 'blog',
 };
 
 export const AboutPageSection = ({
@@ -116,9 +127,9 @@ export enum CMSEnum {
   VirtualClass = 'Virtual Classes Schedule',
   Dictionary = 'Dictionary',
   Blog = 'Blog',
-  BlogDetails = 'Blog Details',
+  BlogDetails = 'Blog Posts',
   Events = 'Events',
-  EventsDetails = 'Event Details',
+  EventsDetails = 'Events Detail',
   Organizations = 'Organizations',
   GiftCard = 'Gift Card',
   GiftOrZoomCardSession = 'Gift/Zoom Card Sessions',
@@ -146,4 +157,43 @@ export const GlobalSection = () => {
       value: 'footer',
     },
   ];
+};
+
+export const OrganizationSection = ({
+  t,
+}: {
+  t: TFunction<'translation', undefined>;
+}) => {
+  return [
+    {
+      label: t('Cms.Organization.collaboratingTitle'),
+      value: 'orgCollaborating',
+    },
+    {
+      label: t('Cms.Organization.workTitle'),
+      value: 'orgWork',
+    },
+    {
+      label: t('Cms.Organization.ctaTitle'),
+      value: 'orgCta1',
+    },
+    {
+      label: t('Cms.Organization.benefitsTitle'),
+      value: 'orgBenefits',
+    },
+    {
+      label: t('Cms.Organization.testimonialsTitle'),
+      value: 'orgTestimonials',
+    },
+    {
+      label: t('Cms.Organization.cta2Title'),
+      value: 'orgCta2',
+    },
+  ];
+};
+
+export const getClassNames = (index: number, activeLanguage: number) => {
+  if (index === activeLanguage) return 'bg-primary text-white';
+  if (index > activeLanguage) return 'bg-white text-primary';
+  return 'bg-primary text-white';
 };

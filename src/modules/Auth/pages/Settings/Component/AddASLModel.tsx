@@ -34,7 +34,7 @@ const AddAslModel = ({ OnSubmit, modal, data }: any) => {
                   name="level"
                   value={values.level}
                 />
-                <div className="flex justify-end gap-4">
+                <div className="btn-wrap">
                   <Button
                     onClickHandler={() => modal.closeModal()}
                     type="button"

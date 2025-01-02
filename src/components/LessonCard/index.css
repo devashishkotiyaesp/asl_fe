@@ -1,0 +1,33 @@
+.lesson-card {
+  @apply p-2.5 bg-LightGray rounded-10px;
+}
+.lesson-card-video {
+  @apply overflow-hidden rounded-10px relative h-[140px];
+}
+.lesson-card-video video {
+  @apply w-full h-full object-cover;
+}
+.lesson-card-overlay {
+  @apply absolute bg-gradient-to-t from-black top-0 left-0 w-full h-full flex items-end justify-between px-4 pb-2 text-white;
+}
+/* .lesson-card-play-button {
+  @apply w-9 h-9 select-none;
+}
+.lesson-card-play-button svg {
+  @apply w-full h-full select-none;
+} */
+.lesson-card-duration {
+  @apply text-sm text-white;
+}
+.lesson-card-title {
+  @apply mt-2.5 text-base leading-normal font-medium;
+}
+.lesson-card-desc {
+  @apply mt-1.5 text-sm leading-normal text-black/50 mb-2 line-clamp-2;
+}
+.lesson-card-content {
+  /* @apply px-2.5; */
+}
+/* .lesson-card-content .button {
+  @apply mt-2.5;
+} */
